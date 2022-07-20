@@ -3,5 +3,6 @@
 var $plugins =
 [
 {"name":"DSI-Core","status":true,"description":"v2.00 A helper plugin for DSI plugins.","parameters":{"showDevTool:bool":"true"}},
+{"name":"DSI_Sys1_Bitmap","status":true,"description":"v1.0 Bitmap System for Peaceful Days.","parameters":{}},
 {"name":"rmmz_movement","status":true,"description":"(v1.0.4) 8 direction movement and pixel movement for RPG Maker MZ.","parameters":{}}
 ];
