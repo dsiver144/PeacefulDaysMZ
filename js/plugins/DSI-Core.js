@@ -193,8 +193,17 @@ if (Imported.DSI_Core.params.showDevTool) {
 Array.prototype.randomizeItem = function() {
     return this[Math.floor(Math.random() * this.length)];
 };
+
+/**
+ * Get Random item from an array.
+ * @param {any[]} array 
+ * @returns {any}
+ */
+DSI_CORE.randomizeArrayItem = function(array) {
+    return array.randomizeItem();
+}
  
-var Easing = Easing || {}
+Easing = {}
 Easing.easeInOutExpo = function(t, b, c, d) {
     if (t==0) return b;
     if (t==d) return b+c;
