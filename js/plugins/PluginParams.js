@@ -31,9 +31,9 @@ class SoundEffect {
 }
 class StrFarmCrop {
    constructor() {
-		/** @type {number} */
+		/** @type {string} */
 		this.seedItemID = null;
-		/** @type {number} */
+		/** @type {string} */
 		this.productID = null;
 		/** @type {number[]} */
 		this.stages = null;

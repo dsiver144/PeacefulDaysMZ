@@ -2330,7 +2330,7 @@ Scene_Load.prototype.onSavefileOk = function() {
 Scene_Load.prototype.executeLoad = function(savefileId) {
     DataManager.loadGame(savefileId)
         .then(() => this.onLoadSuccess())
-        .catch(() => this.onLoadFailure());
+        .catch((err) => this.onLoadFailure(err));
 };
 
 Scene_Load.prototype.onLoadSuccess = function() {
@@ -2341,7 +2341,8 @@ Scene_Load.prototype.onLoadSuccess = function() {
     this._loadSuccess = true;
 };
 
-Scene_Load.prototype.onLoadFailure = function() {
+Scene_Load.prototype.onLoadFailure = function(err) {
+    console.error(err);
     SoundManager.playBuzzer();
     this.activateListWindow();
 };
