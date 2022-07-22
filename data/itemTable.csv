@@ -1,0 +1,5 @@
+name,localizeKey,iconIndex,price,shipPrice,tag,note
+Sunflower Seeds,SunflowerSeeds,227,100,120,seed,
+Sunflower,Sunflower,287,50,100,crop,
+Carrot Seeds,CarrotSeeds,0,100,120,seed,
+Carrot,Carrot,0,0,0,crop,
