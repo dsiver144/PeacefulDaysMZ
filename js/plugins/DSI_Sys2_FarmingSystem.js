@@ -87,8 +87,6 @@ class FarmManager extends SaveableObject {
         FarmManager.inst = this;
         /** @type {Farmland[]} */
         this.farmlands = [];
-        this.lastModified = Date.now();
-        
     }
 
     test() {
@@ -148,55 +146,11 @@ FarmManager.getSeedData = function(seedId) {
 // IMPLEMENT SYSTEM IN TO RPG MAKER SYSTEM
 //==================================================================================
 
-var DSI_Sys2_FarmingSystem_Game_System_recreateSaveableObjects = Game_System.prototype.recreateSaveableObjects;
-Game_System.prototype.recreateSaveableObjects = function () {
-	DSI_Sys2_FarmingSystem_Game_System_recreateSaveableObjects.call(this);
+var DSI_Sys2_FarmingSystem_Game_System_createSaveableObjects = Game_System.prototype.createSaveableObjects;
+Game_System.prototype.createSaveableObjects = function () {
+	DSI_Sys2_FarmingSystem_Game_System_createSaveableObjects.call(this);
     this._farmLand = new FarmManager();
 }
-
-var DSI_FarmingSystem_Game_System_onBeforeSave = Game_System.prototype.onBeforeSave;
-Game_System.prototype.onBeforeSave = function () {
-    DSI_FarmingSystem_Game_System_onBeforeSave.call(this);
-    const savedData = {};
-    $gameTemp.temporaryObjects = {};
-    for (let key in this) {
-        var object = this[key];
-        if (object instanceof SaveableObject) {
-            savedData[key] = object.getSaveData();
-            $gameTemp.temporaryObjects[key] = object;
-            delete this[key];
-        }
-    }
-    this.savedData = savedData;
-};
-
-Game_System.prototype.onAfterSaveTemporaryObjects = function() {
-    for (let key in $gameTemp.temporaryObjects) {
-        var object = $gameTemp.temporaryObjects[key];
-        $gameSystem[key] = object;
-    }
-    $gameTemp.temporaryObjects = null;
-}
-
-var DSI_FarmingSystem_Scene_Save_onSaveSuccess = Scene_Save.prototype.onSaveSuccess;
-Scene_Save.prototype.onSaveSuccess = function () {
-    $gameSystem.onAfterSaveTemporaryObjects();
-    DSI_FarmingSystem_Scene_Save_onSaveSuccess.call(this);
-};
-
-var DSI_Sys2_FarmingSystem_Scene_Load_onLoadSuccess = Scene_Load.prototype.onLoadSuccess;
-Scene_Load.prototype.onLoadSuccess = function () {
-    $gameSystem.recreateSaveableObjects();
-    const savedData = $gameSystem.savedData;
-    for (let key in savedData) {
-        var object = $gameSystem[key];
-        var data = savedData[key];
-        if (object instanceof SaveableObject) {
-            object.loadSaveData(data);
-        }
-    }
-	DSI_Sys2_FarmingSystem_Scene_Load_onLoadSuccess.call(this);
-};
 
 //========================================================================
 // END OF PLUGIN
