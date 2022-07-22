@@ -9,11 +9,20 @@
  * @help 
  * Empty Help
  * 
- * @param testParam:number
- * @text Test Param
- * @type number
- * @default 144
- * @desc A Test Param
+ * @param seedConfig:arr_struct
+ * @text Seed Config
+ * @type struct<StrFarmCrop>[]
+ * @desc Setup seeds
+ * 
+ * @param farmRegionIds:arr_num
+ * @text Farm Region IDs
+ * @type number[]
+ * @default ["111","112"]
+ * 
+ * @param farmMaps:arr_num
+ * @text Farm Map IDs
+ * @type number[]
+ * 
  * 
  */
 /*~struct~PositionObject:
@@ -51,60 +60,98 @@
  */
 
 /** @type {PluginParams} */
-var params = PluginManager.parameters('DSI_Sys2_FarmingSystem');
-params = PluginManager.processParameters(params);
+let FarmParams = PluginManager.parameters('DSI_Sys2_FarmingSystem');
+FarmParams = PluginManager.processParameters(FarmParams);
 
-class Position {
-    /**
-     * Object position
-     * @param {number} x 
-     * @param {number} y 
-     */
-    constructor(x, y) {
-        /** @type {number} */
-        this.x = x;
-        /** @type {number} */
-        this.y = y;
+class FarmManager {
+
+    constructor() {
+        /** @type {Farmland[]} */
+        this.farmlands = [];
+        this.lastModified = Date.now();
+        console.log("Create farm manager");
+        
     }
-    /**
-     * Overwrite toString
-     * @returns {string}
-     */
-    toString() {
-        return `${this.x}-${this.y}`;
+
+    test() {
+        this.farmlands.push(new Farmland(1));
+        this.farmlands[0].addObject(new FarmCrop(new Position(0, 0), 1));
+        this.lastModified = Date.now();
     }
+
 }
 
-class FarmObject {
-    /**
-     * Create farm object
-     * @param {number} x 
-     * @param {number} y 
-     * @param {number} mapId 
-     */
-    constructor(x, y, mapId) {
-        /** @type {number} */
-        this.x = x;
-        /** @type {number} */
-        this.y = y;
-        /** @type {number} */
-        this.mapId = mapId;
-    }
+var DSI_Sys2_FarmingSystem_DataManager_setupNewGame = DataManager.setupNewGame;
+DataManager.setupNewGame = function() {
+	DSI_Sys2_FarmingSystem_DataManager_setupNewGame.call(this);
+    $gameSystem.farmManager = FarmManager.getInstance();
+};
+
+/** @type {FarmManager} */
+FarmManager.inst = null;
+FarmManager.getInstance = function() {
+    const inst = FarmManager.inst || new FarmManager();
+    FarmManager.inst = inst;
+    return inst;
 }
 
-class Farmland {
-    /**
-     * Create a farm land
-     * @param {number} mapId 
-     */
-    constructor(mapId) {
-        /** @type {number} */
-        this.mapId = mapId;
-        /** @type {FarmObject[]} */
-        this.objects = [];
-    }
-}
 
 //========================================================================
 // END OF PLUGIN
 //========================================================================
+/*~struct~StrFarmCrop:
+ * @param seedItemID:num
+ * @text Seed Item
+ * @desc Select item for seed
+ * @type item
+ * 
+ * @param productID:num
+ * @text ProductID
+ * @desc Enter product id
+ * @type item
+ * 
+ * @param stages:arr_num
+ * @text Stages
+ * @desc Enter stages
+ * @type number[]
+ * 
+ * @param resetable:bool
+ * @text Resetable
+ * @desc Set reset state
+ * @type boolean
+ * @default false
+ * 
+ * @param resetStageIndex:num
+ * @text Reset Stage Index
+ * @desc Enter the stage index will reset to
+ * @default 0
+ * 
+ * @param resetTimes:num
+ * @text Reset Times
+ * @default 0
+ * @desc Enter how many times the crop will reset
+ * 
+ * @param sickleRequired:bool
+ * @text Require Sickle To Harvest
+ * @type boolean
+ * @default false
+ * 
+ * @param seasons:arr_num
+ * @text Seasons
+ * @type select[]
+ * @option Spring
+ * @value 0
+ * @option Summer
+ * @value 1
+ * @option Autumn
+ * @value 2
+ * @option Winter
+ * @value 3
+ * 
+ * @param imageFile:str
+ * @text Image file
+ * @type file
+ * @dir img/farms
+ * @desc Enter filename for image
+ * 
+ */
