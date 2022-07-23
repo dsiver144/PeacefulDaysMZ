@@ -11,17 +11,27 @@
  * 
  * 
  */
-class Position {
+class Position extends SaveableObject {
     /**
      * Object position
      * @param {number} x 
      * @param {number} y 
      */
     constructor(x, y) {
+        super();
         /** @type {number} */
         this.x = x;
         /** @type {number} */
         this.y = y;
+    }
+    /**
+     * Save Properties
+     */
+    saveProperties() {
+        return [
+            ['x', 0],
+            ['y', 0],
+        ];
     }
     /**
      * Overwrite toString

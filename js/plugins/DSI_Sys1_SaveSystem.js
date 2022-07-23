@@ -13,7 +13,7 @@ class SaveableObject {
     /**
      * This array will contains multiple array which has 2 values [propetyName, defaultValue].
      * For example [{name: 'Test', defaultValue: 10}]
-     * @returns {number[][]}
+     * @returns {any[]}
      */
     saveProperties() {
         return [];
@@ -25,7 +25,12 @@ class SaveableObject {
     getSaveData() {
         const result = {};
         this.saveProperties().forEach(([property, _]) => {
-            result[property] = this[property];
+            let data = this[property];
+            if (this[property] instanceof SaveableObject) {
+                data = this[property].getSaveData();
+                data['klass'] = this[property].constructor.name;
+            }
+            result[property] = data;
         })
         return (result);
     }
@@ -34,9 +39,12 @@ class SaveableObject {
      * @param {Object} savedData 
      */
     loadSaveData(savedData) {
-        // Do stuff here.
         this.saveProperties().forEach(([property, defaultValue]) => {
-            const value = savedData[property];
+            let value = savedData[property];
+            if (value && value.klass) {
+                value = eval(`new ${value.klass}()`);
+                value.loadSaveData(savedData[property]);
+            }
             this[property] = value != undefined ? value : defaultValue;
         })
     }
@@ -72,12 +80,10 @@ var DSI_Sys1_SaveSystem_Game_System_onBeforeSave = Game_System.prototype.onBefor
 Game_System.prototype.onBeforeSave = function () {
 	DSI_Sys1_SaveSystem_Game_System_onBeforeSave.call(this);
     const savedData = {};
-    $gameTemp.temporaryObjects = {};
     for (let key in this) {
         var object = this[key];
         if (object instanceof SaveableObject) {
             savedData[key] = object.getSaveData();
-            $gameTemp.temporaryObjects[key] = object;
             delete this[key];
         }
     }

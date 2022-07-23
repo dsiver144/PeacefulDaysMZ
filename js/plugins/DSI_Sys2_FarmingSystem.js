@@ -119,7 +119,6 @@ class FarmManager extends SaveableObject {
     loadSaveData(data) {
         super.loadSaveData(data);
         this.farmlands = data['farmlands'].map((data) => {
-            console.log({data});
             let newFarmLand = new Farmland();
             newFarmLand.loadSaveData(data);
             return newFarmLand;
