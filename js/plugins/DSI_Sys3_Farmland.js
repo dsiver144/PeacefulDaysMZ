@@ -70,13 +70,22 @@ class Farmland extends SaveableObject {
         return new Position(x, y).toString();
     }
     /**
+     * Get All Save Properties
+     * @returns {any[]}
+     */
+    saveProperties() {
+        return [
+            ["mapId", null],
+        ]
+    }
+    /**
      * Get Save Data
      * @returns {any}
      */
     getSaveData() {
         const result = super.getSaveData();
         const savedObjects = {};
-        for (var position in this.farmObjects) {
+        for (const position in this.farmObjects) {
             savedObjects[position] = this.farmObjects[position].getSaveData();
         }
         result['farmObjects'] = savedObjects;
@@ -88,21 +97,12 @@ class Farmland extends SaveableObject {
      */
     loadSaveData(data) {
         super.loadSaveData(data);
-        this.farmObjects = {};
-        for (var position in data['farmObjects']) {
+        this.farmObjects = {};  
+        for (const position in data['farmObjects']) {
             let savedObject = data['farmObjects'][position];
             let newFarmObject = eval(`new ${savedObject.type}()`);
             newFarmObject.loadSaveData(savedObject);
             this.farmObjects[position] = newFarmObject;
         }
-    }
-    /**
-     * Get All Save Properties
-     * @returns {any[]}
-     */
-    saveProperties() {
-        return [
-            ["mapId", null],
-        ]
     }
 }

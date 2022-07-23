@@ -68,8 +68,8 @@ Game_System.prototype.recreateSaveableObjects = function() {
     this.createSaveableObjects();
     const savedData = this.savedData;
     for (let key in savedData) {
-        var object = $gameSystem[key];
-        var data = savedData[key];
+        const object = $gameSystem[key];
+        const data = savedData[key];
         if (object instanceof SaveableObject) {
             object.loadSaveData(data);
         }
@@ -81,7 +81,7 @@ Game_System.prototype.onBeforeSave = function () {
 	DSI_Sys1_SaveSystem_Game_System_onBeforeSave.call(this);
     const savedData = {};
     for (let key in this) {
-        var object = this[key];
+        const object = this[key];
         if (object instanceof SaveableObject) {
             savedData[key] = object.getSaveData();
             delete this[key];
