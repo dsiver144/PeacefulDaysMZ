@@ -21,12 +21,12 @@ class ItemDB {
      */
     constructor() {
         ItemDB.inst = this;
-        /** @type {Object.<string, rm.types.Item>} */
+        /** @type {Object.<string, PD_Item>} */
         this.items = {};
     }
     /**
      * Add Item To Database
-     * @param {rm.types.Item} item 
+     * @param {PD_Item} item 
      */
     addItem(item) {
         if (!item || !item.name) return;
@@ -35,7 +35,7 @@ class ItemDB {
     /**
      * Get Item By Name
      * @param {string} name 
-     * @returns {rm.types.Item}
+     * @returns {PD_Item}
      */
     item(name) {
         return this.items[name];
@@ -43,7 +43,7 @@ class ItemDB {
     /**
      * Get Item By ID
      * @param {number} id 
-     * @returns {rm.types.Item}
+     * @returns {PD_Item}
      */
     itemById(id) {
         return Object.values(this.items).find(item => item.id == id);
@@ -57,7 +57,7 @@ ItemDB.getInstance = function() {
 /**
  * Get Item By Name
  * @param {string} name 
- * @returns {rm.types.Item}
+ * @returns {PD_Item}
  */
 ItemDB.get = function(name) {
     return ItemDB.inst.item(name);
@@ -65,20 +65,45 @@ ItemDB.get = function(name) {
 /**
  * Get Item By Id
  * @param {number} id 
- * @returns {rm.types.Item}
+ * @returns {PD_Item}
  */
 ItemDB.getById = function(id) {
     return ItemDB.inst.itemById(id);
 }
 
+class PD_Item {
+    constructor({iconIndex, localizeKey, name, note, price, shipPrice, tag}) {
+        /** @type {number} */
+        this.iconIndex = Number(iconIndex);
+        /** @type {string} */
+        this.localizeKey = localizeKey;
+        /** @type {string} */
+        this.name = name;
+        /** @type {string} */
+        this.note = note;
+        /** @type {number} */
+        this.price = Number(price);
+        /** @type {number} */
+        this.shipPrice = Number(shipPrice);
+        /** @type {string} */
+        this.tag = tag;
+    }
+}
+
+//========================================================================
+// RPG MAKER SECTION
+//========================================================================
+
 var DSI_Sys1_ItemDatabase_Scene_Boot_start = Scene_Boot.prototype.start;
 Scene_Boot.prototype.start = function() {
 	DSI_Sys1_ItemDatabase_Scene_Boot_start.call(this);
     $gameTemp.itemDatabase = new ItemDB();
-    $dataItems.forEach(item => {
-        if (!item) return;
-        $gameTemp.itemDatabase.addItem(item);
-    });
+    MyUtils.parseCSV("itemTable.csv", (data) => {
+        data.forEach(i => {
+            $gameTemp.itemDatabase.addItem(new PD_Item(i));
+        })
+    })
+    console.log($gameTemp.itemDatabase);
     this.onItemDatabaseCreated();
 };
 
