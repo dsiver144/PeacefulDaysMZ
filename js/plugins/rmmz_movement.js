@@ -352,11 +352,20 @@ Game_Player.prototype.checkEventTriggerHere = function (triggers) {
     }
 };
 
-const _Game_Player_checkEventTriggerThere = Game_Player.prototype.checkEventTriggerThere;
-Game_Player.prototype.checkEventTriggerThere = function () {
-    this._x = Math.round(this.x);
-    this._y = Math.round(this.y);
-    _Game_Player_checkEventTriggerThere.call(this, ...arguments);
+Game_Player.prototype.checkEventTriggerThere = function (triggers) {
+    if (this.canStartLocalEvents()) {
+        const direction = this.direction();
+        const x1 = Math.round(this.x);
+        const y1 = Math.round(this.y);
+        const x2 = $gameMap.roundXWithDirection(x1, direction);
+        const y2 = $gameMap.roundYWithDirection(y1, direction);
+        this.startMapEvent(x2, y2, triggers, true);
+        if (!$gameMap.isAnyEventStarting() && $gameMap.isCounter(x2, y2)) {
+            const x3 = $gameMap.roundXWithDirection(x2, direction);
+            const y3 = $gameMap.roundYWithDirection(y2, direction);
+            this.startMapEvent(x3, y3, triggers, true);
+        }
+    }
 }
 
 const _Game_Player_checkEventTriggerTouch = Game_Player.prototype.checkEventTriggerTouch;

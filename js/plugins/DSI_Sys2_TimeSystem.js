@@ -24,13 +24,13 @@ const TimeConfig = {
     maxSeason: 4
 }
 
-class Zhonya extends SaveableObject {
+class GameTime extends SaveableObject {
     /**
      * A class that handle intime for Peaceful Days.
      */
     constructor() {
         super();
-        Zhonya.inst = this;
+        GameTime.inst = this;
         this.init();
     }
     /**
@@ -43,6 +43,19 @@ class Zhonya extends SaveableObject {
         this.year = 1;
         this.frameCount = 0;
         this.season = 0;
+        this.paused = true;
+    }
+    /**
+     * Pause Time
+     */
+    pause() {
+        this.paused = true;
+    }
+    /**
+     * Resume Time
+     */
+    resume() {
+        this.paused = false;
     }
     /**
      * Save properties
@@ -54,13 +67,21 @@ class Zhonya extends SaveableObject {
             ["monthDay", 1],
             ["year", 1],
             ["frameCount", 0],
-            ["season", 0]
+            ["season", 0],
+            ["paused", true]
         ]
     }
     /**
      * Update per frame.
      */
     update() {
+        this.updateFrame();
+    }
+    /**
+     * Update Frame
+     */
+    updateFrame() {
+        if (this.paused) return;
         this.frameCount += 1;
         if (this.frameCount >= TimeConfig.frameRequiredPerUpdate) {
             this.frameCount = 0;
@@ -120,46 +141,54 @@ class Zhonya extends SaveableObject {
         this.year += value;
     }
 }
-/** @type {Zhonya} */
-Zhonya.inst = null;
-
-function GameTime() {
-    return new Error("This is a static class!");
-}
+/** @type {GameTime} */
+GameTime.inst = null;
 /**
  * Get Hour
  * @returns {number}
  */
 GameTime.hour = function() {
-    return Zhonya.inst.hour;
+    return GameTime.inst.hour;
 }
 /**
  * Get Min
  * @returns {number}
  */
 GameTime.min = function() {
-    return Zhonya.inst.min;
+    return GameTime.inst.min;
 }
 /**
  * Get Season
  * @returns {number}
  */
 GameTime.season = function() {
-    return Zhonya.inst.season;
+    return GameTime.inst.season;
 }
 /**
  * Get Month Day
  * @returns {number}
  */
 GameTime.monthDay = function() {
-    return Zhonya.inst.monthDay;
+    return GameTime.inst.monthDay;
 }
 /**
  * Get Year
  * @returns {number}
  */
 GameTime.year = function() {
-    return Zhonya.inst.year;
+    return GameTime.inst.year;
+}
+/**
+ * Pause Time
+ */
+GameTime.pause = function() {
+    GameTime.inst.pause();
+}
+/**
+ * Resume Time
+ */
+GameTime.resume = function() {
+    GameTime.inst.resume();
 }
 
 //==================================================================================
@@ -169,11 +198,11 @@ GameTime.year = function() {
 var DSI_Sys2_TimeSystem_Game_System_createSaveableObjects = Game_System.prototype.createSaveableObjects;
 Game_System.prototype.createSaveableObjects = function() {
 	DSI_Sys2_TimeSystem_Game_System_createSaveableObjects.call(this);
-    this._time = new Zhonya();
+    this._time = new GameTime();
 }
 
 var DSI_Sys2_TimeSystem_Scene_Map_updateMain = Scene_Map.prototype.updateMain;
 Scene_Map.prototype.updateMain = function() {
 	DSI_Sys2_TimeSystem_Scene_Map_updateMain.call(this);
-    Zhonya.inst.update();
+    GameTime.inst.update();
 };
