@@ -25,40 +25,6 @@
  * 
  * 
  */
-/*~struct~PositionObject:
- * @param x:num
- * @text x
- * @desc X position
- * 
- * @param y:num
- * @text y
- * @desc Y Position
- *
- */
-/*~struct~SoundEffect:
- * @param name:str
- * @text name
- * @type file
- * @dir audio/se/
- * @desc Choose the name of SE you want to use.
- *
- * @param volume:num
- * @text volume
- * @default 70
- * @desc Choose the volume value of the se
- * 
- * @param pitch:num
- * @text pitch
- * @default 100
- * @desc Choose the pitch value of the se
- * 
- * @param pan:num
- * @text pan
- * @default 0
- * @desc Choose the pan value of the se
- * 
- */
-
 /** @type {PluginParams} */
 let FarmParams = PluginManager.parameters('DSI_Sys2_FarmingSystem');
 FarmParams = PluginManager.processParameters(FarmParams);
@@ -251,4 +217,14 @@ class StrFarmCrop {
  * @dir img/farms
  * @desc Enter filename for image
  * 
+ */
+/*~struct~PositionObject:
+ * @param x:num
+ * @text x
+ * @desc X position
+ * 
+ * @param y:num
+ * @text y
+ * @desc Y Position
+ *
  */
