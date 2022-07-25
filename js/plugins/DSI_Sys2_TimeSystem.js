@@ -8,21 +8,17 @@
  * @help 
  * Empty Help
  * 
- * @param testParam:number
- * @text Test Param
- * @type number
- * @default 144
- * @desc A Test Param
- * 
  */
 const TimeConfig = {
     maxHour: 24,
     maxMin: 60,
     maxMonthDay: 28,
-    frameRequiredPerUpdate: 120,
+    frameRequiredPerUpdate: 100,
     minPerUpdate: 5,
     maxSeason: 4
 }
+
+// Formula: 100 * (60 / 5) * 24 ) / 60 / 60 = 8 min per in game day.
 
 class GameTime extends SaveableObject {
     /**
@@ -78,10 +74,17 @@ class GameTime extends SaveableObject {
         this.updateFrame();
     }
     /**
+     * Check if time system is active
+     * @returns {boolean}
+     */
+    isActive() {
+        return !this.paused;
+    }
+    /**
      * Update Frame
      */
     updateFrame() {
-        if (this.paused) return;
+        if (!this.isActive()) return;
         this.frameCount += 1;
         if (this.frameCount >= TimeConfig.frameRequiredPerUpdate) {
             this.frameCount = 0;
