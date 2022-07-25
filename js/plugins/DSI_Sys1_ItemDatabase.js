@@ -70,9 +70,17 @@ ItemDB.get = function(name) {
 ItemDB.getById = function(id) {
     return ItemDB.inst.itemById(id);
 }
+/**
+ * Get Item By Id
+ * @param {number} id 
+ * @returns {Object.<string, PD_Item>}
+ */
+ ItemDB.items = function() {
+    return ItemDB.inst.items;
+}
 
 class PD_Item {
-    constructor({iconIndex, localizeKey, name, note, price, shipPrice, tag}) {
+    constructor({iconIndex, localizeKey, name, note, price, shipPrice, tag, stamina}) {
         /** @type {number} */
         this.iconIndex = Number(iconIndex);
         /** @type {string} */
@@ -85,8 +93,10 @@ class PD_Item {
         this.price = Number(price);
         /** @type {number} */
         this.shipPrice = Number(shipPrice);
-        /** @type {string} */
-        this.tag = tag;
+        /** @type {string[]} */
+        this.tags = tag.split(';').map(t => t.trim());
+        /** @type {number[]} */
+        this.staminaData = stamina.split(";").map(t => Number(t));
     }
 }
 
@@ -94,21 +104,32 @@ class PD_Item {
 // RPG MAKER SECTION
 //========================================================================
 
-var DSI_Sys1_ItemDatabase_Scene_Boot_start = Scene_Boot.prototype.start;
-Scene_Boot.prototype.start = function() {
-	DSI_Sys1_ItemDatabase_Scene_Boot_start.call(this);
-    $gameTemp.itemDatabase = new ItemDB();
+var DSI_Sys1_ItemDatabase_Scene_Boot_create = Scene_Boot.prototype.create;
+Scene_Boot.prototype.create = function() {
+	DSI_Sys1_ItemDatabase_Scene_Boot_create.call(this);
+    this.loadCustomDatabase();
+};
+
+Scene_Boot.prototype.loadCustomDatabase = function() {
+    new ItemDB();
     MyUtils.parseCSV("itemTable.csv", (data) => {
         data.forEach(i => {
-            $gameTemp.itemDatabase.addItem(new PD_Item(i));
+            if (!i || !i.name) return;
+            ItemDB.getInstance().addItem(new PD_Item(i));
         })
+        this.customDatabaseLoaded = true;
+        this.onItemDatabaseCreated();
     })
-    console.log($gameTemp.itemDatabase);
-    this.onItemDatabaseCreated();
-};
+}
 
 Scene_Boot.prototype.onItemDatabaseCreated = function() {
     // To be aliased by other function
+};
+
+var DSI_Sys1_ItemDatabase_Scene_Boot_isReady = Scene_Boot.prototype.isReady;
+Scene_Boot.prototype.isReady = function() {
+	const result = DSI_Sys1_ItemDatabase_Scene_Boot_isReady.call(this);
+    return result && !!this.customDatabaseLoaded;
 };
 
 //========================================================================

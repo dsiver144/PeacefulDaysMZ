@@ -1,15 +1,15 @@
 //=======================================================================
-// * Plugin Name  : DSI_Sys3_FarmCrop.js
+// * Plugin Name  : DSI_Sys3_FarmTile.js
 // * Last Updated : 7/23/2022
 //========================================================================
 /*:
  * @author dsiver144
  * @target MZ
- * @plugindesc (v1.0) Farm Crop
+ * @plugindesc (v1.0) Farm Tile
  * @help 
  * Empty Help
  */
-class FarmCrop extends FarmObject {
+class FarmTile extends FarmObject {
     /**
      * Create farm object
      * @param {Position} position 
@@ -17,7 +17,7 @@ class FarmCrop extends FarmObject {
      */
      constructor(position, mapId) {
         super(position, mapId);
-        this.type = 'FarmCrop';
+        this.type = 'FarmTile';
     }
     /**
      * Set Seed

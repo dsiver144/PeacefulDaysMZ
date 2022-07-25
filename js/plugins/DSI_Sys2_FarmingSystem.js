@@ -85,22 +85,35 @@ class FarmManager extends SaveableObject {
     constructor() {
         super();
         FarmManager.inst = this;
-        /** @type {Farmland[]} */
-        this.farmlands = [];
+        /** @type {Object.<string, Farmland>} */
+        this.farmlands = {};
     }
-
-    test() {
-        const farmland = new Farmland(1);
-        const crop = new FarmCrop(new Position(0, 0), 1);
-        crop.setSeed(0);
-        farmland.addObject(crop);
-        this.farmlands.push(farmland);
+    /**
+     * Get Current Farm land
+     * @returns {Farmland}
+     */
+    currentFarmland() {
+        return this.getFarmlandById($gameMap.mapId());
+    }
+    /**
+     * Get Farm Land By ID
+     * @param {number} mapId - map id of the farm land
+     * @returns {Farmland}
+     */
+    getFarmlandById(mapId) {
+        let land = this.farmlands[mapId.toString()];
+        if (land) return land;
+        land = new Farmland(mapId);
+        this.farmlands[mapId.toString()] = land;
+        return land;
     }
     /**
      * On New Day
      */
     onNewDay() {
-        this.farmlands.forEach(farmland => farmland.onNewDay());
+        for (let mapId in this.farmlands) {
+            this.farmlands[mapId].onNewDay();
+        }
     }
     /**
      * Get Save Data
@@ -108,7 +121,10 @@ class FarmManager extends SaveableObject {
      */
     getSaveData() {
         const result = super.getSaveData();
-        const farmlands = this.farmlands.map(farmLand => farmLand.getSaveData());
+        const farmlands = {};
+        for (let mapId in this.farmlands) {
+            farmlands[mapId] = this.farmlands[mapId].getSaveData();
+        }
         result['farmlands'] = farmlands;
         return result;
     }
@@ -118,20 +134,20 @@ class FarmManager extends SaveableObject {
      */
     loadSaveData(data) {
         super.loadSaveData(data);
-        this.farmlands = data['farmlands'].map((data) => {
+        const farmlands = {};
+        for (let mapId in data['farmlands']) {
+            const landData = data['farmlands'][mapId];
             let newFarmLand = new Farmland();
-            newFarmLand.loadSaveData(data);
-            return newFarmLand;
-        })
+            newFarmLand.loadSaveData(landData);
+            farmlands[mapId] = newFarmLand;
+        }
+        this.farmlands = farmlands;
     }
 
 }
 
 /** @type {FarmManager} */
 FarmManager.inst = null;
-FarmManager.getInstance = function() {
-    return FarmManager.inst;
-}
 /**
  * Get Seed Data
  * @param {number} seedId 
