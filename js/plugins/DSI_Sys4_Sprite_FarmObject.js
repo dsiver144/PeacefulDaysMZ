@@ -13,8 +13,9 @@
 class Sprite_FarmObject extends Sprite {
     /**
      * A class that handle farm object display.
+     * @param {FarmObject} farmObject
      */
-    constructor() {
-        
+    constructor(farmObject) {
+        this.farmObject = farmObject;
     }
 }

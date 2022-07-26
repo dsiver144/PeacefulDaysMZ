@@ -12,7 +12,7 @@
 class FarmTile extends FarmObject {
     /**
      * Create farm object
-     * @param {Position} position 
+     * @param {Vector2} position 
      * @param {number} mapId 
      */
      constructor(position, mapId) {

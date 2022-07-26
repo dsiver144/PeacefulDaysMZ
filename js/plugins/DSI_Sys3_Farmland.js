@@ -67,7 +67,7 @@ class Farmland extends SaveableObject {
      * @returns {number}
      */
     pos(x, y) {
-        return new Position(x, y).toString();
+        return new Vector2(x, y).toString();
     }
     /**
      * Get All Save Properties

@@ -11,7 +11,7 @@
  * 
  * 
  */
-class Position extends SaveableObject {
+class Vector2 extends SaveableObject {
     /**
      * Object position
      * @param {number} x 

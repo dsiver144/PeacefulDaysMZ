@@ -29,7 +29,6 @@
 let FarmParams = PluginManager.parameters('DSI_Sys2_FarmingSystem');
 FarmParams = PluginManager.processParameters(FarmParams);
 
-
 var DSI_Sys2_FarmingSystem_Scene_Boot_onItemDatabaseCreated = Scene_Boot.prototype.onItemDatabaseCreated;
 Scene_Boot.prototype.onItemDatabaseCreated = function() {
 	DSI_Sys2_FarmingSystem_Scene_Boot_onItemDatabaseCreated.call(this);
