@@ -146,6 +146,14 @@ MyUtils.getCustomSpriteFromTilemap = function(key) {
     if (!spriteset) return null;
     return spriteset.getCustomSpriteFromTilemap(key);
 }
+/**
+ * Random Array Item
+ * @param {any[]} array 
+ * @returns {any}
+ */
+MyUtils.randomArrayItem = function(array) {
+    return array[Math.floor(Math.random() * array.length)];
+}
 
 //========================================================================
 // END OF PLUGIN
