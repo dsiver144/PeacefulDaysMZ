@@ -52,25 +52,26 @@ class FarmObject extends SaveableObject {
      * Will be called when being spawned.
      */
     onSpawned() {
-
+        console.log("> A new ", this.type, " has been spawned at " + this.position.toString(), this);
+        this.getSprite();
     }
     /**
      * Will be called when being removed;
      */
     onRemoved() {
-        
+        console.log("> A ", this.type, " has been removed at " + this.position.toString(), this);
     }
     /**
      * On New Day
      */
     onNewDay() {
-
+        
     }
     /**
      * On Interact
      */
     onInteract() {
-
+        console.log("> A ", this.type, " has been interacted at " + this.position.toString(), this);
     }
     /**
      * On Hit By Tool
@@ -101,6 +102,24 @@ class FarmObject extends SaveableObject {
      * @returns {boolean}
      */
     interactable() {
-        return false;
+        return true;
+    }
+    /**
+     * Get object sprite
+     */
+    getSprite() {
+        let sprite = FarmManager.inst.getObjectSprite(this.position.x, this.position.y);
+        if (!sprite) {
+            sprite = new Sprite_FarmObject(this);
+            FarmManager.inst.addObjectSprite(this.position.x, this.position.y, sprite);
+        }
+        return sprite;
+    }
+    /**
+     * Sprite Class
+     * @returns {any}
+     */
+    spriteClass() {
+        return Sprite_FarmObject;
     }
 }

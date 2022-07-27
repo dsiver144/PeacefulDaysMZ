@@ -31,6 +31,18 @@ class Farmland extends SaveableObject {
         }
     }
     /**
+     * Check interact with farm object;
+     * @param {number} x 
+     * @param {number} y 
+     */
+    checkInteract(x, y) {
+        const object = this.getObject(x, y);
+        if (!object) return false;
+        if (!object.interactable()) return false;
+        object.onInteract();
+        return true;
+    }
+    /**
      * Use Tool
      * @param {ToolType} toolType 
      * @param {number} x 
@@ -38,6 +50,7 @@ class Farmland extends SaveableObject {
      * @param {any} toolEx 
      */
     useTool(toolType, x, y, toolEx = null) {
+        console.log({toolType, x, y, toolEx});
         switch(toolType) {
             case ToolType.hoe:
                 this.useHoe(x, y);

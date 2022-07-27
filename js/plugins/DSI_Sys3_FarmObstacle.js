@@ -82,6 +82,10 @@ class FarmObstacle extends FarmObject {
 
 class OSmallStone extends FarmObstacle {
 
+    interactable() {
+        return true;
+    }
+
     init() {
         this.type = 'OSmallStone';
     }

@@ -45,6 +45,7 @@ DefaultKeyboardConfig[KeyAction.SwitchItemLeft] = 90;
 DefaultKeyboardConfig[KeyAction.SwitchItemRight] = 88;
 DefaultKeyboardConfig[KeyAction.PageLeft] = 81;
 DefaultKeyboardConfig[KeyAction.PageRight] = 69;
+
 const DefaultGamePadConfig = {}
 DefaultGamePadConfig[KeyAction.UseTool] = 2;
 DefaultGamePadConfig[KeyAction.Check] = 0;
@@ -59,7 +60,6 @@ DefaultGamePadConfig[KeyAction.MoveUp] = 12;
 DefaultGamePadConfig[KeyAction.MoveDown] = 13;
 DefaultGamePadConfig[KeyAction.MoveLeft] = 14;
 DefaultGamePadConfig[KeyAction.MoveRight] = 15;
-
 
 //==================================================================================
 // IMPLEMENT SYSTEM IN TO RPG MAKER SYSTEM
@@ -83,17 +83,12 @@ Game_Player.prototype.update = function(sceneActive) {
 };
 
 Game_Player.prototype.updateCustomInput = function() {
-    this.updateUseTool();
+    this.updateUseToolInput();
 };
 
-Game_Player.prototype.updateUseTool = function() {
-    if (Input.isRepeated(KeyAction.UseTool)) {
-        console.log("Use tool", TouchInput.x, TouchInput.y);
-    }
-};
-
+//==================================================================================
 // Overwrite default system
-
+//==================================================================================
 Game_Player.prototype.isDashButtonPressed = function() {
     const shift = Input.isPressed(KeyAction.Run);
     if (ConfigManager.alwaysDash) {
@@ -134,6 +129,9 @@ Scene_Map.prototype.isMenuCalled = function() {
 
 Game_Player.prototype.triggerButtonAction = function() {
     if (Input.isTriggered(KeyAction.Check)) {
+        if (this.checkInteractWithFarmObjects()) {
+            return true;
+        }
         if (this.getOnOffVehicle()) {
             return true;
         }
@@ -149,6 +147,9 @@ Game_Player.prototype.triggerButtonAction = function() {
     return false;
 };
 
+Game_Player.prototype.checkInteractWithFarmObjects = function() {
+    return false;
+}
 
 var DSI_Sys1_ControllerSystem_TouchInput__onMouseDown = TouchInput._onMouseDown;
 TouchInput._onMouseDown = function(event) {

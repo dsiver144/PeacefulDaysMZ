@@ -53,6 +53,10 @@ class FarmManager extends SaveableObject {
         /** @type {Object.<string, Farmland>} */
         this.farmlands = {};
     }
+    
+    test() {
+        this.currentFarmland().addObject(new OSmallStone($gamePlayer.frontPosition(), $gameMap.mapId()));
+    }
     /**
      * Get Current Farm land
      * @returns {Farmland}
@@ -69,6 +73,14 @@ class FarmManager extends SaveableObject {
      */
     useTool(toolType, x, y, toolEx = null) {
         this.currentFarmland().useTool(toolType, x, y, toolEx);
+    }
+    /**
+     * Check if player is interact with farm object
+     * @param {number} x 
+     * @param {number} y 
+     */
+    checkInteract(x, y) {
+        return this.currentFarmland().checkInteract(x, y);
     }
     /**
      * Get Farm Land By ID
@@ -118,7 +130,29 @@ class FarmManager extends SaveableObject {
         }
         this.farmlands = farmlands;
     }
+    /**
+     * Get Farm Object Sprite
+     * @param {number} x 
+     * @param {number} y 
+     * @returns {Sprite_FarmObject}
+     */
+    getObjectSprite(x, y) {
+        return MyUtils.getCustomSpriteFromTilemap(`farmObject_${x}_${y}`);
+    }
+    /**
+     * Add farm object sprite to tilemap
+     * @param {number} x 
+     * @param {number} y 
+     * @param {Sprite_FarmObject} sprite 
+     */
+    addObjectSprite(x, y, sprite) {
+        MyUtils.addCustomSpriteToTilemap(`farmObject_${x}_${y}`, sprite);
+    }
 
+}
+
+ImageManager.loadFarm = function(filename, dir = "") {
+    return ImageManager.loadBitmap("img/farms/" + dir, filename);
 }
 
 /** @type {FarmManager} */
@@ -136,10 +170,49 @@ FarmManager.getSeedData = function(seedId) {
 // IMPLEMENT SYSTEM IN TO RPG MAKER SYSTEM
 //==================================================================================
 
+Game_Player.prototype.updateUseToolInput = function() {
+    if (Input.isTriggered(KeyAction.UseTool)) {
+        if (Input.getInputMode() === 'keyboard') {
+            const x = $gameMap.canvasToMapX(TouchInput.x);
+            const y = $gameMap.canvasToMapY(TouchInput.y);
+            this.turnTowardPoint(x, y);
+        }
+        this._pressingToolBtn = true;
+        this._pressingToolCounter = 0;
+    }
+    if (this._pressingToolBtn) {
+        if (Input.isPressed(KeyAction.UseTool)) {
+            this._pressingToolCounter += 1;
+            console.log("Hold tool btn: ", this._pressingToolCounter);
+        } else {
+            const pos = this.frontPosition();
+            FarmManager.inst.useTool('hoe', pos.x, pos.y);
+            this._pressingToolBtn = false;
+        }
+    }
+};
+
+Game_Player.prototype.checkInteractWithFarmObjects = function() {
+    const pos = this.frontPosition();
+    return FarmManager.inst.checkInteract(pos.x, pos.y);
+}
+
 var DSI_Sys2_FarmingSystem_Game_System_createSaveableObjects = Game_System.prototype.createSaveableObjects;
 Game_System.prototype.createSaveableObjects = function () {
 	DSI_Sys2_FarmingSystem_Game_System_createSaveableObjects.call(this);
     this._farmLand = new FarmManager();
+}
+
+// Display Farm Objects
+
+var DSI_Sys2_FarmingSystem_Spriteset_Map_createCharacters = Spriteset_Map.prototype.createCharacters;
+Spriteset_Map.prototype.createCharacters = function () {
+	DSI_Sys2_FarmingSystem_Spriteset_Map_createCharacters.call(this);
+    this.createFarmObjectSprites();
+}
+
+Spriteset_Map.prototype.createFarmObjectSprites = function() {
+    
 }
 
 //========================================================================

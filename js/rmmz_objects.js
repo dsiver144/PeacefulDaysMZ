@@ -7836,6 +7836,16 @@ Game_Character.prototype.turnTowardCharacter = function(character) {
     }
 };
 
+Game_Character.prototype.turnTowardPoint = function(x, y) {
+    const sx = this.deltaXFrom(x);
+    const sy = this.deltaYFrom(y);
+    if (Math.abs(sx) > Math.abs(sy)) {
+        this.setDirection(sx > 0 ? 4 : 6);
+    } else if (sy !== 0) {
+        this.setDirection(sy > 0 ? 8 : 2);
+    }
+};
+
 Game_Character.prototype.turnAwayFromCharacter = function(character) {
     const sx = this.deltaXFrom(character.x);
     const sy = this.deltaYFrom(character.y);
@@ -8356,6 +8366,33 @@ Game_Player.prototype.getInputDirection = function() {
 Game_Player.prototype.executeMove = function(direction) {
     this.moveStraight(direction);
 };
+
+Game_Player.prototype.frontPosition = function() {
+    let x = this._x; 
+    let y = this._y;
+    switch (this.direction()) {
+        case 2:
+            x = Math.round(x);
+            y = Math.round(y);
+            break;
+        case 8:
+            x = Math.round(x);
+            y = Math.round(y);
+            break;
+        case 4:
+            x = Math.round(x);
+            y = Math.round(y);
+            break;
+        case 6:
+            x = Math.round(x);
+            y = Math.round(y);
+            break;
+    }
+    const x2 = $gameMap.roundXWithDirection(x, this.direction());
+    const y2 = $gameMap.roundYWithDirection(y, this.direction());
+    console.log(this._x, this._y, x2, y2);
+    return v2(x2, y2);
+}
 
 Game_Player.prototype.update = function(sceneActive) {
     const lastScrolledX = this.scrolledX();

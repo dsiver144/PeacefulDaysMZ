@@ -105,6 +105,41 @@ MyUtils.loadCSV = function(src, callback) {
     xhr.send(null);
 };
 
+Spriteset_Map.prototype.addCustomSpriteToTilemap = function(key, sprite) {
+    this._customSprites = this._customSprites || {};
+    if (this._customSprites[key]) {
+        return;
+    }
+    this._customSprites[key] = sprite;
+    this._tilemap.addChild(sprite);
+}
+
+Spriteset_Map.prototype.getCustomSpriteFromTilemap = function(key) {
+    this._customSprites = this._customSprites || {};
+    return this._customSprites[key];
+}
+/**
+ * Add custom sprite to tilemap
+ * @param {string} key 
+ * @param {Sprite} sprite 
+ * @returns 
+ */
+MyUtils.addCustomSpriteToTilemap = function(key, sprite) {
+    const spriteset = SceneManager._scene._spriteset;
+    if (!spriteset) return;
+    spriteset.addCustomSpriteToTilemap(key, sprite);
+}
+/**
+ * Get Custom Sprite From Tilemap
+ * @param {string} key 
+ * @returns {Sprite}
+ */
+MyUtils.getCustomSpriteFromTilemap = function(key) {
+    const spriteset = SceneManager._scene._spriteset;
+    if (!spriteset) return null;
+    return spriteset.getCustomSpriteFromTilemap(key);
+}
+
 //========================================================================
 // END OF PLUGIN
 //========================================================================
