@@ -104,6 +104,13 @@ MyUtils.loadCSV = function(src, callback) {
     };
     xhr.send(null);
 };
+/** @type {Spriteset_Map} */
+MyUtils.spriteset = null;
+var DSI_Utils_Spriteset_Map_initialize = Spriteset_Map.prototype.initialize;
+Spriteset_Map.prototype.initialize = function() {
+    MyUtils.spriteset = this;
+	DSI_Utils_Spriteset_Map_initialize.call(this);
+};
 
 Spriteset_Map.prototype.addCustomSpriteToTilemap = function(key, sprite) {
     this._customSprites = this._customSprites || {};
@@ -125,7 +132,7 @@ Spriteset_Map.prototype.getCustomSpriteFromTilemap = function(key) {
  * @returns 
  */
 MyUtils.addCustomSpriteToTilemap = function(key, sprite) {
-    const spriteset = SceneManager._scene._spriteset;
+    const spriteset = this.spriteset;
     if (!spriteset) return;
     spriteset.addCustomSpriteToTilemap(key, sprite);
 }
@@ -135,7 +142,7 @@ MyUtils.addCustomSpriteToTilemap = function(key, sprite) {
  * @returns {Sprite}
  */
 MyUtils.getCustomSpriteFromTilemap = function(key) {
-    const spriteset = SceneManager._scene._spriteset;
+    const spriteset = this.spriteset;
     if (!spriteset) return null;
     return spriteset.getCustomSpriteFromTilemap(key);
 }

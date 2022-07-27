@@ -50,7 +50,6 @@ class Farmland extends SaveableObject {
      * @param {any} toolEx 
      */
     useTool(toolType, x, y, toolEx = null) {
-        console.log({toolType, x, y, toolEx});
         switch(toolType) {
             case ToolType.hoe:
                 this.useHoe(x, y);
@@ -172,5 +171,12 @@ class Farmland extends SaveableObject {
             newFarmObject.loadSaveData(savedObject);
             this.farmObjects[position] = newFarmObject;
         }
+    }
+    /**
+     * Get array of all farm objects
+     * @returns {FarmObject[]}
+     */
+    allObjects() {
+        return Object.values(this.farmObjects);
     }
 }

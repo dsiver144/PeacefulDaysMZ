@@ -23,11 +23,17 @@
  * @text Farm Map IDs
  * @type number[]
  * 
+ * @command updateNewDay
+ * 
  * 
  */
 /** @type {PluginParams} */
 let FarmParams = PluginManager.parameters('DSI_Sys2_FarmingSystem');
 FarmParams = PluginManager.processParameters(FarmParams);
+
+PluginManager.registerCommand('DSI_Sys2_FarmingSystem', 'updateNewDay', () => {
+    FarmManager.inst.onNewDay();
+});
 
 var DSI_Sys2_FarmingSystem_Scene_Boot_onItemDatabaseCreated = Scene_Boot.prototype.onItemDatabaseCreated;
 Scene_Boot.prototype.onItemDatabaseCreated = function() {
@@ -152,7 +158,9 @@ class FarmManager extends SaveableObject {
 }
 
 ImageManager.loadFarm = function(filename, dir = "") {
-    return ImageManager.loadBitmap("img/farms/" + dir, filename);
+    let path = "img/farms/" + dir;
+    if (dir.length > 0) path += "/";
+    return ImageManager.loadBitmap(path, filename);
 }
 
 /** @type {FarmManager} */
@@ -194,7 +202,8 @@ Game_Player.prototype.updateUseToolInput = function() {
 
 Game_Player.prototype.checkInteractWithFarmObjects = function() {
     const pos = this.frontPosition();
-    return FarmManager.inst.checkInteract(pos.x, pos.y);
+    const result = FarmManager.inst.checkInteract(pos.x, pos.y);
+    return result;
 }
 
 var DSI_Sys2_FarmingSystem_Game_System_createSaveableObjects = Game_System.prototype.createSaveableObjects;
@@ -212,7 +221,9 @@ Spriteset_Map.prototype.createCharacters = function () {
 }
 
 Spriteset_Map.prototype.createFarmObjectSprites = function() {
-    
+    FarmManager.inst.currentFarmland().allObjects().forEach(object => {
+        object.objectSprite();
+    })
 }
 
 //========================================================================

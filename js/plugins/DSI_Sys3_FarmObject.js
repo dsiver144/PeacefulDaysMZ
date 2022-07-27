@@ -53,7 +53,7 @@ class FarmObject extends SaveableObject {
      */
     onSpawned() {
         console.log("> A new ", this.type, " has been spawned at " + this.position.toString(), this);
-        this.getSprite();
+        this.objectSprite();
     }
     /**
      * Will be called when being removed;
@@ -102,18 +102,26 @@ class FarmObject extends SaveableObject {
      * @returns {boolean}
      */
     interactable() {
-        return true;
+        return false;
     }
     /**
      * Get object sprite
      */
-    getSprite() {
+    objectSprite() {
         let sprite = FarmManager.inst.getObjectSprite(this.position.x, this.position.y);
-        if (!sprite) {
-            sprite = new Sprite_FarmObject(this);
+        if (!sprite && this.mapId == $gameMap.mapId()) {
+            const constructor = this.spriteClass();
+            sprite = new constructor(this);
             FarmManager.inst.addObjectSprite(this.position.x, this.position.y, sprite);
         }
         return sprite;
+    }
+    /**
+     * Refresh object sprite
+     */
+    refreshSprite() {
+        const sprite = this.objectSprite();
+        sprite && sprite.refreshBitmap();
     }
     /**
      * Sprite Class
