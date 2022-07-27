@@ -42,6 +42,17 @@ class Vector2 extends SaveableObject {
     }
 }
 
+// Shortcut for Vector2
+/**
+ * Create a vector2
+ * @param {number} x 
+ * @param {number} y 
+ * @returns {Vector2}
+ */
+const v2 = function(x, y) {
+    return new Vector2(x, y);
+}
+
 class MyUtils {
     constructor() {
         return new Error("This is a static class");

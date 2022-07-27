@@ -61,6 +61,16 @@ class FarmManager extends SaveableObject {
         return this.getFarmlandById($gameMap.mapId());
     }
     /**
+     * Use Tool
+     * @param {ToolType} toolType 
+     * @param {number} x 
+     * @param {number} y 
+     * @param {any} toolEx
+     */
+    useTool(toolType, x, y, toolEx = null) {
+        this.currentFarmland().useTool(toolType, x, y, toolEx);
+    }
+    /**
      * Get Farm Land By ID
      * @param {number} mapId - map id of the farm land
      * @returns {Farmland}

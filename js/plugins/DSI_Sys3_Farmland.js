@@ -31,6 +31,61 @@ class Farmland extends SaveableObject {
         }
     }
     /**
+     * Use Tool
+     * @param {ToolType} toolType 
+     * @param {number} x 
+     * @param {number} y 
+     * @param {any} toolEx 
+     */
+    useTool(toolType, x, y, toolEx = null) {
+        switch(toolType) {
+            case ToolType.hoe:
+                this.useHoe(x, y);
+                break;
+            case ToolType.seedPack:
+                this.useSeed(x, y, toolEx);
+            case ToolType.hammer:
+                this.useHammer(x, y);
+                break;
+        }
+    }
+    /**
+     * Use Hoe
+     * @param {number} x 
+     * @param {number} y 
+     */
+    useHoe(x, y) {
+        if (this.getObject(x, y)) return;
+        const farmTile = new FarmTile(v2(x, y), this.mapId);
+        this.addObject(farmTile);
+    }
+    /**
+     * Use Hammer
+     * @param {number} x 
+     * @param {number} y 
+     * @param {number} seedId
+     */
+    useSeed(x, y, seedId) {
+        
+    }
+    /**
+     * Use Hammer
+     * @param {number} x 
+     * @param {number} y 
+     */
+    useHammer(x, y) {
+        
+    }
+    /**
+     * Get Object At
+     * @param {number} x 
+     * @param {number} y 
+     * @returns {FarmObject}
+     */
+    getObject(x, y) {
+        return this.farmObjects[this.pos(x, y)];
+    }
+    /**
      * Add Object
      * @param {FarmObject} object 
      */

@@ -87,7 +87,7 @@ class OSmallStone extends FarmObstacle {
     }
 
     hittingTools() {
-        return [TOOL_TYPE.hammer];
+        return [ToolType.hammer];
     }
 
     onHitByTool(toolType) {

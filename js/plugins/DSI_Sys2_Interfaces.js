@@ -11,7 +11,7 @@
  */
 
 /** @enum */
-const TOOL_TYPE = {
+const ToolType = {
     "seedPack": 0,
     "wateringCan": 1,
     "hoe": 2,

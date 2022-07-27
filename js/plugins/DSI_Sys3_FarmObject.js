@@ -74,7 +74,7 @@ class FarmObject extends SaveableObject {
     }
     /**
      * On Hit By Tool
-     * @param {TOOL_TYPE} toolType 
+     * @param {ToolType} toolType 
      */
     checkHitByTool(toolType) {
         if (!this.hittingTools().includes(toolType)) return false;
@@ -82,7 +82,7 @@ class FarmObject extends SaveableObject {
     }
     /**
      * Return all tool that can be used to hit this object
-     * @returns {TOOL_TYPE[]}
+     * @returns {ToolType[]}
      */
     hittingTools() {
         return [];
@@ -90,7 +90,7 @@ class FarmObject extends SaveableObject {
     /**
      * On Hit By Tool. 
      * Must return correct boolean value if successfully or not.
-     * @param {TOOL_TYPE} toolType 
+     * @param {ToolType} toolType 
      * @returns {boolean}
      */
     onHitByTool(toolType) {
