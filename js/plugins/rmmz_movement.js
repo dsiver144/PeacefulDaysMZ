@@ -101,7 +101,7 @@ Game_Player.prototype._moveByInput = function (direction) {
             if (canLeft && canDown) {
                 if (leftTest(1)) {
                     this.setMovementSuccess(true);
-                    let dis = this.distancePerFrame() / Math.SQRT2;
+                    let dis = this.distancePerFrame()// / Math.SQRT2;
                     this._y += dis;
                     this._x -= dis;
                     if (Math.round(this._y) > roundY || Math.round(this._x) < roundX) {
@@ -127,7 +127,7 @@ Game_Player.prototype._moveByInput = function (direction) {
             if (canRight && canDown) {
                 if (rightTest(1)) {
                     this.setMovementSuccess(true);
-                    let dis = this.distancePerFrame() / Math.SQRT2;
+                    let dis = this.distancePerFrame()// / Math.SQRT2;
                     this._y += dis;
                     this._x += dis;
                     if (Math.round(this._y) > roundY || Math.round(this._x) > roundX) {
@@ -153,7 +153,7 @@ Game_Player.prototype._moveByInput = function (direction) {
             if (canLeft && canUp) {
                 if (leftTest(-1)) {
                     this.setMovementSuccess(true);
-                    let dis = this.distancePerFrame() / Math.SQRT2;
+                    let dis = this.distancePerFrame()// / Math.SQRT2;
                     this._y -= dis;
                     this._x -= dis;
                     if (Math.round(this._y) < roundY || Math.round(this._x) < roundX) {
@@ -179,7 +179,7 @@ Game_Player.prototype._moveByInput = function (direction) {
             if (canRight && canUp) {
                 if (rightTest(-1)) {
                     this.setMovementSuccess(true);
-                    let dis = this.distancePerFrame() / Math.SQRT2;
+                    let dis = this.distancePerFrame()// / Math.SQRT2;
                     this._y -= dis;
                     this._x += dis;
                     if (Math.round(this._y) < roundY || Math.round(this._x) > roundX) {

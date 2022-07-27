@@ -5683,6 +5683,7 @@ Input.clear = function() {
     this._preferredAxis = "";
     this._date = 0;
     this._virtualButton = null;
+    this.inputMode = 'keyboard';
 };
 
 /**
@@ -5838,6 +5839,7 @@ Input._onKeyDown = function(event) {
     const buttonName = this.keyMapper[event.keyCode];
     if (buttonName) {
         this._currentState[buttonName] = true;
+        this.setInputMode('keyboard');
     }
 };
 
@@ -5908,11 +5910,27 @@ Input._updateGamepadState = function(gamepad) {
             const buttonName = this.gamepadMapper[j];
             if (buttonName) {
                 this._currentState[buttonName] = newState[j];
+                if (newState[j]) {
+                    this.setInputMode('gamepad');
+                }
             }
         }
     }
     this._gamepadStates[gamepad.index] = newState;
 };
+
+Input.setInputMode = function(mode) {
+    if (this.inputMode == mode) return;
+    this.inputMode = mode;
+    console.log("@ Input mode switched to : " + mode);
+}
+/**
+ * Get Input Mode
+ * @returns {"keyboard" | "gamepad"}
+ */
+Input.getInputMode = function() {
+    return this.inputMode;
+}
 
 Input._updateDirection = function() {
     let x = this._signX();

@@ -27,6 +27,7 @@ const KeyAction = {
     "Mission": "mission",
     "PageLeft": "pageup",
     "PageRight": "pagedown",
+    "None": "none"
 }
 
 const DefaultKeyboardConfig = {}
@@ -59,6 +60,11 @@ DefaultGamePadConfig[KeyAction.MoveDown] = 13;
 DefaultGamePadConfig[KeyAction.MoveLeft] = 14;
 DefaultGamePadConfig[KeyAction.MoveRight] = 15;
 
+
+//==================================================================================
+// IMPLEMENT SYSTEM IN TO RPG MAKER SYSTEM
+//==================================================================================
+
 Input.keyMapper = {};
 Input.gamepadMapper = {};
 for (var keyname in DefaultKeyboardConfig) {
@@ -67,12 +73,6 @@ for (var keyname in DefaultKeyboardConfig) {
 for (var keyname in DefaultGamePadConfig) {
     Input.gamepadMapper[DefaultGamePadConfig[keyname]] = keyname;
 }
-
-console.log(Input.gamepadMapper);
-
-//==================================================================================
-// IMPLEMENT SYSTEM IN TO RPG MAKER SYSTEM
-//==================================================================================
 
 var DSI_Sys1_PlayerController_Game_Player_update = Game_Player.prototype.update;
 Game_Player.prototype.update = function(sceneActive) {
@@ -83,18 +83,50 @@ Game_Player.prototype.update = function(sceneActive) {
 };
 
 Game_Player.prototype.updateCustomInput = function() {
-    if (Input.isTriggered(KeyAction.UseTool)) {
-        console.log("Use tool");
+    this.updateUseTool();
+};
+
+Game_Player.prototype.updateUseTool = function() {
+    if (Input.isRepeated(KeyAction.UseTool)) {
+        console.log("Use tool", TouchInput.x, TouchInput.y);
     }
 };
 
-
-
 // Overwrite default system
 
-Window_Selectable.prototype.isOkTriggered = function() {
-    return this._canRepeat ? Input.isRepeated(KeyAction.Check) : Input.isTriggered(KeyAction.Check);
+Game_Player.prototype.isDashButtonPressed = function() {
+    const shift = Input.isPressed(KeyAction.Run);
+    if (ConfigManager.alwaysDash) {
+        return !shift;
+    } else {
+        return shift;
+    }
 };
+
+Window_Selectable.prototype.isOkTriggered = function() {
+    const key = Input.getInputMode() == "keyboard" ? KeyAction.None : KeyAction.Check;
+    return this._canRepeat ? Input.isRepeated(key) : Input.isTriggered(key);
+};
+
+Window_Selectable.prototype.isCancelTriggered = function() {
+    return Input.isRepeated(KeyAction.Menu);
+};
+
+// This handle touch on RPG Windows
+Window_Selectable.prototype.processTouch = function() {
+    if (this.isOpenAndActive()) {
+        if (this.isHoverEnabled() && TouchInput.isHovered()) {
+            this.onTouchSelect(false);
+        } else if (TouchInput.isTriggered()) {
+            this.onTouchSelect(true);
+        }
+        if (TouchInput.isClicked()) {
+            this.onTouchOk();
+        }
+    }
+};
+
+Scene_MenuBase.prototype.createButtons = function() {}
 
 Scene_Map.prototype.isMenuCalled = function() {
     return Input.isTriggered(KeyAction.Menu);
@@ -157,3 +189,86 @@ Input.setState = function(name, value) {
 Game_Temp.prototype.isDestinationValid = function() {
     return false;
 };
+
+// /**
+//  * Checks whether the mouse button or touchscreen has been pressed and
+//  * released at the same position.
+//  *
+//  * @returns {boolean} True if the mouse button or touchscreen is clicked.
+//  */
+//  TouchInput.isClicked = function() {
+//     return false;
+// };
+
+// /**
+//  * Checks whether the mouse button or touchscreen is currently pressed down.
+//  *
+//  * @returns {boolean} True if the mouse button or touchscreen is pressed.
+//  */
+// TouchInput.isPressed = function() {
+//     return false;
+// };
+
+// /**
+//  * Checks whether the left mouse button or touchscreen is just pressed.
+//  *
+//  * @returns {boolean} True if the mouse button or touchscreen is triggered.
+//  */
+// TouchInput.isTriggered = function() {
+//     return false;
+// };
+
+// /**
+//  * Checks whether the left mouse button or touchscreen is just pressed
+//  * or a pseudo key repeat occurred.
+//  *
+//  * @returns {boolean} True if the mouse button or touchscreen is repeated.
+//  */
+// TouchInput.isRepeated = function() {
+//     return false;
+// };
+
+// /**
+//  * Checks whether the left mouse button or touchscreen is kept depressed.
+//  *
+//  * @returns {boolean} True if the left mouse button or touchscreen is long-pressed.
+//  */
+// TouchInput.isLongPressed = function() {
+//     return false;
+// };
+
+// /**
+//  * Checks whether the right mouse button is just pressed.
+//  *
+//  * @returns {boolean} True if the right mouse button is just pressed.
+//  */
+// TouchInput.isCancelled = function() {
+//     return false;
+// };
+
+// /**
+//  * Checks whether the mouse or a finger on the touchscreen is moved.
+//  *
+//  * @returns {boolean} True if the mouse or a finger on the touchscreen is moved.
+//  */
+// TouchInput.isMoved = function() {
+//     return false;
+// };
+
+// /**
+//  * Checks whether the mouse is moved without pressing a button.
+//  *
+//  * @returns {boolean} True if the mouse is hovered.
+//  */
+// TouchInput.isHovered = function() {
+//     return false;
+// };
+
+// /**
+//  * Checks whether the left mouse button or touchscreen is released.
+//  *
+//  * @returns {boolean} True if the mouse button or touchscreen is released.
+//  */
+// TouchInput.isReleased = function() {
+//     return false;
+// };
