@@ -194,19 +194,29 @@ FarmManager.isFarmRegion = function(x, y) {
 Game_Player.prototype.updateUseToolInput = function() {
     if (Input.isTriggered(KeyAction.UseTool)) {
         if (Input.getInputMode() === 'keyboard') {
+            const px = Math.round(this._x);
+            const py = Math.round(this._y);
             const x = $gameMap.canvasToMapX(TouchInput.x);
             const y = $gameMap.canvasToMapY(TouchInput.y);
-            this.turnTowardPoint(x, y);
+            const dist = Math.sqrt((x - px) * (x - px) + (y - py) * (y - py));
+            if (dist <= 1.5) {
+                this._targetToolPos = new Vector2(x, y);
+                this.turnTowardPoint(x, y);
+                this._pressingToolBtn = true;
+                this._pressingToolCounter = 0;
+            }
+        } else {
+            this._targetToolPos = this.frontPosition();
+            this._pressingToolBtn = true;
+            this._pressingToolCounter = 0;
         }
-        this._pressingToolBtn = true;
-        this._pressingToolCounter = 0;
     }
     if (this._pressingToolBtn) {
         if (Input.isPressed(KeyAction.UseTool)) {
             this._pressingToolCounter += 1;
             // console.log("Hold tool btn: ", this._pressingToolCounter);
         } else {
-            const pos = this.frontPosition();
+            const pos = this._targetToolPos;
             const toolResult = FarmManager.inst.useTool(window.curTool || "hoe", pos.x, pos.y, window.toolEx);
             console.log({toolResult});
             this._pressingToolBtn = false;
@@ -215,7 +225,21 @@ Game_Player.prototype.updateUseToolInput = function() {
 };
 
 Game_Player.prototype.checkInteractWithFarmObjects = function() {
-    const pos = this.frontPosition();
+    /** @type {Vector2} */
+    let pos = null;
+    if (Input.getInputMode() === 'keyboard') {
+        const px = Math.round(this._x);
+        const py = Math.round(this._y);
+        const x = $gameMap.canvasToMapX(TouchInput.x);
+        const y = $gameMap.canvasToMapY(TouchInput.y);
+        const dist = Math.sqrt((x - px) * (x - px) + (y - py) * (y - py));
+        if (dist > 1.5) {
+            return false;
+        }
+        pos = new Vector2(x, y);
+    } else {
+        pos = this.frontPosition();
+    }
     const result = FarmManager.inst.checkInteract(pos.x, pos.y);
     return result;
 }
