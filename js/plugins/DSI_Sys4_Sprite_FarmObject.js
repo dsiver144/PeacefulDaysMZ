@@ -28,6 +28,12 @@ class Sprite_FarmObject extends Sprite {
         
     }
     /**
+     * Remove optional sprites
+     */
+    removeOptionalSprites() {
+
+    }
+    /**
      * Refresh bitmap
      */
     refreshBitmap() {

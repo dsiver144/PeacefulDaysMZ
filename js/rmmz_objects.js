@@ -8390,7 +8390,6 @@ Game_Player.prototype.frontPosition = function() {
     }
     const x2 = $gameMap.roundXWithDirection(x, this.direction());
     const y2 = $gameMap.roundYWithDirection(y, this.direction());
-    console.log(this._x, this._y, x2, y2);
     return v2(x2, y2);
 }
 

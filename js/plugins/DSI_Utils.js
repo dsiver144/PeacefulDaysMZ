@@ -121,6 +121,16 @@ Spriteset_Map.prototype.addCustomSpriteToTilemap = function(key, sprite) {
     this._tilemap.addChild(sprite);
 }
 
+Spriteset_Map.prototype.removeCustomSpriteFromTilemap = function(key) {
+    this._customSprites = this._customSprites || {};
+    const sprite = this._customSprites[key];
+    if (!sprite) {
+        return;
+    }
+    this._tilemap.removeChild(sprite);
+    delete this._customSprites[key];
+}
+
 Spriteset_Map.prototype.getCustomSpriteFromTilemap = function(key) {
     this._customSprites = this._customSprites || {};
     return this._customSprites[key];
@@ -129,12 +139,20 @@ Spriteset_Map.prototype.getCustomSpriteFromTilemap = function(key) {
  * Add custom sprite to tilemap
  * @param {string} key 
  * @param {Sprite} sprite 
- * @returns 
  */
 MyUtils.addCustomSpriteToTilemap = function(key, sprite) {
     const spriteset = this.spriteset;
     if (!spriteset) return;
     spriteset.addCustomSpriteToTilemap(key, sprite);
+}
+/**
+ * Remove custom sprite to tilemap
+ * @param {string} key 
+ */
+MyUtils.removeCustomSpriteFromTilemap = function(key) {
+    const spriteset = this.spriteset;
+    if (!spriteset) return;
+    spriteset.removeCustomSpriteFromTilemap(key);
 }
 /**
  * Get Custom Sprite From Tilemap

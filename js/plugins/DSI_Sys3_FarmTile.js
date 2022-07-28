@@ -15,18 +15,73 @@ class FarmTile extends FarmObject {
      * @param {Vector2} position 
      * @param {number} mapId 
      */
-     constructor(position, mapId) {
+    constructor(position, mapId) {
         super(position, mapId);
         this.type = 'FarmTile';
         this.reset();
     }
     /**
-     * Set Seed
+     * @inheritdoc
+     */
+    onHitByTool(toolType, extraData) {
+        let result = false;
+        switch (toolType) {
+            case ToolType.seedPack:
+                if (this.hasSeed()) {
+                    return false;
+                }
+                this.applySeed(extraData);
+                result = true;
+                break;
+            case ToolType.wateringCan:
+                this.applyWater();
+                result = true;
+                break;
+            case ToolType.hoe:
+                if (this.isTree()) return false;
+                this.reset();
+                this.refreshSprite();
+
+                result = true;
+                break;
+            case ToolType.sickle:
+                if (this.isTree()) return false;
+                if (!this.isFullyGrownUp()) return false;
+                const {sickleRequired} = this.seedData();
+                if (!sickleRequired) return false;
+                return this.harvest(ToolType.sickle);
+                break;
+            case ToolType.hammer:
+                if (this.hasSeed()) return false;
+                FarmManager.inst.getFarmlandById(this.mapId).removeObject(this);
+                break;
+            case ToolType.axe:
+                if (!this.isTree()) return false;
+                break;
+        }
+        return result;
+    }
+    /**
+     * Get current seed data
+     * @returns {StrFarmCrop}
+     */
+    seedData() {
+        return FarmManager.getSeedData(this.seedId);
+    }
+    /**
+     * Apply water on tile
+     */
+    applyWater() {
+        this.isWatered = true;
+        this.refreshSprite();
+    }
+    /**
+     * Apply Seed
      * @param {number} seedId 
      */
-    setSeed(seedId) {
-        const config = FarmManager.getSeedData(seedId);
+    applySeed(seedId) {
         this.seedId = seedId;
+        const config = this.seedData();
         this.currentDays = 0;
         this.currentStage = 0;
         this.resetTimes = config.resetable ? config.resetTimes : 0;
@@ -38,6 +93,14 @@ class FarmTile extends FarmObject {
      */
     hasSeed() {
         return this.seedId != null;
+    }
+    /**
+     * Check if this is a tree
+     */
+    isTree() {
+        if (!this.hasSeed()) return false;
+        const { isTree } = this.seedData();
+        return !!isTree;
     }
     /**
      * Reset Crop
@@ -65,8 +128,8 @@ class FarmTile extends FarmObject {
      * Check if this crop is fully grown up.
      */
     isFullyGrownUp() {
-        if (!this.hasSeed()) return;
-        const {stages} = FarmManager.getSeedData(this.seedId);
+        if (!this.hasSeed()) return false;
+        const { stages } = this.seedData();
         return this.currentStage == stages.length;
     }
     /**
@@ -76,7 +139,7 @@ class FarmTile extends FarmObject {
         if (times == 0) return;
         if (!this.hasSeed()) return;
         if (this.isFullyGrownUp()) return;
-        const {stages} = FarmManager.getSeedData(this.seedId);
+        const { stages } = this.seedData();
         const maxDays = stages[this.currentStage];
         this.currentDays += 1;
         if (this.currentDays >= maxDays) {
@@ -86,27 +149,34 @@ class FarmTile extends FarmObject {
         this.growUp(times - 1);
     }
     /**
-     * @inheritdoc
+     * Harvest crop / fruit from this object
+     * @param {ToolType} toolType
+     * @returns {boolean} true if can harvest
      */
-    interactable() {
+    harvest(toolType = null) {
+        console.log("Harvest ", toolType, this.seedId);
         return true;
     }
     /**
      * @inheritdoc
      */
+    interactable() {
+        if (!this.isFullyGrownUp()) return false;
+        const { sickleRequired } = this.seedData();
+        return !sickleRequired;
+    }
+    /**
+     * @inheritdoc
+     */
     onInteract() {
-        // Test
-        this.setSeed(window.seedId || 0);
-
-        if (!this.isFullyGrownUp()) return;
-        console.log("Harvest ", this.seedId);
+        this.harvest();
     }
     /**
      * @inheritdoc
      */
     isCollidable() {
         if (!this.hasSeed()) return false;
-        return FarmManager.getSeedData(this.seedId).isCollidable;
+        return this.seedData().isCollidable;
     }
     /**
      * @inheritdoc

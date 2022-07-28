@@ -60,6 +60,7 @@ class FarmObject extends SaveableObject {
      */
     onRemoved() {
         console.log("> A ", this.type, " has been removed at " + this.position.toString(), this);
+        this.removeSprite();
     }
     /**
      * On New Day
@@ -92,9 +93,10 @@ class FarmObject extends SaveableObject {
      * On Hit By Tool. 
      * Must return correct boolean value if successfully or not.
      * @param {ToolType} toolType 
+     * @param {any} extraData 
      * @returns {boolean}
      */
-    onHitByTool(toolType) {
+    onHitByTool(toolType, extraData) {
         return false;
     }
     /**
@@ -112,14 +114,23 @@ class FarmObject extends SaveableObject {
         return false;
     }
     /**
+     * Sprite Identifier Key
+     * @returns {string}
+     */
+    spriteKey() {
+        const {x, y} = this.position;
+        return `farmObject_${x}_${y}`;
+    }
+    /**
      * Get object sprite
      */
     objectSprite() {
-        let sprite = FarmManager.inst.getObjectSprite(this.position.x, this.position.y);
+        const key = this.spriteKey();
+        let sprite = MyUtils.getCustomSpriteFromTilemap(key);
         if (!sprite && this.mapId == $gameMap.mapId()) {
             const constructor = this.spriteClass();
             sprite = new constructor(this);
-            FarmManager.inst.addObjectSprite(this.position.x, this.position.y, sprite);
+            MyUtils.addCustomSpriteToTilemap(key, sprite);
         }
         return sprite;
     }
@@ -129,6 +140,16 @@ class FarmObject extends SaveableObject {
     refreshSprite() {
         const sprite = this.objectSprite();
         sprite && sprite.refreshBitmap();
+    }
+    /**
+     * Remove sprite
+     */
+    removeSprite() {
+        const sprite = this.objectSprite();
+        if (sprite) {
+            sprite.removeOptionalSprites();
+            MyUtils.removeCustomSpriteFromTilemap(this.spriteKey());
+        }
     }
     /**
      * Sprite Class

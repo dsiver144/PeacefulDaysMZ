@@ -33,6 +33,13 @@ class Sprite_FarmTile extends Sprite_FarmObject {
     /**
      * @inheritdoc
      */
+    removeOptionalSprites() {
+        const {x, y} = this.farmObject.position;
+        MyUtils.removeCustomSpriteFromTilemap(`soil_${x}_${y}`);
+    }
+    /**
+     * @inheritdoc
+     */
     updatePosition() {
         super.updatePosition();
         this._soilSprite.x = this.x;
@@ -45,8 +52,12 @@ class Sprite_FarmTile extends Sprite_FarmObject {
     refreshBitmap() {
         /** @type {FarmTile} */
         const farmTile = this.farmTile();
+        // Refresh water image for soil sprite
+        const waterRectX = farmTile.isWatered ? 32 : 0;
+        this._soilSprite.setFrame(waterRectX, 0, 32, 32);
+        // Refresh crop sprite
         if (farmTile.hasSeed()) {
-            const seedConfig = FarmManager.getSeedData(farmTile.seedId);
+            const seedConfig = farmTile.seedData();
             this.bitmap = ImageManager.loadFarm(seedConfig.imageFile);
             this.bitmap.addLoadListener(bitmap => {
                 const stageIndex = farmTile.currentStage;
@@ -56,11 +67,15 @@ class Sprite_FarmTile extends Sprite_FarmObject {
                 this.anchor.y = 1.0;
                 this.anchor.x = 0.5;
             });
-            this.customScreenZ = farmTile.currentStage > 0 ? 3 : 0;
-            if (seedConfig.fruitTree) {
+            // Separate between fruit tree display and normal display.
+            if (seedConfig.isTree) {
                 // Hide soil sprite when it's fruit tree.
                 this._soilSprite.opacity = 0;
+            } else {
+                this._customScreenZ = farmTile.currentStage > 0 ? 3 : 1;
             }
+        } else {
+            this.bitmap = null;
         }
     }
     /**
@@ -73,7 +88,7 @@ class Sprite_FarmTile extends Sprite_FarmObject {
      * @inheritdoc
      */
     screenZ() {
-        return this.customScreenZ || 3;
+        return this._customScreenZ != null ? this._customScreenZ : 3;
     }
 
 }

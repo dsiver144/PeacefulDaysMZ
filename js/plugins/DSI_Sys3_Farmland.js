@@ -48,18 +48,40 @@ class Farmland extends SaveableObject {
      * @param {number} x 
      * @param {number} y 
      * @param {any} toolEx 
+     * @returns {boolean}
      */
     useTool(toolType, x, y, toolEx = null) {
+        let result = false;
         switch(toolType) {
             case ToolType.hoe:
-                this.useHoe(x, y);
+                result = this.useHoe(x, y);
+                break;
+            case ToolType.wateringCan:
+                result = this.useWateringCan(x, y);
                 break;
             case ToolType.seedPack:
-                this.useSeed(x, y, toolEx);
+                result = this.useSeed(x, y, toolEx);
+                break;
             case ToolType.hammer:
-                this.useHammer(x, y);
+                result = this.useHammer(x, y);
+                break;
+            case ToolType.sickle:
+                result = this.useSickle(x, y);
+                break;
+            case ToolType.axe:
+                result = this.useAxe(x, y);
                 break;
         }
+        return result;
+    }
+    /**
+     * Region ID
+     * @param {number} x 
+     * @param {number} y 
+     * @returns {number}
+     */
+    regionId(x, y) {
+        return $gameMap.regionId(x, y);
     }
     /**
      * Use Hoe
@@ -67,18 +89,27 @@ class Farmland extends SaveableObject {
      * @param {number} y 
      */
     useHoe(x, y) {
-        if (this.getObject(x, y)) return;
+        const object = this.getObject(x, y);
+        if (object) {
+            return object.onHitByTool(ToolType.hoe);
+        }
+        if (!FarmManager.isFarmRegion(x, y)) {
+            return false;
+        }
         const farmTile = new FarmTile(v2(x, y), this.mapId);
         this.addObject(farmTile);
+        return true;
     }
     /**
-     * Use Hammer
+     * Use Seed Pack
      * @param {number} x 
      * @param {number} y 
      * @param {number} seedId
      */
     useSeed(x, y, seedId) {
-        
+        const object = this.getObject(x, y);
+        if (!object) return false;
+        return object.onHitByTool(ToolType.seedPack, seedId);
     }
     /**
      * Use Hammer
@@ -86,7 +117,39 @@ class Farmland extends SaveableObject {
      * @param {number} y 
      */
     useHammer(x, y) {
-        
+        const object = this.getObject(x, y);
+        if (!object) return false;
+        return object.onHitByTool(ToolType.hammer);
+    }
+    /**
+     * Use Watering Can
+     * @param {number} x 
+     * @param {number} y 
+     */
+    useWateringCan(x, y) {
+        const object = this.getObject(x, y);
+        if (!object) return false;
+        return object.onHitByTool(ToolType.wateringCan);
+    }
+    /**
+     * Use Sickle
+     * @param {number} x 
+     * @param {number} y 
+     */
+    useSickle(x, y) {
+        const object = this.getObject(x, y);
+        if (!object) return false;
+        return object.onHitByTool(ToolType.sickle);
+    }
+    /**
+     * Use Axe
+     * @param {number} x 
+     * @param {number} y 
+     */
+    useAxe(x, y) {
+        const object = this.getObject(x, y);
+        if (!object) return false;
+        return object.onHitByTool(ToolType.axe);
     }
     /**
      * Get Object At
@@ -112,7 +175,7 @@ class Farmland extends SaveableObject {
      */
     removeObject(object) {
         const { x, y } = object.position;
-        this.farmObjects.splice(this.pos(x, y), 1);
+        delete this.farmObjects[this.pos(x, y)];
         object.onRemoved();
     }
     /**

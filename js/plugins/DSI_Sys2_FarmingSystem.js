@@ -10,9 +10,14 @@
  * Empty Help
  * 
  * @param seedConfig:arr_struct
- * @text Seed Config
+ * @text Normal Crop Config
  * @type struct<StrFarmCrop>[]
  * @desc Setup seeds
+ * 
+ * @param treeConfig:arr_struct
+ * @text Tree Config
+ * @type struct<StrFarmCrop>[]
+ * @desc Setup tree
  * 
  * @param farmRegionIds:arr_num
  * @text Farm Region IDs
@@ -41,12 +46,21 @@ Scene_Boot.prototype.onItemDatabaseCreated = function() {
     // ================================================
     // Set seedId ref to each seed item.
     // ================================================
-    FarmParams.seedConfig.forEach((seedConfig, index) => {
+    /** @type {StrFarmCrop[]} */
+    const allSeeds = FarmParams.seedConfig.concat(FarmParams.treeConfig);
+    FarmParams.allSeeds = allSeeds;
+    allSeeds.forEach((seedConfig, index) => {
         const seedItem = ItemDB.get(seedConfig.seedItemID);
         if (seedItem) {
             seedItem.seedId = index;
         }
-    })
+    });
+    // FarmParams.treeConfig.forEach((seedConfig, index) => {
+    //     const seedItem = ItemDB.get(seedConfig.seedItemID);
+    //     if (seedItem) {
+    //         seedItem.seedId = FarmParams.seedConfig.length + index;
+    //     }
+    // })
 };
 
 class FarmManager extends SaveableObject {
@@ -89,9 +103,10 @@ class FarmManager extends SaveableObject {
      * @param {number} x 
      * @param {number} y 
      * @param {any} toolEx
+     * @returns {boolean} true if use successfully else false
      */
     useTool(toolType, x, y, toolEx = null) {
-        this.currentFarmland().useTool(toolType, x, y, toolEx);
+        return this.currentFarmland().useTool(toolType, x, y, toolEx);
     }
     /**
      * Check if player is interact with farm object
@@ -149,25 +164,6 @@ class FarmManager extends SaveableObject {
         }
         this.farmlands = farmlands;
     }
-    /**
-     * Get Farm Object Sprite
-     * @param {number} x 
-     * @param {number} y 
-     * @returns {Sprite_FarmObject}
-     */
-    getObjectSprite(x, y) {
-        return MyUtils.getCustomSpriteFromTilemap(`farmObject_${x}_${y}`);
-    }
-    /**
-     * Add farm object sprite to tilemap
-     * @param {number} x 
-     * @param {number} y 
-     * @param {Sprite_FarmObject} sprite 
-     */
-    addObjectSprite(x, y, sprite) {
-        MyUtils.addCustomSpriteToTilemap(`farmObject_${x}_${y}`, sprite);
-    }
-
 }
 
 ImageManager.loadFarm = function(filename, dir = "") {
@@ -184,7 +180,17 @@ FarmManager.inst = null;
  * @returns {StrFarmCrop}
  */
 FarmManager.getSeedData = function(seedId) {
-    return FarmParams.seedConfig[seedId];
+    return FarmParams.allSeeds[seedId];
+}
+/**
+ * Check if this region id is farm region.
+ * @param {number} x 
+ * @param {number} y
+ * @returns {boolean}
+ */
+FarmManager.isFarmRegion = function(x, y) {
+    const regionId = $gameMap.regionId(x, y);
+    return FarmParams.farmRegionIds.includes(regionId);
 }
 
 //==================================================================================
@@ -204,10 +210,11 @@ Game_Player.prototype.updateUseToolInput = function() {
     if (this._pressingToolBtn) {
         if (Input.isPressed(KeyAction.UseTool)) {
             this._pressingToolCounter += 1;
-            console.log("Hold tool btn: ", this._pressingToolCounter);
+            // console.log("Hold tool btn: ", this._pressingToolCounter);
         } else {
             const pos = this.frontPosition();
-            FarmManager.inst.useTool('hoe', pos.x, pos.y);
+            const toolResult = FarmManager.inst.useTool(window.curTool || "hoe", pos.x, pos.y, window.toolEx);
+            console.log({toolResult});
             this._pressingToolBtn = false;
         }
     }
@@ -268,7 +275,7 @@ class StrFarmCrop {
          /** @type {boolean} */
          this.sickleRequired = null;
          /** @type {boolean} */
-         this.fruitTree = null;
+         this.isTree = null;
          /** @type {boolean} */
          this.isCollidable = null;
          /** @type {number[]} */
@@ -318,8 +325,8 @@ class StrFarmCrop {
  * @type boolean
  * @default false
  * 
- * @param fruitTree:bool
- * @text Fruit Tree Flag
+ * @param isTree:bool
+ * @text Tree Flag
  * @type boolean
  * @default false
  * 

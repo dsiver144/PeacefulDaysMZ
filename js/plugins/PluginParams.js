@@ -3,6 +3,8 @@ class PluginParams {
    constructor() {
 		/** @type {StrFarmCrop[]} */
 		this.seedConfig = null;
+		/** @type {StrFarmCrop[]} */
+		this.treeConfig = null;
 		/** @type {number[]} */
 		this.farmRegionIds = null;
 		/** @type {number[]} */
@@ -28,7 +30,7 @@ class StrFarmCrop {
 		/** @type {boolean} */
 		this.sickleRequired = null;
 		/** @type {boolean} */
-		this.fruitTree = null;
+		this.isTree = null;
 		/** @type {boolean} */
 		this.isCollidable = null;
 		/** @type {number[]} */
