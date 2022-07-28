@@ -9,6 +9,8 @@
  * @help 
  * Empty Help
  */
+
+const NON_WATER_DAY_THRESHOLD = 3;
 class FarmTile extends FarmObject {
     /**
      * Create farm object
@@ -57,6 +59,9 @@ class FarmTile extends FarmObject {
                 break;
             case ToolType.axe:
                 if (!this.isTree()) return false;
+                this.reset();
+                this.refreshSprite();
+                result = true;
                 break;
         }
         return result;
@@ -73,6 +78,7 @@ class FarmTile extends FarmObject {
      */
     applyWater() {
         this.isWatered = true;
+        this.nonWaterDays = 0;
         this.refreshSprite();
     }
     /**
@@ -115,12 +121,26 @@ class FarmTile extends FarmObject {
         this.nonWaterDays = -1;
     }
     /**
+     * On Dead
+     */
+    onDead() {
+        this.isDead = true;
+    }
+    /**
      * @inheritdoc
      */
     onNewDay() {
-        const isWatered = true;//this.isWatered;
-        if (isWatered) {
+        if (!this.hasSeed()) return;
+        if (this.isDead) return;
+        const {nonWaterFlag, isTree} = this.seedData();
+        const isGrownable = this.isWatered || nonWaterFlag || isTree;
+        if (isGrownable) {
             this.growUp();
+        } else {
+            this.nonWaterDays += 1;
+            if (this.nonWaterDays >= NON_WATER_DAY_THRESHOLD) {
+                this.onDead();
+            }
         }
         this.refreshSprite();
     }
@@ -138,8 +158,17 @@ class FarmTile extends FarmObject {
     growUp(times = 1) {
         if (times == 0) return;
         if (!this.hasSeed()) return;
+        const { stages, seasons } = this.seedData();
+        if (seasons.includes(GameTime.season()) == false) {
+            // If not the correct season for this crop then dead.
+            if (this.isTree()) {
+                this.resetToTargetedStage();
+            } else {
+                this.onDead();
+            }
+            return;
+        }
         if (this.isFullyGrownUp()) return;
-        const { stages } = this.seedData();
         const maxDays = stages[this.currentStage];
         this.currentDays += 1;
         if (this.currentDays >= maxDays) {
@@ -155,7 +184,25 @@ class FarmTile extends FarmObject {
      */
     harvest(toolType = null) {
         console.log("Harvest ", toolType, this.seedId);
+        if (this.isTree()) {
+            this.resetToTargetedStage();
+        } else {
+            if (this.resetTimes > 0) {
+                this.resetTimes -= 1;
+                this.resetToTargetedStage();
+            } else {
+                this.reset();
+            }
+        }
+        this.refreshSprite();
         return true;
+    }
+    /**
+     * Reset tile to targeted stage
+     */
+    resetToTargetedStage() {
+        this.currentStage = this.seedData().resetStageIndex;
+        this.currentDays = 0;
     }
     /**
      * @inheritdoc

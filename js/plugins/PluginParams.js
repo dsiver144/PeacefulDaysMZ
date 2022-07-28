@@ -33,6 +33,8 @@ class StrFarmCrop {
 		this.isTree = null;
 		/** @type {boolean} */
 		this.isCollidable = null;
+		/** @type {boolean} */
+		this.nonWaterFlag = null;
 		/** @type {number[]} */
 		this.seasons = null;
 		/** @type {string} */

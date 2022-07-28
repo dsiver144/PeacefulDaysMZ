@@ -55,12 +55,6 @@ Scene_Boot.prototype.onItemDatabaseCreated = function() {
             seedItem.seedId = index;
         }
     });
-    // FarmParams.treeConfig.forEach((seedConfig, index) => {
-    //     const seedItem = ItemDB.get(seedConfig.seedItemID);
-    //     if (seedItem) {
-    //         seedItem.seedId = FarmParams.seedConfig.length + index;
-    //     }
-    // })
 };
 
 class FarmManager extends SaveableObject {
@@ -226,7 +220,6 @@ Game_Player.prototype.checkInteractWithFarmObjects = function() {
     return result;
 }
 
-
 var DSI_Sys2_FarmingSystem_Game_CharacterBase_isCollidedWithCharacters = Game_CharacterBase.prototype.isCollidedWithCharacters;
 Game_CharacterBase.prototype.isCollidedWithCharacters = function(x, y) {
 	const result = DSI_Sys2_FarmingSystem_Game_CharacterBase_isCollidedWithCharacters.call(this, x, y);
@@ -278,6 +271,8 @@ class StrFarmCrop {
          this.isTree = null;
          /** @type {boolean} */
          this.isCollidable = null;
+         /** @type {boolean} */
+         this.nonWaterFlag = null;
          /** @type {number[]} */
          this.seasons = null;
          /** @type {string} */
@@ -332,6 +327,11 @@ class StrFarmCrop {
  * 
  * @param isCollidable:bool
  * @text Collidable Flag
+ * @type boolean
+ * @default false
+ * 
+ * @param nonWaterFlag:bool
+ * @text Non Water Flag
  * @type boolean
  * @default false
  * 
