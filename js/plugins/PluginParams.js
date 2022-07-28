@@ -9,28 +9,10 @@ class PluginParams {
 		this.farmMaps = null;
 	}
 }
-class PositionObject {
-   constructor() {
-		/** @type {number} */
-		this.x = null;
-		/** @type {number} */
-		this.y = null;
-	}
-}
-class SoundEffect {
-   constructor() {
-		/** @type {string} */
-		this.name = null;
-		/** @type {number} */
-		this.volume = null;
-		/** @type {number} */
-		this.pitch = null;
-		/** @type {number} */
-		this.pan = null;
-	}
-}
 class StrFarmCrop {
    constructor() {
+		/** @type {number} */
+		this.itemPreview = null;
 		/** @type {string} */
 		this.seedItemID = null;
 		/** @type {string} */
@@ -45,9 +27,21 @@ class StrFarmCrop {
 		this.resetTimes = null;
 		/** @type {boolean} */
 		this.sickleRequired = null;
+		/** @type {boolean} */
+		this.fruitTree = null;
+		/** @type {boolean} */
+		this.isCollidable = null;
 		/** @type {number[]} */
 		this.seasons = null;
 		/** @type {string} */
 		this.imageFile = null;
+	}
+}
+class PositionObject {
+   constructor() {
+		/** @type {number} */
+		this.x = null;
+		/** @type {number} */
+		this.y = null;
 	}
 }

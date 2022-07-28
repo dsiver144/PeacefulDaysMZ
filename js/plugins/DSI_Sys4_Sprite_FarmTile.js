@@ -56,6 +56,11 @@ class Sprite_FarmTile extends Sprite_FarmObject {
                 this.anchor.y = 1.0;
                 this.anchor.x = 0.5;
             });
+            this.customScreenZ = farmTile.currentStage > 0 ? 3 : 0;
+            if (seedConfig.fruitTree) {
+                // Hide soil sprite when it's fruit tree.
+                this._soilSprite.opacity = 0;
+            }
         }
     }
     /**
@@ -68,7 +73,7 @@ class Sprite_FarmTile extends Sprite_FarmObject {
      * @inheritdoc
      */
     screenZ() {
-        return 3;
+        return this.customScreenZ || 3;
     }
 
 }

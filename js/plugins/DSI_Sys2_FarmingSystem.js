@@ -64,6 +64,19 @@ class FarmManager extends SaveableObject {
         this.currentFarmland().addObject(new OSmallStone($gamePlayer.frontPosition(), $gameMap.mapId()));
     }
     /**
+     * Check if player collide with any farm objects
+     * @param {number} x 
+     * @param {number} y 
+     * @returns {boolean}
+     */
+    checkCollision(x, y) {
+        const farmland = this.currentFarmland();
+        if (!farmland) return false;
+        const object = farmland.getObject(x, y);
+        if (!object) return false;
+        return object.isCollidable();
+    }
+    /**
      * Get Current Farm land
      * @returns {Farmland}
      */
@@ -206,6 +219,13 @@ Game_Player.prototype.checkInteractWithFarmObjects = function() {
     return result;
 }
 
+
+var DSI_Sys2_FarmingSystem_Game_CharacterBase_isCollidedWithCharacters = Game_CharacterBase.prototype.isCollidedWithCharacters;
+Game_CharacterBase.prototype.isCollidedWithCharacters = function(x, y) {
+	const result = DSI_Sys2_FarmingSystem_Game_CharacterBase_isCollidedWithCharacters.call(this, x, y);
+    return result || FarmManager.inst.checkCollision(x, y);
+}
+
 var DSI_Sys2_FarmingSystem_Game_System_createSaveableObjects = Game_System.prototype.createSaveableObjects;
 Game_System.prototype.createSaveableObjects = function () {
 	DSI_Sys2_FarmingSystem_Game_System_createSaveableObjects.call(this);
@@ -232,8 +252,10 @@ Spriteset_Map.prototype.createFarmObjectSprites = function() {
 class StrFarmCrop {
     constructor() {
          /** @type {number} */
+         this.itemPreview = null;
+         /** @type {string} */
          this.seedItemID = null;
-         /** @type {number} */
+         /** @type {string} */
          this.productID = null;
          /** @type {number[]} */
          this.stages = null;
@@ -245,6 +267,10 @@ class StrFarmCrop {
          this.resetTimes = null;
          /** @type {boolean} */
          this.sickleRequired = null;
+         /** @type {boolean} */
+         this.fruitTree = null;
+         /** @type {boolean} */
+         this.isCollidable = null;
          /** @type {number[]} */
          this.seasons = null;
          /** @type {string} */
@@ -289,6 +315,16 @@ class StrFarmCrop {
  * 
  * @param sickleRequired:bool
  * @text Require Sickle To Harvest
+ * @type boolean
+ * @default false
+ * 
+ * @param fruitTree:bool
+ * @text Fruit Tree Flag
+ * @type boolean
+ * @default false
+ * 
+ * @param isCollidable:bool
+ * @text Collidable Flag
  * @type boolean
  * @default false
  * 

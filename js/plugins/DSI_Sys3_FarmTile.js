@@ -95,11 +95,18 @@ class FarmTile extends FarmObject {
      * @inheritdoc
      */
     onInteract() {
-
+        // Test
         this.setSeed(window.seedId || 0);
 
         if (!this.isFullyGrownUp()) return;
         console.log("Harvest ", this.seedId);
+    }
+    /**
+     * @inheritdoc
+     */
+    isCollidable() {
+        if (!this.hasSeed()) return false;
+        return FarmManager.getSeedData(this.seedId).isCollidable;
     }
     /**
      * @inheritdoc

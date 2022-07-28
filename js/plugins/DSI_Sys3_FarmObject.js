@@ -105,6 +105,13 @@ class FarmObject extends SaveableObject {
         return false;
     }
     /**
+     * Check if RPG Character can collide with farm objects.
+     * @returns {boolean}
+     */
+    isCollidable() {
+        return false;
+    }
+    /**
      * Get object sprite
      */
     objectSprite() {
