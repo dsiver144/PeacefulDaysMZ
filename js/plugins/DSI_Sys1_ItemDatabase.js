@@ -15,6 +15,10 @@
  * @desc A Test Param
  * 
  */
+const DatabaseConfig = {
+    defaultLevelPriceBonus: 100,
+}
+
 class ItemDB {
     /**
      * My Item 
@@ -80,7 +84,7 @@ ItemDB.getById = function(id) {
 }
 
 class PD_Item {
-    constructor({iconIndex, localizeKey, name, note, price, shipPrice, tag, stamina}) {
+    constructor({iconIndex, localizeKey, name, note, price, shipPrice, tag, stamina, levelPriceBonus}) {
         /** @type {number} */
         this.iconIndex = Number(iconIndex);
         /** @type {string} */
@@ -88,7 +92,7 @@ class PD_Item {
         /** @type {string} */
         this.name = name;
         /** @type {string} */
-        this.note = note;
+        this.note = note || "";
         /** @type {number} */
         this.price = Number(price);
         /** @type {number} */
@@ -97,6 +101,8 @@ class PD_Item {
         this.tags = tag.split(';').map(t => t.trim());
         /** @type {number[]} */
         this.staminaData = stamina.split(";").map(t => Number(t));
+        /** @type {number} */
+        this.levelPriceBonus = levelPriceBonus ? Number(levelPriceBonus) : DatabaseConfig.defaultLevelPriceBonus;
     }
 }
 

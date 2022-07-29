@@ -1,34 +1,31 @@
 //=======================================================================
-// * Plugin Name  : DSI_Sys2_InventorySystem.js
-// * Last Updated : 7/25/2022
+// * Plugin Name  : DSI_Sys2_ItemContainer.js
+// * Last Updated : 7/29/2022
 //========================================================================
 /*:
  * @author dsiver144
- * @plugindesc (v1.0) Peaceful Days Inventory System
+ * @plugindesc (v1.0) Peaceful Days Item Container System
  * @help 
  * Empty Help
  * 
  */
 
-const BagConfig = {
+const ContainerConfig = {
     unlockedRows: 1,
     maxSlotPerRow: 4,
     maxRows: 4,
     maxItemPerStacks: 100,
 }
 
-
-
-class MyBag extends SaveableObject {
+class ItemContainer extends SaveableObject {
     /**
      * This class handle Inventory system for Peaceful Days
      */
-    constructor() {
+    constructor(unlockedRows = ContainerConfig.unlockedRows) {
         super();
-        MyBag.inst = this;
-        /** @type {Object.<string, BagItem>} */
+        /** @type {Object.<string, GameItem>} */
         this.items = {};
-        this.unlockedRows = BagConfig.unlockedRows;
+        this.unlockedRows = unlockedRows;
     }
     /**
      * @inheritdoc
@@ -44,14 +41,18 @@ class MyBag extends SaveableObject {
      * @param {number} number 
      */
     addItem(id, number) {
+        if (ItemDB.get(id) == null) {
+            console.log('There is no ' + id + ' in Item Database!');
+            return;
+        }
         const slotId = this.findAvailableSlotId(id, number);
         if (slotId >= 0) {
-            let bagItem = this.items[slotId] || new BagItem(id, 0);
+            const bagItem = this.items[slotId] || new GameItem(id, 0);
             bagItem.addQuantity(number);
             this.items[slotId] = bagItem;
-            console.log(`> Bag: ${bagItem.id} (${bagItem.quantity}) has been added to #${slotId}!`);
+            console.log(`> Container: ${bagItem.id} (${number}) has been added to #${slotId}! | Quantity: ${bagItem.quantity}`);
         } else {
-            console.log(`> Bag: Can't not add ${id} (${number})`);
+            console.log(`> Container: Can't not add ${id} (${number})`);
         }
     }
     /**
@@ -73,7 +74,7 @@ class MyBag extends SaveableObject {
         for (let slotId = 0; slotId <= this.maxAvailableIndex(); slotId++) {
             const bagItem = this.items[slotId];
             if (bagItem) {
-                if (bagItem.id == id && bagItem.quantity + number <= BagConfig.maxItemPerStacks) {
+                if (bagItem.id == id && bagItem.quantity + number <= ContainerConfig.maxItemPerStacks) {
                     return slotId;
                 }
             } else {
@@ -84,11 +85,18 @@ class MyBag extends SaveableObject {
         return -1;
     }
     /**
+     * Check if a slot is available
+     * @param {number} slotId 
+     */
+    isSlotAvailable(slotId) {
+        return slotId <= this.maxAvailableIndex() && !this.items[slotId];
+    }
+    /**
      * Get the max bag slot index at the moment
      * @returns {number}
      */
     maxAvailableIndex() {
-        return BagConfig.maxSlotPerRow * this.unlockedRows - 1;
+        return ContainerConfig.maxSlotPerRow * this.unlockedRows - 1;
     }
     /**
      * @inheritdoc
@@ -112,28 +120,34 @@ class MyBag extends SaveableObject {
         const savedItems = data['items'];
         for (let slotId in savedItems) {
             const savedBagItem = savedItems[slotId];
-            let bagItem = new BagItem();
+            let bagItem = new GameItem();
             bagItem.loadSaveData(savedBagItem);
             items[slotId] = bagItem;
         }
         this.items = items;
     }
 }
-/** @type {MyBag} */
-MyBag.inst = null;
-
-class BagItem extends SaveableObject {
+class GameItem extends SaveableObject {
     /**
-     * InventoryItem
+     * Container Item
      * @param {number} id id of the item
      * @param {number} quantity number of the item in the Inventory
      */
-    constructor(id, quantity) {
+    constructor(id, quantity, level = 0) {
         super();
         /** @type {number} */
         this.id = id;
         /** @type {number} */
         this.quantity = quantity;
+        /** @type {number} */
+        this.level = level;
+    }
+    /**
+     * Get raw item data
+     * @returns {PD_Item}
+     */
+    data() {
+        return ItemDB.get(this.id);
     }
     /**
      * Add quantity
@@ -155,17 +169,8 @@ class BagItem extends SaveableObject {
     saveProperties() {
         return [
             ["id"],
-            ["quantity"]
+            ["quantity"],
+            ["level"],
         ]
     }
-}
-
-//==================================================================================
-// IMPLEMENT SYSTEM IN TO RPG MAKER SYSTEM
-//==================================================================================
-
-var DSI_Sys2_InventorySystem_Game_System_createSaveableObjects = Game_System.prototype.createSaveableObjects;
-Game_System.prototype.createSaveableObjects = function() {
-	DSI_Sys2_InventorySystem_Game_System_createSaveableObjects.call(this);
-    this._myBag = new MyBag();
 }
