@@ -35,13 +35,13 @@ class Sprite_FarmTile extends Sprite_FarmObject {
         this._soilSprite.setFrame(0, 0, 32, 32);
         this._soilSprite.anchor.x = 0.5;
         this._soilSprite.anchor.y = 1.0;
-        MyUtils.addCustomSpriteToTilemap(this.soilSpriteKey(), this._soilSprite);
+        MyUtils.addMapSprite(this.soilSpriteKey(), this._soilSprite);
     }
     /**
      * @inheritdoc
      */
     removeOptionalSprites() {
-        MyUtils.removeCustomSpriteFromTilemap(this.soilSpriteKey());
+        MyUtils.removeMapSprite(this.soilSpriteKey());
     }
     /**
      * @inheritdoc

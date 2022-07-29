@@ -141,14 +141,15 @@ class FarmObject extends SaveableObject {
     }
     /**
      * Get object sprite
+     * @returns {Sprite_FarmObject}
      */
     objectSprite() {
         const key = this.spriteKey();
-        let sprite = MyUtils.getCustomSpriteFromTilemap(key);
+        let sprite = MyUtils.getMapSprite(key);
         if (!sprite && this.mapId == $gameMap.mapId()) {
             const constructor = this.spriteClass();
             sprite = new constructor(this);
-            MyUtils.addCustomSpriteToTilemap(key, sprite);
+            MyUtils.addMapSprite(key, sprite);
         }
         return sprite;
     }
@@ -166,7 +167,7 @@ class FarmObject extends SaveableObject {
         const sprite = this.objectSprite();
         if (sprite) {
             sprite.removeOptionalSprites();
-            MyUtils.removeCustomSpriteFromTilemap(this.spriteKey());
+            MyUtils.removeMapSprite(this.spriteKey());
         }
     }
     /**
