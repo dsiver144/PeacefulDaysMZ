@@ -61,7 +61,18 @@ class ItemContainer extends SaveableObject {
      * @param {number} number 
      */
     removeItem(id, number) {
-        
+        let totalNumber = number;
+        for (let slotId in this.items) {
+            const bagItem = this.items[slotId];
+            if (bagItem.id === id) {
+                number = bagItem.removeQuantity(number);
+                console.log('Remain: ', number);
+                if (number <= 0) {
+                    break;
+                }
+            }
+        };
+        console.log(this.items);
     }
     /**
      * Find available slot id to add item to
@@ -159,9 +170,15 @@ class GameItem extends SaveableObject {
     /**
      * Remove quantity
      * @param {number} value 
+     * @returns {number} the amount left after the removal
      */
     removeQuantity(value) {
         this.quantity -= value;
+        if (this.quantity < 0) {
+            this.quantity = 0;
+            return Math.abs(this.quantity);
+        }
+        return 0;
     }
     /**
      * @inheritdoc
