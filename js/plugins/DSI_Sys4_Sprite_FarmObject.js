@@ -9,7 +9,7 @@
  * @help 
  * Empty Help
  */
-class Sprite_FarmObject extends Sprite {
+class Sprite_FarmObject extends Sprite_Shakeable {
     /**
      * A class that handle farm object display.
      * @param {FarmObject} farmObject
@@ -41,11 +41,37 @@ class Sprite_FarmObject extends Sprite {
         this.setFrame(0, 0, 32, 32);
     }
     /**
+     * Check for collision.
+     */
+    checkForCollision() {
+        if (!this.farmObject) return;
+        const x = Math.round($gamePlayer._x);
+        const y = Math.round($gamePlayer._y);
+        if (x === this.farmObject.position.x && y === this.farmObject.position.y) {
+            if (!this._collided) {
+                this._collided = true;
+                this.onCollideWithObject();
+            }
+        } else {
+            if (this._collided) {
+                this._collided = false;
+                this.onCollideWithObject();
+            }
+        }
+    }
+    /**
+     * On collide with object
+     */
+    onCollideWithObject() {
+        
+    }
+    /**
      * @inheritdoc
      */
     update() {
         super.update();
         this.updatePosition();
+        this.checkForCollision();
     }
     /**
      * Update sprite position

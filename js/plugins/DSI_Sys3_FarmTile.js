@@ -9,8 +9,6 @@
  * @help 
  * Empty Help
  */
-
-const NON_WATER_DAY_THRESHOLD = 3;
 class FarmTile extends FarmObject {
     /**
      * Create farm object
@@ -43,7 +41,6 @@ class FarmTile extends FarmObject {
                 if (this.isTree()) return false;
                 this.reset();
                 this.refreshSprite();
-
                 result = true;
                 break;
             case ToolType.sickle:
@@ -59,12 +56,24 @@ class FarmTile extends FarmObject {
                 break;
             case ToolType.axe:
                 if (!this.isTree()) return false;
-                this.reset();
-                this.refreshSprite();
+                this.onHitByAxe();
                 result = true;
                 break;
         }
         return result;
+    }
+    /**
+     * Hit By Axe
+     */
+    onHitByAxe() {
+        const power = 25;
+        this.hp -= power;
+        if (this.hp <= 0) {
+            this.reset();
+            this.refreshSprite();
+        } else {
+            this.shakeSprite(0.05);
+        }
     }
     /**
      * Get current seed data
@@ -92,6 +101,9 @@ class FarmTile extends FarmObject {
         this.currentStage = 0;
         this.resetTimes = config.resetable ? config.resetTimes : 0;
         this.refreshSprite();
+        if (this.isTree()) {
+            this.hp = FarmConfig.TREE_HP;
+        }
     }
     /**
      * Check if has plan seed or not
@@ -109,39 +121,60 @@ class FarmTile extends FarmObject {
         return !!isTree;
     }
     /**
-     * Reset Crop
+     * Check if the crop is still in seed / sapling stage.
+     * @returns {boolean}
+     */
+    isSeedStage() {
+        return this.currentStage == 0;
+    }
+    /**
+     * Check if the crop is dead
+     * @returns {boolean}
+     */
+    isDead() {
+        return this.death;
+    }
+    /**
+     * Reset tile
      */
     reset() {
         this.seedId = null;
-        this.isWatered = false;
-        this.isDead = false;
+        this.death = false;
         this.currentDays = -1;
         this.currentStage = -1;
         this.resetTimes = -1;
         this.nonWaterDays = -1;
+        this.hp = 0;
     }
     /**
      * On Dead
      */
     onDead() {
-        this.isDead = true;
+        if (this.isSeedStage()) {
+            this.reset();
+            return;
+        }
+        this.death = true;
     }
     /**
      * @inheritdoc
      */
     onNewDay() {
+        const isWatered = this.isWatered;
+        this.isWatered = false;
         if (!this.hasSeed()) return;
-        if (this.isDead) return;
+        if (this.isDead()) return;
         const {nonWaterFlag, isTree} = this.seedData();
-        const isGrownable = this.isWatered || nonWaterFlag || isTree;
+        const isGrownable = isWatered || nonWaterFlag || isTree;
         if (isGrownable) {
             this.growUp();
         } else {
             this.nonWaterDays += 1;
-            if (this.nonWaterDays >= NON_WATER_DAY_THRESHOLD) {
+            if (this.nonWaterDays >= FarmConfig.NON_WATER_DAY_THRESHOLD) {
                 this.onDead();
             }
         }
+        this.seasonCheck();
         this.refreshSprite();
     }
     /**
@@ -158,17 +191,8 @@ class FarmTile extends FarmObject {
     growUp(times = 1) {
         if (times == 0) return;
         if (!this.hasSeed()) return;
-        const { stages, seasons } = this.seedData();
-        if (seasons.includes(GameTime.season()) == false) {
-            // If not the correct season for this crop then dead.
-            if (this.isTree()) {
-                this.resetToTargetedStage();
-            } else {
-                this.onDead();
-            }
-            return;
-        }
         if (this.isFullyGrownUp()) return;
+        const { stages } = this.seedData();
         const maxDays = stages[this.currentStage];
         this.currentDays += 1;
         if (this.currentDays >= maxDays) {
@@ -176,6 +200,20 @@ class FarmTile extends FarmObject {
             this.currentDays = 0;
         }
         this.growUp(times - 1);
+    }
+    /**
+     * Season Check
+     */
+    seasonCheck() {
+        if (!this.hasSeed()) return;
+        if (this.isDead()) return;
+        const { seasons } = this.seedData();
+        if (seasons.includes(GameTime.season())) return;
+        if (this.isTree()) {
+            this.resetToTargetedStage();
+        } else {
+            this.onDead();
+        }
     }
     /**
      * Harvest crop / fruit from this object
@@ -234,10 +272,11 @@ class FarmTile extends FarmObject {
             ['seedId', null],
             ['isWatered', null],
             ['nonWaterDays', 0],
-            ['isDead', null],
+            ['death', null],
             ['currentDays', 0],
             ['currentStage', 0],
-            ['resetTimes', 0]
+            ['resetTimes', 0],
+            ['hp', 100],
         ];
         return props.concat(newProps);
     }

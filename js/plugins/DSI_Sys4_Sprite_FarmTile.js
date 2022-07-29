@@ -49,7 +49,7 @@ class Sprite_FarmTile extends Sprite_FarmObject {
     updatePosition() {
         super.updatePosition();
         this._soilSprite.x = this.x;
-        this._soilSprite.y = this.y;
+        this._soilSprite.y = super.screenY();
         this._soilSprite.z = 0;
     }
     /**
@@ -73,7 +73,7 @@ class Sprite_FarmTile extends Sprite_FarmObject {
     refreshDead() {
         const farmTile = this.farmTile();
         if (!farmTile.hasSeed()) return false;
-        if (!farmTile.isDead) return false;
+        if (!farmTile.isDead()) return false;
         this.bitmap = ImageManager.loadFarm("crops/CropDie");
         this.anchor.y = 1.0;
         this.anchor.x = 0.5;
@@ -93,8 +93,9 @@ class Sprite_FarmTile extends Sprite_FarmObject {
             const frameWidth = bitmap.width / (seedConfig.stages.length + 1);
             const frameHeight = bitmap.height;
             this.setFrame(frameWidth * stageIndex, 0, frameWidth, frameHeight);
-            this.anchor.y = 1.0;
+            this.anchor.y = 0.75;
             this.anchor.x = 0.5;
+            this._customYOffset = -bitmap.height * (1.0 - this.anchor.y);
         });
         // Separate between fruit tree display and normal display.
         if (seedConfig.isTree) {
@@ -108,8 +109,20 @@ class Sprite_FarmTile extends Sprite_FarmObject {
     /**
      * @inheritdoc
      */
+    onCollideWithObject() {
+        if (!this._collided) return;
+        const farmTile = this.farmTile();
+        if (!farmTile.hasSeed()) return;
+        if (farmTile.isTree()) return;
+        if (farmTile.isSeedStage()) return;
+        this.shake(0.05);
+    }
+    /**
+     * @inheritdoc
+     */
     screenY() {
-        return super.screenY();
+        const value = super.screenY();
+        return value + (this._customYOffset ? this._customYOffset : 0);
     }
     /**
      * @inheritdoc

@@ -32,6 +32,12 @@
  * 
  * 
  */
+
+const FarmConfig = {
+    NON_WATER_DAY_THRESHOLD: 3,
+    TREE_HP: 100
+}
+
 /** @type {PluginParams} */
 let FarmParams = PluginManager.parameters('DSI_Sys2_FarmingSystem');
 FarmParams = PluginManager.processParameters(FarmParams);

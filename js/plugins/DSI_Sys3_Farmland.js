@@ -39,7 +39,7 @@ class Farmland extends SaveableObject {
         const object = this.getObject(x, y);
         if (!object) return false;
         if (!object.interactable()) return false;
-        object.onInteract();
+        object.interact();
         return true;
     }
     /**
@@ -167,7 +167,7 @@ class Farmland extends SaveableObject {
     addObject(object) {
         const { x, y } = object.position;
         this.farmObjects[this.pos(x, y)] = object;
-        object.onSpawned();
+        object.spawn();
     }
     /**
      * 
@@ -176,7 +176,7 @@ class Farmland extends SaveableObject {
     removeObject(object) {
         const { x, y } = object.position;
         delete this.farmObjects[this.pos(x, y)];
-        object.onRemoved();
+        object.remove();
     }
     /**
      * Remove farm object at

@@ -49,18 +49,36 @@ class FarmObject extends SaveableObject {
         ];
     }
     /**
+     * Spawn
+     */
+    spawn() {
+        this.objectSprite();
+        this.onSpawned();
+    }
+    /**
+     * Remove
+     */
+    remove() {
+        this.removeSprite();
+        this.onRemoved();
+    }
+    /**
+     * Interact
+     */
+    interact() {
+        this.onInteract();
+    }
+    /**
      * Will be called when being spawned.
      */
     onSpawned() {
         console.log("> A new ", this.type, " has been spawned at " + this.position.toString(), this);
-        this.objectSprite();
     }
     /**
      * Will be called when being removed;
      */
     onRemoved() {
         console.log("> A ", this.type, " has been removed at " + this.position.toString(), this);
-        this.removeSprite();
     }
     /**
      * On New Day
@@ -149,6 +167,16 @@ class FarmObject extends SaveableObject {
         if (sprite) {
             sprite.removeOptionalSprites();
             MyUtils.removeCustomSpriteFromTilemap(this.spriteKey());
+        }
+    }
+    /**
+     * Shake sprite
+     * @param {number} power
+     */
+    shakeSprite(power = 0.1) {
+        const sprite = this.objectSprite();
+        if (sprite) {
+            sprite.shake(power);
         }
     }
     /**

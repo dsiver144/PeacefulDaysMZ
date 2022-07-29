@@ -173,6 +173,39 @@ MyUtils.randomArrayItem = function(array) {
     return array[Math.floor(Math.random() * array.length)];
 }
 
+class Sprite_Shakeable extends Sprite {
+    /**
+     * Shake
+     * @param {number} power
+     */
+    shake(power = 0.1) {
+        if (this.angleCounter != null) return;
+        this.angleCounter = 0;
+        this.angleCounterMax = Math.PI * 2;
+        this.angleCounterStep = Math.PI * 2 / 30;
+        this.angleRadius = power;
+    }
+    /**
+     * Update shake 
+     */
+    updateShake() {
+        if (this.angleCounter != null) {
+            this.rotation = 0 + Math.sin(this.angleCounter) * this.angleRadius;
+            this.angleCounter += this.angleCounterStep;
+            if (this.angleCounterMax - this.angleCounter <= 0.01) {
+                this.angleCounter = null;
+            }
+        }
+    }
+    /**
+     * Update per frame
+     */
+    update() {
+        super.update();
+        this.updateShake();
+    }
+}
+
 //========================================================================
 // END OF PLUGIN
 //========================================================================
