@@ -68,7 +68,7 @@ Game_System.prototype.recreateSaveableObjects = function() {
     this.createSaveableObjects();
     const savedData = this.savedData;
     for (let key in savedData) {
-        const object = $gameSystem[key];
+        const object = this[key];
         const data = savedData[key];
         if (object instanceof SaveableObject) {
             object.loadSaveData(data);
