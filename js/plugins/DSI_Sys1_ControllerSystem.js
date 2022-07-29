@@ -19,6 +19,7 @@ const KeyAction = {
     "MoveDown": "down",
     "UseTool": "tool",
     "Check": "check",
+    "Cancel": "cancel",
     "Menu": "menu",
     "Map": "map",
     "Run": "run",
@@ -38,6 +39,7 @@ DefaultKeyboardConfig[KeyAction.MoveDown] = 83;
 DefaultKeyboardConfig[KeyAction.UseTool] = "M0";
 DefaultKeyboardConfig[KeyAction.Check] = "M2";
 DefaultKeyboardConfig[KeyAction.Menu] = 27;
+DefaultKeyboardConfig[KeyAction.Cancel] = 27;
 DefaultKeyboardConfig[KeyAction.Map] = 77;
 DefaultKeyboardConfig[KeyAction.Run] = 16;
 DefaultKeyboardConfig[KeyAction.Mission] = 70;
@@ -49,7 +51,8 @@ DefaultKeyboardConfig[KeyAction.PageRight] = 69;
 const DefaultGamePadConfig = {}
 DefaultGamePadConfig[KeyAction.UseTool] = 2;
 DefaultGamePadConfig[KeyAction.Check] = 0;
-DefaultGamePadConfig[KeyAction.Menu] = 1;
+DefaultGamePadConfig[KeyAction.Menu] = 9;
+DefaultGamePadConfig[KeyAction.Cancel] = 1;
 DefaultGamePadConfig[KeyAction.Mission] = 8;
 DefaultGamePadConfig[KeyAction.Map] = 3;
 DefaultGamePadConfig[KeyAction.SwitchItemLeft] = 4;
@@ -90,7 +93,7 @@ Game_Player.prototype.updateCustomInput = function() {
 // Overwrite default system
 //==================================================================================
 Game_Player.prototype.isDashButtonPressed = function() {
-    const shift = Input.isPressed(KeyAction.Run);
+    const shift = Input.isPressed(KeyAction.Run) || Input.isPressed(KeyAction.Cancel);
     if (ConfigManager.alwaysDash) {
         return !shift;
     } else {
@@ -104,7 +107,7 @@ Window_Selectable.prototype.isOkTriggered = function() {
 };
 
 Window_Selectable.prototype.isCancelTriggered = function() {
-    return Input.isRepeated(KeyAction.Menu);
+    return Input.isRepeated(KeyAction.Menu) || Input.isRepeated(KeyAction.Cancel);
 };
 
 // This handle touch on RPG Windows
