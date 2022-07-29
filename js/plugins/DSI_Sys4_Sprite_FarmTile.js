@@ -75,8 +75,16 @@ class Sprite_FarmTile extends Sprite_FarmObject {
         if (!farmTile.hasSeed()) return false;
         if (!farmTile.isDead()) return false;
         this.bitmap = ImageManager.loadFarm("crops/CropDie");
-        this.anchor.y = 1.0;
-        this.anchor.x = 0.5;
+        this.bitmap.addLoadListener(bitmap => {
+            const frameWidth = bitmap.width;
+            const frameHeight = bitmap.height;
+            this.setFrame(0, 0, frameWidth, frameHeight);
+            this.anchor.y = 1.0;
+            this.anchor.x = 0.5;
+            this._customScreenZ = 1;
+            this._customYOffset = 0;
+            this.updatePosition();
+        });
         return true;
     }
     /**
@@ -96,6 +104,7 @@ class Sprite_FarmTile extends Sprite_FarmObject {
             this.anchor.y = 0.75;
             this.anchor.x = 0.5;
             this._customYOffset = -bitmap.height * (1.0 - this.anchor.y);
+            this.updatePosition();
         });
         // Separate between fruit tree display and normal display.
         if (seedConfig.isTree) {
