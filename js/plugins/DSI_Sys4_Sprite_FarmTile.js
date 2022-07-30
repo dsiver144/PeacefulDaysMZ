@@ -105,13 +105,16 @@ class Sprite_FarmTile extends Sprite_FarmObject {
             this.anchor.x = 0.5;
             this._customYOffset = -bitmap.height * (1.0 - this.anchor.y);
             this.updatePosition();
+            this.updateTopLeftOffset();
         });
         // Separate between fruit tree display and normal display.
         if (seedConfig.isTree) {
             // Hide soil sprite when it's fruit tree.
             this._soilSprite.opacity = 0;
+            this.setOffscreenLimit(3, 3);
         } else {
             this._customScreenZ = farmTile.currentStage > 0 ? 3 : 1;
+            this.setOffscreenLimit(1, 1);
         }
         return true;
     }
