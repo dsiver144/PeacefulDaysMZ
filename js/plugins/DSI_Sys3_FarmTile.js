@@ -39,6 +39,7 @@ class FarmTile extends FarmObject {
                 break;
             case ToolType.hoe:
                 if (this.isTree()) return false;
+                if (!this.isSeedStage()) return false;
                 this.reset();
                 this.refreshSprite();
                 result = true;
@@ -160,7 +161,7 @@ class FarmTile extends FarmObject {
      * @inheritdoc
      */
     onNewDay() {
-        const isWatered = this.isWatered;
+        const isWatered = MyUtils.DEBUG || this.isWatered;
         this.isWatered = false;
         if (!this.hasSeed()) return;
         if (this.isDead()) return;
