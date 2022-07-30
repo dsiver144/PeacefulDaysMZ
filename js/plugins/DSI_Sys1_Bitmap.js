@@ -30,14 +30,19 @@ var DSI = DSI || {};
         }
     }
 
-    // ImageManager.iconWidth = 24;
-    // ImageManager.iconHeight = 24;
+    Game_Map.prototype.screenTileXd = function() {
+        return Math.round((Graphics.width / this.tileWidth()) * 16) / 16 / (window.customScaleRatio || 1.0);
+    };
+    
+    Game_Map.prototype.screenTileY = function() {
+        return Math.round((Graphics.height / this.tileHeight()) * 16) / 16 / (window.customScaleRatio || 1.0);
+    };
 
-    // ImageManager.loadSystem = function (filename) {
-    //     if (filename === 'IconSet') {
-    //         filename = 'vxa/IconSet';
-    //     }
-    //     return this.loadBitmap("img/system/", filename);
-    // };
+	var DSI_DSI_Sys1_Spriteset_Spriteset_Map_update = Spriteset_Map.prototype.update;
+    Spriteset_Map.prototype.update = function() {
+		DSI_DSI_Sys1_Spriteset_Spriteset_Map_update.call(this);
+        this._baseSprite.scale.x = window.customScaleRatio || 1.0;   
+        this._baseSprite.scale.y = window.customScaleRatio || 1.0;
+    }
 
 })(DSI);
