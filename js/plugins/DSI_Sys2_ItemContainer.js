@@ -75,6 +75,22 @@ class ItemContainer extends SaveableObject {
         console.log(this.items);
     }
     /**
+     * Check if this container has item with a specific amount.
+     * @param {string} id 
+     * @param {number} number 
+     * @returns {boolean}
+     */
+    hasItem(id, number) {
+        let totalNumber = 0;
+        for (let slotId in this.items) {
+            const bagItem = this.items[slotId];
+            if (bagItem.id === id) {
+                totalNumber += bagItem.quantity;
+            }
+        }
+        return totalNumber >= number;
+    }
+    /**
      * Find available slot id to add item to
      * @param {number} id 
      * @param {number} number 
