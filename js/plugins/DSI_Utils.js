@@ -106,6 +106,7 @@ MyUtils.loadCSV = function(src, callback) {
 };
 /** @type {Spriteset_Map} */
 MyUtils.spriteset = null;
+MyUtils.DEBUG = false;
 var DSI_Utils_Spriteset_Map_initialize = Spriteset_Map.prototype.initialize;
 Spriteset_Map.prototype.initialize = function() {
     MyUtils.spriteset = this;
