@@ -23,8 +23,8 @@ class ItemContainer extends SaveableObject {
      */
     constructor(unlockedRows = ContainerConfig.unlockedRows) {
         super();
-        /** @type {Object.<string, GameItem>} */
-        this.items = {};
+        /** @type {Map<number, GameItem>} */
+        this.items = new Map();
         this.unlockedRows = unlockedRows;
     }
     /**
@@ -47,9 +47,9 @@ class ItemContainer extends SaveableObject {
         }
         const slotId = this.findAvailableSlotId(id, number);
         if (slotId >= 0) {
-            const bagItem = this.items[slotId] || new GameItem(id, 0);
+            const bagItem = this.items.get(slotId) || new GameItem(id, 0);
             bagItem.addQuantity(number);
-            this.items[slotId] = bagItem;
+            this.items.set(slotId, bagItem);
             console.log(`> Container: ${bagItem.id} (${number}) has been added to #${slotId}! | Quantity: ${bagItem.quantity}`);
         } else {
             console.log(`> Container: Can't not add ${id} (${number})`);
@@ -62,17 +62,17 @@ class ItemContainer extends SaveableObject {
      */
     removeItem(id, number) {
         let totalNumber = number;
-        for (let slotId in this.items) {
-            const bagItem = this.items[slotId];
+        for (let [slotId, bagItem] of this.items.entries()) {
             if (bagItem.id === id) {
-                number = bagItem.removeQuantity(number);
-                console.log('Remain: ', number);
-                if (number <= 0) {
+                totalNumber = bagItem.removeQuantity(number);
+                if (bagItem.quantity <= 0) {
+                    this.items.delete(slotId);
+                }
+                if (totalNumber <= 0) {
                     break;
                 }
             }
         };
-        console.log(this.items);
     }
     /**
      * Check if this container has item with a specific amount.
@@ -82,8 +82,7 @@ class ItemContainer extends SaveableObject {
      */
     hasItem(id, number) {
         let totalNumber = 0;
-        for (let slotId in this.items) {
-            const bagItem = this.items[slotId];
+        for (let [slotId, bagItem] of this.items.entries()) {
             if (bagItem.id === id) {
                 totalNumber += bagItem.quantity;
             }
@@ -99,7 +98,7 @@ class ItemContainer extends SaveableObject {
     findAvailableSlotId(id, number) {
         let emptySlots = [];
         for (let slotId = 0; slotId <= this.maxAvailableIndex(); slotId++) {
-            const bagItem = this.items[slotId];
+            const bagItem = this.items.get(slotId);
             if (bagItem) {
                 if (bagItem.id == id && bagItem.quantity + number <= ContainerConfig.maxItemPerStacks) {
                     return slotId;
@@ -116,7 +115,7 @@ class ItemContainer extends SaveableObject {
      * @param {number} slotId 
      */
     isSlotAvailable(slotId) {
-        return slotId <= this.maxAvailableIndex() && !this.items[slotId];
+        return slotId <= this.maxAvailableIndex() && !this.items.get(slotId);
     }
     /**
      * Get the max bag slot index at the moment
@@ -130,9 +129,8 @@ class ItemContainer extends SaveableObject {
      */
     getSaveData() {
         const data = super.getSaveData();
-        const saveItems = {};
-        for (let slotId in this.items) {
-            const bagItem = this.items[slotId];
+        const saveItems = {}
+        for (let [slotId, bagItem] of this.items.entries()) {
             saveItems[slotId] = bagItem.getSaveData();
         }
         data['items'] = saveItems;
@@ -143,13 +141,13 @@ class ItemContainer extends SaveableObject {
      */
     loadSaveData(data) {
         super.loadSaveData(data);
-        const items = {};
+        /** @type {Map<number, GameItem>} */
+        const items = new Map();
         const savedItems = data['items'];
-        for (let slotId in savedItems) {
-            const savedBagItem = savedItems[slotId];
+        for (let slotId in savedItems)  {
             let bagItem = new GameItem();
-            bagItem.loadSaveData(savedBagItem);
-            items[slotId] = bagItem;
+            bagItem.loadSaveData(savedItems[slotId]);
+            items.set(slotId, bagItem);
         }
         this.items = items;
     }
