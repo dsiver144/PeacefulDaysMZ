@@ -1031,6 +1031,7 @@ Graphics._createPixiApp = function() {
         });
         this._app.ticker.remove(this._app.render, this._app);
         this._app.ticker.add(this._onTick, this);
+        this._app.ticker.maxFPS = 60;
     } catch (e) {
         this._app = null;
     }
