@@ -144,3 +144,11 @@ NetCore.listen = function(action, callback) {
 //     });
 //     return conn;
 // }
+
+class Game_RemotePlayer extends Game_Character {
+
+    initMembers() {
+        super.initMembers();
+    }
+    
+}

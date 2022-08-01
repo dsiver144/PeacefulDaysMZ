@@ -123,6 +123,7 @@ class FarmManager extends SaveableObject {
      */
     registerNetCoreListeners() {
         if (!NetCore.isReady()) return;
+        this._remoteCharacters = {};
         NetCore.listen('remoteUseTool', (data) => {
             const {peerId, content} = data;
             const {action, params} = content;
@@ -130,6 +131,23 @@ class FarmManager extends SaveableObject {
             const {toolType, x, y, toolEx} = params;
             this.currentFarmland().useTool(toolType, x, y, toolEx);
             NetCore.inst.sendDataToRemotes({action: 'hostUseTool', params: {toolType, x, y, toolEx}});
+        });
+        NetCore.listen('remoteMove', (data) => {
+            const {peerId, content} = data;
+            const {action, params} = content;
+            console.log('Remove move', content);
+            if (!this._remoteCharacters[peerId]) {
+                /** @type {Game_RemotePlayer} */
+                const remotePlayer = new Game_RemotePlayer();
+                remotePlayer.setImage($gamePlayer.characterName(), $gamePlayer.characterIndex());
+                this._remoteCharacters[peerId] = remotePlayer;
+                MyUtils.addMapSprite('remotePlayer' + peerId, new Sprite_Character(remotePlayer));
+            }
+            /** @type {Game_RemotePlayer} */
+            let remotePlayer = this._remoteCharacters[peerId];
+            remotePlayer.setPosition(params._realX, params._realY);
+            remotePlayer._direction = params._direction;
+            MyUtils.getMapSprite('remotePlayer' + peerId).update();
         });
         NetCore.listen('hostUseTool', (data) => {
             const {peerId, content} = data;
