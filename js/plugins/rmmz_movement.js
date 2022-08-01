@@ -55,11 +55,7 @@ Game_Player.prototype.moveByInput = function() {
             }
             // Handle network
             if (NetCore.isReady()) {
-                if (NetCore.isHost()) {
-                    NetCore.inst.sendDataToRemotes({action: 'remoteMove', params: {_realX: this._realX, _realY: this._realY, _direction: this._direction}});
-                } else {
-                    NetCore.inst.sendDataToHost({action: 'remoteMove', params: {_realX: this._realX, _realY: this._realY, _direction: this._direction}});
-                }
+                NetCore.send({action: 'characterMove', params: {_realX: this._realX, _realY: this._realY, _direction: this._direction, _pattern: this._pattern}});
             }
             return;
         } else if ($gameTemp.isDestinationValid()) {

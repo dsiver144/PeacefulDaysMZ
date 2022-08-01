@@ -3,26 +3,36 @@ class NetCore {
      * This class handle network interaction between client and host.
      * @param {boolean} isHost 
      */
-    constructor(isHost) {
+    constructor(isHost, initPeer = true) {
         NetCore.inst = this;
         this._isHost = isHost;
         this._isRemote = !isHost;
-        this.peer = new Peer();
+        this._peer = null;
         /** @type {string} */
-        this.peerId = null;
-        this.remoteConnections = [];
-        this.connectionToHost = null;
-        this.peer.on('open', (id) => {
-            console.log('> PEER ID:', id);
-            this.peerId = id;
-        });
-        this.peer.on('connection', (conn) => {
+        this._peerId = null;
+        this._remoteConnections = [];
+        this._hostConnection = null;
+        /** @type {Map<string, (data: any) => void>} */
+        this._actions = new Map();
+        initPeer && this.initPeer();
+    }
+    /**
+     * Init Peer
+     */
+    initPeer() {
+        this._peer = new Peer();
+        this._peer.on('connection', (conn) => {
             console.log('New remote connection openned:', conn);
-            this.remoteConnections.push(conn);
+            this._remoteConnections.push(conn);
             conn.on('data', this.onDataRecieve.bind(this));
         });
-        /** @type {Map<string, (data: any) => void>} */
-        this.actions = new Map();
+        return new Promise((resolve, reject) => {
+            this._peer.on('open', (id) => {
+                console.log('> PEER ID:', id);
+                this._peerId = id;
+                resolve();
+            });
+        })
     }
     /**
      * Check if this is host.
@@ -36,19 +46,19 @@ class NetCore {
      * @returns {boolean}
      */
     isReady() {
-        return this.peerId != null;
+        return this._peerId != null;
     }
     /**
      * Connect to host
      * @param {string} peerId 
      */
     connectToHost(peerId) {
-        const connection = this.peer.connect(peerId);
+        const connection = this._peer.connect(peerId);
         connection.on('open', () => {
             console.log('Connection to host openned:', connection);
             connection.on('data', this.onDataRecieve.bind(this));
         });
-        this.connectionToHost = connection;
+        this._hostConnection = connection;
     }
     /**
      * Send Data To Host
@@ -56,16 +66,16 @@ class NetCore {
      * @returns {void}
      */
     sendDataToHost(data) {
-        if (!this.connectionToHost) return;
-        this.connectionToHost.send(this.formatData(data));
+        if (!this._hostConnection) return;
+        this._hostConnection.send(this.formatData(data));
     }
     /**
      * Send Data To Remotes
      * @param {any} data 
      */
     sendDataToRemotes(data) {
-        for (var i = 0; i < this.remoteConnections.length; i++) {
-            this.remoteConnections[i].send(this.formatData(data));
+        for (var i = 0; i < this._remoteConnections.length; i++) {
+            this._remoteConnections[i].send(this.formatData(data));
         }
     }
     /**
@@ -74,14 +84,14 @@ class NetCore {
      * @returns {any}
      */
     formatData(data) {
-        return {peerId: this.peerId, content: data};
+        return {peerId: this._peerId, content: data};
     }
     /**
      * On Data Receive
      * @param {any} data 
      */
     onDataRecieve(data) {
-        const callback = this.actions.get(data.content.action);
+        const callback = this._actions.get(data.content.action);
         if (callback) {
             callback(data);
         }
@@ -93,22 +103,39 @@ class NetCore {
      * @param {(data: any) => void} callback 
      */
     listen(action, callback) {
-        this.actions.set(action, callback);
+        this._actions.set(action, callback);
     }
 }
 /** @type {NetCore} */
 NetCore.inst = null;
-
+/**
+ * Init NetCore
+ * @param {boolean} isHost 
+ */
 NetCore.init = function(isHost = true) {
     new NetCore(isHost);
 }
-
+/**
+ * Check if NetCore is ready
+ * @returns {boolean}
+ */
 NetCore.isReady = function() {
     return NetCore.inst && NetCore.inst.isReady();
 }
-
+/**
+ * Check if this is host
+ * @returns {boolean}
+ */
 NetCore.isHost = function() {
     return NetCore.inst.isHost();
+}
+/**
+ * Send Data
+ * @param {any} data 
+ * @returns {void}
+ */
+NetCore.send = function(data) {
+    return NetCore.inst.isHost() ? NetCore.inst.sendDataToRemotes(data) : NetCore.inst.sendDataToHost(data);
 }
 /**
  * Listen to action
@@ -117,38 +144,4 @@ NetCore.isHost = function() {
  */
 NetCore.listen = function(action, callback) {
     NetCore.inst.listen(action, callback);
-}
-// var peer = new Peer();
-// peer.on('open', function (id) {
-//     console.log('My peer ID is: ' + id);
-// });
-// peer.on('connection', function (conn) {
-//     console.log('New connection:', conn);
-//     conn.on('open', function () {
-//         // Receive messages
-//         conn.on('data', function (data) {
-//             console.log('Received', data);
-//         });
-//     });
-//     peer.currentConnect = conn;
-// });
-
-// function connectPeer(peerId) {
-//     var conn = peer.connect(peerId);
-//     conn.on('open', function () {
-//         console.log('Connection openned:', conn);
-//         // Receive messages
-//         conn.on('data', function (data) {
-//             console.log('Received', data);
-//         });
-//     });
-//     return conn;
-// }
-
-class Game_RemotePlayer extends Game_Character {
-
-    initMembers() {
-        super.initMembers();
-    }
-    
 }

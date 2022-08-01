@@ -108,34 +108,33 @@ class FarmManager extends SaveableObject {
      */
     useTool(toolType, x, y, toolEx = null) {
         if (NetCore.isReady()) {
-            if (NetCore.inst.isHost()) {
-                NetCore.inst.sendDataToRemotes({action: 'hostUseTool', params: {toolType, x, y, toolEx}});
+            if (NetCore.isHost()) {
+                NetCore.send({action: 'hostUseTool', params: {toolType, x, y, toolEx}});
             } else {
-                NetCore.inst.sendDataToHost({action: 'remoteUseTool', params: {toolType, x, y, toolEx}});
+                NetCore.send({action: 'remoteUseTool', params: {toolType, x, y, toolEx}});
                 return false;
             }
         }
         return this.currentFarmland().useTool(toolType, x, y, toolEx);
     }
-    /**
-     * Register Net Core Listeners.
-     * @returns {void}
-     */
     registerNetCoreListeners() {
         if (!NetCore.isReady()) return;
         this._remoteCharacters = {};
         NetCore.listen('remoteUseTool', (data) => {
-            const {peerId, content} = data;
-            const {action, params} = content;
+            const { peerId, content } = data;
+            const { action, params } = content;
             console.log('Got remote use tool data', data, content);
-            const {toolType, x, y, toolEx} = params;
+            const { toolType, x, y, toolEx } = params;
             this.currentFarmland().useTool(toolType, x, y, toolEx);
-            NetCore.inst.sendDataToRemotes({action: 'hostUseTool', params: {toolType, x, y, toolEx}});
+            NetCore.inst.sendDataToRemotes({ action: 'hostUseTool', params: { toolType, x, y, toolEx } });
         });
-        NetCore.listen('remoteMove', (data) => {
-            const {peerId, content} = data;
-            const {action, params} = content;
-            console.log('Remove move', content);
+        NetCore.listen('characterMove', (data) => {
+            if (SceneManager._scene.constructor !== Scene_Map) {
+                return;
+            }
+            const { peerId, content } = data;
+            const { action, params } = content;
+            console.log('characterMove', content);
             if (!this._remoteCharacters[peerId]) {
                 /** @type {Game_RemotePlayer} */
                 const remotePlayer = new Game_RemotePlayer();
@@ -147,13 +146,14 @@ class FarmManager extends SaveableObject {
             let remotePlayer = this._remoteCharacters[peerId];
             remotePlayer.setPosition(params._realX, params._realY);
             remotePlayer._direction = params._direction;
+            remotePlayer._pattern = params._pattern;
             MyUtils.getMapSprite('remotePlayer' + peerId).update();
         });
         NetCore.listen('hostUseTool', (data) => {
-            const {peerId, content} = data;
-            const {action, params} = content;
+            const { peerId, content } = data;
+            const { action, params } = content;
             console.log('Got host use tool data', data, content);
-            const {toolType, x, y, toolEx} = params;
+            const { toolType, x, y, toolEx } = params;
             this.currentFarmland().useTool(toolType, x, y, toolEx);
         });
     }
