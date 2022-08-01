@@ -170,6 +170,15 @@ class Farmland extends SaveableObject {
         object.spawn();
     }
     /**
+     * Replace Object
+     * @param {FarmObject} object 
+     */
+    replaceObject(object) {
+        const { x, y } = object.position;
+        this.removeObjectAt(x, y);
+        this.addObject(object);
+    }
+    /**
      * 
      * @param {FarmObject} object 
      */
