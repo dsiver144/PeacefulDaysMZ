@@ -24,15 +24,26 @@ class ItemContainer extends SaveableObject {
     constructor(unlockedRows = ContainerConfig.unlockedRows) {
         super();
         /** @type {Map<number, GameItem>} */
-        this.items = new Map();
-        this.unlockedRows = unlockedRows;
+        this._items = new Map();
+        this._unlockedRows = unlockedRows;
+        this._pageIndex = 0;
+        this._name = '';
+    }
+    /**
+     * Get container name
+     * @returns {string}
+     */
+    name() {
+        return this._name;
     }
     /**
      * @inheritdoc
      */
     saveProperties() {
         return [
-            ["unlockedRows", 0]
+            ["_unlockedRows", 0],
+            ["_pageIndex", 0],
+            ["_name", ''],
         ]
     }
     /**
@@ -47,9 +58,9 @@ class ItemContainer extends SaveableObject {
         }
         const slotId = this.findAvailableSlotId(id, number);
         if (slotId >= 0) {
-            const bagItem = this.items.get(slotId) || new GameItem(id, 0);
+            const bagItem = this._items.get(slotId) || new GameItem(id, 0);
             bagItem.addQuantity(number);
-            this.items.set(slotId, bagItem);
+            this._items.set(slotId, bagItem);
             console.log(`> Container: ${bagItem.id} (${number}) has been added to #${slotId}! | Quantity: ${bagItem.quantity}`);
         } else {
             console.log(`> Container: Can't not add ${id} (${number})`);
@@ -59,14 +70,16 @@ class ItemContainer extends SaveableObject {
      * Remove Item
      * @param {number} id 
      * @param {number} number 
+     * @param {(item: BagItem) => boolean} conditionFunc 
      */
-    removeItem(id, number) {
+    removeItem(id, number, conditionFunc = null) {
         let totalNumber = number;
-        for (let [slotId, bagItem] of this.items.entries()) {
-            if (bagItem.id === id) {
+        for (let [slotId, bagItem] of this._items.entries()) {
+            const conditionMet = conditionFunc ? conditionFunc(bagItem) : true;
+            if (bagItem.id === id && conditionMet) {
                 totalNumber = bagItem.removeQuantity(number);
                 if (bagItem.quantity <= 0) {
-                    this.items.delete(slotId);
+                    this._items.delete(slotId);
                 }
                 if (totalNumber <= 0) {
                     break;
@@ -78,12 +91,14 @@ class ItemContainer extends SaveableObject {
      * Check if this container has item with a specific amount.
      * @param {string} id 
      * @param {number} number 
+     * @param {(item: BagItem) => boolean} conditionFunc 
      * @returns {boolean}
      */
-    hasItem(id, number) {
+    hasItem(id, number, conditionFunc = null) {
         let totalNumber = 0;
-        for (let [slotId, bagItem] of this.items.entries()) {
-            if (bagItem.id === id) {
+        for (let [slotId, bagItem] of this._items.entries()) {
+            const conditionMet = conditionFunc ? conditionFunc(bagItem) : true;
+            if (bagItem.id === id && conditionMet) {
                 totalNumber += bagItem.quantity;
             }
         }
@@ -98,7 +113,7 @@ class ItemContainer extends SaveableObject {
     findAvailableSlotId(id, number) {
         let emptySlots = [];
         for (let slotId = 0; slotId <= this.maxAvailableIndex(); slotId++) {
-            const bagItem = this.items.get(slotId);
+            const bagItem = this._items.get(slotId);
             if (bagItem) {
                 if (bagItem.id == id && bagItem.quantity + number <= ContainerConfig.maxItemPerStacks) {
                     return slotId;
@@ -115,14 +130,28 @@ class ItemContainer extends SaveableObject {
      * @param {number} slotId 
      */
     isSlotAvailable(slotId) {
-        return slotId <= this.maxAvailableIndex() && !this.items.get(slotId);
+        return slotId <= this.maxAvailableIndex() && !this._items.get(slotId);
     }
     /**
      * Get the max bag slot index at the moment
      * @returns {number}
      */
     maxAvailableIndex() {
-        return ContainerConfig.maxSlotPerRow * this.unlockedRows - 1;
+        return ContainerConfig.maxSlotPerRow * this._unlockedRows - 1;
+    }
+    /**
+     * Get the max slot of a page
+     * @returns {number}
+     */
+    maxPageSlots() {
+        return ContainerConfig.maxRows * ContainerConfig.maxSlotPerRow;
+    }
+    /**
+     * Get the max possible page index
+     * @returns {number}
+     */
+    availablePageIndex() {
+        return Math.floor((this.maxAvailableIndex()) / this.maxPageSlots());
     }
     /**
      * @inheritdoc
@@ -130,7 +159,7 @@ class ItemContainer extends SaveableObject {
     getSaveData() {
         const data = super.getSaveData();
         const saveItems = {}
-        for (let [slotId, bagItem] of this.items.entries()) {
+        for (let [slotId, bagItem] of this._items.entries()) {
             saveItems[slotId] = bagItem.getSaveData();
         }
         data['items'] = saveItems;
@@ -147,9 +176,9 @@ class ItemContainer extends SaveableObject {
         for (let slotId in savedItems)  {
             let bagItem = new GameItem();
             bagItem.loadSaveData(savedItems[slotId]);
-            items.set(slotId, bagItem);
+            items.set(+slotId, bagItem);
         }
-        this.items = items;
+        this._items = items;
     }
 }
 class GameItem extends SaveableObject {
@@ -189,8 +218,9 @@ class GameItem extends SaveableObject {
     removeQuantity(value) {
         this.quantity -= value;
         if (this.quantity < 0) {
+            const remain = Math.abs(this.quantity);
             this.quantity = 0;
-            return Math.abs(this.quantity);
+            return remain;
         }
         return 0;
     }

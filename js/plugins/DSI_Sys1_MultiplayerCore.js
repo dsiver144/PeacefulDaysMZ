@@ -44,11 +44,9 @@ class NetCore {
      */
     connectToHost(peerId) {
         const connection = this.peer.connect(peerId);
-        connection.on('open', function () {
+        connection.on('open', () => {
             console.log('Connection to host openned:', connection);
-            connection.on('data', function (data) {
-                console.log('Received', data);
-            });
+            connection.on('data', this.onDataRecieve.bind(this));
         });
         this.connectionToHost = connection;
     }
@@ -83,7 +81,7 @@ class NetCore {
      * @param {any} data 
      */
     onDataRecieve(data) {
-        const callback = this.actions.get(data.contents.action);
+        const callback = this.actions.get(data.content.action);
         if (callback) {
             callback(data);
         }
@@ -101,11 +99,25 @@ class NetCore {
 /** @type {NetCore} */
 NetCore.inst = null;
 
-NetCore.init = function(isHost) {
+NetCore.init = function(isHost = true) {
     new NetCore(isHost);
 }
 
+NetCore.isReady = function() {
+    return NetCore.inst && NetCore.inst.isReady();
+}
 
+NetCore.isHost = function() {
+    return NetCore.inst.isHost();
+}
+/**
+ * Listen to action
+ * @param {string} action 
+ * @param {(data: any) => void} callback 
+ */
+NetCore.listen = function(action, callback) {
+    NetCore.inst.listen(action, callback);
+}
 // var peer = new Peer();
 // peer.on('open', function (id) {
 //     console.log('My peer ID is: ' + id);
