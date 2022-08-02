@@ -1,6 +1,6 @@
 //=======================================================================
 // * Plugin Name  : DSI_Sys2_FarmingSystem.js
-// * Last Updated : 7/20/2022
+// * Last Updated : 8/2/2022
 //========================================================================
 /*:
  * @author dsiver144
@@ -72,7 +72,6 @@ class FarmManager extends SaveableObject {
         FarmManager.inst = this;
         /** @type {Object.<string, Farmland>} */
         this.farmlands = {};
-        this.registerNetCoreListeners();
     }
     
     test() {
@@ -121,65 +120,6 @@ class FarmManager extends SaveableObject {
             result = this.currentFarmland().useTool(toolType, x, y, toolEx);
         }
         return result; 
-    }
-    registerNetCoreListeners() {
-        if (!NetCore.isReady()) return;
-        this._remoteCharacters = {};
-        if (NetCore.isHost()) {
-            NetCore.listen('remoteUseTool', (data) => {
-                const { peerId, content } = data;
-                const { action, params } = content;
-                console.log('Got remote use tool data', data, content);
-                const { toolType, x, y, toolEx } = params;
-                this.currentFarmland().useTool(toolType, x, y, toolEx);
-                const object = this.currentFarmland().getObject(x, y).getSaveData();
-                NetCore.inst.sendDataToRemotes({ action: 'updateObject', params: { objects: [object] } });
-            });
-        } else {
-            NetCore.listen('updateObject', (data) => {
-                const { peerId, content } = data;
-                const { action, params } = content;
-                console.log('Got updateObject message', data, content);
-                const { objects } = params;
-                objects.forEach(object => {
-                    const newObject = eval(`new ${object.type}()`);
-                    newObject.loadSaveData(object);
-                    this.currentFarmland().replaceObject(newObject);
-                })
-            });
-            NetCore.listen('hostUseTool', (data) => {
-                const { peerId, content } = data;
-                const { action, params } = content;
-                console.log('Got host use tool data', data, content);
-                const { object } = params;
-                const newObject = eval(`new ${object.type}()`);
-                newObject.loadSaveData(object);
-                this.currentFarmland().replaceObject(newObject);
-            });
-        }
-        // Handle for both host & remote
-        NetCore.listen('characterMove', (data) => {
-            if (SceneManager._scene.constructor !== Scene_Map) {
-                return;
-            }
-            const { peerId, content } = data;
-            const { action, params } = content;
-            console.log('characterMove', content);
-            if (!this._remoteCharacters[peerId]) {
-                /** @type {Game_RemotePlayer} */
-                const remotePlayer = new Game_RemotePlayer();
-                remotePlayer.setImage($gamePlayer.characterName(), $gamePlayer.characterIndex());
-                this._remoteCharacters[peerId] = remotePlayer;
-                MyUtils.addMapSprite('remotePlayer' + peerId, new Sprite_Character(remotePlayer));
-            }
-            /** @type {Game_RemotePlayer} */
-            let remotePlayer = this._remoteCharacters[peerId];
-            remotePlayer.setPosition(params._realX, params._realY);
-            remotePlayer._direction = params._direction;
-            remotePlayer._pattern = params._pattern;
-            MyUtils.getMapSprite('remotePlayer' + peerId).update();
-        });
-
     }
     /**
      * Check if player is interact with farm object
@@ -295,9 +235,10 @@ Game_Player.prototype.updateUseToolInput = function() {
             this._pressingToolCounter += 1;
             // console.log("Hold tool btn: ", this._pressingToolCounter);
         } else {
+            const toolType = window.curTool || "hoe";
             const pos = this._targetToolPos;
-            const toolResult = FarmManager.inst.useTool(window.curTool || "hoe", pos.x, pos.y, window.toolEx);
-            console.log({toolResult});
+            const power = 0;
+            ToolManager.inst.useTool(this, toolType, pos.x, pos.y, power);
             this._pressingToolBtn = false;
         }
     }
@@ -305,7 +246,6 @@ Game_Player.prototype.updateUseToolInput = function() {
 
 Game_Player.prototype.checkInteractWithFarmObjects = function() {
     /** @type {Vector2} */
-    let pos = null;
     if (Input.getInputMode() === 'keyboard') {
         const px = Math.round(this._x);
         const py = Math.round(this._y);
@@ -322,7 +262,9 @@ Game_Player.prototype.checkInteractWithFarmObjects = function() {
     const result = FarmManager.inst.checkInteract(pos.x, pos.y);
     return result;
 }
-
+// ================================================================================
+// Handle collision with farm objects.
+// ================================================================================
 var DSI_Sys2_FarmingSystem_Game_CharacterBase_isCollidedWithCharacters = Game_CharacterBase.prototype.isCollidedWithCharacters;
 Game_CharacterBase.prototype.isCollidedWithCharacters = function(x, y) {
 	const result = DSI_Sys2_FarmingSystem_Game_CharacterBase_isCollidedWithCharacters.call(this, x, y);
@@ -334,8 +276,9 @@ Game_System.prototype.createSaveableObjects = function () {
 	DSI_Sys2_FarmingSystem_Game_System_createSaveableObjects.call(this);
     this._farmLand = new FarmManager();
 }
-
-// Display Farm Objects
+// ================================================================================
+// Handle display Farm Objects
+// ================================================================================
 
 var DSI_Sys2_FarmingSystem_Spriteset_Map_createCharacters = Spriteset_Map.prototype.createCharacters;
 Spriteset_Map.prototype.createCharacters = function () {

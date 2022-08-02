@@ -26,6 +26,16 @@ class SaveableObject {
         const result = {};
         this.saveProperties().forEach(([property, _]) => {
             let data = this[property];
+            // if (property.match(/@Map\((.+?)\):(.+?)/i)) {
+            //     const klass = RegExp.$1;
+            //     data = this[RegExp.$2];
+            //     let newData = {};
+            //     for (const [key, value] of data) {
+            //         newData[key] = value.getSaveData();
+            //     }
+            //     data['special'] = `Map(${klass})`;
+            //     data = newData;
+            // }
             if (this[property] instanceof SaveableObject) {
                 data = this[property].getSaveData();
                 data['klass'] = this[property].constructor.name;

@@ -7506,6 +7506,39 @@ Game_CharacterBase.prototype.endBalloon = function() {
     this._balloonPlaying = false;
 };
 
+Game_CharacterBase.prototype.nearestFrontPoint = function() {
+    const direction = this.direction();
+    let cx = this._x; 
+    let cy = this._y;
+    let overhead = 0.35;
+    switch (direction) {
+        case 2:
+            cx = Math.round(cx);
+            cy = Math.floor(cy + overhead);
+            break;
+        case 8:
+            cx = Math.round(cx);
+            cy = Math.ceil(cy - overhead);
+            break;
+        case 4:
+            cx = Math.ceil(cx - overhead);
+            cy = Math.round(cy);
+            break;
+        case 6:
+            cx = Math.floor(cx + overhead);
+            cy = Math.round(cy);
+            break;
+    }
+    return new Vector2(cx, cy);
+}
+
+Game_CharacterBase.prototype.frontPosition = function() {
+    let nearestPoint = this.nearestFrontPoint();
+    const x2 = $gameMap.roundXWithDirection(nearestPoint.x, this.direction());
+    const y2 = $gameMap.roundYWithDirection(nearestPoint.y, this.direction());
+    return v2(x2, y2);
+}
+
 //-----------------------------------------------------------------------------
 // Game_Character
 //
@@ -8366,32 +8399,6 @@ Game_Player.prototype.getInputDirection = function() {
 Game_Player.prototype.executeMove = function(direction) {
     this.moveStraight(direction);
 };
-
-Game_Player.prototype.frontPosition = function() {
-    let x = this._x; 
-    let y = this._y;
-    switch (this.direction()) {
-        case 2:
-            x = Math.round(x);
-            y = Math.round(y);
-            break;
-        case 8:
-            x = Math.round(x);
-            y = Math.round(y);
-            break;
-        case 4:
-            x = Math.round(x);
-            y = Math.round(y);
-            break;
-        case 6:
-            x = Math.round(x);
-            y = Math.round(y);
-            break;
-    }
-    const x2 = $gameMap.roundXWithDirection(x, this.direction());
-    const y2 = $gameMap.roundYWithDirection(y, this.direction());
-    return v2(x2, y2);
-}
 
 Game_Player.prototype.update = function(sceneActive) {
     const lastScrolledX = this.scrolledX();

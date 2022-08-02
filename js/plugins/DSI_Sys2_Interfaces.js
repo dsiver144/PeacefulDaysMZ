@@ -9,7 +9,6 @@
  * Empty Help
  * 
  */
-
 /** @enum */
 const ToolType = {
     "seedPack": "seedPack",
@@ -18,4 +17,5 @@ const ToolType = {
     "hammer": "hammer",
     "axe": "axe",
     "sickle": "sickle",
+    "none": "none",
 }
