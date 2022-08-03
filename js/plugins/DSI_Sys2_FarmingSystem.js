@@ -75,7 +75,8 @@ class FarmManager extends SaveableObject {
     }
     
     test() {
-        this.currentFarmland().addObject(new OSmallStone($gamePlayer.frontPosition(), $gameMap.mapId()));
+        var object = new OHugeStone(new Vector2(3, 5), 1);
+        FarmManager.inst.currentFarmland().addObject(object)
     }
     /**
      * Check if player collide with any farm objects

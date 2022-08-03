@@ -168,6 +168,15 @@ class Farmland extends SaveableObject {
         const { x, y } = object.position;
         this.farmObjects[this.pos(x, y)] = object;
         object.spawn();
+        // Spawm child object
+        for (let ox = 0; ox < object.bottomSize().x; ox++) {
+            for (let oy = 0; oy < object.bottomSize().y; oy++) {
+                if (ox == 0 && oy == 0) continue;
+                const childObject = new FarmChildObject(new Vector2(x + ox, y + oy), object.mapId);
+                childObject.setParentPosition(object.position);
+                this.farmObjects[this.pos(x + ox, y + oy)] = childObject;
+            }
+        }
     }
     /**
      * Replace Object
@@ -239,6 +248,9 @@ class Farmland extends SaveableObject {
         this.farmObjects = {};  
         for (const position in data['farmObjects']) {
             let savedObject = data['farmObjects'][position];
+            if (!savedObject.type) {
+                console.warn("@@ Save handle error for :", savedObject);
+            }
             let newFarmObject = eval(`new ${savedObject.type}()`);
             newFarmObject.loadSaveData(savedObject);
             this.farmObjects[position] = newFarmObject;

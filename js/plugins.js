@@ -25,5 +25,6 @@ var $plugins =
 {"name":"DSI_Sys3_FarmTile","status":true,"description":"(v1.0) Farm Tile","parameters":{}},
 {"name":"DSI_Sys3_Farmland","status":true,"description":"","parameters":{}},
 {"name":"DSI_Sys4_Sprite_FarmObject","status":true,"description":"(v1.0) Sprite Farm Object","parameters":{}},
-{"name":"DSI_Sys4_Sprite_FarmTile","status":true,"description":"(v1.0) Sprite Farm Tile","parameters":{}}
+{"name":"DSI_Sys4_Sprite_FarmTile","status":true,"description":"(v1.0) Sprite Farm Tile","parameters":{}},
+{"name":"DSI_Sys4_Sprite_FarmObstacle","status":true,"description":"(v1.0) Sprite Farm Obstacle","parameters":{}}
 ];
