@@ -78,6 +78,7 @@ class ToolManager extends SaveableObject {
             savedTools[type] = tool.getSaveData();
         }
         data.tools = savedTools;
+        return data;
     }
     /**
      * @inheritdoc
@@ -88,7 +89,7 @@ class ToolManager extends SaveableObject {
         /** @type {Map<string, PD_Tool>} */
         const newTools = new Map();
         for (const type in savedTools) {
-            const tool = new PD_Tool();
+            const tool = eval(`new ${savedTools[type].type}()`);
             tool.loadSaveData(savedTools[type]);
             newTools.set(type, tool);
         }
@@ -105,6 +106,7 @@ class PD_Tool extends SaveableObject {
      */
     constructor() {
         super();
+        this.type = this.constructor.name;
         this.level = 0;
     }
     /**
@@ -133,7 +135,8 @@ class PD_Tool extends SaveableObject {
      */
     saveProperties() {
         return [
-            ['level', 0]
+            ['level', 0],
+            ['type']
         ]
     }
     /**
