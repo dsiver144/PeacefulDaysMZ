@@ -2268,7 +2268,7 @@ Scene_Save.prototype.executeSave = function(savefileId) {
     $gameSystem.onBeforeSave();
     DataManager.saveGame(savefileId)
         .then(() => this.onSaveSuccess())
-        .catch(() => this.onSaveFailure());
+        .catch((err) => this.onSaveFailure(err));
 };
 
 Scene_Save.prototype.onSaveSuccess = function() {
@@ -2276,7 +2276,8 @@ Scene_Save.prototype.onSaveSuccess = function() {
     this.popScene();
 };
 
-Scene_Save.prototype.onSaveFailure = function() {
+Scene_Save.prototype.onSaveFailure = function(err = null) {
+    console.log(err);
     SoundManager.playBuzzer();
     this.activateListWindow();
 };
