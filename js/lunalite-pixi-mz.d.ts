@@ -26703,6 +26703,29 @@ declare class Sprite extends PIXI.Sprite {
 	 * @type Number
 	 */
 	static _counter: number;
+    /**
+     * Start tween
+     * 
+	 * @method startTween
+     * @param settings params you want to tween
+     * @param duration duration of the tween
+     * @param onFinishCallBack the callback when finish
+     * @param easingFunction easing function
+     * @param repeat repeat this tween?
+     * @return {object} the tween object
+     */
+    startTween(settings: object, duration: number, onFinishCallBack: Function, easingFunction: Function, repeat: boolean): object;
+    /**
+     * Check if this object is tweening
+     * 
+     * @method hasTween
+     * @return {boolean}
+     */
+    hasTween(): boolean;
+    /**
+     * Remove tween out of this current object
+     */
+    removeTween(): void;
 }
 
 declare class Stage extends PIXI.Container {
@@ -41966,6 +41989,29 @@ declare class Window_StatusBase extends Window_Selectable {
 	 * @param index
 	 */
 	actorSlotName(actor: Game_Actor, index: number): string;
+    /**
+     * Start tween
+     * 
+	 * @method startTween
+     * @param settings params you want to tween
+     * @param duration duration of the tween
+     * @param onFinishCallBack the callback when finish
+     * @param easingFunction easing function
+     * @param repeat repeat this tween?
+     * @return {object} the tween object
+     */
+    startTween(settings: object, duration: number, onFinishCallBack: Function, easingFunction: Function, repeat: boolean): object;
+    /**
+     * Check if this object is tweening
+     * 
+     * @method hasTween
+     * @return {boolean}
+     */
+    hasTween(): boolean;
+    /**
+     * Remove tween out of this current object
+     */
+    removeTween(): void;
 }
 
 /**
