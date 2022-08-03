@@ -105,7 +105,14 @@ class PD_Tool extends SaveableObject {
      */
     constructor() {
         super();
-        this.level = 3;
+        this.level = 0;
+    }
+    /**
+     * Check if this tool is chargeable.
+     * @returns {boolean}
+     */
+    isChargeAble() {
+        return this.level > 0;
     }
     /**
      * Get tool charge time in frames.

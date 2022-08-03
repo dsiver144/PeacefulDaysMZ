@@ -214,6 +214,7 @@ Game_Player.prototype.updateUseToolInput = function() {
     if (Input.isTriggered(KeyAction.UseTool)) {
         const equippedTool = ToolManager.inst.equippedTool();
         if (!equippedTool) return;        
+        this._toolChargeAble = equippedTool.isChargeAble();
         this._toolChargeTime = equippedTool.chargeTime();
         this._toolMaxChargeLevel = equippedTool.maxChargeLevel();
         this._toolChargedLevel = 0;
@@ -223,7 +224,7 @@ Game_Player.prototype.updateUseToolInput = function() {
             const x = $gameMap.canvasToMapX(TouchInput.x);
             const y = $gameMap.canvasToMapY(TouchInput.y);
             const dist = Math.sqrt((x - px) * (x - px) + (y - py) * (y - py));
-            if (dist >= 1.0 && dist <= 1.5) {
+            if (dist >= 0.8 && dist <= 1.5) {
                 this._targetToolPos = new Vector2(x, y);
                 this.turnTowardPoint(x, y);
                 this._pressingToolBtn = true;
@@ -236,12 +237,12 @@ Game_Player.prototype.updateUseToolInput = function() {
         }
     }
     if (this._pressingToolBtn) {
-        if (Input.isTriggered(KeyAction.Check) || Input.isTriggered(KeyAction.Cancel)) {
+        if (this._toolChargeAble && Input.isTriggered(KeyAction.Check) || Input.isTriggered(KeyAction.Cancel)) {
             SoundManager.playCancel();
             this._pressingToolBtn = false;
             return;
         }
-        if (Input.isPressed(KeyAction.UseTool)) {
+        if (this._toolChargeAble && Input.isPressed(KeyAction.UseTool)) {
             if (this._pressingToolCounter < this._toolChargeTime) {
                 this._pressingToolCounter += 1;
             } else {
