@@ -1,6 +1,6 @@
 //=======================================================================
 // * Plugin Name  : DSI_Utils.js
-// * Last Updated : 7/22/2022
+// * Last Updated : 8/3/2022
 //========================================================================
 /*:
  * @author dsiver144
@@ -11,6 +11,18 @@
  * 
  * 
  */
+
+/**
+ * Load Menu Image
+ * @param {string} filename filename of the image
+ * @param {string} dir sub-directory of the image
+ * @returns {Bitmap}
+ */
+ImageManager.loadMenu = function(filename, dir = "") {
+    let path = "img/menus/" + dir;
+    if (dir.length > 0) path += "/";
+    return ImageManager.loadBitmap(path, filename);
+}
 class Vector2 extends SaveableObject {
     /**
      * Object position
