@@ -51,12 +51,11 @@ RangeManager.getToolRangeTiles = function(level, character) {
 /**
  * Get Tool AOE Range
  * @param {number} level 
- * @param {Game_Character} character 
+ * @param {number} centerX 
+ * @param {number} centerY 
  * @returns {Vector2[]}
  */
-RangeManager.getToolAOERangeTiles = function(level, character) {
-    const cx = Math.round(character._x);
-    const cy = Math.round(character._y);
+RangeManager.getToolAOERangeTiles = function(level, centerX, centerY) {
     /** @type {Vector2[]} */
     const tiles = [];
     let range = RangeConfig.aoeRangeByLevel[level];
@@ -64,7 +63,7 @@ RangeManager.getToolAOERangeTiles = function(level, character) {
         for (var y = -range; y <= range; y++) {
             if (x == 0 && y == 0) continue;
             const isValue = Math.abs(x) + Math.abs(y) <= range;
-            if (isValue) tiles.push(new Vector2(cx + x, cy + y));
+            if (isValue) tiles.push(new Vector2(centerX + x, centerY + y));
         }
     }
     return tiles;

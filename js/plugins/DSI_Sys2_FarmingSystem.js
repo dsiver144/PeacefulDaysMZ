@@ -212,13 +212,18 @@ FarmManager.isFarmRegion = function(x, y) {
 
 Game_Player.prototype.updateUseToolInput = function() {
     if (Input.isTriggered(KeyAction.UseTool)) {
+        const equippedTool = ToolManager.inst.equippedTool();
+        if (!equippedTool) return;        
+        this._toolChargeTime = equippedTool.chargeTime();
+        this._toolMaxChargeLevel = equippedTool.maxChargeLevel();
+        this._toolChargedLevel = 0;
         if (Input.getInputMode() === 'keyboard') {
             const px = Math.round(this._x);
             const py = Math.round(this._y);
             const x = $gameMap.canvasToMapX(TouchInput.x);
             const y = $gameMap.canvasToMapY(TouchInput.y);
             const dist = Math.sqrt((x - px) * (x - px) + (y - py) * (y - py));
-            if (dist <= 1.5) {
+            if (dist >= 1.0 && dist <= 1.5) {
                 this._targetToolPos = new Vector2(x, y);
                 this.turnTowardPoint(x, y);
                 this._pressingToolBtn = true;
@@ -231,13 +236,33 @@ Game_Player.prototype.updateUseToolInput = function() {
         }
     }
     if (this._pressingToolBtn) {
+        if (Input.isTriggered(KeyAction.Check) || Input.isTriggered(KeyAction.Cancel)) {
+            SoundManager.playCancel();
+            this._pressingToolBtn = false;
+            return;
+        }
         if (Input.isPressed(KeyAction.UseTool)) {
-            this._pressingToolCounter += 1;
+            if (this._pressingToolCounter < this._toolChargeTime) {
+                this._pressingToolCounter += 1;
+            } else {
+                this._pressingToolCounter = 0;
+                if (this._toolChargedLevel < this._toolMaxChargeLevel) {
+                    this._toolChargedLevel += 1;
+                    console.log("POWER LEVEL INCREASE: ", this._toolChargedLevel);
+                    
+                    if (this._toolChargedLevel == this._toolMaxChargeLevel) {
+                        SoundManager.playRecovery();
+                    } else {
+                        SoundManager.playReflection();
+                    }
+                }
+            }
             // console.log("Hold tool btn: ", this._pressingToolCounter);
         } else {
             const toolType = window.curTool || "hoe";
             const pos = this._targetToolPos;
-            const power = 0;
+            const power = this._toolChargedLevel;
+            console.log("POWER LEVEL: ", this._toolChargedLevel);
             ToolManager.inst.useTool(this, toolType, pos.x, pos.y, power);
             this._pressingToolBtn = false;
         }

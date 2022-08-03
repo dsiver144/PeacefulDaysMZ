@@ -9,6 +9,10 @@
  * Empty Help
  * 
  */
+const ToolConfig = {
+    timeToCharge: 40,
+    chargeTimeReduction: 20,
+}
 
 class ToolManager extends SaveableObject {
     /**
@@ -27,6 +31,13 @@ class ToolManager extends SaveableObject {
      */
     addTool(tool) {
         this._tools.set(tool.getType(), tool);
+    }
+    /**
+     * Get Equipped Tool
+     * @returns {PD_Tool}
+     */
+    equippedTool() {
+        return this._tools.get(window.curTool || "hoe");
     }
     /**
      * Add basic tools
@@ -94,7 +105,21 @@ class PD_Tool extends SaveableObject {
      */
     constructor() {
         super();
-        this.level = 1;
+        this.level = 3;
+    }
+    /**
+     * Get tool charge time in frames.
+     * @returns {number}
+     */
+    chargeTime() {
+        return ToolConfig.timeToCharge;
+    }
+    /**
+     * Max charge level
+     * @returns {number}
+     */
+    maxChargeLevel() {
+        return this.level;
     }
     /**
      * @inheritdoc
