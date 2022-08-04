@@ -43866,7 +43866,7 @@ interface TestBattler {
 /**
  * The data class for maps.
  */
- interface Map extends MetaData {
+ interface RM_Map extends MetaData {
     /**
      * The map's display name.
      */
@@ -44238,7 +44238,7 @@ declare var $dataSystem: System;
 /** @global RPGMakerMV MapInfo data. */
 declare var $dataMapInfos: Array<MapInfo>;
 /** @global RPGMakerMV Map data for the current map. */
-declare var $dataMap: Map;
+declare var $dataMap: RM_Map;
 /** @global RPGMakerMV Temporary game data; not saved with the game. */
 declare var $gameTemp: Game_Temp;
 /** @global RPGMakerMV Game System data; saved with the game.
