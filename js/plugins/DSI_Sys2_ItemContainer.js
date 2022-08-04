@@ -32,14 +32,21 @@ class ItemContainer extends SaveableObject {
         /** @type {string} */
         this._name = '';
         /** @type {number} */
-        this._selectedIndex = 0;
+        this._selectedSlotId = 0;
     }
     /**
      * Select a slot
      * @param {number} slotId 
      */
     select(slotId) {
-        this._selectedIndex = slotId;
+        this._selectedSlotId = slotId;
+    }
+    /**
+     * Get selecting item
+     * @returns {GameItem}
+     */
+    selectingItem() {
+        return this._items.get(this._selectedSlotId);
     }
     /**
      * Get container name
