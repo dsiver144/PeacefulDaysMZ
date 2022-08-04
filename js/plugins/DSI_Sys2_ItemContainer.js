@@ -25,9 +25,21 @@ class ItemContainer extends SaveableObject {
         super();
         /** @type {Map<number, GameItem>} */
         this._items = new Map();
+        /** @type {number} */
         this._unlockedRows = unlockedRows;
+        /** @type {number} */
         this._pageIndex = 0;
+        /** @type {string} */
         this._name = '';
+        /** @type {number} */
+        this._selectedIndex = 0;
+    }
+    /**
+     * Select a slot
+     * @param {number} slotId 
+     */
+    select(slotId) {
+        this._selectedIndex = slotId;
     }
     /**
      * Get container name
@@ -44,6 +56,7 @@ class ItemContainer extends SaveableObject {
             ["_unlockedRows", 0],
             ["_pageIndex", 0],
             ["_name", ''],
+            ["_selectedIndex", 0],
         ]
     }
     /**

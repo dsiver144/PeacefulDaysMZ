@@ -36,4 +36,12 @@
 		],
 		"description": "Shortcut for inheritdoc"
 	},
+	"onelineType": {
+		"scope": "javascript,typescript",
+		"prefix": "ot",
+		"body": [
+			"/** @type {$1} */",
+		],
+		"description": "Shortcut for one-line type"
+	}
 }
