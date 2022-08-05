@@ -49,6 +49,8 @@ class Sprite_FarmObstacle extends Sprite_FarmObject {
             this.updatePosition();
             this.anchor.x = 0;
             this.anchor.y = 0;
+            this.updateTopLeftOffset();
+            this.setOffscreenLimit(1, 10);
         });
     }
     /**
