@@ -40,6 +40,13 @@ class Sprite_FarmTile extends Sprite_FarmObject {
     /**
      * @inheritdoc
      */
+    toggleDisplay(value) {
+        super.toggleDisplay(value);
+        this._soilSprite.renderable = value;
+    }
+    /**
+     * @inheritdoc
+     */
     removeOptionalSprites() {
         MyUtils.removeMapSprite(this.soilSpriteKey());
     }
@@ -111,10 +118,10 @@ class Sprite_FarmTile extends Sprite_FarmObject {
         if (seedConfig.isTree) {
             // Hide soil sprite when it's fruit tree.
             this._soilSprite.opacity = 0;
-            this.setOffscreenLimit(3, 3);
+            this.setOffscreenLimit(3, 4);
         } else {
             this._customScreenZ = farmTile.currentStage > 0 ? 3 : 1;
-            this.setOffscreenLimit(1, 1);
+            this.setOffscreenLimit(1, 2);
         }
         return true;
     }
