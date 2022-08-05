@@ -225,7 +225,7 @@ Game_Player.prototype.updateUseToolInput = function() {
             const x = $gameMap.canvasToMapX(TouchInput.x);
             const y = $gameMap.canvasToMapY(TouchInput.y);
             const dist = Math.sqrt((x - px) * (x - px) + (y - py) * (y - py));
-            if (dist >= 0.8 && dist <= 1.5) {
+            if (dist <= 1.5) {
                 this._targetToolPos = new Vector2(x, y);
                 this.turnTowardPoint(x, y);
                 this._pressingToolBtn = true;

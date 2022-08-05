@@ -31,13 +31,15 @@ const KeyAction = {
     "None": "none"
 }
 
+const ValidKeyboardKeys = ["13", "16", "17", "18", "186", "187", "188", "189", "190", "191", "192", "20", "219", "220", "221", "222", "32", "37", "38", "39", "40", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "8", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "9", "90", "91", "EMPTY1", "EMPTY2"];
+
 const DefaultKeyboardConfig = {}
 DefaultKeyboardConfig[KeyAction.MoveUp] = 87;
 DefaultKeyboardConfig[KeyAction.MoveLeft] = 65;
 DefaultKeyboardConfig[KeyAction.MoveRight] = 68;
 DefaultKeyboardConfig[KeyAction.MoveDown] = 83;
-DefaultKeyboardConfig[KeyAction.UseTool] = "M0";
-DefaultKeyboardConfig[KeyAction.Check] = "M2";
+DefaultKeyboardConfig[KeyAction.UseTool] = 256; // Mouse 0
+DefaultKeyboardConfig[KeyAction.Check] = 257; // Mouse 1
 DefaultKeyboardConfig[KeyAction.Menu] = 27;
 // DefaultKeyboardConfig[KeyAction.Cancel] = 27;
 DefaultKeyboardConfig[KeyAction.Map] = 77;
@@ -63,6 +65,10 @@ DefaultGamePadConfig[KeyAction.MoveUp] = 12;
 DefaultGamePadConfig[KeyAction.MoveDown] = 13;
 DefaultGamePadConfig[KeyAction.MoveLeft] = 14;
 DefaultGamePadConfig[KeyAction.MoveRight] = 15;
+
+for (var i in DefaultKeyboardConfig) {
+    console.log(i, KeyboardMap[DefaultKeyboardConfig[i]]);
+}
 
 //==================================================================================
 // IMPLEMENT SYSTEM IN TO RPG MAKER SYSTEM
@@ -156,7 +162,7 @@ Game_Player.prototype.checkInteractWithFarmObjects = function() {
 
 var DSI_Sys1_ControllerSystem_TouchInput__onMouseDown = TouchInput._onMouseDown;
 TouchInput._onMouseDown = function(event) {
-    const buttonName = Input.keyMapper['M' + event.button];
+    const buttonName = Input.keyMapper[256 + event.button];
     if (buttonName) {
         Input.setState(buttonName, true);
     }
@@ -165,7 +171,7 @@ TouchInput._onMouseDown = function(event) {
 
 var DSI_Sys1_ControllerSystem_TouchInput__onMouseUp = TouchInput._onMouseUp;
 TouchInput._onMouseUp = function(event) {
-    const buttonName = Input.keyMapper['M' + event.button];
+    const buttonName = Input.keyMapper[256 + event.button];
     if (buttonName) {
         Input.setState(buttonName, false);
     }
