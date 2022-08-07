@@ -73,6 +73,7 @@ class Sprite_FarmObject extends Sprite_Shakeable {
         this.updatePosition();
         this.checkForCollision();
         this.checkForVisibility();
+        this.updateFade();
     }
     /**
      * Update sprite position
@@ -163,6 +164,30 @@ class Sprite_FarmObject extends Sprite_Shakeable {
             } else {
                 if (this.renderable) this.toggleDisplay(false);
             }
+    }
+    /**
+     * Set Fade status
+     * When player walk behind this object it will fade opacity
+     * @param {boolean} v 
+     */
+    setFade(v) {
+        this._canBeFade = v;
+    }
+    /**
+     * Update fade
+     */
+    updateFade() {
+        if (!this._topLeftOffset) return;
+        if (!this._canBeFade) return;
+        const topLeftX = this.x + this._topLeftOffset.x;
+        const topLeftY = this.y + this._topLeftOffset.y;
+        const pX = $gamePlayer.screenX();
+        const pY = $gamePlayer.screenY();
+        if (pX >= topLeftX && pX <= topLeftX + this.width && pY >= topLeftY && pY <= topLeftY + this.height) {
+           this.opacity = 100;
+        } else {
+            this.opacity = 255;
+        }
     }
     /**
      * Toggle Display

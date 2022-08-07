@@ -119,6 +119,10 @@ class Sprite_FarmTile extends Sprite_FarmObject {
             // Hide soil sprite when it's fruit tree.
             this._soilSprite.opacity = 0;
             this.setOffscreenLimit(3, 4);
+            if (farmTile.currentStage > 1) {
+                // Only fade sprite when tree is grown up
+                this.setFade(true);
+            }
         } else {
             this._customScreenZ = farmTile.currentStage > 0 ? 3 : 1;
             this.setOffscreenLimit(1, 2);
