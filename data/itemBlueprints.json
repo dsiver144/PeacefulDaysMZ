@@ -1,0 +1,56 @@
+[
+    {
+        "itemID": "Basic Chest",
+        "components": [
+            {
+                "itemID": "Material Lumber",
+                "number": 30
+            }
+        ],
+        "level": 0
+    },
+    {
+        "itemID": "Green Energy Bar",
+        "components": [
+            {
+                "itemID": "Green Herb",
+                "number": 2
+            }
+        ],
+        "level": 0
+    },
+    {
+        "itemID": "Wooden Path",
+        "components": [
+            {
+                "itemID": "Material Lumber",
+                "number": 5
+            }
+        ],
+        "level": 1
+    },
+    {
+        "itemID": "Stone Path",
+        "components": [
+            {
+                "itemID": "Material Stone",
+                "number": 5
+            }
+        ],
+        "level": 1
+    },
+    {
+        "itemID": "Protein Bar",
+        "components": [
+            {
+                "itemID": "Green Herb",
+                "number": 2
+            },
+            {
+                "itemID": "Corn",
+                "number": 1
+            }
+        ],
+        "level": 2
+    }
+]
