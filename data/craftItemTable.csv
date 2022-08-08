@@ -1,4 +1,4 @@
-name,localizeKey,iconIndex,price,shopPrice,tag,stamina,levelPriceBonus
+name,localizeKey,iconIndex,price,shipPrice,tag,stamina,levelPriceBonus
 Wooden Chest,WoodenChest,,0,50,craftItem;storage,,
 Green Energy Bar,GreenEnergyBar,,0,10,craftItem;food,6;10,
 Wooden Path,WoodenPath,,0,5,craftItem;decorator,,

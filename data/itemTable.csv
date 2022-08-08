@@ -1,5 +1,5 @@
 name,localizeKey,iconIndex,price,shipPrice,tag,stamina,levelPriceBonus
-Sunflower Seeds,SunflowerSeeds,227,100,120,seed,,
+Sunflower Seeds,SunflowerSeeds,227,100,100,seed,,
 Sunflower,Sunflower,287,50,100,crop; flower,,
 Carrot Seeds,CarrotSeeds,0,100,120,seed,,
 Carrot,Carrot,0,0,0,crop; vegetable,5;25,
@@ -29,3 +29,5 @@ Axe L2,Axe,231,0,0,tool,,
 Axe L3,Axe,82,5000,0,tool,,
 Axe L4,Axe,576,10000,0,tool,,
 Corn,Corn,,200,200,crop; grain,10;25,
+Corn Seeds,CornSeeds,,200,200,seed,,
+,,,,,,,
