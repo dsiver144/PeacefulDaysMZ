@@ -212,7 +212,7 @@ FarmManager.isFarmRegion = function(x, y) {
 //==================================================================================
 
 Game_Player.prototype.updateUseToolInput = function() {
-    if (Input.isTriggered(KeyAction.UseTool)) {
+    if (Input.isTriggered(FieldKeyAction.UseTool)) {
         const equippedTool = ToolManager.inst.equippedTool();
         if (!equippedTool) return;        
         this._toolChargeAble = equippedTool.isChargeAble();
@@ -238,12 +238,12 @@ Game_Player.prototype.updateUseToolInput = function() {
         }
     }
     if (this._pressingToolBtn) {
-        if (this._toolChargeAble && Input.isTriggered(KeyAction.Check) || Input.isTriggered(KeyAction.Cancel)) {
+        if (this._toolChargeAble && Input.isTriggered(FieldKeyAction.Check) || Input.isTriggered(FieldKeyAction.Cancel)) {
             SoundManager.playCancel();
             this._pressingToolBtn = false;
             return;
         }
-        if (this._toolChargeAble && Input.isPressed(KeyAction.UseTool)) {
+        if (this._toolChargeAble && Input.isPressed(FieldKeyAction.UseTool)) {
             if (this._pressingToolCounter < this._toolChargeTime) {
                 this._pressingToolCounter += 1;
             } else {

@@ -22,8 +22,8 @@ class Scene_MainMenu extends Scene_MenuBase {
      * Create all neccessary objects
      */
     createAllObjects() {
-        const button1 = new Sprite_KeyboardHint(KeyAction.PageLeft);
-        const button2 = new Sprite_GamePadHint(KeyAction.PageRight);
+        const button1 = new Sprite_KeyboardHint(MenuKeyAction.PageLeft);
+        const button2 = new Sprite_GamePadHint(MenuKeyAction.PageRight);
         this.addChild(button1);
         this.addChild(button2);
         button1.x = 100;
@@ -54,7 +54,7 @@ class Scene_MainMenu extends Scene_MenuBase {
      * Update control
      */
     updateControl() {
-        if (Input.isTriggered(KeyAction.Menu) || Input.isTriggered(KeyAction.Cancel)) {
+        if (Input.isTriggered(FieldKeyAction.Menu) || Input.isTriggered(FieldKeyAction.Cancel)) {
             if (this.canReturnToMap()) {
                 this.returnToMap();
             } else {

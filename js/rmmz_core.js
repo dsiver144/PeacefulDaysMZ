@@ -5720,11 +5720,11 @@ Input.update = function() {
  * @returns {boolean} True if the key is pressed.
  */
 Input.isPressed = function(keyName) {
-    if (this._isEscapeCompatible(keyName) && this.isPressed("escape")) {
-        return true;
-    } else {
-        return !!this._currentState[keyName];
-    }
+    const code = Input.keyMapper[keyName];
+    const code2 = Input.gamepadMapper[keyName];
+    const keyboard = code != null && !!this._currentState[code.toString()];
+    const gamepad = code2 != null && !!this._currentState[code2.toString()];
+    return keyboard || gamepad;
 };
 
 /**
@@ -5734,11 +5734,11 @@ Input.isPressed = function(keyName) {
  * @returns {boolean} True if the key is triggered.
  */
 Input.isTriggered = function(keyName) {
-    if (this._isEscapeCompatible(keyName) && this.isTriggered("escape")) {
-        return true;
-    } else {
-        return this._latestButton === keyName && this._pressedTime === 0;
-    }
+    const code = Input.keyMapper[keyName];
+    const code2 = Input.gamepadMapper[keyName];
+    const keyboard = code != null && this._latestButton === code.toString() && this._pressedTime === 0;
+    const gamepad = code2 != null && this._latestButton === code2.toString() && this._pressedTime === 0;
+    return keyboard || gamepad;
 };
 
 /**
@@ -5748,16 +5748,17 @@ Input.isTriggered = function(keyName) {
  * @returns {boolean} True if the key is repeated.
  */
 Input.isRepeated = function(keyName) {
-    if (this._isEscapeCompatible(keyName) && this.isRepeated("escape")) {
-        return true;
-    } else {
-        return (
-            this._latestButton === keyName &&
-            (this._pressedTime === 0 ||
-                (this._pressedTime >= this.keyRepeatWait &&
-                    this._pressedTime % this.keyRepeatInterval === 0))
-        );
-    }
+    const code = Input.keyMapper[keyName];
+    const code2 = Input.gamepadMapper[keyName];
+    const keyboard = code != null && this._latestButton === code.toString() &&
+                (this._pressedTime === 0 ||
+                    (this._pressedTime >= this.keyRepeatWait &&
+                        this._pressedTime % this.keyRepeatInterval === 0))
+    const gamepad = code2 != null && this._latestButton === code2.toString() &&
+                (this._pressedTime === 0 ||
+                    (this._pressedTime >= this.keyRepeatWait &&
+                        this._pressedTime % this.keyRepeatInterval === 0))
+    return keyboard || gamepad;
 };
 
 /**
@@ -5767,14 +5768,13 @@ Input.isRepeated = function(keyName) {
  * @returns {boolean} True if the key is long-pressed.
  */
 Input.isLongPressed = function(keyName) {
-    if (this._isEscapeCompatible(keyName) && this.isLongPressed("escape")) {
-        return true;
-    } else {
-        return (
-            this._latestButton === keyName &&
-            this._pressedTime >= this.keyRepeatWait
-        );
-    }
+    const code = Input.keyMapper[keyName];
+    const code2 = Input.gamepadMapper[keyName];
+    const keyboard = code != null && this._latestButton === code.toString() &&
+                        this._pressedTime >= this.keyRepeatWait;
+    const gamepad = code2 != null && this._latestButton === code2.toString() &&
+                        this._pressedTime >= this.keyRepeatWait;
+    return keyboard || gamepad;
 };
 
 /**
@@ -5834,16 +5834,10 @@ Input._onKeyDown = function(event) {
         event.preventDefault();
     }
     if (event.keyCode === 144) {
-        // Numlock
         this.clear();
     }
-    const buttonNames = this.keyMapper[event.keyCode];
-    if (buttonNames) {
-        buttonNames.forEach(button => {
-            this._currentState[button] = true;
-        })
-        this.setInputMode('keyboard');
-    }
+    this._currentState[event.keyCode] = true;
+    this.setInputMode('keyboard');
 };
 
 Input._shouldPreventDefault = function(keyCode) {
@@ -5862,12 +5856,7 @@ Input._shouldPreventDefault = function(keyCode) {
 };
 
 Input._onKeyUp = function(event) {
-    const buttonNames = this.keyMapper[event.keyCode];
-    if (buttonNames) {
-        buttonNames.forEach(button => {
-            this._currentState[button] = false;
-        })
-    }
+    this._currentState[event.keyCode] = false;
 };
 
 Input._onLostFocus = function() {
@@ -5912,12 +5901,9 @@ Input._updateGamepadState = function(gamepad) {
     }
     for (let j = 0; j < newState.length; j++) {
         if (newState[j] !== lastState[j]) {
-            const buttonName = this.gamepadMapper[j];
-            if (buttonName) {
-                this._currentState[buttonName] = newState[j];
-                if (newState[j]) {
-                    this.setInputMode('gamepad');
-                }
+            this._currentState[j.toString()] = newState[j];
+            if (newState[j]) {
+                this.setInputMode('gamepad');
             }
         }
     }

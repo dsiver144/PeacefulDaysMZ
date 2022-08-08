@@ -9,10 +9,8 @@
  * @help 
  * Empty Help
  */
-/**
- * @enum
- */
-const KeyAction = {
+/** @enum */
+const FieldKeyAction = {
     "MoveUp": "up",
     "MoveLeft": "left",
     "MoveRight": "right",
@@ -25,10 +23,21 @@ const KeyAction = {
     "Run": "run",
     "SwitchItemLeft": "switchleft",
     "SwitchItemRight": "switchright",
+    "SwitchItemRowUp": "switch_item_row_up",
+    "SwitchItemRowDown": "switch_item_row_down",
     "Mission": "mission",
-    "PageLeft": "pageup",
-    "PageRight": "pagedown",
     "None": "none"
+}
+/** @enum */
+const MenuKeyAction = {
+    "MoveUp": "menu_up",
+    "MoveLeft": "menu_left",
+    "MoveRight": "menu_right",
+    "MoveDown": "menu_down",
+    "Confirm": "menu_confirm",
+    "Cancel": "menu_cancel",
+    "PageLeft": "menu_pageleft",
+    "PageRight": "menu_pageright",
 }
 
 const KeyCodeToNameConverter = {
@@ -146,37 +155,55 @@ const ButtonConverter = {
 }
 
 const DefaultKeyboardConfig = {}
-DefaultKeyboardConfig[KeyAction.MoveUp] = 87;
-DefaultKeyboardConfig[KeyAction.MoveLeft] = 65;
-DefaultKeyboardConfig[KeyAction.MoveRight] = 68;
-DefaultKeyboardConfig[KeyAction.MoveDown] = 83;
-DefaultKeyboardConfig[KeyAction.UseTool] = 256; // Mouse 0
-DefaultKeyboardConfig[KeyAction.Check] = 258; // Mouse 1
-DefaultKeyboardConfig[KeyAction.Menu] = 27;
+DefaultKeyboardConfig[FieldKeyAction.MoveUp] = 87;
+DefaultKeyboardConfig[FieldKeyAction.MoveLeft] = 65;
+DefaultKeyboardConfig[FieldKeyAction.MoveRight] = 68;
+DefaultKeyboardConfig[FieldKeyAction.MoveDown] = 83;
+DefaultKeyboardConfig[FieldKeyAction.UseTool] = 256; // Mouse 0
+DefaultKeyboardConfig[FieldKeyAction.Check] = 258; // Mouse 1
+DefaultKeyboardConfig[FieldKeyAction.Menu] = 27;
 // DefaultKeyboardConfig[KeyAction.Cancel] = 27;
-DefaultKeyboardConfig[KeyAction.Map] = 77;
-DefaultKeyboardConfig[KeyAction.Run] = 16;
-DefaultKeyboardConfig[KeyAction.Mission] = 70;
-DefaultKeyboardConfig[KeyAction.SwitchItemLeft] = 90;
-DefaultKeyboardConfig[KeyAction.SwitchItemRight] = 88;
-DefaultKeyboardConfig[KeyAction.PageLeft] = 81;
-DefaultKeyboardConfig[KeyAction.PageRight] = 69;
+DefaultKeyboardConfig[FieldKeyAction.Map] = 77;
+DefaultKeyboardConfig[FieldKeyAction.Run] = 16;
+DefaultKeyboardConfig[FieldKeyAction.Mission] = 70;
+DefaultKeyboardConfig[FieldKeyAction.SwitchItemLeft] = 90;
+DefaultKeyboardConfig[FieldKeyAction.SwitchItemRight] = 88;
+DefaultKeyboardConfig[FieldKeyAction.PageLeft] = 81;
+DefaultKeyboardConfig[FieldKeyAction.PageRight] = 69;
+
+DefaultKeyboardConfig[MenuKeyAction.Confirm] = 32;
+DefaultKeyboardConfig[MenuKeyAction.Cancel] = 27;
+DefaultKeyboardConfig[MenuKeyAction.PageLeft] = 81;
+DefaultKeyboardConfig[MenuKeyAction.PageRight] = 69;
+DefaultKeyboardConfig[MenuKeyAction.MoveUp] = 87;
+DefaultKeyboardConfig[MenuKeyAction.MoveLeft] = 65;
+DefaultKeyboardConfig[MenuKeyAction.MoveRight] = 68;
+DefaultKeyboardConfig[MenuKeyAction.MoveDown] = 83;
 
 const DefaultGamePadConfig = {}
-DefaultGamePadConfig[KeyAction.UseTool] = 2;
-DefaultGamePadConfig[KeyAction.Check] = 0;
-DefaultGamePadConfig[KeyAction.Menu] = 9;
-DefaultGamePadConfig[KeyAction.Cancel] = 1;
-DefaultGamePadConfig[KeyAction.Mission] = 8;
-DefaultGamePadConfig[KeyAction.Map] = 3;
-DefaultGamePadConfig[KeyAction.SwitchItemLeft] = 4;
-DefaultGamePadConfig[KeyAction.SwitchItemRight] = 5;
-DefaultGamePadConfig[KeyAction.PageLeft] = 6;
-DefaultGamePadConfig[KeyAction.PageRight] = 7;
-DefaultGamePadConfig[KeyAction.MoveUp] = 12;
-DefaultGamePadConfig[KeyAction.MoveDown] = 13;
-DefaultGamePadConfig[KeyAction.MoveLeft] = 14;
-DefaultGamePadConfig[KeyAction.MoveRight] = 15;
+DefaultGamePadConfig[FieldKeyAction.UseTool] = 2;
+DefaultGamePadConfig[FieldKeyAction.Check] = 0;
+DefaultGamePadConfig[FieldKeyAction.Menu] = 9;
+DefaultGamePadConfig[FieldKeyAction.Cancel] = 1;
+DefaultGamePadConfig[FieldKeyAction.Mission] = 8;
+DefaultGamePadConfig[FieldKeyAction.Map] = 3;
+DefaultGamePadConfig[FieldKeyAction.SwitchItemLeft] = 4;
+DefaultGamePadConfig[FieldKeyAction.SwitchItemRight] = 5;
+DefaultGamePadConfig[FieldKeyAction.PageLeft] = 6;
+DefaultGamePadConfig[FieldKeyAction.PageRight] = 7;
+DefaultGamePadConfig[FieldKeyAction.MoveUp] = 12;
+DefaultGamePadConfig[FieldKeyAction.MoveDown] = 13;
+DefaultGamePadConfig[FieldKeyAction.MoveLeft] = 14;
+DefaultGamePadConfig[FieldKeyAction.MoveRight] = 15;
+
+DefaultGamePadConfig[MenuKeyAction.Confirm] = 0;
+DefaultGamePadConfig[MenuKeyAction.Cancel] = 1;
+DefaultGamePadConfig[MenuKeyAction.PageLeft] = 6;
+DefaultGamePadConfig[MenuKeyAction.PageRight] = 7;
+DefaultGamePadConfig[MenuKeyAction.MoveUp] = 12;
+DefaultGamePadConfig[MenuKeyAction.MoveDown] = 13;
+DefaultGamePadConfig[MenuKeyAction.MoveLeft] = 14;
+DefaultGamePadConfig[MenuKeyAction.MoveRight] = 15;
 
 for (var i in DefaultKeyboardConfig) {
     console.log(i, KeyCodeToNameConverter[DefaultKeyboardConfig[i]]);
@@ -192,12 +219,11 @@ for (var i in DefaultGamePadConfig) {
 Input.keyMapper = {};
 Input.gamepadMapper = {};
 for (var keyname in DefaultKeyboardConfig) {
-    Input.keyMapper[DefaultKeyboardConfig[keyname]] = Input.keyMapper[DefaultKeyboardConfig[keyname]] || [];
-    Input.keyMapper[DefaultKeyboardConfig[keyname]].push(keyname);
+    Input.keyMapper[keyname] = DefaultKeyboardConfig[keyname];
 }
 
 for (var keyname in DefaultGamePadConfig) {
-    Input.gamepadMapper[DefaultGamePadConfig[keyname]] = keyname;
+    Input.gamepadMapper[keyname] = DefaultGamePadConfig[keyname];
 }
 
 var DSI_Sys1_PlayerController_Game_Player_update = Game_Player.prototype.update;
@@ -216,7 +242,7 @@ Game_Player.prototype.updateCustomInput = function() {
 // Overwrite default system
 //==================================================================================
 Game_Player.prototype.isDashButtonPressed = function() {
-    const shift = Input.isPressed(KeyAction.Run) || Input.isPressed(KeyAction.Cancel);
+    const shift = Input.isPressed(FieldKeyAction.Run) || Input.isPressed(FieldKeyAction.Cancel);
     if (ConfigManager.alwaysDash) {
         return !shift;
     } else {
@@ -224,13 +250,57 @@ Game_Player.prototype.isDashButtonPressed = function() {
     }
 };
 
+Window_Selectable.prototype.processCursorMove = function() {
+    if (this.isCursorMovable()) {
+        const lastIndex = this.index();
+        if (Input.isRepeated(MenuKeyAction.MoveDown)) {
+            this.cursorDown(Input.isTriggered(MenuKeyAction.MoveDown));
+        }
+        if (Input.isRepeated(MenuKeyAction.MoveUp)) {
+            this.cursorUp(Input.isTriggered(MenuKeyAction.MoveUp));
+        }
+        if (Input.isRepeated(MenuKeyAction.MoveRight)) {
+            this.cursorRight(Input.isTriggered(MenuKeyAction.MoveRight));
+        }
+        if (Input.isRepeated(MenuKeyAction.MoveLeft)) {
+            this.cursorLeft(Input.isTriggered(MenuKeyAction.MoveLeft));
+        }
+        if (!this.isHandled(MenuKeyAction.PageLeft) && Input.isTriggered(MenuKeyAction.PageLeft)) {
+            this.cursorPagedown();
+        }
+        if (!this.isHandled(MenuKeyAction.PageRight) && Input.isTriggered(MenuKeyAction.PageRight)) {
+            this.cursorPageup();
+        }
+        if (this.index() !== lastIndex) {
+            this.playCursorSound();
+        }
+    }
+};
+
+Window_Selectable.prototype.processHandling = function() {
+    if (this.isOpenAndActive()) {
+        if (this.isOkEnabled() && this.isOkTriggered()) {
+            return this.processOk();
+        }
+        if (this.isCancelEnabled() && this.isCancelTriggered()) {
+            return this.processCancel();
+        }
+        if (this.isHandled(MenuKeyAction.PageLeft) && Input.isTriggered(MenuKeyAction.PageLeft)) {
+            return this.processPagedown();
+        }
+        if (this.isHandled(MenuKeyAction.PageRight) && Input.isTriggered(MenuKeyAction.PageRight)) {
+            return this.processPageup();
+        }
+    }
+};
+
 Window_Selectable.prototype.isOkTriggered = function() {
-    const key = Input.getInputMode() == "keyboard" ? KeyAction.None : KeyAction.Check;
+    const key = MenuKeyAction.Confirm;
     return this._canRepeat ? Input.isRepeated(key) : Input.isTriggered(key);
 };
 
 Window_Selectable.prototype.isCancelTriggered = function() {
-    return Input.isRepeated(KeyAction.Menu) || Input.isRepeated(KeyAction.Cancel);
+    return Input.isRepeated(FieldKeyAction.Menu) || Input.isRepeated(MenuKeyAction.Cancel);
 };
 
 // This handle touch on RPG Windows
@@ -250,11 +320,11 @@ Window_Selectable.prototype.processTouch = function() {
 Scene_MenuBase.prototype.createButtons = function() {}
 
 Scene_Map.prototype.isMenuCalled = function() {
-    return Input.isTriggered(KeyAction.Menu);
+    return Input.isTriggered(FieldKeyAction.Menu);
 };
 
 Game_Player.prototype.triggerButtonAction = function() {
-    if (Input.isTriggered(KeyAction.Check)) {
+    if (Input.isTriggered(FieldKeyAction.Check)) {
         if (this.checkInteractWithFarmObjects()) {
             return true;
         }
@@ -279,31 +349,35 @@ Game_Player.prototype.checkInteractWithFarmObjects = function() {
 
 var DSI_Sys1_ControllerSystem_TouchInput__onMouseDown = TouchInput._onMouseDown;
 TouchInput._onMouseDown = function(event) {
-    const buttonName = Input.keyMapper[256 + event.button];
-    if (buttonName) {
-        Input.setState(buttonName, true);
+    const buttonNames = Input.keyMapper[256 + event.button];
+    if (buttonNames) {
+        buttonNames.forEach(button => {
+            Input.setState(button, true);
+        })
     }
 	DSI_Sys1_ControllerSystem_TouchInput__onMouseDown.call(this, event);
 };
 
 var DSI_Sys1_ControllerSystem_TouchInput__onMouseUp = TouchInput._onMouseUp;
 TouchInput._onMouseUp = function(event) {
-    const buttonName = Input.keyMapper[256 + event.button];
-    if (buttonName) {
-        Input.setState(buttonName, false);
+    const buttonNames = Input.keyMapper[256 + event.button];
+    if (buttonNames) {
+        buttonNames.forEach(button => {
+            Input.setState(button, false);
+        })
     }
 	DSI_Sys1_ControllerSystem_TouchInput__onMouseUp.call(this, event);
 };
 
 Input._signX = function() {
-    const left = this.isPressed(KeyAction.MoveLeft) ? 1 : 0;
-    const right = this.isPressed(KeyAction.MoveRight) ? 1 : 0;
+    const left = this.isPressed(FieldKeyAction.MoveLeft) ? 1 : 0;
+    const right = this.isPressed(FieldKeyAction.MoveRight) ? 1 : 0;
     return right - left;
 };
 
 Input._signY = function() {
-    const up = this.isPressed(KeyAction.MoveUp) ? 1 : 0;
-    const down = this.isPressed(KeyAction.MoveDown) ? 1 : 0;
+    const up = this.isPressed(FieldKeyAction.MoveUp) ? 1 : 0;
+    const down = this.isPressed(FieldKeyAction.MoveDown) ? 1 : 0;
     return down - up;
 };
 
