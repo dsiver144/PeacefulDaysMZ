@@ -29,7 +29,13 @@ class Sprite_KeyHint extends Sprite {
         this._frameIndex = 0;
         /** @type {number} */
         this._invervalCount = 0;
-        this.setImage();
+        this.anchor.x = 0.5;
+        this.anchor.y = 0.5;
+
+        this._keySprite = new Sprite();
+        this._keySprite.anchor.x = 0.5;
+        this._keySprite.anchor.y = 0.5;
+        this.addChild(this._keySprite);
     }
     /**
      * Get frame change interval
@@ -43,16 +49,51 @@ class Sprite_KeyHint extends Sprite {
      * @returns {number}
      */
     maxFrameIndex() {
-        return 1;
+        return this._maxFrameIndex;
     }
     /**
      * Set Key Image
+     * @param {Bitmap} bitmap
+     * @param {number} bitmap
      */
-    setImage() {
-        this.bitmap = ImageManager.loadKey(...this.imagePath());
-        this.bitmap.addLoadListener(bitmap => {
+    setImage(bitmap, maxFrames = 1) {
+        this.bitmap = bitmap;
+        this._maxFrameIndex = maxFrames - 1;
+        bitmap && this.bitmap.addLoadListener(bitmap => {
             this.updateFrame();
         });
+        this.refreshKeySprite();
+    }
+    /**
+     * Refresh Key Sprite
+     */
+    refreshKeySprite() {
+        const inputMode = Input.getInputMode();
+        const data = inputMode === 'keyboard' ? KeyCodeToNameConverter[DefaultKeyboardConfig[this._keyAction]] : ButtonConverter[DefaultGamePadConfig[this._keyAction]];
+        let buttonName = data;
+        let buttonColor = '#ddcebf';
+        let isImage = false;
+        if (Array.isArray(data)) {
+            buttonName = data[0];
+            buttonColor = data[1];
+        }
+        if (buttonName.match(/@(.+)/i)) {
+            isImage = true;
+            buttonName = RegExp.$1;
+        }
+        let bitmap = null;
+        console.log(this._keyAction, isImage, buttonName, buttonColor);
+        if (isImage) {
+            bitmap = ImageManager.loadKey(buttonName, inputMode);
+        } else {
+            bitmap = new Bitmap(48, 48);
+            bitmap.textColor = buttonColor;
+            bitmap.fontSize = 22;
+            bitmap.outlineColor = 'ddcebf';
+            bitmap.outlineWidth = 3;
+            bitmap.drawText(buttonName, 0, 0, bitmap.width, bitmap.height, 'center');
+        }
+        this._keySprite.bitmap = bitmap;
     }
     /**
      * Image Path
@@ -110,12 +151,6 @@ class Sprite_KeyboardHint extends Sprite_KeyHint {
      imagePath() {
         const img = DefaultKeyboardConfig[this._keyAction].toString();
         return [img, 'keyboard'];
-    }
-    /**
-     * @inheritdoc
-     */
-     maxFrameIndex() {
-        return 2;
     }
 }
 

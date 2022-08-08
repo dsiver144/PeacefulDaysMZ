@@ -22,8 +22,11 @@ class Scene_MainMenu extends Scene_MenuBase {
      * Create all neccessary objects
      */
     createAllObjects() {
-        const button1 = new Sprite_KeyboardHint(MenuKeyAction.PageLeft);
-        const button2 = new Sprite_GamePadHint(MenuKeyAction.PageRight);
+        const button1 = new Sprite_KeyHint(MenuKeyAction.Confirm);
+        button1.setImage(null, 0);
+        const button2 = new Sprite_KeyHint(MenuKeyAction.Cancel);
+        button2.setImage(null, 0);
+
         this.addChild(button1);
         this.addChild(button2);
         button1.x = 100;
