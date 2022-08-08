@@ -31,7 +31,119 @@ const KeyAction = {
     "None": "none"
 }
 
-const ValidKeyboardKeys = ["13", "16", "17", "18", "186", "187", "188", "189", "190", "191", "192", "20", "219", "220", "221", "222", "32", "37", "38", "39", "40", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "8", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "9", "90", "91", "EMPTY1", "EMPTY2"];
+const KeyCodeToNameConverter = {
+    9: 'TAB',
+    13: 'ENT',
+    16: 'SHF',
+    17: 'CTR',
+    18: 'ALT',
+    19: 'PSE',
+    27: 'ESC',
+    32: 'SPACE',
+    33: 'PGUP',
+    34: 'PGDN',
+    35: 'END',
+    36: 'HOME',
+    37: 'LEFT',
+    38: 'UP',
+    39: 'RIGHT',
+    40: 'DOWN',
+    44: 'PRSCR',
+    45: 'INS',
+    46: 'DEL',
+    48: '0',
+    49: '1',
+    50: '2',
+    51: '3',
+    52: '4',
+    53: '5',
+    54: '6',
+    55: '7',
+    56: '8',
+    57: '9',
+    58: ',',
+    59: ';',
+    61: '=',
+    65: 'A',
+    66: 'B',
+    67: 'C',
+    68: 'D',
+    69: 'E',
+    70: 'F',
+    71: 'G',
+    72: 'H',
+    73: 'I',
+    74: 'J',
+    75: 'K',
+    76: 'L',
+    77: 'M',
+    78: 'N',
+    79: 'O',
+    80: 'P',
+    81: 'Q',
+    82: 'R',
+    83: 'S',
+    84: 'T',
+    85: 'U',
+    86: 'V',
+    87: 'W',
+    88: 'X',
+    89: 'Y',
+    90: 'Z',
+    91: 'OS',
+    96: 'N.0',
+    97: 'N.1',
+    98: 'N.2',
+    99: 'N.3',
+    100: 'N.4',
+    101: 'N.5',
+    102: 'N.6',
+    103: 'N.7',
+    104: 'N.8',
+    105: 'N.9',
+    112: 'F1',
+    113: 'F2',
+    114: 'F3',
+    115: 'F4',
+    116: 'F5',
+    117: 'F6',
+    118: 'F7',
+    119: 'F8',
+    120: 'F9',
+    121: 'F10',
+    122: 'F11',
+    123: 'F12',
+    186: ';',
+    187: '=',
+    188: ',',
+    189: '-',
+    190: '.',
+    191: '/',
+    220: '\\',
+    222: '\'',
+    256: 'L.Clk',
+    257: 'M.Clk',
+    258: 'R.Clk',
+}
+
+const ButtonConverter = {
+    0: ["A", "#4bf542"],
+    1: ["B", "#f56342"],
+    2: ["X", "#429cf5"],
+    3: ["Y", "#f5c542"],
+    4: "LB",
+    5: "RB",
+    6: "LT",
+    7: "RT",
+    8: "BACK",
+    9: "START",
+    10: "LSB",
+    11: "RSB",
+    12: "UP",
+    13: "DOWN",
+    14: "LEFT",
+    15: "RIGHT",
+}
 
 const DefaultKeyboardConfig = {}
 DefaultKeyboardConfig[KeyAction.MoveUp] = 87;
@@ -67,7 +179,10 @@ DefaultGamePadConfig[KeyAction.MoveLeft] = 14;
 DefaultGamePadConfig[KeyAction.MoveRight] = 15;
 
 for (var i in DefaultKeyboardConfig) {
-    console.log(i, KeyboardMap[DefaultKeyboardConfig[i]]);
+    console.log(i, KeyCodeToNameConverter[DefaultKeyboardConfig[i]]);
+}
+for (var i in DefaultGamePadConfig) {
+    console.log(i, ButtonConverter[DefaultGamePadConfig[i]]);
 }
 
 //==================================================================================
@@ -77,8 +192,10 @@ for (var i in DefaultKeyboardConfig) {
 Input.keyMapper = {};
 Input.gamepadMapper = {};
 for (var keyname in DefaultKeyboardConfig) {
-    Input.keyMapper[DefaultKeyboardConfig[keyname]] = keyname;
+    Input.keyMapper[DefaultKeyboardConfig[keyname]] = Input.keyMapper[DefaultKeyboardConfig[keyname]] || [];
+    Input.keyMapper[DefaultKeyboardConfig[keyname]].push(keyname);
 }
+
 for (var keyname in DefaultGamePadConfig) {
     Input.gamepadMapper[DefaultGamePadConfig[keyname]] = keyname;
 }

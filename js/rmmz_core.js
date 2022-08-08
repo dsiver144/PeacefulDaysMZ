@@ -5837,9 +5837,11 @@ Input._onKeyDown = function(event) {
         // Numlock
         this.clear();
     }
-    const buttonName = this.keyMapper[event.keyCode];
-    if (buttonName) {
-        this._currentState[buttonName] = true;
+    const buttonNames = this.keyMapper[event.keyCode];
+    if (buttonNames) {
+        buttonNames.forEach(button => {
+            this._currentState[button] = true;
+        })
         this.setInputMode('keyboard');
     }
 };
@@ -5860,9 +5862,11 @@ Input._shouldPreventDefault = function(keyCode) {
 };
 
 Input._onKeyUp = function(event) {
-    const buttonName = this.keyMapper[event.keyCode];
-    if (buttonName) {
-        this._currentState[buttonName] = false;
+    const buttonNames = this.keyMapper[event.keyCode];
+    if (buttonNames) {
+        buttonNames.forEach(button => {
+            this._currentState[button] = false;
+        })
     }
 };
 
