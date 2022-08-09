@@ -7,6 +7,7 @@ var $plugins =
 {"name":"DSI_PeerJS","status":false,"description":"","parameters":{}},
 {"name":"DSI_Sys1_EventSystem","status":true,"description":"(v1.0) Peaceful Days Event System","parameters":{}},
 {"name":"DSI_Sys1_Interfaces","status":true,"description":"(v1.0) Peaceful Days Interfaces","parameters":{}},
+{"name":"DSI_Sys1_EngineOverhaul","status":true,"description":"(v1.0) RPG Maker Engine Overhaul","parameters":{}},
 {"name":"DSI_Sys1_MultiplayerCore","status":true,"description":"","parameters":{}},
 {"name":"DSI_Sys1_Bitmap","status":true,"description":"v1.0 Bitmap System for Peaceful Days.","parameters":{}},
 {"name":"DSI_Sys1_ItemDatabase","status":true,"description":"","parameters":{}},
