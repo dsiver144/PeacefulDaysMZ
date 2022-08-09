@@ -26,7 +26,7 @@ Game_CharacterBase.prototype.isRidingHorse = function() {
     return !!this._ridingHorse;
 }
 
-Game_CharacterBase.prototype.setRideHorse = function(value) {
+Game_CharacterBase.prototype.rideHorse = function(value) {
     this._ridingHorse = value;
 }
 
