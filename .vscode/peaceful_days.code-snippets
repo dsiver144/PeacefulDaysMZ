@@ -43,5 +43,30 @@
 			"/** @type {$1} */",
 		],
 		"description": "Shortcut for one-line type"
-	}
+	},
+	"newTextKey": {
+		"scope": "javascript,typescript,json",
+		"prefix": "nk",
+		"body": [
+			"{\r\n\t\"key\": \"$1\",\r\n\t\"lang\": {\r\n\t\t\"vn\": \"$2\",\r\n\t\t\"en\": \"$3\"\r\n\t}\r\n}$0",
+		],
+		"description": "Shortcut for one-line type"
+	},
+	"newNPCTextKey": {
+		"scope": "javascript,typescript,json",
+		"prefix": "nnk",
+		"body": [
+			"{\r\n\t\"key\": \"$1\",\r\n\t\"npc\": \"$2\",\r\n\t\"lang\": {\r\n\t\t\"vn\": \"$3\",\r\n\t\t\"en\": \"$4\"\r\n\t}\r\n}$0",
+		],
+		"description": "Shortcut for one-line type"
+	},
+	"newItemTextKey": {
+		"scope": "javascript,typescript,json",
+		"prefix": "nik",
+		"body": [
+			"{\r\n\t\"key\": \"$1\",\r\n\t\"lang\": {\r\n\t\t\"vn\": \"$2\",\r\n\t\t\"en\": \"$3\"\r\n\t},\r\n\t\"description\": {\r\n\t\t\"vn\": \"\",\r\n\t\t\"en\": \"\"\r\n\t}\r\n},$0",
+		],
+		"description": "Shortcut for one-line type"
+	},
 }
+

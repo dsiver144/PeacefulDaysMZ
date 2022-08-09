@@ -1,0 +1,149 @@
+[
+    {
+        "key": "Lbl_OK",
+        "lang": {
+            "vn": "OK",
+            "en": "OK"
+        }
+    },
+    {
+        "key": "Lbl_Exit",
+        "lang": {
+            "vn": "Thoát",
+            "en": "Exit"
+        }
+    },
+    {
+        "key": "Lbl_Cancel",
+        "lang": {
+            "vn": "Hủy",
+            "en": "Cancel"
+        }
+    },
+    {
+        "key": "Lbl_Back",
+        "lang": {
+            "vn": "Trở về",
+            "en": "Back"
+        }
+    },
+    {
+        "key": "Lbl_Accept",
+        "lang": {
+            "vn": "Đồng ý",
+            "en": "Accept"
+        }
+    },
+    {
+        "key": "Lbl_Yes",
+        "lang": {
+            "vn": "Có",
+            "en": "Yes"
+        }
+    },
+    {
+        "key": "Lbl_No",
+        "lang": {
+            "vn": "Không",
+            "en": "No"
+        }
+    },
+    {
+        "key": "Lbl_SortBag",
+        "lang": {
+            "vn": "Sắp xếp",
+            "en": "Sort"
+        }
+    },
+    {
+        "key": "Lb_Backpack",
+        "lang": {
+            "vn": "Túi đồ",
+            "en": "Bagpack"
+        }
+    },
+    {
+        "key": "Lb_NewGame",
+        "lang": {
+            "vn": "Khởi đầu mới",
+            "en": "Start a new life"
+        }
+    },
+    {
+        "key": "Lb_ContinueGame",
+        "lang": {
+            "vn": "Chơi tiếp",
+            "en": "Continue"
+        }
+    },
+    {
+        "key": "Lb_ExitGame",
+        "lang": {
+            "vn": "Thoát",
+            "en": "Exit Game"
+        }
+    },
+    {
+        "key": "Lb_ChooseASiveFile",
+        "lang": {
+            "vn": "Chọn file save của bạn",
+            "en": "Choose your save file"
+        }
+    },
+    {
+        "key": "Lb_SaveFileConfirm",
+        "lang": {
+            "vn": "Bạn có muốn lưu vào file này không?",
+            "en": "Do you want to save to this slot?"
+        }
+    },
+    {
+        "key": "Lbl_Save",
+        "lang": {
+            "vn": "Lưu file",
+            "en": "Save"
+        }
+    },
+    {
+        "key": "Lbl_Load",
+        "lang": {
+            "vn": "Mở file",
+            "en": "Load"
+        }
+    },
+    {
+        "key": "Lbl_Empty",
+        "lang": {
+            "vn": "Trống",
+            "en": "Empty"
+        }
+    },
+    {
+        "key": "Lbl_Full",
+        "lang": {
+            "vn": "Đầy",
+            "en": "Full"
+        }
+    },
+    {
+        "key": "Lbl_Show",
+        "lang": {
+            "vn": "Hiện",
+            "en": "Show"
+        }
+    },
+    {
+        "key": "Lbl_Hide",
+        "lang": {
+            "vn": "Ẩn",
+            "en": "Hide"
+        }
+    },
+    {
+        "key": "Lbl_Available",
+        "lang": {
+            "vn": "Có sẵn",
+            "en": "Available"
+        }
+    }
+]

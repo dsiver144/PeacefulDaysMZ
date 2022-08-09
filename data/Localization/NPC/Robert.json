@@ -1,0 +1,19 @@
+[
+    {
+        "key": "Robert_Intro0",
+        "npc": "Robert",
+        "lang": {
+            "vn": "Chào, tôi là Robert, rất vui được gặp cậu.",
+            "en": "Hi, I'm Robert, nice to meet ya."
+        }
+    },
+    {
+        "key": "Robert_EveryDay0",
+        "npc": "Robert",
+        "condition": ["Monday", "Rain", "Switch10", "Lv0"],
+        "lang": {
+            "vn": "",
+            "en": ""
+        }
+    }
+]
