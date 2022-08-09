@@ -1,0 +1,12 @@
+name,localizeKey,iconIndex,price,shipPrice,tag,stamina,levelPriceBonus,nonDiscardable
+Sunflower Seeds,SunflowerSeeds,227,100,100,seed,,,
+Sunflower,Sunflower,287,50,100,crop; flower,,,
+Carrot Seeds,CarrotSeeds,0,100,120,seed,,,
+Carrot,Carrot,0,0,0,crop; vegetable,5;25,,
+Hoe,Hoe,234,0,0,tool,,,true
+Watering Can,WateringCan,233,0,0,tool,,,true
+Sickle,Sickle,235,0,0,tool,,,true
+Hammer,Hammer,232,0,0,tool,,,true
+Axe,Axe,231,0,0,tool,,,true
+Corn,Corn,,200,200,crop; grain,10;25,,
+Corn Seeds,CornSeeds,,200,200,seed,,,

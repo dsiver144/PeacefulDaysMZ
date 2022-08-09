@@ -118,7 +118,7 @@ Scene_Boot.prototype.create = function() {
 
 Scene_Boot.prototype.loadCustomDatabase = function() {
     new ItemDB();
-    MyUtils.parseCSV("itemTable.csv", (data) => {
+    MyUtils.parseCSV("Database/itemTable.csv", (data) => {
         data.forEach(i => {
             if (!i || !i.name) return;
             ItemDB.getInstance().addItem(new PD_Item(i));

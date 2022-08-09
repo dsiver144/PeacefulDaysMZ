@@ -121,7 +121,7 @@
         }
     },
     {
-        "key": "MLumber",
+        "key": "Lumber",
         "lang": {
             "vn": "Gỗ",
             "en": "Lumber"
@@ -132,7 +132,7 @@
         }
     },
     {
-        "key": "MStone",
+        "key": "Stone",
         "lang": {
             "vn": "Đá",
             "en": "Stone"
