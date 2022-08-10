@@ -50,7 +50,7 @@
 		"body": [
 			"{\r\n\t\"key\": \"$1\",\r\n\t\"lang\": {\r\n\t\t\"vn\": \"$2\",\r\n\t\t\"en\": \"$3\"\r\n\t}\r\n}$0",
 		],
-		"description": "Shortcut for one-line type"
+		"description": "Shortcut for new simple text key"
 	},
 	"newNPCTextKey": {
 		"scope": "javascript,typescript,json",
@@ -58,7 +58,7 @@
 		"body": [
 			"{\r\n\t\"key\": \"$1\",\r\n\t\"npc\": \"$2\",\r\n\t\"lang\": {\r\n\t\t\"vn\": \"$3\",\r\n\t\t\"en\": \"$4\"\r\n\t}\r\n}$0",
 		],
-		"description": "Shortcut for one-line type"
+		"description": "Shortcut for NPC text key"
 	},
 	"newItemTextKey": {
 		"scope": "javascript,typescript,json",
@@ -66,7 +66,17 @@
 		"body": [
 			"{\r\n\t\"key\": \"$1\",\r\n\t\"lang\": {\r\n\t\t\"vn\": \"$2\",\r\n\t\t\"en\": \"$3\"\r\n\t},\r\n\t\"description\": {\r\n\t\t\"vn\": \"\",\r\n\t\t\"en\": \"\"\r\n\t}\r\n},$0",
 		],
-		"description": "Shortcut for one-line type"
+		"description": "Shortcut for new item text key"
+	},
+	"newCraftingEntry": {
+		"scope": "javascript,typescript,json",
+		"prefix": "nci",
+		"body": [
+			"\t{\r\n\t\t\"itemID\": \"$1\",\r\n\t\t\"components\": [\r\n\t\t\t{\r\n\t\t\t\t\"itemID\": \"$2\",\r\n\t\t\t\t\"number\": $3\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"level\": $4\r\n\t}, $0",
+		],
+		"description": "Shortcut new craft entry"
 	},
 }
+
+
 

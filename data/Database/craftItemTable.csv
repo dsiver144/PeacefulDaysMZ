@@ -1,6 +1,8 @@
 name,localizeKey,iconIndex,price,shipPrice,tag,stamina,levelPriceBonus,nonDiscardable
-WoodenChest,WoodenChest,,0,50,craftItem;storage,,,
+BasicChest,BasicChest,,0,50,craftItem;storage,,,
 GreenEnergyBar,GreenEnergyBar,,0,10,craftItem;food,6;10,,
 WoodenPath,WoodenPath,,0,5,craftItem;decorator,,,
 StonePath,StonePath,,0,5,craftItem;decorator,,,
 ProteinBar,ProteinBar,,0,10,craftItem;food,20;25,,
+Furnace,Furnace,,0,100,craftItem;creator,,,
+MachinePartMaker,MachinePartMaker,,0,100,craftItem;creator,,,

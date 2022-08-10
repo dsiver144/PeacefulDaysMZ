@@ -1,0 +1,82 @@
+[
+    {
+        "itemID": "Wire",
+        "quantity": 5,
+        "duration": 60,
+        "components": [
+            {
+                "itemID": "CooperBar",
+                "number": 1
+            }
+        ],
+        "require": "MachinePartMaker"
+    },
+    {
+        "itemID": "Gear",
+        "quantity": 5,
+        "duration": 60,
+        "components": [
+            {
+                "itemID": "SilverBar",
+                "number": 1
+            }
+        ],
+        "require": "MachinePartMaker"
+    },
+    {
+        "itemID": "Screw",
+        "quantity": 5,
+        "duration": 60,
+        "components": [
+            {
+                "itemID": "SilverBar",
+                "number": 1
+            }
+        ],
+        "require": "MachinePartMaker"
+    },
+    {
+        "itemID": "Tube",
+        "quantity": 2,
+        "duration": 60,
+        "components": [
+            {
+                "itemID": "SilverBar",
+                "number": 1
+            }
+        ],
+        "require": "MachinePartMaker"
+    },
+    {
+        "itemID": "SmallMotor",
+        "quantity": 1,
+        "duration": 60,
+        "components": [
+            {
+                "itemID": "Wire",
+                "number": 5
+            },
+            {
+                "itemID": "SteelBar",
+                "number": 1
+            }
+        ],
+        "require": "MachinePartMaker"
+    },
+    {
+        "itemID": "BigMotor",
+        "quantity": 1,
+        "duration": 120,
+        "components": [
+            {
+                "itemID": "Wire",
+                "number": 10
+            },
+            {
+                "itemID": "SteelBar",
+                "number": 2
+            }
+        ],
+        "require": "MachinePartMaker"
+    }
+]

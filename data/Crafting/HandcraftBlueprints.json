@@ -1,0 +1,103 @@
+[
+	{
+		"itemID": "BasicChest",
+		"components": [
+			{
+				"itemID": "Lumber",
+				"number": 30
+			},
+			{
+				"itemID": "Stone",
+				"number": 10
+			}
+		],
+		"level": 0
+	},
+	{
+		"itemID": "GreenEnergyBar",
+		"components": [
+			{
+				"itemID": "GreenHerb",
+				"number": 2
+			}
+		],
+		"level": 0
+	},
+	{
+		"itemID": "WoodenPath",
+		"components": [
+			{
+				"itemID": "Lumber",
+				"number": 5
+			}
+		],
+		"level": 1
+	},
+	{
+		"itemID": "StonePath",
+		"components": [
+			{
+				"itemID": "Stone",
+				"number": 5
+			}
+		],
+		"level": 1
+	},
+	{
+		"itemID": "ProteinBar",
+		"components": [
+			{
+				"itemID": "GreenHerb",
+				"number": 2
+			},
+			{
+				"itemID": "Corn",
+				"number": 1
+			}
+		],
+		"level": 2
+	},
+	{
+		"itemID": "Furnace",
+		"components": [
+			{
+				"itemID": "Charcoal",
+				"number": 25
+			},
+			{
+				"itemID": "Stone",
+				"number": 30
+			},
+			{
+				"itemID": "Lumber",
+				"number": 30
+			},
+			{
+				"itemID": "CooperOre",
+				"number": 5
+			}
+		],
+		"level": 3,
+		"exp": 5
+	},
+	{
+		"itemID": "MachinePartMaker",
+		"quantity": 1,
+		"components": [
+			{
+				"itemID": "Charcoal",
+				"number": 25
+			},
+			{
+				"itemID": "CooperOre",
+				"number": 5
+			},
+			{
+				"itemID": "SilverOre",
+				"number": 5
+			}
+		],
+		"level": 3,
+		"exp": 5
+	}
+]

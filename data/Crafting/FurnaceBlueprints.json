@@ -1,0 +1,50 @@
+[
+	{
+		"itemID": "CooperBar",
+		"quantity": 1,
+		"duration": 60,
+		"components": [
+			{
+				"itemID": "CooperOre",
+				"number": 2
+			}
+		],
+		"require": "Furnace"
+	},
+	{
+		"itemID": "SilverBar",
+		"quantity": 1,
+		"duration": 120,
+		"components": [
+			{
+				"itemID": "SilverOre",
+				"number": 2
+			}
+		],
+		"require": "Furnace"
+	},
+	{
+		"itemID": "SteelBar",
+		"quantity": 1,
+		"duration": 180,
+		"components": [
+			{
+				"itemID": "IronOre",
+				"number": 2
+			}
+		],
+		"require": "Furnace"
+	},
+	{
+		"itemID": "GoldBar",
+		"quantity": 1,
+		"duration": 240,
+		"components": [
+			{
+				"itemID": "GoldBar",
+				"number": 2
+			}
+		],
+		"require": "Furnace"
+	}
+]

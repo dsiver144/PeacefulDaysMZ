@@ -1,200 +1,299 @@
 [
-    {
-        "key": "SunflowerSeeds",
-        "lang": {
-            "vn": "Hạt giống H.H.Dương",
-            "en": "Sunflower Seeds"
-        },
-        "description": {
-            "vn": "Hạt giống để trồng hoa hướng dương.",
-            "en": ""
-        }
-    },
-    {
-        "key": "Sunflower",
-        "lang": {
-            "vn": "Hoa Hướng Dương",
-            "en": "Sunflower"
-        },
-        "description": {
-            "vn": "Chúng luôn hướng về phía mắt trời.",
-            "en": ""
-        }
-    },
-    {
-        "key": "CarrotSeeds",
-        "lang": {
-            "vn": "Hạt giống Cà Rốt",
-            "en": "Carrot Seeds"
-        },
-        "description": {
-            "vn": "Hạt giống để trồng cà rốt.",
-            "en": ""
-        }
-    },
-    {
-        "key": "Carrot",
-        "lang": {
-            "vn": "Cà Rốt",
-            "en": "Carrot"
-        },
-        "description": {
-            "vn": "Chứa nhiều vitamin A rất tốt cho sức khỏe.",
-            "en": ""
-        }
-    },
-    {
-        "key": "CornSeeds",
-        "lang": {
-            "vn": "Hạt giống Bắp",
-            "en": "Corn Seeds"
-        },
-        "description": {
-            "vn": "Hạt giống để trồng Bắp",
-            "en": ""
-        }
-    },
-    {
-        "key": "Corn",
-        "lang": {
-            "vn": "Trái Bắp",
-            "en": "Corn"
-        },
-        "description": {
-            "vn": "Chúng vừa được coi là một loại rau vừa là một loại ngũ cốc.",
-            "en": ""
-        }
-    },
-    {
-        "key": "Hoe",
-        "lang": {
-            "vn": "Cuốc",
-            "en": "Hoe"
-        },
-        "description": {
-            "vn": "Dùng để cuốc đất trồng trọt.",
-            "en": ""
-        }
-    },
-    {
-        "key": "WateringCan",
-        "lang": {
-            "vn": "Bình Tưới Nước",
-            "en": "Watering Can"
-        },
-        "description": {
-            "vn": "Dùng để tưới nước.",
-            "en": ""
-        }
-    },
-    {
-        "key": "Sickle",
-        "lang": {
-            "vn": "Liềm",
-            "en": "Sickle"
-        },
-        "description": {
-            "vn": "Dùng để cắt các loại cỏ dại hoặc thu hoạch một số cây trồng.",
-            "en": ""
-        }
-    },
-    {
-        "key": "Hammer",
-        "lang": {
-            "vn": "Búa",
-            "en": "Hammer"
-        },
-        "description": {
-            "vn": "Dùng để đập đá để thu thấp nguyên liệu.",
-            "en": ""
-        }
-    },
-    {
-        "key": "Axe",
-        "lang": {
-            "vn": "Rìu",
-            "en": "Axe"
-        },
-        "description": {
-            "vn": "Dùng để chặt gỗ để thu thập nguyên liệu.",
-            "en": ""
-        }
-    },
-    {
-        "key": "Lumber",
-        "lang": {
-            "vn": "Gỗ",
-            "en": "Lumber"
-        },
-        "description": {
-            "vn": "Nguyên liệu phổ biến để chế tác nhà cửa, vật phẩm, ...",
-            "en": ""
-        }
-    },
-    {
-        "key": "Stone",
-        "lang": {
-            "vn": "Đá",
-            "en": "Stone"
-        },
-        "description": {
-            "vn": "Nguyên liệu phổ biến để chế tác nhà cửa, vật phẩm, ...",
-            "en": ""
-        }
-    },
-    {
-        "key": "GreenHerb",
-        "lang": {
-            "vn": "Cây thảo mộc xanh",
-            "en": "Green Herb"
-        },
-        "description": {
-            "vn": "Là cây thảo mộc dại mọc ở thị trấn Aurara. Có thể ăn để hồi một tí năng lượng.",
-            "en": ""
-        }
-    },
-    {
-        "key": "WoodenChest",
-        "lang": {
-            "vn": "Rương Gỗ",
-            "en": "Wooden Chest"
-        },
-        "description": {
-            "vn": "Được dùng để chứa vật phẩm.",
-            "en": ""
-        }
-    },
-    {
-        "key": "GreenEnergyBar",
-        "lang": {
-            "vn": "Thanh năng lượng xanh",
-            "en": "Green Energy Bar"
-        },
-        "description": {
-            "vn": "Có thể ăn để hồi năng lượng. Rất hữu ích vào những ngày làm việc mệt nhọc.",
-            "en": ""
-        }
-    },
-    {
-        "key": "WoodenPath",
-        "lang": {
-            "vn": "Tấm lót đường bằng Gỗ",
-            "en": "Wooden Path"
-        },
-        "description": {
-            "vn": "Dùng để trang trí nông trại là chính.",
-            "en": ""
-        }
-    },
-    {
-        "key": "StonePath",
-        "lang": {
-            "vn": "Tấm lót đường bằng Đá",
-            "en": "Stone Path"
-        },
-        "description": {
-            "vn": "Dùng để trang trí nông trại là chính",
-            "en": ""
-        }
-    }
+	{
+		"key": "SunflowerSeeds",
+		"lang": {
+			"vn": "Hạt giống H.H.Dương",
+			"en": "Sunflower Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng hoa hướng dương.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Sunflower",
+		"lang": {
+			"vn": "Hoa Hướng Dương",
+			"en": "Sunflower"
+		},
+		"description": {
+			"vn": "Chúng luôn hướng về phía mắt trời.",
+			"en": ""
+		}
+	},
+	{
+		"key": "CarrotSeeds",
+		"lang": {
+			"vn": "Hạt giống Cà Rốt",
+			"en": "Carrot Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng cà rốt.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Carrot",
+		"lang": {
+			"vn": "Cà Rốt",
+			"en": "Carrot"
+		},
+		"description": {
+			"vn": "Chứa nhiều vitamin A rất tốt cho sức khỏe.",
+			"en": ""
+		}
+	},
+	{
+		"key": "CornSeeds",
+		"lang": {
+			"vn": "Hạt giống Bắp",
+			"en": "Corn Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng Bắp",
+			"en": ""
+		}
+	},
+	{
+		"key": "Corn",
+		"lang": {
+			"vn": "Trái Bắp",
+			"en": "Corn"
+		},
+		"description": {
+			"vn": "Chúng vừa được coi là một loại rau vừa là một loại ngũ cốc.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Hoe",
+		"lang": {
+			"vn": "Cuốc",
+			"en": "Hoe"
+		},
+		"description": {
+			"vn": "Dùng để cuốc đất trồng trọt.",
+			"en": ""
+		}
+	},
+	{
+		"key": "WateringCan",
+		"lang": {
+			"vn": "Bình Tưới Nước",
+			"en": "Watering Can"
+		},
+		"description": {
+			"vn": "Dùng để tưới nước.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Sickle",
+		"lang": {
+			"vn": "Liềm",
+			"en": "Sickle"
+		},
+		"description": {
+			"vn": "Dùng để cắt các loại cỏ dại hoặc thu hoạch một số cây trồng.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Hammer",
+		"lang": {
+			"vn": "Búa",
+			"en": "Hammer"
+		},
+		"description": {
+			"vn": "Dùng để đập đá để thu thấp nguyên liệu.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Axe",
+		"lang": {
+			"vn": "Rìu",
+			"en": "Axe"
+		},
+		"description": {
+			"vn": "Dùng để chặt gỗ để thu thập nguyên liệu.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Lumber",
+		"lang": {
+			"vn": "Gỗ",
+			"en": "Lumber"
+		},
+		"description": {
+			"vn": "Nguyên liệu phổ biến để chế tác nhà cửa, vật phẩm, ...",
+			"en": ""
+		}
+	},
+	{
+		"key": "HardwoodLumber",
+		"lang": {
+			"vn": "Gỗ Cứng",
+			"en": "Hardwood Lumber"
+		},
+		"description": {
+			"vn": "Chúng khá chắc chắn và hiếm. Nguyên liệu phổ biến để chế tác nhà cửa, vật phẩm, ...",
+			"en": ""
+		}
+	},
+	{
+		"key": "Stone",
+		"lang": {
+			"vn": "Đá",
+			"en": "Stone"
+		},
+		"description": {
+			"vn": "Nguyên liệu phổ biến để chế tác nhà cửa, vật phẩm, ...",
+			"en": ""
+		}
+	},
+	{
+		"key": "CooperOre",
+		"lang": {
+			"vn": "Quặng Đồng",
+			"en": "Cooper Ore"
+		},
+		"description": {
+			"vn": "Thu được từ các mỏ quặng. Nguyên liệu thô phổ biến cho việc chế tạo.",
+			"en": ""
+		}
+	},
+	{
+		"key": "CooperBar",
+		"lang": {
+			"vn": "Thanh Đồng",
+			"en": "Cooper Bar"
+		},
+		"description": {
+			"vn": "Thu được bằng cách nung nóng quặng rồi đổ vào khuôn. Có thể dùng để chế tạo.",
+			"en": ""
+		}
+	},
+	{
+		"key": "SilverOre",
+		"lang": {
+			"vn": "Quặng Bạc",
+			"en": "Silver Ore"
+		},
+		"description": {
+			"vn": "Thu được từ các mỏ quặng. Nguyên liệu thô phổ biến cho việc chế tạo.",
+			"en": ""
+		}
+	},
+	{
+		"key": "SilverBar",
+		"lang": {
+			"vn": "Thanh Bạc",
+			"en": "Silver Bar"
+		},
+		"description": {
+			"vn": "Thu được bằng cách nung nóng quặng rồi đổ vào khuôn. Có thể dùng để chế tạo.",
+			"en": ""
+		}
+	},
+	{
+		"key": "IronOre",
+		"lang": {
+			"vn": "Quặng Sắt",
+			"en": "Iron Ore"
+		},
+		"description": {
+			"vn": "Thu được từ các mỏ quặng. Nguyên liệu thô phổ biến cho việc chế tạo.",
+			"en": ""
+		}
+	},
+	{
+		"key": "SteelBar",
+		"lang": {
+			"vn": "Thanh Sắt",
+			"en": "Steel Bar"
+		},
+		"description": {
+			"vn": "Thu được bằng cách nung nóng quặng rồi đổ vào khuôn. Có thể dùng để chế tạo.",
+			"en": ""
+		}
+	},
+	{
+		"key": "GoldOre",
+		"lang": {
+			"vn": "Quặng Vàng",
+			"en": "Gold Ore"
+		},
+		"description": {
+			"vn": "Thu được từ các mỏ quặng. Nguyên liệu thô phổ biến cho việc chế tạo.",
+			"en": ""
+		}
+	},
+	{
+		"key": "GoldBar",
+		"lang": {
+			"vn": "Thanh Vàng Nguyên Chất",
+			"en": "Gold Bar"
+		},
+		"description": {
+			"vn": "Thu được bằng cách nung nóng quặng rồi đổ vào khuôn. Có thể dùng để chế tạo.",
+			"en": ""
+		}
+	},
+	{
+		"key": "GreenHerb",
+		"lang": {
+			"vn": "Cây thảo mộc xanh",
+			"en": "Green Herb"
+		},
+		"description": {
+			"vn": "Là cây thảo mộc dại mọc ở thị trấn Aurara. Có thể ăn để hồi một tí năng lượng.",
+			"en": ""
+		}
+	},
+	{
+		"key": "BasicChest",
+		"lang": {
+			"vn": "Rương Đồ",
+			"en": "Basic Chest"
+		},
+		"description": {
+			"vn": "Được dùng để chứa vật phẩm.",
+			"en": ""
+		}
+	},
+	{
+		"key": "GreenEnergyBar",
+		"lang": {
+			"vn": "Thanh năng lượng xanh",
+			"en": "Green Energy Bar"
+		},
+		"description": {
+			"vn": "Có thể ăn để hồi năng lượng. Rất hữu ích vào những ngày làm việc mệt nhọc.",
+			"en": ""
+		}
+	},
+	{
+		"key": "WoodenPath",
+		"lang": {
+			"vn": "Tấm lót đường bằng Gỗ",
+			"en": "Wooden Path"
+		},
+		"description": {
+			"vn": "Dùng để trang trí nông trại là chính.",
+			"en": ""
+		}
+	},
+	{
+		"key": "StonePath",
+		"lang": {
+			"vn": "Tấm lót đường bằng Đá",
+			"en": "Stone Path"
+		},
+		"description": {
+			"vn": "Dùng để trang trí nông trại là chính",
+			"en": ""
+		}
+	}
 ]
