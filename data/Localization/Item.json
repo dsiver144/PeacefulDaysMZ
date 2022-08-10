@@ -154,6 +154,17 @@
 		}
 	},
 	{
+		"key": "Charcoal",
+		"lang": {
+			"vn": "Than Gỗ",
+			"en": "Charcoal"
+		},
+		"description": {
+			"vn": "Được tìm thấy ở sâu trong lòng đất. Nguyên liệu phổ biến để chế tác vật phẩm.",
+			"en": ""
+		}
+	},
+	{
 		"key": "CooperOre",
 		"lang": {
 			"vn": "Quặng Đồng",
@@ -293,6 +304,127 @@
 		},
 		"description": {
 			"vn": "Dùng để trang trí nông trại là chính",
+			"en": ""
+		}
+	},
+	{
+		"key": "Furnace",
+		"lang": {
+			"vn": "Lò Nung",
+			"en": "Smelting Furnace"
+		},
+		"description": {
+			"vn": "Dùng để chế biến các nguyên liệu thô sang nguyên liệu xịn.",
+			"en": ""
+		}
+	},
+	{
+		"key": "MachinePartMaker",
+		"lang": {
+			"vn": "Thiết Bị Chế Tạo Bộ Phận Máy",
+			"en": "Machine Part Maker"
+		},
+		"description": {
+			"vn": "Dùng để chế tạo các bộ phận máy móc quan trọng.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Gear",
+		"lang": {
+			"vn": "Bánh Răng",
+			"en": "Gear"
+		},
+		"description": {
+			"vn": "Một bộ phận được dùng trong chế tạo máy móc.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Tube",
+		"lang": {
+			"vn": "Ống kim loại",
+			"en": "Tube"
+		},
+		"description": {
+			"vn": "Một bộ phận được dùng trong chế tạo máy móc.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Wire",
+		"lang": {
+			"vn": "Dây dẫn",
+			"en": "Wire"
+		},
+		"description": {
+			"vn": "Một bộ phận được dùng trong chế tạo máy móc.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Screw",
+		"lang": {
+			"vn": "Ốc vít",
+			"en": "Screw"
+		},
+		"description": {
+			"vn": "Một bộ phận được dùng trong chế tạo máy móc.",
+			"en": ""
+		}
+	},
+	{
+		"key": "SmallMotor",
+		"lang": {
+			"vn": "Mô-tơ nhỏ",
+			"en": "Small Motor"
+		},
+		"description": {
+			"vn": "Thiết bị có thể quay, được dùng trong chế tạo máy móc nhỏ.",
+			"en": ""
+		}
+	},
+	{
+		"key": "BigMotor",
+		"lang": {
+			"vn": "Mô-tơ lớn",
+			"en": "Big Motor"
+		},
+		"description": {
+			"vn": "Thiết bị có thể quay, được dùng trong chế tạo máy móc lớn.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Pump",
+		"lang": {
+			"vn": "Máy Bơm",
+			"en": "Pump"
+		},
+		"description": {
+			"vn": "Cung cấp nước cho các thiết bị phun nước, ...",
+			"en": ""
+		}
+	},
+	{
+		"key": "Sprinkler",
+		"lang": {
+			"vn": "Máy Phun Nước Tự Động",
+			"en": "Sprinkler"
+		},
+		"description": {
+			"vn": "Nó sẽ tự động tưới một vùng xung quanh vào mỗi buổi sáng.",
+			"en": ""
+		}
+	},
+	{
+		"key": "RecycleMachine",
+		"lang": {
+			"vn": "Máy Tái Chế",
+			"en": "Recycle Machine"
+		},
+		"description": {
+			"vn": "Dùng để tái chế các loại thiết bị, máy móc không sử dụng để lấy nguyên liệu.",
 			"en": ""
 		}
 	}

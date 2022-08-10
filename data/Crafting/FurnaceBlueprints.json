@@ -5,6 +5,10 @@
 		"duration": 60,
 		"components": [
 			{
+				"itemID": "Charcoal",
+				"number": 1
+			},
+			{
 				"itemID": "CooperOre",
 				"number": 2
 			}
@@ -16,6 +20,10 @@
 		"quantity": 1,
 		"duration": 120,
 		"components": [
+			{
+				"itemID": "Charcoal",
+				"number": 1
+			},
 			{
 				"itemID": "SilverOre",
 				"number": 2
@@ -29,6 +37,10 @@
 		"duration": 180,
 		"components": [
 			{
+				"itemID": "Charcoal",
+				"number": 1
+			},
+			{
 				"itemID": "IronOre",
 				"number": 2
 			}
@@ -40,6 +52,10 @@
 		"quantity": 1,
 		"duration": 240,
 		"components": [
+			{
+				"itemID": "Charcoal",
+				"number": 1
+			},
 			{
 				"itemID": "GoldBar",
 				"number": 2

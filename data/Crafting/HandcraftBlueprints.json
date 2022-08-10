@@ -97,7 +97,72 @@
 				"number": 5
 			}
 		],
-		"level": 3,
+		"level": 4,
+		"exp": 5
+	},
+	{
+		"itemID": "Pump",
+		"components": [
+			{
+				"itemID": "Tube",
+				"number": 1
+			},
+			{
+				"itemID": "BigMotor",
+				"number": 1
+			},
+			{
+				"itemID": "Screw",
+				"number": 5
+			},
+			{
+				"itemID": "Gear",
+				"number": 5
+			}
+		],
+		"level": 4,
+		"exp": 2
+	},
+	{
+		"itemID": "Sprinkler",
+		"components": [
+			{
+				"itemID": "Tube",
+				"number": 4
+			},
+			{
+				"itemID": "SmallMotor",
+				"number": 1
+			},
+			{
+				"itemID": "Screw",
+				"number": 4
+			},
+			{
+				"itemID": "Gear",
+				"number": 1
+			}
+		],
+		"level": 4,
+		"exp": 2
+	},
+	{
+		"itemID": "RecycleMachine",
+		"components": [
+			{
+				"itemID": "BigMotor",
+				"number": 1
+			},
+			{
+				"itemID": "Gear",
+				"number": 4
+			},
+			{
+				"itemID": "Screw",
+				"number": 4
+			}
+		],
+		"level": 5,
 		"exp": 5
 	}
 ]
