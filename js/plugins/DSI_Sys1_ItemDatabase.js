@@ -19,6 +19,7 @@ const DatabaseConfig = {
     defaultLevelPriceBonus: 100,
 }
 
+const ItemRef = {};
 class ItemDB {
     /**
      * My Item 
@@ -35,6 +36,7 @@ class ItemDB {
     addItem(item) {
         if (!item || !item.name) return;
         this.items[item.name] = item;
+        ItemRef[item.name] = item;
     }
     /**
      * Get Item By Name

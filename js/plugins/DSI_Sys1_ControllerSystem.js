@@ -92,10 +92,10 @@ DefaultGamePadConfig[MenuKeyAction.MoveLeft] = 14;
 DefaultGamePadConfig[MenuKeyAction.MoveRight] = 15;
 
 for (var i in DefaultKeyboardConfig) {
-    console.log(i, KeyCodeToNameConverter[DefaultKeyboardConfig[i]]);
+    // console.log(i, KeyCodeToNameConverter[DefaultKeyboardConfig[i]]);
 }
 for (var i in DefaultGamePadConfig) {
-    console.log(i, ButtonConverter[DefaultGamePadConfig[i]]);
+    // console.log(i, ButtonConverter[DefaultGamePadConfig[i]]);
 }
 
 //==================================================================================

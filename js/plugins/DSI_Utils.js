@@ -116,6 +116,28 @@ MyUtils.loadCSV = function(src, callback) {
     };
     xhr.send(null);
 };
+/**
+ * Load Custom File
+ * @param {string} src 
+ * @param {(data: string) => void} callback 
+ */
+MyUtils.loadFile = function(src, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "data/" + src, false);
+    xhr.onload = function (e) {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                callback(xhr.responseText);
+            } else {
+                callback(null);
+            }
+        }
+    };
+    xhr.onerror = function (e) {
+        callback(null);
+    };
+    xhr.send(null);
+};
 /** @type {Spriteset_Map} */
 MyUtils.spriteset = null;
 MyUtils.DEBUG = false;

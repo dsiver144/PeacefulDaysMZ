@@ -1,7 +1,7 @@
 [   
     {
         "key": "Info",
-        "npc": "Robert",
+        "npc": "Azalea",
         "lang": {
             "vn": "",
             "en": ""
@@ -9,15 +9,15 @@
     },
     {
         "key": "Intro0",
-        "npc": "Robert",
+        "npc": "Azalea",
         "lang": {
-            "vn": "Chào, tôi là Robert, rất vui được gặp cậu.",
-            "en": "Hi, I'm Robert, nice to meet ya."
+            "vn": "Chào, tôi là Azalea, rất vui được gặp cậu.",
+            "en": "Hi, I'm Azalea, nice to meet ya."
         }
     },
     {
         "key": "EveryDay0",
-        "npc": "Robert",
+        "npc": "Azalea",
         "condition": ["Monday", "Rain", "Switch10", "Lv0"],
         "lang": {
             "vn": "",
