@@ -49,6 +49,20 @@
         }
     },
     {
+        "key": "Lbl_On",
+        "lang": {
+            "vn": "Mở",
+            "en": "On"
+        }
+    },
+    {
+        "key": "Lbl_Off",
+        "lang": {
+            "vn": "Tắt",
+            "en": "Off"
+        }
+    },
+    {
         "key": "Lbl_SortBag",
         "lang": {
             "vn": "Sắp xếp",

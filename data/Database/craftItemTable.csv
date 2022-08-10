@@ -1,6 +1,6 @@
 name,localizeKey,iconIndex,price,shipPrice,tag,stamina,levelPriceBonus,nonDiscardable
-Wooden Chest,WoodenChest,,0,50,craftItem;storage,,,
-Green Energy Bar,GreenEnergyBar,,0,10,craftItem;food,6;10,,
-Wooden Path,WoodenPath,,0,5,craftItem;decorator,,,
-Stone Path,StonePath,,0,5,craftItem;decorator,,,
-Protein Bar,ProteinBar,,0,10,craftItem;food,20;25,,
+WoodenChest,WoodenChest,,0,50,craftItem;storage,,,
+GreenEnergyBar,GreenEnergyBar,,0,10,craftItem;food,6;10,,
+WoodenPath,WoodenPath,,0,5,craftItem;decorator,,,
+StonePath,StonePath,,0,5,craftItem;decorator,,,
+ProteinBar,ProteinBar,,0,10,craftItem;food,20;25,,
