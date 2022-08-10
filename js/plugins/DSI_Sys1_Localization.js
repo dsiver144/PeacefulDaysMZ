@@ -28,6 +28,8 @@ class LocalizeManager {
     constructor() {
         /** @type {Map.<string, LocalizeEntry>} */
         this._texts = new Map();
+        /** @type {Map<string, NpcLocalizeEntry[]} */
+        this._npcEntries = new Map();
         this._language = 'vn';
         this.init();
         this.loadFiles();
@@ -37,12 +39,11 @@ class LocalizeManager {
      * @param {string} key 
      * @param {string} prefix 
      * @param {string} language 
-     * @returns {LocalizeEntry}
+     * @returns {string}
      */
     getText(key, prefix = null, language = null) {
         key = prefix ? prefix + "_" + key : key;
         language = language || this._language;
-        console.log(language);
         const entry = this._texts.get(key);
         return entry ? entry.lang[language] : `[${key}]`;
     }
@@ -137,7 +138,12 @@ class LocalizeManager {
                     newEntry[key] = data[key];
                 }
                 this._texts.set(data.npc + "_" + data.key, newEntry);
-            })
+                // Caching npc entries.
+                if (!this._npcEntries.get(data.npc)) {
+                    this._npcEntries.set(data.npc, [])
+                }
+                this._npcEntries.get(data.npc).push(newEntry);
+            });
         })
         this._isNPCLoaded = true;
     }
@@ -153,6 +159,18 @@ LocalizeManager.inst = new LocalizeManager();
  */
 const GT = function(key, prefix = null, language = null) {
     return LocalizeManager.inst.getText(key, prefix, language);
+}
+/**
+ * Get Text By Key
+ */
+LocalizeManager.t = GT;
+/**
+ * Get NPC Text Data
+ * @param {string} npcKey the key of the NPC
+ * @returns {NpcLocalizeEntry[]}
+ */
+LocalizeManager.NPC = function(npcKey) {
+    return this.inst._npcEntries.get(npcKey);
 }
 
 class LocalizeEntry {
