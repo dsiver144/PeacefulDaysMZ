@@ -83,6 +83,20 @@
 		"level": 1
 	},
 	{
+		"itemID": "LatexHarvestKit",
+		"components": [
+			{
+				"itemID": "Lumber",
+				"number": 5
+			}, {
+				"itemID": "CooperBar",
+				"number": 1
+			}
+		],
+		"level": 1,
+		"exp": 2
+	},
+	{
 		"itemID": "Furnace",
 		"components": [
 			{
@@ -143,6 +157,10 @@
 			{
 				"itemID": "Gear",
 				"number": 5
+			},
+			{
+				"itemID": "Belt",
+				"number": 1
 			}
 		],
 		"level": 2,
@@ -187,6 +205,60 @@
 			{
 				"itemID": "Screw",
 				"number": 4
+			}
+		],
+		"level": 3,
+		"exp": 5
+	},
+	{
+		"itemID": "Fermenter",
+		"components": [
+			{
+				"itemID": "BigMotor",
+				"number": 2
+			},
+			{
+				"itemID": "Gear",
+				"number": 2
+			},
+			{
+				"itemID": "Screw",
+				"number": 4
+			},
+			{
+				"itemID": "Tube",
+				"number": 1
+			},
+			{
+				"itemID": "Belt",
+				"number": 1
+			}
+		],
+		"level": 3,
+		"exp": 5
+	},
+	{
+		"itemID": "WeavingMachine",
+		"components": [
+			{
+				"itemID": "BigMotor",
+				"number": 2
+			},
+			{
+				"itemID": "Gear",
+				"number": 2
+			},
+			{
+				"itemID": "Screw",
+				"number": 4
+			},
+			{
+				"itemID": "Tube",
+				"number": 3
+			},
+			{
+				"itemID": "Belt",
+				"number": 1
 			}
 		],
 		"level": 3,

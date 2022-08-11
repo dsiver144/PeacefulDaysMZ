@@ -504,5 +504,38 @@
 			"vn": "Được nung từ Đất Sét, là một nguyên liệu cần thiết cho xây dựng.",
 			"en": ""
 		}
+	},
+	{
+		"key": "Latex",
+		"lang": {
+			"vn": "Nhựa Cây Cao Su",
+			"en": "Latex"
+		},
+		"description": {
+			"vn": "Được thu hoạch từ cây cao su, dùng để làm cao su tự nhiên.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Rubber",
+		"lang": {
+			"vn": "Cao Su",
+			"en": "Rubber"
+		},
+		"description": {
+			"vn": "Được sản xuất từ nhựa cây cao su. Có độ bền rất cao.",
+			"en": ""
+		}
+	},
+	{
+		"key": "LatexHarvestKit",
+		"lang": {
+			"vn": "Kit Thu Hoạch Nhựa Cây",
+			"en": "Latex Harvest Kit"
+		},
+		"description": {
+			"vn": "Có thể được đặt lên cây Cao su để thu hoạch nhựa từ chúng.",
+			"en": ""
+		}
 	}
 ]
