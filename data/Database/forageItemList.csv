@@ -1,2 +1,3 @@
 name,localizeKey,iconIndex,price,shipPrice,tag,stamina,levelPriceBonus,nonDiscardable
 GreenHerb,GreenHerb,,5,5,forage;material,2;10,,
+WaterJar,WaterJar,,5,5,forage;material,,,

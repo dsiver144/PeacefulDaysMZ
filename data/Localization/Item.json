@@ -286,6 +286,17 @@
 		}
 	},
 	{
+		"key": "WoodenFence",
+		"lang": {
+			"vn": "Hàng Rào Gỗ",
+			"en": "Wooden Fence"
+		},
+		"description": {
+			"vn": "Có thể dùng để trang trí và giới hạn vật nuôi trong một khu vực để chúng không đi lung tung.",
+			"en": ""
+		}
+	},
+	{
 		"key": "WoodenPath",
 		"lang": {
 			"vn": "Tấm lót đường bằng Gỗ",
@@ -321,7 +332,7 @@
 	{
 		"key": "MachinePartMaker",
 		"lang": {
-			"vn": "Thiết Bị Chế Tạo Bộ Phận Máy",
+			"vn": "T.Bị SX Bộ Phận Máy",
 			"en": "Machine Part Maker"
 		},
 		"description": {
@@ -425,6 +436,72 @@
 		},
 		"description": {
 			"vn": "Dùng để tái chế các loại thiết bị, máy móc không sử dụng để lấy nguyên liệu.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Glass",
+		"lang": {
+			"vn": "Tấm Thủy Tinh",
+			"en": "Glass"
+		},
+		"description": {
+			"vn": "Được chế tạo bằng cách nung cát trong Lò Lửa.",
+			"en": ""
+		}
+	},
+	{
+		"key": "EmptyJar",
+		"lang": {
+			"vn": "Lọ Thủy Tinh",
+			"en": "Empty Jar"
+		},
+		"description": {
+			"vn": "Dùng đựng các nguyên liệu thu thập được ngoài thiên nhiên.",
+			"en": ""
+		}
+	},
+	{
+		"key": "WaterJar",
+		"lang": {
+			"vn": "Lọ Nước",
+			"en": "Water Jar"
+		},
+		"description": {
+			"vn": "Được lấy từ các nguồn nước sạch.",
+			"en": ""
+		}
+	},
+	{
+		"key": "SoftSoil",
+		"lang": {
+			"vn": "Cục Đất",
+			"en": "Soft Soil"
+		},
+		"description": {
+			"vn": "Là một nguyên liệu thô sơ phổ biến để chế tạo.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Clay",
+		"lang": {
+			"vn": "Đất Sét",
+			"en": "Clay"
+		},
+		"description": {
+			"vn": "Là một nguyên liệu cần thiết cho xây dựng.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Brick",
+		"lang": {
+			"vn": "Gạch Nung",
+			"en": "Gạch"
+		},
+		"description": {
+			"vn": "Được nung từ Đất Sét, là một nguyên liệu cần thiết cho xây dựng.",
 			"en": ""
 		}
 	}

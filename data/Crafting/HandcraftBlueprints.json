@@ -24,24 +24,49 @@
 		"level": 0
 	},
 	{
-		"itemID": "WoodenPath",
+		"itemID": "Clay",
+		"quantity": 5,
+		"components": [
+			{
+				"itemID": "SoftSoil",
+				"number": 1
+			},
+			{
+				"itemID": "WaterJar",
+				"number": 1
+			}
+		],
+		"level": 0
+	},
+	{
+		"itemID": "WoodenFence",
 		"components": [
 			{
 				"itemID": "Lumber",
 				"number": 5
 			}
 		],
-		"level": 1
+		"level": 0
+	},
+	{
+		"itemID": "WoodenPath",
+		"components": [
+			{
+				"itemID": "Lumber",
+				"number": 2
+			}
+		],
+		"level": 0
 	},
 	{
 		"itemID": "StonePath",
 		"components": [
 			{
 				"itemID": "Stone",
-				"number": 5
+				"number": 2
 			}
 		],
-		"level": 1
+		"level": 0
 	},
 	{
 		"itemID": "ProteinBar",
@@ -51,11 +76,11 @@
 				"number": 2
 			},
 			{
-				"itemID": "Corn",
+				"tag": "crop",
 				"number": 1
 			}
 		],
-		"level": 2
+		"level": 1
 	},
 	{
 		"itemID": "Furnace",
@@ -77,7 +102,7 @@
 				"number": 5
 			}
 		],
-		"level": 3,
+		"level": 1,
 		"exp": 5
 	},
 	{
@@ -97,7 +122,7 @@
 				"number": 5
 			}
 		],
-		"level": 4,
+		"level": 2,
 		"exp": 5
 	},
 	{
@@ -120,11 +145,12 @@
 				"number": 5
 			}
 		],
-		"level": 4,
+		"level": 2,
 		"exp": 2
 	},
 	{
 		"itemID": "Sprinkler",
+		"comment": "3x3",
 		"components": [
 			{
 				"itemID": "Tube",
@@ -143,11 +169,12 @@
 				"number": 1
 			}
 		],
-		"level": 4,
+		"level": 2,
 		"exp": 2
 	},
 	{
 		"itemID": "RecycleMachine",
+		"comment": "25% chance per component. Can be upgraded to increase the chance.",
 		"components": [
 			{
 				"itemID": "BigMotor",
@@ -162,7 +189,59 @@
 				"number": 4
 			}
 		],
-		"level": 5,
+		"level": 3,
 		"exp": 5
+	},
+	{
+		"itemID": "Forge",
+		"comment": "Can be used to upgrade tools. Can be created one.",
+		"components": [
+			{
+				"itemID": "Brick",
+				"number": 5
+			},
+			{
+				"itemID": "Charcoal",
+				"number": 10
+			},
+			{
+				"itemID": "SteelBar",
+				"number": 5
+			},
+			{
+				"itemID": "SilverBar",
+				"number": 5
+			},
+			{
+				"itemID": "CopperBar",
+				"number": 5
+			}
+		],
+		"level": 4,
+		"exp": 5,
+		"limit": 1
+	},
+	{
+		"itemID": "Enhanced Sprinkler",
+		"comment": "5x5",
+		"components": [
+			{
+				"itemID": "Tube",
+				"number": 8
+			},
+			{
+				"itemID": "BigMotor",
+				"number": 2
+			},
+			{
+				"itemID": "Screw",
+				"number": 16
+			},
+			{
+				"itemID": "Gear",
+				"number": 4
+			}
+		],
+		"level": 5
 	}
 ]

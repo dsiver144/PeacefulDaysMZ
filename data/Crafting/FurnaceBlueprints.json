@@ -1,5 +1,39 @@
 [
 	{
+		"itemID": "Brick",
+		"quantity": 1,
+		"duration": 20,
+		"components": [
+			{
+				"itemID": "Clay",
+				"number": 1
+			}
+		]
+	},
+	{
+		"itemID": "Glass",
+		"quantity": 1,
+		"duration": 10,
+		"components": [
+			{
+				"itemID": "Sand",
+				"number": 1
+			}
+		],
+		"level": 0
+	},
+	{
+		"itemID": "EmptyJar",
+		"quantity": 1,
+		"duration": 10,
+		"components": [
+			{
+				"itemID": "Glass",
+				"number": 1
+			}
+		]
+	},
+	{
 		"itemID": "CooperBar",
 		"quantity": 1,
 		"duration": 60,

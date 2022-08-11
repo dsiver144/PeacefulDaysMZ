@@ -1,0 +1,4 @@
+name,localizeKey,iconIndex,price,shipPrice,tag,stamina,levelPriceBonus,nonDiscardable
+WoodenPath,WoodenPath,,0,0,craftItem;decorator,,,
+StonePath,StonePath,,0,0,craftItem;decorator,,,
+WoodenFence,WoodenFence,,0,0,craftItem;decorator,,,
