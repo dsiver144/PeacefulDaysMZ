@@ -294,7 +294,7 @@
 		"limit": 1
 	},
 	{
-		"itemID": "Enhanced Sprinkler",
+		"itemID": "EnhancedSprinkler",
 		"comment": "5x5",
 		"components": [
 			{

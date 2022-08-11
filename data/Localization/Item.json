@@ -429,6 +429,17 @@
 		}
 	},
 	{
+		"key": "EnhancedSprinkler",
+		"lang": {
+			"vn": "M.P.N.T.Đ Nâng Cấp",
+			"en": "Enhanced Sprinkler"
+		},
+		"description": {
+			"vn": "Nó sẽ tự động tưới một vùng xung quanh vào mỗi buổi sáng. Vùng tưới sẽ lớn hơn nhiều.",
+			"en": ""
+		}
+	},
+	{
 		"key": "RecycleMachine",
 		"lang": {
 			"vn": "Máy Tái Chế",
@@ -535,6 +546,26 @@
 		},
 		"description": {
 			"vn": "Có thể được đặt lên cây Cao su để thu hoạch nhựa từ chúng.",
+			"en": ""
+		}
+	},{
+		"key": "Fermenter",
+		"lang": {
+			"vn": "Máy Lên Men",
+			"en": "Fermenter"
+		},
+		"description": {
+			"vn": "Dùng để lên men các sản phẩm từ vật nuôi.",
+			"en": ""
+		}
+	}, {
+		"key": "WeavingMachine",
+		"lang": {
+			"vn": "Máy Dệt",
+			"en": "Weaving Machine"
+		},
+		"description": {
+			"vn": "Dùng để dệt các sản phẩm từ vật nuôi.",
 			"en": ""
 		}
 	}
