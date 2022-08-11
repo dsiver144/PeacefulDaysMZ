@@ -1,0 +1,11 @@
+name,localizeKey,iconIndex,price,shipPrice,tag,stamina,levelPriceBonus,nonDiscardable
+CowMilk,CowMilk,,0,0,aProduct;dairy,,,
+SheepMilk,SheepMilk,,0,0,aProduct;dairy,,,
+GoatMilk,GoatMilk,,0,0,aProduct;dairy,,,
+ChickenEgg,ChickenEgg,,0,0,aProduct;egg,,,
+DuckEgg,DuckEgg,,0,0,aProduct;egg,,,
+OstrichEgg,OstrichEgg,,0,0,aProduct;egg,,,
+GoldenEgg,GoldenEgg,,0,0,aProduct;egg;rare,,,
+StorkEgg,StorkEgg,,0,0,aProduct;egg,,,
+AustraEgg,AustraEgg,,0,0,aProduct;egg,,,
+LeghornEgg,LeghornEgg,,0,0,aProduct;egg,,,

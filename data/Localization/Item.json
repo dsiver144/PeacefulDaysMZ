@@ -429,6 +429,17 @@
 		}
 	},
 	{
+		"key": "Forge",
+		"lang": {
+			"vn": "Lò Rèn",
+			"en": "Forge"
+		},
+		"description": {
+			"vn": "Có thể dùng để nâng cấp nông cụ.",
+			"en": ""
+		}
+	},
+	{
 		"key": "EnhancedSprinkler",
 		"lang": {
 			"vn": "M.P.N.T.Đ Nâng Cấp",
@@ -566,6 +577,36 @@
 		},
 		"description": {
 			"vn": "Dùng để dệt các sản phẩm từ vật nuôi.",
+			"en": ""
+		}
+	},{
+		"key": "CowMilk",
+		"lang": {
+			"vn": "Sữa Bò",
+			"en": "Cow Milk"
+		},
+		"description": {
+			"vn": "Có thể uống hoặc dùng để làm phô mai.",
+			"en": ""
+		}
+	},{
+		"key": "SheepMilk",
+		"lang": {
+			"vn": "Sữa Cừu",
+			"en": "Sheep Milk"
+		},
+		"description": {
+			"vn": "Có thể uống hoặc dùng để làm phô mai.",
+			"en": ""
+		}
+	},{
+		"key": "GoatMilk",
+		"lang": {
+			"vn": "Sữa Dê",
+			"en": "Goat Milk"
+		},
+		"description": {
+			"vn": "Có thể uống hoặc dùng để làm phô mai.",
 			"en": ""
 		}
 	}

@@ -47,6 +47,9 @@
             {
                 "itemID": "ChickenEgg",
                 "number": 1
+            }, {
+                "itemID": "CookingOil",
+                "number": 1
             }
         ],
         "require": "Fermenter"
@@ -60,6 +63,9 @@
             {
                 "itemID": "DuckEgg",
                 "number": 1
+            }, {
+                "itemID": "CookingOil",
+                "number": 1
             }
         ],
         "require": "Fermenter"
@@ -72,6 +78,56 @@
         "components": [
             {
                 "itemID": "OstrichEgg",
+                "number": 1
+            }, {
+                "itemID": "CookingOil",
+                "number": 1
+            }
+        ],
+        "require": "Fermenter"
+    },
+    {
+        "itemID": "AustraMayo",
+        "quality": true,
+        "quantity": 1,
+        "duration": 300,
+        "components": [
+            {
+                "itemID": "AustraEgg",
+                "number": 1
+            }, {
+                "itemID": "CookingOil",
+                "number": 1
+            }
+        ],
+        "require": "Fermenter"
+    },
+    {
+        "itemID": "LeghornMayo",
+        "quality": true,
+        "quantity": 1,
+        "duration": 300,
+        "components": [
+            {
+                "itemID": "LeghornEgg",
+                "number": 1
+            }, {
+                "itemID": "CookingOil",
+                "number": 1
+            }
+        ],
+        "require": "Fermenter"
+    },{
+        "itemID": "GoldenMayo",
+        "quality": true,
+        "quantity": 1,
+        "duration": 500,
+        "components": [
+            {
+                "itemID": "GoldenEgg",
+                "number": 1
+            }, {
+                "itemID": "CookingOil",
                 "number": 1
             }
         ],
