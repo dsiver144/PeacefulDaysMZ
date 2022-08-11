@@ -20,6 +20,10 @@ const ToolType = {
     "none": "none",
 }
 
+const GameEvent = {
+    "InputModeChanged": "InputModeChanged"
+}
+
 const KeyCodeToNameConverter = {
     9: 'TAB',
     13: 'ENT',

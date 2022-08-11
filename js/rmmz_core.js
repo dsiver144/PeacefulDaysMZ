@@ -5913,6 +5913,7 @@ Input._updateGamepadState = function(gamepad) {
 Input.setInputMode = function(mode) {
     if (this.inputMode == mode) return;
     this.inputMode = mode;
+    EventManager.emit(GameEvent.InputModeChanged, mode);
     console.log("@ Input mode switched to : " + mode);
 }
 /**

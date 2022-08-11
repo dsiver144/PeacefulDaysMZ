@@ -36,6 +36,22 @@ class Sprite_KeyHint extends Sprite {
         this._keySprite.anchor.x = 0.5;
         this._keySprite.anchor.y = 0.5;
         this.addChild(this._keySprite);
+        
+        EventManager.on(GameEvent.InputModeChanged, this.onInputModeChanged, this);
+    }
+    /**
+     * On Input Mode Changed
+     * @param {string} mode 
+     */
+    onInputModeChanged(mode) {
+        this.refreshKeySprite(mode);
+    }
+    /**
+     * Destroy Sprite
+     */
+    destroy() {
+        EventManager.off(GameEvent.InputModeChanged, this.onInputModeChanged, this);
+        super.destroy();
     }
     /**
      * Get frame change interval
@@ -67,8 +83,8 @@ class Sprite_KeyHint extends Sprite {
     /**
      * Refresh Key Sprite
      */
-    refreshKeySprite() {
-        const inputMode = Input.getInputMode();
+    refreshKeySprite(mode) {
+        const inputMode = mode || Input.getInputMode();
         const data = inputMode === 'keyboard' ? KeyCodeToNameConverter[DefaultKeyboardConfig[this._keyAction]] : ButtonConverter[DefaultGamePadConfig[this._keyAction]];
         let buttonName = data;
         let buttonColor = '#ddcebf';
