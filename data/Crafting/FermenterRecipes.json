@@ -1,0 +1,80 @@
+[
+    {
+        "itemID": "Cheese",
+        "quality": true,
+        "quantity": 1,
+        "duration": 300,
+        "components": [
+            {
+                "itemID": "CowMilk",
+                "number": 1
+            }
+        ],
+        "require": "Fermenter"
+    },
+    {
+        "itemID": "SheepMilkCheese",
+        "quality": true,
+        "quantity": 1,
+        "duration": 300,
+        "components": [
+            {
+                "itemID": "SheepMilk",
+                "number": 1
+            }
+        ],
+        "require": "Fermenter"
+    },
+    {
+        "itemID": "GoatMilkCheese",
+        "quality": true,
+        "quantity": 1,
+        "duration": 300,
+        "components": [
+            {
+                "itemID": "GoatMilk",
+                "number": 1
+            }
+        ],
+        "require": "Fermenter"
+    },
+    {
+        "itemID": "ChickenMayo",
+        "quality": true,
+        "quantity": 1,
+        "duration": 150,
+        "components": [
+            {
+                "itemID": "ChickenEgg",
+                "number": 1
+            }
+        ],
+        "require": "Fermenter"
+    },
+    {
+        "itemID": "DuckMayo",
+        "quality": true,
+        "quantity": 1,
+        "duration": 300,
+        "components": [
+            {
+                "itemID": "DuckEgg",
+                "number": 1
+            }
+        ],
+        "require": "Fermenter"
+    },
+    {
+        "itemID": "OstrichMayo",
+        "quality": true,
+        "quantity": 1,
+        "duration": 450,
+        "components": [
+            {
+                "itemID": "OstrichEgg",
+                "number": 1
+            }
+        ],
+        "require": "Fermenter"
+    }
+]
