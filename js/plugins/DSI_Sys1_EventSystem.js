@@ -34,13 +34,13 @@ class EventEmitter {
      * @param {string} eventName 
      * @param {Function} callback 
      */
-    on(eventName, callback) {
+    on(eventName, callback, target) {
         let event = this.events[eventName];
         if (!event) {
             event = new EmitterEvent(eventName);
             this.events[eventName] = event;
         }
-        event.addCallback(callback);
+        event.addCallback(callback, target);
     }
     /**
      * Stop listen on specific event
@@ -68,13 +68,16 @@ class EmitterEvent {
         this.eventName = eventName;
         /** @type {Function[]} */
         this.callbacks = [];
+        /** @type {object[]} */
+        this.targets = [];
     }
     /**
      * Add callback to event
      * @param {Function} callback 
      */
-    addCallback(callback) {
+    addCallback(callback, target) {
         this.callbacks.push(callback);
+        this.targets.push(target);
     }
     /**
      * Remove callback from event
@@ -84,6 +87,7 @@ class EmitterEvent {
         const index = this.callbacks.indexOf(callback);
         if (index >= 0) {
             this.callbacks.splice(index, 1);
+            this.targets.splice(index, 1);
         }
     }
     /**
@@ -91,9 +95,8 @@ class EmitterEvent {
      * @param {any} data 
      */
     fire(data) {
-        const callbacks = this.callbacks.slice(0);
-        callbacks.forEach(callback => {
-            callback(data);
+        this.callbacks.forEach((callback, index) => {
+            callback.call(this.targets[index], data);
         })
     }
 }
