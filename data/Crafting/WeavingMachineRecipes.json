@@ -1,0 +1,51 @@
+[
+    {
+        "itemID": "SheepYarnBall",
+        "quality": true,
+        "quantity": 1,
+        "duration": 300,
+        "components": [
+            {
+                "itemID": "SheepWool",
+                "number": 1
+            }
+        ],
+        "require": "WeavingMachine"
+    }, {
+        "itemID": "MerinoSheepYarnBall",
+        "quality": true,
+        "quantity": 1,
+        "duration": 500,
+        "components": [
+            {
+                "itemID": "MerinoSheepWool",
+                "number": 1
+            }
+        ],
+        "require": "WeavingMachine"
+    }, {
+        "itemID": "AngoraRabbitYarnBall",
+        "quality": true,
+        "quantity": 1,
+        "duration": 400,
+        "components": [
+            {
+                "itemID": "AngoraRabbitWool",
+                "number": 1
+            }
+        ],
+        "require": "WeavingMachine"
+    },  {
+        "itemID": "AlpacaYarnBall",
+        "quality": true,
+        "quantity": 1,
+        "duration": 600,
+        "components": [
+            {
+                "itemID": "AlpacaWool",
+                "number": 1
+            }
+        ],
+        "require": "WeavingMachine"
+    }
+]

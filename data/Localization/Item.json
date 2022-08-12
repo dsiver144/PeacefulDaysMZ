@@ -790,5 +790,95 @@
 			"vn": "Được dùng trong chế biến thức ăn.",
 			"en": ""
 		}
+	}, {
+		"key": "SheepWool",
+		"lang": {
+			"vn": "Lông Cừu",
+			"en": "Sheep Wool"
+		},
+		"description": {
+			"vn": "Có thể được dùng để dệt thành những cuộn len.",
+			"en": ""
+		}
+	}, {
+		"key": "MerinoSheepWool",
+		"lang": {
+			"vn": "Lông Cừu Merino",
+			"en": "Merino Sheep Wool"
+		},
+		"description": {
+			"vn": "Có thể được dùng để dệt thành những cuộn len chất lượng cao.",
+			"en": ""
+		}
+	}, {
+		"key": "AngoraRabbitWool",
+		"lang": {
+			"vn": "Lông Thỏ Angora",
+			"en": "Angora Rabbit Wool"
+		},
+		"description": {
+			"vn": "Có thể được dùng để dệt thành những cuộn len.",
+			"en": ""
+		}
+	}, {
+		"key": "AlpacaWool",
+		"lang": {
+			"vn": "Lông Lạc Đà Alpaca",
+			"en": "Alpaca Wool"
+		},
+		"description": {
+			"vn": "Có thể được dùng để dệt thành những cuộn len.",
+			"en": ""
+		}
+	}, {
+		"key": "AlpacaWool",
+		"lang": {
+			"vn": "Lông Lạc Đà Alpaca",
+			"en": "Alpaca Wool"
+		},
+		"description": {
+			"vn": "Có thể được dùng để dệt thành những cuộn len.",
+			"en": ""
+		}
+	}, {
+		"key": "SheepYarnBall",
+		"lang": {
+			"vn": "Cuộn Len Cừu",
+			"en": "Sheep Yarn Ball"
+		},
+		"description": {
+			"vn": "Được dệt từ những @[SheepWool], có thể dùng để làm các vật phẩm dệt may khác.",
+			"en": ""
+		}
+	}, {
+		"key": "MerinoSheepYarnBall",
+		"lang": {
+			"vn": "Cuộn Len Cừu Merino",
+			"en": "Merino Sheep Yarn Ball"
+		},
+		"description": {
+			"vn": "Được dệt từ những @[MerinoSheepWool], có thể dùng để làm các vật phẩm dệt may khác.",
+			"en": ""
+		}
+	}, {
+		"key": "AngoraRabbitYarnBall",
+		"lang": {
+			"vn": "Cuộn Len Thỏ Angora",
+			"en": "Angora Rabbit Yarn Ball"
+		},
+		"description": {
+			"vn": "Được dệt từ những @[AngoraRabbitWool], có thể dùng để làm các vật phẩm dệt may khác.",
+			"en": ""
+		}
+	}, {
+		"key": "AlpacaYarnBall",
+		"lang": {
+			"vn": "Cuộn Len L.Đ Alpaca",
+			"en": "Alpaca Yarn Ball"
+		},
+		"description": {
+			"vn": "Được dệt từ những @[AlpacaWool], có thể dùng để làm các vật phẩm dệt may khác.",
+			"en": ""
+		}
 	}
 ]
