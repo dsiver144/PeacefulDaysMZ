@@ -559,7 +559,8 @@
 			"vn": "Có thể được đặt lên cây Cao su để thu hoạch nhựa từ chúng.",
 			"en": ""
 		}
-	},{
+	},
+	{
 		"key": "Fermenter",
 		"lang": {
 			"vn": "Máy Lên Men",
@@ -569,7 +570,8 @@
 			"vn": "Dùng để lên men các sản phẩm từ vật nuôi.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "WeavingMachine",
 		"lang": {
 			"vn": "Máy Dệt",
@@ -579,7 +581,8 @@
 			"vn": "Dùng để dệt các sản phẩm từ vật nuôi.",
 			"en": ""
 		}
-	},{
+	},
+	{
 		"key": "CowMilk",
 		"lang": {
 			"vn": "Sữa Bò",
@@ -589,7 +592,8 @@
 			"vn": "Có thể uống hoặc dùng để làm phô mai.",
 			"en": ""
 		}
-	},{
+	},
+	{
 		"key": "SheepMilk",
 		"lang": {
 			"vn": "Sữa Cừu",
@@ -599,7 +603,8 @@
 			"vn": "Có thể uống hoặc dùng để làm phô mai.",
 			"en": ""
 		}
-	},{
+	},
+	{
 		"key": "GoatMilk",
 		"lang": {
 			"vn": "Sữa Dê",
@@ -607,6 +612,182 @@
 		},
 		"description": {
 			"vn": "Có thể uống hoặc dùng để làm phô mai.",
+			"en": ""
+		}
+	},
+	{
+		"key": "ChickenEgg",
+		"lang": {
+			"vn": "Trứng Gà",
+			"en": "Chicken Egg"
+		},
+		"description": {
+			"vn": "Có thể dùng để chế biến thức ăn.",
+			"en": ""
+		}
+	},
+	{
+		"key": "DuckEgg",
+		"lang": {
+			"vn": "Trứng Vịt",
+			"en": "Duck Egg"
+		},
+		"description": {
+			"vn": "Có thể dùng để chế biến thức ăn.",
+			"en": ""
+		}
+	},
+	{
+		"key": "OstrichEgg",
+		"lang": {
+			"vn": "Trứng Đà Điểu",
+			"en": "Ostrich Egg"
+		},
+		"description": {
+			"vn": "Có thể dùng để chế biến thức ăn.",
+			"en": ""
+		}
+	},
+	{
+		"key": "AustraEgg",
+		"lang": {
+			"vn": "Trứng Gà Quạ",
+			"en": "Australorp Egg"
+		},
+		"description": {
+			"vn": "Có thể dùng để chế biến thức ăn.",
+			"en": ""
+		}
+	},
+	{
+		"key": "LeghornEgg",
+		"lang": {
+			"vn": "Trứng Gà Lơ-go",
+			"en": "Leghorn Egg"
+		},
+		"description": {
+			"vn": "Có thể dùng để chế biến thức ăn.",
+			"en": ""
+		}
+	},
+	{
+		"key": "GoldenEgg",
+		"lang": {
+			"vn": "Trứng Gà Vàng",
+			"en": "Golden Egg"
+		},
+		"description": {
+			"vn": "Có thể dùng để chế biến thức ăn.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Cheese",
+		"lang": {
+			"vn": "Phô Mai",
+			"en": "Cheese"
+		},
+		"description": {
+			"vn": "Được làm từ @[CowMilk], chứa nhiều protein có lợi có sức khỏe.",
+			"en": ""
+		}
+	},
+	{
+		"key": "SheepMilkCheese",
+		"lang": {
+			"vn": "Phô Mai Sữa Cừu",
+			"en": "Sheep Milk Cheese"
+		},
+		"description": {
+			"vn": "Được làm từ @[SheepMilk], chứa nhiều protein có lợi cho sức khỏe.",
+			"en": ""
+		}
+	},
+	{
+		"key": "GoatMilkCheese",
+		"lang": {
+			"vn": "Phô Mai Sữa Dê",
+			"en": "Goat Milk Cheese"
+		},
+		"description": {
+			"vn": "Được làm từ @[GoatMilk], chứa nhiều protein có lợi có sức khỏe.",
+			"en": ""
+		}
+	},
+	{
+		"key": "ChickenMayo",
+		"lang": {
+			"vn": "Mayo Trứng Gà",
+			"en": "Chicken Mayo"
+		},
+		"description": {
+			"vn": "Được làm từ @[ChickenEgg], nguyên liệu phổ biến để làm các món salad.",
+			"en": ""
+		}
+	},
+	{
+		"key": "DuckMayo",
+		"lang": {
+			"vn": "Mayo Trứng Vịt",
+			"en": "Duck Mayo"
+		},
+		"description": {
+			"vn": "Được làm từ @[DuckEgg], nguyên liệu phổ biến để làm các món salad.",
+			"en": ""
+		}
+	},
+	{
+		"key": "OstrichMayo",
+		"lang": {
+			"vn": "Mayo Trứng Đà Điểu",
+			"en": "Ostrich Mayo"
+		},
+		"description": {
+			"vn": "Được làm từ @[OstrichEgg], nguyên liệu phổ biến để làm các món salad.",
+			"en": ""
+		}
+	},
+	{
+		"key": "AustraMayo",
+		"lang": {
+			"vn": "Mayo Trứng Gà Quạ",
+			"en": "Australorp Mayo"
+		},
+		"description": {
+			"vn": "Được làm từ @[AustraEgg], nguyên liệu phổ biến để làm các món salad.",
+			"en": ""
+		}
+	},
+	{
+		"key": "LeghornMayo",
+		"lang": {
+			"vn": "Mayo Trứng Gà Lơ-go",
+			"en": "Leghorn Mayo"
+		},
+		"description": {
+			"vn": "Được làm từ @[LeghornEgg], nguyên liệu phổ biến để làm các món salad.",
+			"en": ""
+		}
+	},
+	{
+		"key": "GoldenEgg",
+		"lang": {
+			"vn": "Mayo Trứng Gà Vàng",
+			"en": "Golden Mayo"
+		},
+		"description": {
+			"vn": "Được làm từ @[GoldenEgg], nguyên liệu phổ biến để làm các món salad.",
+			"en": ""
+		}
+	},
+	{
+		"key": "CookingOil",
+		"lang": {
+			"vn": "Dầu Ăn",
+			"en": "Cooking Oil"
+		},
+		"description": {
+			"vn": "Được dùng trong chế biến thức ăn.",
 			"en": ""
 		}
 	}
