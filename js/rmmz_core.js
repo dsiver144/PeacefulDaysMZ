@@ -4563,6 +4563,7 @@ ColorFilter.prototype._fragmentSrc = function() {
         "}" +
         "void main() {" +
         "  vec4 sample = texture2D(uSampler, vTextureCoord);" +
+        "  vec2 coor = vTextureCoord.xy;" +
         "  float a = sample.a;" +
         "  vec3 hsl = rgbToHsl(sample.rgb);" +
         "  hsl.x = mod(hsl.x + hue / 360.0, 1.0);" +
@@ -4571,6 +4572,10 @@ ColorFilter.prototype._fragmentSrc = function() {
         "  float r = rgb.r;" +
         "  float g = rgb.g;" +
         "  float b = rgb.b;" +
+        "  if (sample.r == 1.0 && sample.g ==0.8549019607843137 && sample.b == 0.2705882352941176) {" +
+        "    gl_FragColor = vec4(sample.r, sample.g, sample.b, sample.a);" +
+        "    return;" +
+        "  }" +
         "  float r2 = colorTone.r / 255.0;" +
         "  float g2 = colorTone.g / 255.0;" +
         "  float b2 = colorTone.b / 255.0;" +

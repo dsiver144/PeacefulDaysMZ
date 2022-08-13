@@ -24,6 +24,8 @@ const GameEvent = {
     "InputModeChanged": "InputModeChanged"
 }
 
+const YellowLightColor = [255, 218, 69];
+
 const KeyCodeToNameConverter = {
     9: 'TAB',
     13: 'ENT',
