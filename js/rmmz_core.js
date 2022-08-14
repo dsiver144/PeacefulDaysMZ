@@ -4563,7 +4563,6 @@ ColorFilter.prototype._fragmentSrc = function() {
         "}" +
         "void main() {" +
         "  vec4 sample = texture2D(uSampler, vTextureCoord);" +
-        "  vec2 coor = vTextureCoord.xy;" +
         "  float a = sample.a;" +
         "  vec3 hsl = rgbToHsl(sample.rgb);" +
         "  hsl.x = mod(hsl.x + hue / 360.0, 1.0);" +
@@ -4573,7 +4572,10 @@ ColorFilter.prototype._fragmentSrc = function() {
         "  float g = rgb.g;" +
         "  float b = rgb.b;" +
         "  if (sample.r == 1.0 && sample.g ==0.8549019607843137 && sample.b == 0.2705882352941176) {" +
-        "    gl_FragColor = vec4(sample.r, sample.g, sample.b, sample.a);" +
+        "    r = sample.r * brightness / 255.0;" + 
+        "    g = sample.g * brightness / 255.0;" + 
+        "    b = sample.b * brightness / 255.0;" + 
+        "    gl_FragColor = vec4(r, g, b, a);" +
         "    return;" +
         "  }" +
         "  float r2 = colorTone.r / 255.0;" +
@@ -4593,6 +4595,16 @@ ColorFilter.prototype._fragmentSrc = function() {
         "  r = r * brightness / 255.0;" +
         "  g = g * brightness / 255.0;" +
         "  b = b * brightness / 255.0;" +
+        // "  vec2 coor = vTextureCoord.xy;" +
+        // "  coor.y *= 0.6;" +
+        // "  vec2 lightVec = vec2(0.5, 0.5 * 0.6  );" +
+        // "  float lightR = 0.125;" +
+        // "  float dist = length(lightVec - coor);" +
+        // " if (dist <= lightR) {" + 
+        // "   vec4 newColor = mix(vec4(sample.r, sample.g, sample.b, sample.a), vec4(r, g, b, a),  smoothstep(0.6, 1.0, dist / lightR));" + 
+        // "   gl_FragColor = newColor;" +
+        // "   return;" +
+        // "  }" + 
         "  gl_FragColor = vec4(r, g, b, a);" +
         "}";
     return src;
