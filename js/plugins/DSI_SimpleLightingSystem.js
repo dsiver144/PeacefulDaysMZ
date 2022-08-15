@@ -61,10 +61,11 @@ class LightingFilter extends PIXI.Filter {
      */
     setAmbientLightColor(r, g, b, a) {
         this.uniforms.ambientLight = this.uniforms.ambientLight || [];
-        this.uniforms.ambientLight[0] = r / 255.0;
-        this.uniforms.ambientLight[1] = g / 255.0;
-        this.uniforms.ambientLight[2] = b / 255.0;
-        this.uniforms.ambientLight[3] = a / 255.0;
+        a = a / 255.0;
+        this.uniforms.ambientLight[3] = a;
+        this.uniforms.ambientLight[0] = r  / 255.0 * a;
+        this.uniforms.ambientLight[1] = g  / 255.0 * a;
+        this.uniforms.ambientLight[2] = b  / 255.0 * a;
     }
     /**
      * Update filter per frame
@@ -124,7 +125,8 @@ class LightSystem {
      * Update Light System
      */
     update() {
-        this._filter.setAmbientLightColor(255, 255, 255, 255);
+        const {r, g, b, a} = AmbientController.inst.color;
+        this._filter.setAmbientLightColor(r, g, b, a);
         this._filter.update();
         for (var i = 0; i < this._allLightSprites.length; i++) {
             this._allLightSprites[i].update();
@@ -205,7 +207,7 @@ class Sprite_Light extends Sprite {
      * Screen Y
      * @returns {number}
      */
-     screenY() {
+    screenY() {
         const th = $gameMap.tileHeight();
         return Math.floor(
             this.scrolledY() * th + th / 2
@@ -235,9 +237,78 @@ class Sprite_Light extends Sprite {
 }
 
 
+class AmbientController extends SaveableObject {
+    /**
+     * AmbientController
+     */
+    constructor() {
+        super();
+        AmbientController.inst = this;
+        this._color = {
+            r: 255,
+            g: 255,
+            b: 255,
+            a: 255
+        }
+        this._targetColor = {
+            r: 255,
+            g: 255,
+            b: 255,
+            a: 255,
+        }
+        this._colorTweenDuration = 0;
+    }
+
+    get color() {
+        return this._color;
+    }
+
+    saveProperties() {
+        return [
+            ['_color', null],
+            ['_originalColor', null],
+            ['_targetColor', null],
+            ['_colorTweenDuration', null],
+            ['_maxColorTweenDuration', null],
+        ]
+    }
+
+    set(r, g, b, a, duration = 60) {
+        this._targetColor = { r, g, b, a };
+        this._originalColor = { ...this._color };
+        this._colorTweenDuration = 0;
+        this._maxColorTweenDuration = duration;
+    }
+
+    updateColor() {
+        if (this._maxColorTweenDuration == null) return;
+        this._colorTweenDuration += 1;
+        const t = this._colorTweenDuration / this._maxColorTweenDuration;
+        this._color.r = this._originalColor.r + (this._targetColor.r - this._originalColor.r) * t;
+        this._color.g = this._originalColor.g + (this._targetColor.g - this._originalColor.g) * t;
+        this._color.b = this._originalColor.b + (this._targetColor.b - this._originalColor.b) * t;
+        this._color.a = this._originalColor.a + (this._targetColor.a - this._originalColor.a) * t;
+        if (this._colorTweenDuration == this._maxColorTweenDuration) {
+            this._maxColorTweenDuration = null;
+        }
+    }
+
+    update() {
+        this.updateColor();
+    }
+}
+/** @type {AmbientController} */
+AmbientController.inst = null;
+
 //==================================================================================
 // IMPLEMENT SYSTEM IN TO RPG MAKER SYSTEM
 //==================================================================================
+
+var DSI_SimpleLightingSystem_Game_System_createSaveableObjects = Game_System.prototype.createSaveableObjects;
+Game_System.prototype.createSaveableObjects = function () {
+    DSI_SimpleLightingSystem_Game_System_createSaveableObjects.call(this);
+    this._ambientController = new AmbientController();
+}
 
 var DSI_SimpleLight_Spriteset_Map_createBaseSprite = Spriteset_Map.prototype.createBaseSprite;
 Spriteset_Map.prototype.createBaseSprite = function () {
@@ -250,6 +321,7 @@ var DSI_SimpleLight_Spriteset_Map_update = Spriteset_Map.prototype.update;
 Spriteset_Map.prototype.update = function () {
     DSI_SimpleLight_Spriteset_Map_update.call(this);
     if (this._lightSystem) this._lightSystem.update();
+    AmbientController.inst?.update();
 }
 
 //==================================================================================

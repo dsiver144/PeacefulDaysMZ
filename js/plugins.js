@@ -4,12 +4,12 @@ var $plugins =
 [
 {"name":"DSI-Core","status":true,"description":"v2.00 A helper plugin for DSI plugins.","parameters":{"showDevTool:bool":"true"}},
 {"name":"DSI_ShaderCore","status":true,"description":"","parameters":{}},
-{"name":"DSI_SimpleLightingSystem","status":true,"description":"(v1.0) Player Controller","parameters":{}},
 {"name":"rmmz_movement","status":true,"description":"(v1.0.4) 8 direction movement and pixel movement for RPG Maker MZ.","parameters":{}},
 {"name":"DSI_PeerJS","status":false,"description":"","parameters":{}},
 {"name":"DSI_Sys1_EventSystem","status":true,"description":"(v1.0) Peaceful Days Event System","parameters":{}},
 {"name":"DSI_Sys1_Interfaces","status":true,"description":"(v1.0) Peaceful Days Interfaces","parameters":{}},
 {"name":"DSI_Sys1_SaveSystem","status":true,"description":"(v1.0) Save System","parameters":{}},
+{"name":"DSI_SimpleLightingSystem","status":true,"description":"(v1.0) Player Controller","parameters":{}},
 {"name":"DSI_Utils","status":true,"description":"(v1.0) An Utils plugin by dsiver144","parameters":{}},
 {"name":"DSI_Sys1_Localization","status":true,"description":"(v1.0) A custom plugin by dsiver144","parameters":{}},
 {"name":"DSI_Sys1_EngineOverhaul","status":true,"description":"(v1.0) RPG Maker Engine Overhaul","parameters":{}},
