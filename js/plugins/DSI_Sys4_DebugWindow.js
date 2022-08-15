@@ -26,7 +26,6 @@ class Window_MyDebug extends Window_Command {
             height: 400
         }
         super(new Rectangle(DebugWindowConfig.x, DebugWindowConfig.y, DebugWindowConfig.width, DebugWindowConfig.height));
-        this.alpha = 0.9;
         this.makeCommandList();
         Input.update();
     }
