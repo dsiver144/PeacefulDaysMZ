@@ -25,7 +25,7 @@ Game_Temp.prototype.initialize = function() {
 };
 
 Game_Temp.prototype.isPlaytest = function() {
-    return this._isPlaytest;
+    return this._isPlaytest || MyUtils.DEBUG.status;
 };
 
 Game_Temp.prototype.setDestination = function(x, y) {

@@ -9,7 +9,7 @@ var $plugins =
 {"name":"DSI_Sys1_EventSystem","status":true,"description":"(v1.0) Peaceful Days Event System","parameters":{}},
 {"name":"DSI_Sys1_Interfaces","status":true,"description":"(v1.0) Peaceful Days Interfaces","parameters":{}},
 {"name":"DSI_Sys1_SaveSystem","status":true,"description":"(v1.0) Save System","parameters":{}},
-{"name":"DSI_SimpleLightingSystem","status":true,"description":"(v1.0) Player Controller","parameters":{}},
+{"name":"DSI_Sys1_SimpleLightingSystem","status":true,"description":"(v1.0) Player Controller","parameters":{}},
 {"name":"DSI_Utils","status":true,"description":"(v1.0) An Utils plugin by dsiver144","parameters":{}},
 {"name":"DSI_Sys1_Localization","status":true,"description":"(v1.0) A custom plugin by dsiver144","parameters":{}},
 {"name":"DSI_Sys1_EngineOverhaul","status":true,"description":"(v1.0) RPG Maker Engine Overhaul","parameters":{}},
@@ -33,5 +33,6 @@ var $plugins =
 {"name":"DSI_Sys4_Sprite_FarmObject","status":true,"description":"(v1.0) Sprite Farm Object","parameters":{}},
 {"name":"DSI_Sys4_Sprite_FarmTile","status":true,"description":"(v1.0) Sprite Farm Tile","parameters":{}},
 {"name":"DSI_Sys4_Sprite_FarmObstacle","status":true,"description":"(v1.0) Sprite Farm Obstacle","parameters":{}},
-{"name":"DSI_Sys4_Sprite_Key","status":true,"description":"(v1.0) Sprite Key","parameters":{}}
+{"name":"DSI_Sys4_Sprite_Key","status":true,"description":"(v1.0) Sprite Key","parameters":{}},
+{"name":"DSI_Sys4_DebugWindow","status":true,"description":"","parameters":{}}
 ];

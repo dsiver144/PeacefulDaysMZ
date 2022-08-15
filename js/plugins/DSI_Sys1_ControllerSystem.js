@@ -39,6 +39,10 @@ const MenuKeyAction = {
     "PageLeft": "menu_pageleft",
     "PageRight": "menu_pageright",
 }
+/** @enum */
+const DebugKeyAction = {
+    "DebugMenu": "debugMenu"
+}
 
 const DefaultKeyboardConfig = {}
 DefaultKeyboardConfig[FieldKeyAction.MoveUp] = 87;
@@ -65,6 +69,8 @@ DefaultKeyboardConfig[MenuKeyAction.MoveUp] = 87;
 DefaultKeyboardConfig[MenuKeyAction.MoveLeft] = 65;
 DefaultKeyboardConfig[MenuKeyAction.MoveRight] = 68;
 DefaultKeyboardConfig[MenuKeyAction.MoveDown] = 83;
+
+DefaultKeyboardConfig[DebugKeyAction.DebugMenu] = 192;
 
 const DefaultGamePadConfig = {}
 DefaultGamePadConfig[FieldKeyAction.UseTool] = 2;

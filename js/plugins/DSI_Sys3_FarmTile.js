@@ -161,7 +161,7 @@ class FarmTile extends FarmObject {
      * @inheritdoc
      */
     onNewDay() {
-        const isWatered = MyUtils.DEBUG || this.isWatered;
+        const isWatered = MyUtils.DEBUG.waterHack || this.isWatered;
         this.isWatered = false;
         if (!this.hasSeed()) return;
         if (this.isDead()) return;

@@ -140,7 +140,7 @@ MyUtils.loadFile = function(src, callback) {
 };
 /** @type {Spriteset_Map} */
 MyUtils.spriteset = null;
-MyUtils.DEBUG = false;
+
 var DSI_Utils_Spriteset_Map_initialize = Spriteset_Map.prototype.initialize;
 Spriteset_Map.prototype.initialize = function() {
     MyUtils.spriteset = this;
@@ -239,54 +239,6 @@ class Sprite_Shakeable extends Sprite {
         super.update();
         this.updateShake();
     }
-}
-
-class Sprite_Wind extends Sprite {
-
-    constructor() {
-        super();
-        this.bitmap = new Bitmap(32, 32);
-        this.bitmap.fillRect(0, 0, 32, 32, '#ffffff');
-        this.velocity = new Vector2(-5, 2);
-        this.x = Graphics.width;
-        this.y = 0;
-        this.loopCount = 30;
-        this.sinCount = 0;
-    }
-
-    update() {
-        super.update();
-        if (this.loopCount > 0) {
-            this.loopCount -= 1;
-        } else {
-            if (this.loopCount2 == undefined) {
-                this.curveVel.y = -30;
-                this.curveVel.x = 30;
-                this.loopCount2 = 5;
-            }
-            if (this.loopCount2 > 0) {
-                this.loopCount2 -= 1;
-            } else {
-                if (this.loopCount3 == undefined) {
-                    this.curveVel.x = 0;
-                    this.curveVel.y = 0;
-                    this.loopCount3 = 5;
-                }
-                // if (this.loopCount3 > 0) {
-                //     this.loopCount3 -= 1;
-                // } else {
-                //     this.curveVel.x = 0;
-                //     this.curveVel.y = 0;
-                // }
-            }
-        }
-        this.x += this.velocity.x + this.curveVel.x;
-        this.y += this.velocity.y + this.curveVel.y;
-    }
-}
-
-function addWind() {
-    MyUtils.spriteset.addChild(new Sprite_Wind());
 }
 
 //========================================================================

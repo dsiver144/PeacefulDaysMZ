@@ -1,5 +1,5 @@
 //=======================================================================
-// * Plugin Name  : DSI_SimpleLightingSystem.js
+// * Plugin Name  : DSI_Sys1_SimpleLightingSystem.js
 // * Last Updated : 8/15/2022
 //========================================================================
 /*:
