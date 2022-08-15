@@ -4,6 +4,7 @@ var $plugins =
 [
 {"name":"DSI-Core","status":true,"description":"v2.00 A helper plugin for DSI plugins.","parameters":{"showDevTool:bool":"true"}},
 {"name":"DSI_ShaderCore","status":true,"description":"","parameters":{}},
+{"name":"DSI_SimpleLightingSystem","status":true,"description":"(v1.0) Player Controller","parameters":{}},
 {"name":"rmmz_movement","status":true,"description":"(v1.0.4) 8 direction movement and pixel movement for RPG Maker MZ.","parameters":{}},
 {"name":"DSI_PeerJS","status":false,"description":"","parameters":{}},
 {"name":"DSI_Sys1_EventSystem","status":true,"description":"(v1.0) Peaceful Days Event System","parameters":{}},
@@ -32,6 +33,5 @@ var $plugins =
 {"name":"DSI_Sys4_Sprite_FarmObject","status":true,"description":"(v1.0) Sprite Farm Object","parameters":{}},
 {"name":"DSI_Sys4_Sprite_FarmTile","status":true,"description":"(v1.0) Sprite Farm Tile","parameters":{}},
 {"name":"DSI_Sys4_Sprite_FarmObstacle","status":true,"description":"(v1.0) Sprite Farm Obstacle","parameters":{}},
-{"name":"DSI_Sys4_Sprite_Key","status":true,"description":"(v1.0) Sprite Key","parameters":{}},
-{"name":"DSI_SimpleLight","status":true,"description":"","parameters":{}}
+{"name":"DSI_Sys4_Sprite_Key","status":true,"description":"(v1.0) Sprite Key","parameters":{}}
 ];
