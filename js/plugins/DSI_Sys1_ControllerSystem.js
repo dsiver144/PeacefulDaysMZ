@@ -217,9 +217,6 @@ Scene_Map.prototype.isMenuCalled = function() {
 
 Game_Player.prototype.triggerButtonAction = function() {
     if (Input.isTriggered(FieldKeyAction.Check)) {
-        if (this.checkInteractWithFarmObjects()) {
-            return true;
-        }
         if (this.getOnOffVehicle()) {
             return true;
         }
@@ -231,13 +228,16 @@ Game_Player.prototype.triggerButtonAction = function() {
         if ($gameMap.setupStartingEvent()) {
             return true;
         }
+        if (this.checkInteractWithFarmObjects()) {
+            return true;
+        }
     }
     return false;
 };
 
 Game_Player.prototype.checkInteractWithFarmObjects = function() {
     return false;
-}
+};
 
 var DSI_Sys1_ControllerSystem_TouchInput__onMouseDown = TouchInput._onMouseDown;
 TouchInput._onMouseDown = function(event) {
