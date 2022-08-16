@@ -120,7 +120,7 @@ class Blueprint {
         this.exp = 1;
         /** @type {number} */
         this.quantity = 1;
-        /** @type {number} */
+        /** @type {number} In-game minutes */
         this.duration = 10;
         /** @type {boolean} */
         this.quality = false;
