@@ -150,8 +150,15 @@ class FarmObject extends SaveableObject {
             const constructor = this.spriteClass();
             sprite = new constructor(this);
             MyUtils.addMapSprite(key, sprite);
+            this.onObjectSpriteCreated();
         }
         return sprite;
+    }
+    /**
+     * On Created Sprite First Time
+     */
+    onObjectSpriteCreated() {
+
     }
     /**
      * Refresh object sprite

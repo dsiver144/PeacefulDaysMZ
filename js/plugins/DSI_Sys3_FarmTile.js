@@ -287,5 +287,4 @@ class FarmTile extends FarmObject {
     spriteClass() {
         return Sprite_FarmTile;
     }
-
 }

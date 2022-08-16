@@ -5,7 +5,7 @@
 /*:
  * @author dsiver144
  * @target MZ
- * @plugindesc (v1.0) Player Controller
+ * @plugindesc (v1.0) Lighting System for MZ inspired by Khas
  * @help 
  * Empty Help
  */
@@ -232,6 +232,12 @@ class Sprite_Light extends Sprite {
      * Update custom effect
      */
     updateEffects() {
+        
+    }
+    /**
+     * Update opacity pulse
+     */
+    updatePulse() {
         this.opacity = 100 + Math.abs(Math.sin(Graphics.frameCount / 100) * (255 - 100));
     }
 }
@@ -244,6 +250,7 @@ class AmbientController extends SaveableObject {
     constructor() {
         super();
         AmbientController.inst = this;
+        // Note: Nice night color tint: {r: 50, g: 30, b: 150, a: 255}
         this._color = {
             r: 255,
             g: 255,
@@ -258,11 +265,15 @@ class AmbientController extends SaveableObject {
         }
         this._colorTweenDuration = 0;
     }
-
+    /**
+     * Get color
+     */
     get color() {
         return this._color;
     }
-
+    /**
+     * @inheritdoc
+     */
     saveProperties() {
         return [
             ['_color', null],
@@ -272,14 +283,24 @@ class AmbientController extends SaveableObject {
             ['_maxColorTweenDuration', null],
         ]
     }
-
+    /**
+     * Set ambient color
+     * @param {number} r 0-255
+     * @param {number} g 0-255
+     * @param {number} b 0-255
+     * @param {number} a 0-255
+     * @param {number} duration frames
+     */
     set(r, g, b, a, duration = 60) {
         this._targetColor = { r, g, b, a };
         this._originalColor = { ...this._color };
         this._colorTweenDuration = 0;
         this._maxColorTweenDuration = duration;
     }
-
+    /**
+     * Update color 
+     * @returns {void}
+     */
     updateColor() {
         if (this._maxColorTweenDuration == null) return;
         this._colorTweenDuration += 1;
@@ -292,7 +313,9 @@ class AmbientController extends SaveableObject {
             this._maxColorTweenDuration = null;
         }
     }
-
+    /**
+     * Update per frame
+     */
     update() {
         this.updateColor();
     }
