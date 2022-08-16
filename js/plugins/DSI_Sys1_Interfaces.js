@@ -12,6 +12,7 @@
 /** @enum */
 const ToolType = {
     "seedPack": "seedPack",
+    "sapling": "sapling",
     "wateringCan": "wateringCan",
     "hoe": "hoe",
     "hammer": "hammer",

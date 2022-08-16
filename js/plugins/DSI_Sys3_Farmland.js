@@ -62,6 +62,9 @@ class Farmland extends SaveableObject {
             case ToolType.seedPack:
                 result = this.useSeed(x, y, toolEx);
                 break;
+            case ToolType.sapling:
+                result = this.useSapling(x, y, toolEx);
+                break;
             case ToolType.hammer:
                 result = this.useHammer(x, y);
                 break;
@@ -93,12 +96,22 @@ class Farmland extends SaveableObject {
         if (object) {
             return object.onHitByTool(ToolType.hoe);
         }
-        if (!FarmManager.isFarmRegion(x, y)) {
-            return false;
+        return !!this.createFarmTile(x, y);
+    }
+    /**
+     * Create and return a FarmTile at specific position
+     * @param {number} x 
+     * @param {number} y
+     * @param {boolean} force
+     * @returns {FarmTile} 
+     */
+    createFarmTile(x, y, force = false) {
+        if (!force && !FarmManager.isFarmRegion(x, y)) {
+            return null;
         }
         const farmTile = new FarmTile(v2(x, y), this.mapId);
         this.addObject(farmTile);
-        return true;
+        return farmTile;
     }
     /**
      * Use Seed Pack
@@ -110,6 +123,22 @@ class Farmland extends SaveableObject {
         const object = this.getObject(x, y);
         if (!object) return false;
         return object.onHitByTool(ToolType.seedPack, seedId);
+    }
+    /**
+     * Use Sapling
+     * @param {number} x 
+     * @param {number} y 
+     * @param {number} seedId
+     */
+    useSapling(x, y, seedId) {
+        let object = this.getObject(x, y);
+        if (!object) {
+            object = this.createFarmTile(x, y);
+        }
+        if (!object) {
+            return false;
+        }
+        return object.onHitByTool(ToolType.sapling, seedId);
     }
     /**
      * Use Hammer

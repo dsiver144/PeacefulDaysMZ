@@ -22,7 +22,7 @@ class LineTool extends PD_Tool {
      * @param {number} y Y position when level 0
      * @param {number} powerCharged the power has been charged by user
      */
-    use(user, x, y, powerCharged) {
+    onUse(user, x, y, powerCharged) {
         /** @type {Vector2[]} */
         let targetPos = this.targetPositions(user, x, y, powerCharged);
         targetPos.forEach(tile => {
@@ -57,7 +57,7 @@ class AoeTool extends PD_Tool {
      * @param {number} y Y position when level 0
      * @param {number} powerCharged the power has been charged by user
      */
-    use(user, x, y, powerCharged) {
+    onUse(user, x, y, powerCharged) {
         /** @type {Vector2[]} */
         let targetPos = this.targetPositions(user, x, y, powerCharged);
         targetPos.forEach(tile => {
@@ -112,6 +112,15 @@ class SeedPack extends LineTool {
      */
     getType() {
         return ToolType.seedPack;
+    }
+}
+
+class TreeSapling extends LineTool {
+    /**
+     * @inheritdoc
+     */
+     getType() {
+        return ToolType.sapling;
     }
 }
 

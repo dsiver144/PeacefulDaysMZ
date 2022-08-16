@@ -26,7 +26,8 @@ class FarmTile extends FarmObject {
     onHitByTool(toolType, extraData) {
         let result = false;
         switch (toolType) {
-            case ToolType.seedPack:
+            case ToolType.seedPack: 
+            case ToolType.sapling:
                 if (this.hasSeed()) {
                     return false;
                 }
@@ -103,7 +104,7 @@ class FarmTile extends FarmObject {
         this.resetTimes = config.resetable ? config.resetTimes : 0;
         this.refreshSprite();
         if (this.isTree()) {
-            this.hp = FarmConfig.TREE_HP;
+            this.hp = FarmConfig.treeHP;
         }
     }
     /**
@@ -171,7 +172,7 @@ class FarmTile extends FarmObject {
             this.growUp();
         } else {
             this.nonWaterDays += 1;
-            if (this.nonWaterDays >= FarmConfig.NON_WATER_DAY_THRESHOLD) {
+            if (this.nonWaterDays >= FarmConfig.nonWaterDayThreshold) {
                 this.onDead();
             }
         }

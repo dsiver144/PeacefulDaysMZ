@@ -19,23 +19,15 @@
  * @type struct<StrFarmCrop>[]
  * @desc Setup tree
  * 
- * @param farmRegionIds:arr_num
- * @text Farm Region IDs
- * @type number[]
- * @default ["111","112"]
- * 
- * @param farmMaps:arr_num
- * @text Farm Map IDs
- * @type number[]
- * 
  * @command updateNewDay
  * 
  * 
  */
 
 const FarmConfig = {
-    NON_WATER_DAY_THRESHOLD: 3,
-    TREE_HP: 100
+    nonWaterDayThreshold: 3,
+    treeHP: 100,
+    farmableRegionIDs: [111, 112],
 }
 
 /** @type {PluginParams} */
@@ -204,7 +196,7 @@ FarmManager.getSeedData = function(seedId) {
  */
 FarmManager.isFarmRegion = function(x, y) {
     const regionId = $gameMap.regionId(x, y);
-    return FarmParams.farmRegionIds.includes(regionId);
+    return FarmConfig.farmableRegionIDs.includes(regionId);
 }
 
 //==================================================================================
@@ -212,63 +204,7 @@ FarmManager.isFarmRegion = function(x, y) {
 //==================================================================================
 
 Game_Player.prototype.updateUseToolInput = function() {
-    if (Input.isTriggered(FieldKeyAction.UseTool)) {
-        const equippedTool = ToolManager.inst.equippedTool();
-        if (!equippedTool) return;        
-        this._toolChargeAble = equippedTool.isChargeAble();
-        this._toolChargeTime = equippedTool.chargeTime();
-        this._toolMaxChargeLevel = equippedTool.maxChargeLevel();
-        this._toolChargedLevel = 0;
-        if (Input.getInputMode() === 'keyboard') {
-            const px = Math.round(this._x);
-            const py = Math.round(this._y);
-            const x = $gameMap.canvasToMapX(TouchInput.x);
-            const y = $gameMap.canvasToMapY(TouchInput.y);
-            const dist = Math.sqrt((x - px) * (x - px) + (y - py) * (y - py));
-            if (dist <= 1.5) {
-                this._targetToolPos = new Vector2(x, y);
-                this.turnTowardPoint(x, y);
-                this._pressingToolBtn = true;
-                this._pressingToolCounter = 0;
-            }
-        } else {
-            this._targetToolPos = this.frontPosition();
-            this._pressingToolBtn = true;
-            this._pressingToolCounter = 0;
-        }
-    }
-    if (this._pressingToolBtn) {
-        if (this._toolChargeAble && Input.isTriggered(FieldKeyAction.Check) || Input.isTriggered(FieldKeyAction.Cancel)) {
-            SoundManager.playCancel();
-            this._pressingToolBtn = false;
-            return;
-        }
-        if (this._toolChargeAble && Input.isPressed(FieldKeyAction.UseTool)) {
-            if (this._pressingToolCounter < this._toolChargeTime) {
-                this._pressingToolCounter += 1;
-            } else {
-                this._pressingToolCounter = 0;
-                if (this._toolChargedLevel < this._toolMaxChargeLevel) {
-                    this._toolChargedLevel += 1;
-                    console.log("POWER LEVEL INCREASE: ", this._toolChargedLevel);
-                    
-                    if (this._toolChargedLevel == this._toolMaxChargeLevel) {
-                        SoundManager.playRecovery();
-                    } else {
-                        SoundManager.playReflection();
-                    }
-                }
-            }
-            // console.log("Hold tool btn: ", this._pressingToolCounter);
-        } else {
-            const toolType = window.curTool || "hoe";
-            const pos = this._targetToolPos;
-            const power = this._toolChargedLevel;
-            console.log("POWER LEVEL: ", this._toolChargedLevel);
-            ToolManager.inst.useTool(this, toolType, pos.x, pos.y, power);
-            this._pressingToolBtn = false;
-        }
-    }
+    ToolManager.inst.update();
 };
 
 Game_Player.prototype.checkInteractWithFarmObjects = function() {
