@@ -2,7 +2,7 @@
     {
         "itemID": "BasicFeeds",
         "quantity": 5,
-        "duration": 180,
+        "duration": 30,
         "components": [
             {
                 "itemID": "WildGrass",
@@ -17,7 +17,7 @@
         "itemID": "PremiumFeeds",
         "comment": "Should be a reward for small quest in the future",
         "quantity": 5,
-        "duration": 360,
+        "duration": 60,
         "components": [
             {
                 "itemID": "WildGrass",
