@@ -66,6 +66,28 @@
 		}
 	},
 	{
+		"key": "OatSeeds",
+		"lang": {
+			"vn": "Hạt Giống Yến Mạch",
+			"en": "Oat Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống trồng cây yến mạch.",
+			"en": ""
+		}
+	},
+	{
+		"key": "OatGrain",
+		"lang": {
+			"vn": "Hạt Yến Mạch",
+			"en": "Oat Grain"
+		},
+		"description": {
+			"vn": "Chứa nhiều protein rất tốt cho sức khỏe.",
+			"en": ""
+		}
+	},
+	{
 		"key": "Hoe",
 		"lang": {
 			"vn": "Cuốc",
@@ -790,7 +812,8 @@
 			"vn": "Được dùng trong chế biến thức ăn.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "SheepWool",
 		"lang": {
 			"vn": "Lông Cừu",
@@ -800,7 +823,8 @@
 			"vn": "Có thể được dùng để dệt thành những cuộn len.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "MerinoSheepWool",
 		"lang": {
 			"vn": "Lông Cừu Merino",
@@ -810,7 +834,8 @@
 			"vn": "Có thể được dùng để dệt thành những cuộn len chất lượng cao.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "AngoraRabbitWool",
 		"lang": {
 			"vn": "Lông Thỏ Angora",
@@ -820,7 +845,8 @@
 			"vn": "Có thể được dùng để dệt thành những cuộn len.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "AlpacaWool",
 		"lang": {
 			"vn": "Lông Lạc Đà Alpaca",
@@ -830,7 +856,8 @@
 			"vn": "Có thể được dùng để dệt thành những cuộn len.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "AlpacaWool",
 		"lang": {
 			"vn": "Lông Lạc Đà Alpaca",
@@ -840,7 +867,8 @@
 			"vn": "Có thể được dùng để dệt thành những cuộn len.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "SheepYarnBall",
 		"lang": {
 			"vn": "Cuộn Len Cừu",
@@ -850,7 +878,8 @@
 			"vn": "Được dệt từ những @[SheepWool], có thể dùng để làm các vật phẩm dệt may khác.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "MerinoSheepYarnBall",
 		"lang": {
 			"vn": "Cuộn Len Cừu Merino",
@@ -860,7 +889,8 @@
 			"vn": "Được dệt từ những @[MerinoSheepWool], có thể dùng để làm các vật phẩm dệt may khác.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "AngoraRabbitYarnBall",
 		"lang": {
 			"vn": "Cuộn Len Thỏ Angora",
@@ -870,7 +900,8 @@
 			"vn": "Được dệt từ những @[AngoraRabbitWool], có thể dùng để làm các vật phẩm dệt may khác.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "AlpacaYarnBall",
 		"lang": {
 			"vn": "Cuộn Len L.Đ Alpaca",
@@ -880,7 +911,8 @@
 			"vn": "Được dệt từ những @[AlpacaWool], có thể dùng để làm các vật phẩm dệt may khác.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "AnimalBell",
 		"lang": {
 			"vn": "Chuông Gọi Thú",
@@ -901,7 +933,8 @@
 			"vn": "Thắp sáng một khu vực, có thể ném một số thứ vào để nấu.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "EnergyGenerator",
 		"lang": {
 			"vn": "Máy Phát Năng Lượng",
@@ -911,7 +944,8 @@
 			"vn": "Nó cung cấp năng lượng cho toàn bộ các thiết bị trong nông trại của bạn.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "BeeHive",
 		"lang": {
 			"vn": "Tổ Ong",

@@ -10,3 +10,5 @@ Hammer,Hammer,232,0,0,tool,,,true
 Axe,Axe,231,0,0,tool,,,true
 Corn,Corn,,0,0,crop; grain,10;25,,
 CornSeeds,CornSeeds,,0,0,seed,,,
+OatSeeds,OatSeeds,,,,seed,,,
+OatGrain,OatGrain,,,,crop; grain,,,

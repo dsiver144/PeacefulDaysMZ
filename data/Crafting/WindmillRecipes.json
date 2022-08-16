@@ -1,0 +1,35 @@
+[
+    {
+        "itemID": "BasicFeeds",
+        "quantity": 5,
+        "duration": 180,
+        "components": [
+            {
+                "itemID": "WildGrass",
+                "number": 5
+            }, {
+                "tag": "vegetable",
+                "number": 1
+            }
+        ],
+        "require": "Windmill"
+    }, {
+        "itemID": "PremiumFeeds",
+        "comment": "Should be a reward for small quest in the future",
+        "quantity": 5,
+        "duration": 360,
+        "components": [
+            {
+                "itemID": "WildGrass",
+                "number": 5
+            }, {
+                "tag": "vegetable",
+                "number": 1
+            }, {
+                "itemID": "OatGrain",
+                "number": 1
+            }
+        ],
+        "require": "Windmill"
+    }
+]
