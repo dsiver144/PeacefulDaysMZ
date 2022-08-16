@@ -69,6 +69,20 @@
 		"level": 0
 	},
 	{
+		"itemID": "Campfire",
+		"components": [
+			{
+				"itemID": "Lumber",
+				"number": 4
+			},
+			{
+				"itemID": "Charcoal",
+				"number": 1
+			}
+		],
+		"level": 0
+	},
+	{
 		"itemID": "ProteinBar",
 		"components": [
 			{
@@ -88,7 +102,8 @@
 			{
 				"itemID": "Lumber",
 				"number": 5
-			}, {
+			},
+			{
 				"itemID": "CooperBar",
 				"number": 1
 			}
@@ -120,6 +135,16 @@
 		"exp": 5
 	},
 	{
+		"itemID": "AnimalBell",
+		"components": [
+			{
+				"itemID": "CooperBar",
+				"number": 2
+			}
+		],
+		"level": 1
+	},
+	{
 		"itemID": "MachinePartMaker",
 		"quantity": 1,
 		"components": [
@@ -140,7 +165,32 @@
 		"exp": 5
 	},
 	{
+		"itemID": "EnergyGenerator",
+		"components": [
+			{
+				"itemID": "BigMotor",
+				"number": 1
+			},
+			{
+				"itemID": "Gear",
+				"number": 5
+			},
+			{
+				"itemID": "Screw",
+				"number": 5
+			},
+			{
+				"itemID": "Belt",
+				"number": 1
+			}
+		],
+		"limit": 1,
+		"level": 2,
+		"exp": 5
+	},
+	{
 		"itemID": "Pump",
+		"comment": "1 pump can supply up to 4 sprinklers at a time.",
 		"components": [
 			{
 				"itemID": "Tube",
@@ -191,8 +241,22 @@
 		"exp": 2
 	},
 	{
+		"itemID": "BeeHive",
+		"components": [
+			{
+				"itemID": "Lumber",
+				"number": 30
+			},
+			{
+				"itemID": "HardwoodLumber",
+				"number": 10
+			}
+		],
+		"level": 2
+	},
+	{
 		"itemID": "RecycleMachine",
-		"comment": "25% chance per component. Can be upgraded to increase the chance.",
+		"comment": "25% chance per component. Guaranted to get back at least 1 component. Can be upgraded to increase the chance.",
 		"components": [
 			{
 				"itemID": "BigMotor",

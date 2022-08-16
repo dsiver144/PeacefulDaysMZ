@@ -880,5 +880,46 @@
 			"vn": "Được dệt từ những @[AlpacaWool], có thể dùng để làm các vật phẩm dệt may khác.",
 			"en": ""
 		}
+	}, {
+		"key": "AnimalBell",
+		"lang": {
+			"vn": "Chuông Gọi Thú",
+			"en": "Animal Bell"
+		},
+		"description": {
+			"vn": "Gắn vào trước cửa chuồng để gọi thú nuôi ra vào chuồng.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Campfire",
+		"lang": {
+			"vn": "Lửa trại",
+			"en": "Campfire"
+		},
+		"description": {
+			"vn": "Thắp sáng một khu vực, có thể ném một số thứ vào để nấu.",
+			"en": ""
+		}
+	}, {
+		"key": "EnergyGenerator",
+		"lang": {
+			"vn": "Máy Phát Năng Lượng",
+			"en": "Energy Generator"
+		},
+		"description": {
+			"vn": "Nó cung cấp năng lượng cho toàn bộ các thiết bị trong nông trại của bạn.",
+			"en": ""
+		}
+	}, {
+		"key": "BeeHive",
+		"lang": {
+			"vn": "Tổ Ong",
+			"en": "Beehive"
+		},
+		"description": {
+			"vn": "Những con ong sẽ đến làm tổ ở đây và sản xuất mật ong.",
+			"en": ""
+		}
 	}
 ]
