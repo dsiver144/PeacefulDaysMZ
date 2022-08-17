@@ -340,7 +340,9 @@ class FarmChildObject extends FarmObject {
      * @returns {Sprite_FarmObject}
      */
     objectSprite() {
-        // this.parentObject().refreshSprite();
+        const key = this.spriteKey();
+        let sprite = MyUtils.getMapSprite(key);
+        return sprite;
     }
     /**
      * Refresh object sprite
