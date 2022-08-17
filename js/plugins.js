@@ -13,6 +13,7 @@ var $plugins =
 {"name":"DSI_Utils","status":true,"description":"(v1.0) An Utils plugin by dsiver144","parameters":{}},
 {"name":"DSI_Sys1_Localization","status":true,"description":"(v1.0) A custom plugin by dsiver144","parameters":{}},
 {"name":"DSI_Sys1_EngineOverhaul","status":true,"description":"(v1.0) RPG Maker Engine Overhaul","parameters":{}},
+{"name":"DSI_Sys1_CameraController","status":true,"description":"","parameters":{}},
 {"name":"DSI_Sys1_MultiplayerCore","status":true,"description":"","parameters":{}},
 {"name":"DSI_Sys1_Bitmap","status":true,"description":"v1.0 Bitmap System for Peaceful Days.","parameters":{}},
 {"name":"DSI_Sys1_ItemDatabase","status":true,"description":"","parameters":{}},

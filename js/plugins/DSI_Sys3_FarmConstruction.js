@@ -13,6 +13,7 @@
 const ConstructionConfig = {
     regionIds: [111, 112],
 }
+
 class FarmConstruction extends FarmObject {
     /**
      * Create farm object
@@ -23,6 +24,47 @@ class FarmConstruction extends FarmObject {
         super(position, mapId);
         this.type = this.constructor.name;
         this.init();
+    }
+    /**
+     * Save properties
+     */
+    saveProperties() {
+        const props = super.saveProperties();
+        return props.concat([
+            // ['hp', 0]
+        ]);
+    }
+    /**
+     * Init object
+     */
+    init() {
+        this.type = this.constructor.name;
+        this._moving = false;
+    }
+    /**
+     * On Interact
+     * @param {FarmObject} object
+     */
+    onInteract(object) {
+        const offsetX = object.position.x - this.position.x;
+        const offsetY = object.position.y - this.position.y;
+        const { x, y, width, height } = this.interactionRange();
+        if (offsetX >= x && offsetX <= x + width - 1 && offsetY >= y && offsetY <= y + height - 1) {
+            console.log('You interact with', { offsetX, offsetY }, object);
+        }
+    }
+    /**
+     * Get interaction range
+     * @returns {{x: number, y: number, width: number, height: number}}
+     */
+    interactionRange() {
+        return { x: 0, y: 0, width: 0, height: 0 };
+    }
+    /**
+     * @inheritdoc
+     */
+    spriteClass() {
+        return Sprite_FarmConstruction;
     }
     /**
      * Image File
@@ -80,6 +122,25 @@ class FarmConstruction extends FarmObject {
         return true;
     }
     /**
+     * Check if this object is being move
+     * @returns {boolean}
+     */
+    isBeingMove() {
+        return !!this._moving;
+    }
+    /**
+     * Start move construction
+     */
+    startMove() {
+        this._moving = true;
+    }
+    /**
+     * End move construction
+     */
+    endMove() {
+        this._moving = false;
+    }
+    /**
      * Check if this construction can be placed at specific position
      * @param {number} x 
      * @param {number} y 
@@ -98,47 +159,17 @@ class FarmConstruction extends FarmObject {
         }
         return true;
     }
-    /**
-     * Save properties
-     */
-    saveProperties() {
-        const props = super.saveProperties();
-        return props.concat([
-            // ['hp', 0]
-        ]);
-    }
-    /**
-     * Init object
-     */
-    init() {
-        this.type = this.constructor.name;
-    }
-    /**
-     * On Interact
-     * @param {FarmObject} object
-     */
-    onInteract(object) {
-        const offsetX = object.position.x - this.position.x;
-        const offsetY = object.position.y - this.position.y;
-        const {x, y, width, height} = this.interactionRange();
-        if (offsetX >= x && offsetX <= x + width - 1 && offsetY >= y && offsetY <= y + height - 1) {
-            console.log('You interact with', {offsetX, offsetY}, object);
-        }
-    }
-    /**
-     * Get interaction range
-     * @returns {{x: number, y: number, width: number, height: number}}
-     */
-    interactionRange() {
-        return {x: 0, y: 0, width: 0, height: 0};
-    }
-    /**
-     * @inheritdoc
-     */
-    spriteClass() {
-        return Sprite_FarmConstruction;
-    }
 }
+
+FarmConstruction.placeConstruction = function (constClass) {
+    /** @type {FarmConstruction} */
+    const construction = new constClass(new Vector2(10, 10), $gameMap.mapId());
+    const sprite = construction.objectSprite();
+    construction.startMove();
+    CameraController.inst.setTarget(sprite, 600);
+    console.log(sprite);
+}
+
 class Coop extends FarmConstruction {
     /**
      * @inheritdoc
@@ -150,7 +181,7 @@ class Coop extends FarmConstruction {
      * @inheritdoc
      */
     bottomSize() {
-        return {x: 5, y: 2};
+        return { x: 5, y: 2 };
     }
     /**
      * @inheritdoc
@@ -167,8 +198,8 @@ class Coop extends FarmConstruction {
      * Get interaction range
      * @returns {{x: number, y: number, width: number, height: number}}
      */
-     interactionRange() {
-        return {x: 1, y: 1, width: 1, height: 1};
+    interactionRange() {
+        return { x: 1, y: 1, width: 1, height: 1 };
     }
     /**
      * @inheritdoc

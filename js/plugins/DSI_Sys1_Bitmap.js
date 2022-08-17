@@ -30,7 +30,7 @@ var DSI = DSI || {};
         }
     }
 
-    Game_Map.prototype.screenTileXd = function() {
+    Game_Map.prototype.screenTileX = function() {
         return Math.round((Graphics.width / this.tileWidth()) * 16) / 16 / (window.customScaleRatio || 1.0);
     };
     

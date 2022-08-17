@@ -12,6 +12,49 @@
 
 class Sprite_FarmConstruction extends Sprite_FarmObject {
     /**
+     * Check if this can be control
+     * @returns {boolean}
+     */
+    isControlable() {
+        return this.construction().isBeingMove();
+    }
+    /**
+     * Update input
+     */
+    updateInput() {
+        if (!this.isControlable()) return;
+        const construction = this.construction();
+        const inputMode = Input.getInputMode();
+        if (inputMode === 'keyboard') {
+            const x = $gameMap.canvasToMapX(TouchInput.x);
+            const y = $gameMap.canvasToMapY(TouchInput.y);
+            construction.position.x = x;
+            construction.position.y = y;
+            const valid = construction.canPlaceAt(x, y);
+            this.opacity = valid ? 255 : 100;
+        } else {
+            if (Input.isRepeated(FieldKeyAction.MoveLeft)) {
+                this.farmObject.position.x -= 1;
+            }
+            if (Input.isRepeated(FieldKeyAction.MoveRight)) {
+                this.farmObject.position.x += 1;
+            }
+            if (Input.isRepeated(FieldKeyAction.MoveUp)) {
+                this.farmObject.position.y -= 1;
+            }
+            if (Input.isRepeated(FieldKeyAction.MoveDown)) {
+                this.farmObject. position.y += 1;
+            }
+        }
+    }
+    /**
+     * Update per frame
+     */
+    update() {
+        super.update();
+        this.updateInput();
+    }
+    /**
      * Get Farm Tile
      * @returns {FarmConstruction}
      */
