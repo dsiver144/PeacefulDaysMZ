@@ -31,9 +31,50 @@ const Craftingconfig = {
         "Windmill": "WindmillRecipes.json",
     }
 }
-class CraftManager {
+
+class CraftManager extends SaveableObject {
     /**
-     * This is the core of the crafting in Peaceful Days.
+     * This handle the crafting system for Peaceful Days
+     */
+    constructor() {
+        super();
+        CraftManager.inst = this;
+    }
+    /**
+     * Check if player can craft
+     * @param {Blueprint} blueprint 
+     */
+    isCraftable(blueprint) {
+        blueprint.require
+    }
+    /**
+     * @inheritdoc
+     */
+    saveProperties() {
+        const data = super.saveProperties();
+        // data.push([]);
+        return data;
+    }
+}
+/** @type {CraftManager} */
+CraftManager.inst = null;
+
+class CraftMachine extends SaveableObject {
+
+    constructor() {
+        super();
+    }
+
+    saveProperties() {
+        return [
+            
+        ]
+    }
+}
+
+class CraftDB {
+    /**
+     * This handle DB work for crafting in Peaceful Days.
      */
     constructor() {
         /** @type {Map<CraftType, Blueprint[]} */
@@ -100,8 +141,8 @@ class CraftManager {
 //============================================================================
 // INIT THE CRAFTING SYSTEM
 //============================================================================
-/** @type {CraftManager} */
-CraftManager.inst = new CraftManager();
+/** @type {CraftDB} */
+CraftDB.inst = new CraftDB();
 //============================================================================
 // Crafting Blueprint Class
 //============================================================================
@@ -154,5 +195,11 @@ class BlueprintComponent {
 var DSI_Sys2_CraftingSystem_Scene_Boot_isReady = Scene_Boot.prototype.isReady;
 Scene_Boot.prototype.isReady = function () {
     const result = DSI_Sys2_CraftingSystem_Scene_Boot_isReady.call(this);
-    return result && CraftManager.inst.isReady();
+    return result && CraftDB.inst.isReady();
 };
+
+var DSI_Sys2_CraftingSystem_Game_System_createSaveableObjects = Game_System.prototype.createSaveableObjects;
+Game_System.prototype.createSaveableObjects = function () {
+    DSI_Sys2_CraftingSystem_Game_System_createSaveableObjects.call(this);
+    this._craftingSystem = new CraftManager();
+}
