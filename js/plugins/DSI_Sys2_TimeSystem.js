@@ -10,35 +10,53 @@
  * 
  */
 const TimeConfig = {
+    morningHour: 6,
     maxHour: 24,
+    extendedHour: 3,
     maxMin: 60,
     maxMonthDay: 28,
     frameRequiredPerUpdate: 100,
     minPerUpdate: 5,
     maxSeason: 4
 }
+/** @enum */
+const WeatherType = {
+    "rain": "rain",
+    "sunny": "sunny",
+    "windy": "windy",
+    "cloudy": "cloudy",
+    "thunderstorm": "thunderstorm",
+    "storm": "storm",
+    "snowy": "snowy",
+    "snowStorm": "snowStorm",
+}
 
 const WeatherConfig = {
     0: {
-        rain: 20,
-        sunny: 60,
-        windy: 20
+        rain: 25,
+        sunny: 45,
+        cloudy: 10,
+        windy: 10
     },
     1: {
-        rain: 50,
-        sunny: 25,
-        windy: 20,
-        storm: 5
+        rain: 30,
+        thunderstorm: 10,
+        sunny: 40,
+        windy: 10,
+        cloudy: 10,
+        storm: 2
     },
     2: {
         rain: 20,
         sunny: 40,
-        windy: 40
+        cloudy: 20,
+        windy: 20
     },
     3: {
         sunny: 20,
-        snowy: 75,
-        snowStorm: 5
+        cloudy: 15,
+        snowy: 60,
+        snowStorm: 2
     }
 }
 
@@ -57,13 +75,15 @@ class GameTime extends SaveableObject {
      * Init
      */
     init() {
-        this.hour = 0;
+        this.hour = 6;
         this.min = 0;
         this.monthDay = 1;
         this.year = 1;
         this.frameCount = 0;
         this.season = 0;
+        this.weatherType = WeatherType.sunny;
         this.paused = true;
+        this.totalMins = 0;
     }
     /**
      * Randomize Weather
@@ -82,6 +102,38 @@ class GameTime extends SaveableObject {
             weatherPool[season] = array;
         }
         return MyUtils.randomArrayItem(weatherPool[season]);
+    }
+    /**
+     * Check if player is in valid hour
+     * @returns {boolean}
+     */
+    isValidHour() {
+        return this.hour >= 6 && this.hour <= 24;
+    }
+    /**
+     * Check if player is in late hour
+     * @returns {boolean1}
+     */
+    isLateHour() {
+        return this.hour >= 0 && this.hour < 6;
+    }
+    /**
+     * Process to next day.
+     * @param {boolean} increaseDay
+     */
+    nextDay(increaseDay = true) {
+        // Calculate total mins until morning
+        const totalHoursToMorning = (this.isValidHour() ? TimeConfig.maxHour - this.hour : -this.hour) + TimeConfig.morningHour;
+        const minLeft = TimeConfig.maxMin - this.min;
+        this.totalMins += totalHoursToMorning * TimeConfig.maxMin + minLeft;
+        // Recalculate the time values when morning comes.
+        if (increaseDay) {
+            this.updateMonthDay(1);
+        }
+        this.hour = TimeConfig.morningHour;
+        this.min = 0;
+        this.weatherType = this.randomizeWeather(this.season);
+        console.log(this.totalMins, this.weatherType, { totalHoursToMorning, minLeft });
     }
     /**
      * Pause Time
@@ -140,6 +192,7 @@ class GameTime extends SaveableObject {
      */
     updateMin(value) {
         this.min += value;
+        this.totalMins += value;
         if (this.min >= TimeConfig.maxMin) {
             this.min = this.min - TimeConfig.maxMin;
             this.updateHour(1);
@@ -154,6 +207,9 @@ class GameTime extends SaveableObject {
         if (this.hour >= TimeConfig.maxHour) {
             this.hour = this.hour - TimeConfig.maxHour;
             this.updateMonthDay(1);
+        }
+        if (this.isLateHour() && this.hour >= TimeConfig.extendedHour) {
+            this.nextDay(false);
         }
     }
     /**
@@ -203,6 +259,13 @@ GameTime.min = function () {
     return GameTime.inst.min;
 }
 /**
+ * Get Total Mins Have Passed
+ * @returns {number}
+ */
+GameTime.totalMins = function () {
+    return GameTime.inst.totalMins;
+}
+/**
  * Get Season
  * @returns {number}
  */
@@ -222,6 +285,13 @@ GameTime.monthDay = function () {
  */
 GameTime.year = function () {
     return GameTime.inst.year;
+}
+/**
+ * Get Weather Type
+ * @returns {string}
+ */
+GameTime.weatherType = function () {
+    return GameTime.inst.weatherType;
 }
 /**
  * Pause Time

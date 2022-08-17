@@ -180,7 +180,6 @@ Scene_Base.prototype.update = function() {
 }
 
 Scene_Base.prototype.updateDebugInput = function() {
-    console.log("update input", Input.isTriggered(DebugKeyAction.DebugMenu));
     if (Input.isTriggered(DebugKeyAction.DebugMenu)) {
         if (!this._debugWindow) {
             this._debugWindow = new Window_MyDebug();
