@@ -40,6 +40,7 @@ class Window_MyDebug extends Window_Command {
         this.addOption('New Day', 'newDay', this.onNewDay.bind(this));
         this.addOption('Test Tree Swing', 'testTreeSwing', this.onTestTreeSwing.bind(this));
         this.addOption('Set Ambient', 'setAmbient', this.onSetAmbientLight.bind(this));
+        this.addOption('Custom', 'custom', this.onCustomCommand.bind(this));
         this.addOption('Exit', 'cancel', this.onCancelCommand.bind(this));
     }
     /**
@@ -118,6 +119,15 @@ class Window_MyDebug extends Window_Command {
         let ambientColor = prompt('Enter 4 values r, g, b, a:');
         ambientColor = ambientColor.split(",").map(n => Number(n));
         AmbientController.inst.set(...ambientColor);
+        this.onCommandOK();
+    }
+    /**
+     * On Custom Command
+     */
+    onCustomCommand() {
+        var object = new Coop(new Vector2(10, 10), 1);
+        FarmManager.inst.currentFarmland().addObject(object);
+
         this.onCommandOK();
     }
     /**

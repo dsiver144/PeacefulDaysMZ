@@ -222,5 +222,4 @@ class OHugeStone extends FarmObstacle {
             y: 2
         }
     }
-
 }

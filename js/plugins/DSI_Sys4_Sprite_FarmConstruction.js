@@ -1,6 +1,6 @@
 //=======================================================================
-// * Plugin Name  : DSI_Sys4_Sprite_FarmObstacle.js
-// * Last Updated : 8/3/2022
+// * Plugin Name  : DSI_Sys4_Sprite_FarmConstruction.js
+// * Last Updated : 8/17/2022
 //========================================================================
 /*:
  * @author dsiver144
@@ -10,25 +10,25 @@
  * Empty Help
  */
 
-class Sprite_FarmObstacle extends Sprite_FarmObject {
+class Sprite_FarmConstruction extends Sprite_FarmObject {
     /**
      * Get Farm Tile
-     * @returns {FarmObstacle}
+     * @returns {FarmConstruction}
      */
-    obstacle() {
+    construction() {
         return this.farmObject;
     }
     /**
      * @inheritdoc
      */
     createOptionalSprites() {
-        
+
     }
     /**
      * @inheritdoc
      */
     removeOptionalSprites() {
-        
+
     }
     /**
      * @inheritdoc
@@ -40,17 +40,18 @@ class Sprite_FarmObstacle extends Sprite_FarmObject {
      * @inheritdoc
      */
     refreshBitmap() {
-        const obstacle = this.obstacle();
-        this.displayOffset = obstacle.displayOffset();
-        this.bitmap = ImageManager.loadFarm(obstacle.imageFile());
+        const construction = this.construction();
+        this.displayOffset = construction.displayOffset();
+        this.bitmap = ImageManager.loadFarm(construction.imageFile());
         this.bitmap.addLoadListener(bitmap => {
-            const {x, y, width, height} = obstacle.imageRect();
+            const { x, y, width, height } = construction.imageRect();
             this.setFrame(x, y, width, height);
             this.updatePosition();
             this.anchor.x = 0;
-            this.anchor.y = 0;
+            this.anchor.y = 1.0;
+            this.displayOffset.y += bitmap.height * this.anchor.y;
             this.updateTopLeftOffset();
-            this.setOffscreenLimit(1, 3);
+            this.setOffscreenLimit(1, 1);
         });
     }
     /**
@@ -77,4 +78,11 @@ class Sprite_FarmObstacle extends Sprite_FarmObject {
             this.scrolledY() * th
         ) + this.displayOffset.y;
     }
+    /**
+     * @inheritdoc
+     */
+    screenZ() {
+        return 3;
+    }
+
 }
