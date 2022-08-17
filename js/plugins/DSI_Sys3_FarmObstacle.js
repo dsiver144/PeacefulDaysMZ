@@ -103,8 +103,9 @@ class FarmObstacle extends FarmObject {
     }
     /**
      * On Interact
+     * @param {FarmObject} object
      */
-    onInteract() {
+    onInteract(object) {
         // Player pick up the obstacle
         console.log('You picked up', this.type);
     }

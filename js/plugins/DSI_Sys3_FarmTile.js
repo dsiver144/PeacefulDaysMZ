@@ -253,9 +253,10 @@ class FarmTile extends FarmObject {
         return !sickleRequired;
     }
     /**
-     * @inheritdoc
+     * On Interact
+     * @param {FarmObject} object
      */
-    onInteract() {
+    onInteract(object) {
         this.harvest();
     }
     /**

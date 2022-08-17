@@ -29,6 +29,12 @@ class FarmConstruction extends FarmObject {
         return "Buildings/"
     }
     /**
+     * @inheritdoc
+     */
+    interactable() {
+        return true;
+    }
+    /**
      * Get Image Rect 
      * @returns {{x: number, y: number, width: number, height: number}}
      */
@@ -47,7 +53,7 @@ class FarmConstruction extends FarmObject {
     displayOffset() {
         return {
             x: 0,
-            y: 0,
+            y: -this.bottomSize().y * 32,
         }
     }
     /**
@@ -73,10 +79,11 @@ class FarmConstruction extends FarmObject {
     }
     /**
      * On Interact
+     * @param {FarmObject} object
      */
-    onInteract() {
+    onInteract(object) {
         // Player pick up the obstacle
-        console.log('You interact with', this.type);
+        console.log('You interact with', object);
     }
     /**
      * @inheritdoc
@@ -96,12 +103,6 @@ class Coop extends FarmConstruction {
     /**
      * @inheritdoc
      */
-    interactable() {
-        return true;
-    }
-    /**
-     * @inheritdoc
-     */
     bottomSize() {
         return {x: 5, y: 2};
     }
@@ -113,15 +114,10 @@ class Coop extends FarmConstruction {
             x: 0,
             y: 0,
             width: 160,
-            height: 160
+            height: 128
         }
     }
-    /**
-     * @inheritdoc
-     */
-    displayOffset() {
-        return {x: 0, y: -64}
-    }
+
     /**
      * @inheritdoc
      */

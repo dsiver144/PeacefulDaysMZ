@@ -65,8 +65,8 @@ class FarmObject extends SaveableObject {
     /**
      * Interact
      */
-    interact() {
-        this.onInteract();
+    interact(object) {
+        this.onInteract(object);
     }
     /**
      * Will be called when being spawned.
@@ -88,8 +88,9 @@ class FarmObject extends SaveableObject {
     }
     /**
      * On Interact
+     * @param {FarmObject} object
      */
-    onInteract() {
+    onInteract(object) {
         console.log("> A ", this.type, " has been interacted at " + this.position.toString(), this);
     }
     /**
@@ -261,7 +262,7 @@ class FarmChildObject extends FarmObject {
      * Interact
      */
     interact() {
-        this.parentObject().interact();
+        this.parentObject().interact(this);
     }
     /**
      * Will be called when being spawned.
@@ -283,8 +284,9 @@ class FarmChildObject extends FarmObject {
     }
     /**
      * On Interact
+     * @param {FarmObject} object
      */
-    onInteract() {
+    onInteract(object) {
         console.log("> A ", this.type, " has been interacted at " + this.position.toString(), this);
     }
     /**
@@ -338,7 +340,7 @@ class FarmChildObject extends FarmObject {
      * @returns {Sprite_FarmObject}
      */
     objectSprite() {
-        this.parentObject().refreshSprite();
+        // this.parentObject().refreshSprite();
     }
     /**
      * Refresh object sprite
