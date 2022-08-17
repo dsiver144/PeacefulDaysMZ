@@ -10,6 +10,9 @@
  * 
  * 
  */
+const ConstructionConfig = {
+    regionIds: [111, 112],
+}
 class FarmConstruction extends FarmObject {
     /**
      * Create farm object
@@ -26,7 +29,7 @@ class FarmConstruction extends FarmObject {
      * @returns {string}
      */
     imageFile() {
-        return "Buildings/"
+        return "constructions/"
     }
     /**
      * @inheritdoc
@@ -63,6 +66,39 @@ class FarmConstruction extends FarmObject {
         return true;
     }
     /**
+     * Check if this construction is removable
+     * @returns {boolean}
+     */
+    isRemovable() {
+        return true;
+    }
+    /**
+     * Check if this construction is movable
+     * @returns {boolean}
+     */
+    isMovable() {
+        return true;
+    }
+    /**
+     * Check if this construction can be placed at specific position
+     * @param {number} x 
+     * @param {number} y 
+     * @returns {boolean}
+     */
+    canPlaceAt(x, y) {
+        const farmland = FarmManager.inst.getFarmlandById(this.mapId);
+        for (let ox = 0; ox < this.bottomSize().x; ox++) {
+            for (let oy = 0; oy < this.bottomSize().y; oy++) {
+                const checkX = x + ox;
+                const checkY = y + oy;
+                const regionId = $gameMap.regionId(checkX, checkY);
+
+                if (farmland.getObject(checkX, checkY) || !ConstructionConfig.regionIds.includes(regionId)) return false;
+            }
+        }
+        return true;
+    }
+    /**
      * Save properties
      */
     saveProperties() {
@@ -82,8 +118,19 @@ class FarmConstruction extends FarmObject {
      * @param {FarmObject} object
      */
     onInteract(object) {
-        // Player pick up the obstacle
-        console.log('You interact with', object);
+        const offsetX = object.position.x - this.position.x;
+        const offsetY = object.position.y - this.position.y;
+        const {x, y, width, height} = this.interactionRange();
+        if (offsetX >= x && offsetX <= x + width - 1 && offsetY >= y && offsetY <= y + height - 1) {
+            console.log('You interact with', {offsetX, offsetY}, object);
+        }
+    }
+    /**
+     * Get interaction range
+     * @returns {{x: number, y: number, width: number, height: number}}
+     */
+    interactionRange() {
+        return {x: 0, y: 0, width: 0, height: 0};
     }
     /**
      * @inheritdoc
@@ -92,7 +139,6 @@ class FarmConstruction extends FarmObject {
         return Sprite_FarmConstruction;
     }
 }
-
 class Coop extends FarmConstruction {
     /**
      * @inheritdoc
@@ -117,7 +163,13 @@ class Coop extends FarmConstruction {
             height: 128
         }
     }
-
+    /**
+     * Get interaction range
+     * @returns {{x: number, y: number, width: number, height: number}}
+     */
+     interactionRange() {
+        return {x: 1, y: 1, width: 1, height: 1};
+    }
     /**
      * @inheritdoc
      */

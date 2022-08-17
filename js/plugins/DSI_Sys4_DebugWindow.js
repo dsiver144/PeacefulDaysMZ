@@ -109,7 +109,7 @@ class Window_MyDebug extends Window_Command {
     onTestTreeSwing() {
         setInterval(() => {
             for (var i = 1; i <= 8; i++) SceneManager._scene._spriteset._characterSprites[i].skew.x = Math.sin(Date.now() * 0.005) * 0.035;
-        }, 60/1000) 
+        }, 60 / 1000)
         this.onCommandOK();
     }
     /**
@@ -127,7 +127,22 @@ class Window_MyDebug extends Window_Command {
     onCustomCommand() {
         var object = new Coop(new Vector2(10, 10), 1);
         FarmManager.inst.currentFarmland().addObject(object);
-
+        // let startX = 0;
+        // let startY = 0;
+        // const interval = setInterval(() => {
+        //     switch (Input.dir4) {
+        //         case 2: startY += 1; break;
+        //         case 4: startX -= 1; break;
+        //         case 6: startX += 1; break;
+        //         case 8: startY -= 1; break;
+        //     }
+        //     if (Input.dir4 > 0) {
+        //         console.log({startX, startY}, object.canPlaceAt(startX, startY));
+        //     }
+        //     if (Input.isTriggered(MenuKeyAction.PageLeft)) {
+        //         FarmManager.inst.currentFarmland().addObject(object);
+        //     }
+        // }, 60/1000);
         this.onCommandOK();
     }
     /**
@@ -184,12 +199,12 @@ Game_Player.prototype.isDebugThrough = function () {
 };
 
 var DSI_Sys4_DebugWindow_Scene_Base_update = Scene_Base.prototype.update;
-Scene_Base.prototype.update = function() {
-	DSI_Sys4_DebugWindow_Scene_Base_update.call(this);
+Scene_Base.prototype.update = function () {
+    DSI_Sys4_DebugWindow_Scene_Base_update.call(this);
     this.updateDebugInput();
 }
 
-Scene_Base.prototype.updateDebugInput = function() {
+Scene_Base.prototype.updateDebugInput = function () {
     if (Input.isTriggered(DebugKeyAction.DebugMenu)) {
         if (!this._debugWindow) {
             this._debugWindow = new Window_MyDebug();
