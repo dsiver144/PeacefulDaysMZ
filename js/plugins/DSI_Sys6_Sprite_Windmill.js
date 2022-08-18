@@ -44,3 +44,19 @@ class Sprite_Windmill extends Sprite_FarmConstruction {
         this.removeChild(this._wingSprite);
     }
 }
+
+class Sprite_Fermenter extends Sprite_FarmConstruction {
+    /**
+     * Get machine
+     * @returns {FarmMachine}
+     */
+    get machine() {
+        return this.farmObject;
+    }
+    update() {
+        super.update();
+        if (this.machine.activeTask) {
+            console.log(this.machine.activeTask.progressRate());
+        }
+    }
+}

@@ -180,4 +180,5 @@ FarmConstruction.placeConstruction = function (constClass) {
     /** @type {FarmConstruction} */
     const construction = new constClass(new Vector2(10, 10), $gameMap.mapId());
     construction.startMove();
+    return construction;
 }

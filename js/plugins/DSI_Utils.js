@@ -18,7 +18,7 @@
  * @param {string} dir sub-directory of the image
  * @returns {Bitmap}
  */
-ImageManager.loadMenu = function(filename, dir = "") {
+ImageManager.loadMenu = function (filename, dir = "") {
     let path = "img/menus/" + dir;
     if (dir.length > 0) path += "/";
     return ImageManager.loadBitmap(path, filename);
@@ -61,7 +61,7 @@ class Vector2 extends SaveableObject {
  * @param {number} y 
  * @returns {Vector2}
  */
-const v2 = function(x, y) {
+const v2 = function (x, y) {
     return new Vector2(x, y);
 }
 
@@ -99,7 +99,7 @@ MyUtils.parseCSV = function (filename, callback) {
  * @param {string} src 
  * @param {(data: string) => void} callback 
  */
-MyUtils.loadCSV = function(src, callback) {
+MyUtils.loadCSV = function (src, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "data/" + src, false);
     xhr.onload = function (e) {
@@ -121,7 +121,7 @@ MyUtils.loadCSV = function(src, callback) {
  * @param {string} src 
  * @param {(data: string) => void} callback 
  */
-MyUtils.loadFile = function(src, callback) {
+MyUtils.loadFile = function (src, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "data/" + src, false);
     xhr.onload = function (e) {
@@ -138,16 +138,36 @@ MyUtils.loadFile = function(src, callback) {
     };
     xhr.send(null);
 };
+/**
+ * Return an UUID
+ * https://stackoverflow.com/questions/105034/how-do-i-create-a-guid-uuid
+ * @returns {string}
+ */
+MyUtils.uuid = function () {
+    var d = new Date().getTime();//Timestamp
+    var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now() * 1000)) || 0;//Time in microseconds since page-load or 0 if unsupported
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16;//random number between 0 and 16
+        if (d > 0) {//Use timestamp until depleted
+            r = (d + r) % 16 | 0;
+            d = Math.floor(d / 16);
+        } else {//Use microseconds since page-load if supported
+            r = (d2 + r) % 16 | 0;
+            d2 = Math.floor(d2 / 16);
+        }
+        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+}
 /** @type {Spriteset_Map} */
 MyUtils.spriteset = null;
 
 var DSI_Utils_Spriteset_Map_initialize = Spriteset_Map.prototype.initialize;
-Spriteset_Map.prototype.initialize = function() {
+Spriteset_Map.prototype.initialize = function () {
     MyUtils.spriteset = this;
-	DSI_Utils_Spriteset_Map_initialize.call(this);
+    DSI_Utils_Spriteset_Map_initialize.call(this);
 };
 
-Spriteset_Map.prototype.addCustomSpriteToTilemap = function(key, sprite) {
+Spriteset_Map.prototype.addCustomSpriteToTilemap = function (key, sprite) {
     this._customSprites = this._customSprites || {};
     if (this._customSprites[key]) {
         return;
@@ -156,7 +176,7 @@ Spriteset_Map.prototype.addCustomSpriteToTilemap = function(key, sprite) {
     this._tilemap.addChild(sprite);
 }
 
-Spriteset_Map.prototype.removeCustomSpriteFromTilemap = function(key) {
+Spriteset_Map.prototype.removeCustomSpriteFromTilemap = function (key) {
     this._customSprites = this._customSprites || {};
     const sprite = this._customSprites[key];
     if (!sprite) {
@@ -166,7 +186,7 @@ Spriteset_Map.prototype.removeCustomSpriteFromTilemap = function(key) {
     delete this._customSprites[key];
 }
 
-Spriteset_Map.prototype.getCustomSpriteFromTilemap = function(key) {
+Spriteset_Map.prototype.getCustomSpriteFromTilemap = function (key) {
     this._customSprites = this._customSprites || {};
     return this._customSprites[key];
 }
@@ -175,7 +195,7 @@ Spriteset_Map.prototype.getCustomSpriteFromTilemap = function(key) {
  * @param {string} key 
  * @param {Sprite} sprite 
  */
-MyUtils.addMapSprite = function(key, sprite) {
+MyUtils.addMapSprite = function (key, sprite) {
     const spriteset = this.spriteset;
     if (!spriteset) return;
     spriteset.addCustomSpriteToTilemap(key, sprite);
@@ -184,7 +204,7 @@ MyUtils.addMapSprite = function(key, sprite) {
  * Remove custom sprite to tilemap
  * @param {string} key 
  */
-MyUtils.removeMapSprite = function(key) {
+MyUtils.removeMapSprite = function (key) {
     const spriteset = this.spriteset;
     if (!spriteset) return;
     spriteset.removeCustomSpriteFromTilemap(key);
@@ -194,7 +214,7 @@ MyUtils.removeMapSprite = function(key) {
  * @param {string} key 
  * @returns {Sprite}
  */
-MyUtils.getMapSprite = function(key) {
+MyUtils.getMapSprite = function (key) {
     const spriteset = this.spriteset;
     if (!spriteset) return null;
     return spriteset.getCustomSpriteFromTilemap(key);
@@ -204,7 +224,7 @@ MyUtils.getMapSprite = function(key) {
  * @param {any[]} array 
  * @returns {any}
  */
-MyUtils.randomArrayItem = function(array) {
+MyUtils.randomArrayItem = function (array) {
     return array[Math.floor(Math.random() * array.length)];
 }
 

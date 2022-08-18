@@ -39,9 +39,6 @@ class CraftManager extends SaveableObject {
     constructor() {
         super();
         CraftManager.inst = this;
-        /** @type {CraftTask[]} */
-        this._tasks = [new CraftTask('Test1')];
-        this._tasks = [new CraftTask('Test2')];
     }
     /**
      * Check if player can craft
@@ -49,12 +46,6 @@ class CraftManager extends SaveableObject {
      */
     isCraftable(blueprint) {
         // blueprint.require
-    }
-    /**
-     * Update when time is running
-     */
-    update() {
-
     }
     /**
      * @inheritdoc
@@ -67,7 +58,6 @@ class CraftManager extends SaveableObject {
 }
 /** @type {CraftManager} */
 CraftManager.inst = null;
-
 class CraftTask extends SaveableObject {
     /**
      * Handle crafting task
@@ -78,18 +68,62 @@ class CraftTask extends SaveableObject {
         /** @type {string} */
         this._assignee = assignee;
         this._beginTime = null;
-        this._endTime = null;
-        this._product = {
-            itemID: null,
-            number: 0,
-            level: 0
+        this._blueprintID = null;
+        this._productLevel = null;
+    }
+    /**
+     * Set task detail
+     * @param {Blueprint} blueprint
+     * @param {number} productLevel
+     */
+    setDetail(blueprint, productLevel = 0) {
+        this._beginTime = GameTime.inst.totalMins;
+        this._blueprintID = blueprint.itemID;
+        this._productLevel = productLevel;
+    }
+    /**
+     * Get set blueprint
+     */
+    get currentBlueprint() {
+        return this._blueprintID ? CraftDB.inst.getBlueprintByID(this._blueprintID) : null;
+    }
+    /**
+     * Get product
+     */
+    get product() {
+        const blueprint = this.currentBlueprint;
+        return {
+            itemID: blueprint.itemID,
+            quantity: blueprint.quality,
+            level: this._productLevel
         }
+    }
+    /**
+     * Get end time
+     */
+    get endTime() {
+        return this._beginTime + this.currentBlueprint.duration;
+    }
+    /**
+     * Check if this task is finished or not
+     * @returns {boolean}
+     */
+    isFinished() {
+        return GameTime.inst.totalMins >= this.endTime;
+    }
+    /**
+     * Get progress rate
+     * @returns {number}
+     */
+    progressRate() {
+        const current = GameTime.inst.totalMins - this._beginTime;
+        return current / this.currentBlueprint.duration;
     }
     /**
      * Update
      */
     update() {
-        
+
     }
     /**
      * @inheritdoc
@@ -98,8 +132,7 @@ class CraftTask extends SaveableObject {
         return [
             ['_assignee', null],
             ['_beginTime', null],
-            ['_endTime', null],
-            ['_product', null],
+            ['_blueprintID', null],
         ]
     }
 }
@@ -111,6 +144,8 @@ class CraftDB {
     constructor() {
         /** @type {Map<CraftType, Blueprint[]} */
         this._blueprints = new Map();
+        /** @type {Map<string, Blueprint>} */
+        this._blueprintsByItemID = new Map();
         this.loadAllBlueprints();
     }
     /**
@@ -118,6 +153,14 @@ class CraftDB {
      */
     get blueprints() {
         return this._blueprints;
+    }
+    /**
+     * Get blueprint by ID
+     * @param {string} itemID 
+     * @returns {Blueprint}
+     */
+    getBlueprintByID(itemID) {
+        return this._blueprintsByItemID.get(itemID);
     }
     /**
      * Load all blueprints
@@ -144,6 +187,7 @@ class CraftDB {
                     }
                 }
                 blueprints.push(blueprint)
+                this._blueprintsByItemID.set(blueprint.itemID, blueprint);
             });
             this._blueprints.set(craftType, blueprints);
         }

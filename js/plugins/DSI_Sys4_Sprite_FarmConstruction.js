@@ -147,3 +147,4 @@ class Sprite_FarmConstruction extends Sprite_FarmObject {
     }
 
 }
+
