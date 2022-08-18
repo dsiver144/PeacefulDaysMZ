@@ -126,7 +126,7 @@ class Window_MyDebug extends Window_Command {
      * On Custom Command
      */
     onCustomCommand() {
-        FarmConstruction.placeConstruction(Coop);
+        Building.place(Coop);
         // var object = new Coop(new Vector2(10, 10), 1);
         // FarmManager.inst.currentFarmland().addObject(object);
         // let startX = 0;

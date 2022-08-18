@@ -10,7 +10,7 @@
  * 
  * 
  */
-class FarmMachine extends FarmConstruction {
+class FarmMachine extends Building {
     /**
      * @inheritdoc
      */

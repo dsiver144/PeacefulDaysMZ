@@ -10,7 +10,12 @@
  * Empty Help
  */
 
-class Sprite_Windmill extends Sprite_FarmConstruction {
+const WindmillConfig = {
+    wingOffset: {x: 48, y: -190},
+    wingSpeed: 1
+}
+
+class Sprite_Windmill extends Sprite_FarmBuilding {
     /**
      * @inheritdoc
      */
@@ -19,8 +24,8 @@ class Sprite_Windmill extends Sprite_FarmConstruction {
         this._wingSprite = new Sprite(ImageManager.loadFarm('constructions/Wings'));
         this._wingSprite.anchor.x = 0.5;
         this._wingSprite.anchor.y = 0.5;
-        this._wingSprite.y -= 190;
-        this._wingSprite.x += 48;
+        this._wingSprite.x += WindmillConfig.wingOffset.x;
+        this._wingSprite.y += WindmillConfig.wingOffset.y;
         this.addChild(this._wingSprite);
     }
     /**
@@ -34,7 +39,7 @@ class Sprite_Windmill extends Sprite_FarmConstruction {
      * Update wing animation
      */
     updateWingAnimation() {
-        this._wingSprite.angle += 1;
+        this._wingSprite.angle += WindmillConfig.wingSpeed;
     }
     /**
      * @inheritdoc
@@ -45,7 +50,7 @@ class Sprite_Windmill extends Sprite_FarmConstruction {
     }
 }
 
-class Sprite_Fermenter extends Sprite_FarmConstruction {
+class Sprite_Fermenter extends Sprite_FarmBuilding {
     /**
      * Get machine
      * @returns {FarmMachine}

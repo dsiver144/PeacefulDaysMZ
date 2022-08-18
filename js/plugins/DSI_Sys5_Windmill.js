@@ -8,7 +8,7 @@
  * @help 
  * Empty Help
  */
-class Windmill extends FarmConstruction {
+class Windmill extends Building {
     /**
      * @inheritdoc
      */

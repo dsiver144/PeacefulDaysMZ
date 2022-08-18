@@ -8,7 +8,7 @@
  * @help 
  * Empty Help
  */
-class Coop extends FarmConstruction {
+class Coop extends Building {
     /**
      * @inheritdoc
      */

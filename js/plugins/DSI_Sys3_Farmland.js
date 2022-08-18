@@ -224,6 +224,17 @@ class Farmland extends SaveableObject {
         const { x, y } = object.position;
         delete this.farmObjects[this.pos(x, y)];
         object.remove();
+        // Remove child objects
+        for (let ox = 0; ox < object.bottomSize().x; ox++) {
+            for (let oy = 0; oy < object.bottomSize().y; oy++) {
+                if (ox == 0 && oy == 0) continue;
+                const checkX = x + ox;
+                const checkY = y + oy;
+                const childObject = this.farmObjects[this.pos(checkX, checkY)];
+                delete this.farmObjects[this.pos(checkX, checkY)];
+                childObject.remove();
+            }
+        }
     }
     /**
      * Remove farm object at

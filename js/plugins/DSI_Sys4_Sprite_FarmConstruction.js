@@ -5,18 +5,24 @@
 /*:
  * @author dsiver144
  * @target MZ
- * @plugindesc (v1.0) Sprite Farm Construction
+ * @plugindesc (v1.0) Sprite Farm Building
  * @help 
  * Empty Help
  */
+const BuildingSpriteConfig = {
+    previewOpacity: 200,
+    previewValidColor: [146, 235, 52, 150],
+    previewInvalidColor: [235, 73, 52, 150],
+    previewZ: 5
+}
 
-class Sprite_FarmConstruction extends Sprite_FarmObject {
+class Sprite_FarmBuilding extends Sprite_FarmObject {
     /**
      * Check if this can be control
      * @returns {boolean}
      */
     isControlable() {
-        return this.construction().isBeingMove();
+        return this.building().isBeingMove();
     }
     /**
      * @inheritdoc
@@ -30,37 +36,40 @@ class Sprite_FarmConstruction extends Sprite_FarmObject {
      */
     updateInput() {
         if (!this.isControlable()) return;
-        const construction = this.construction();
+        const building = this.building();
         const inputMode = Input.getInputMode();
-        const lastX = construction.position.x;
-        const lastY = construction.position.y;
+        const lastX = building.position.x;
+        const lastY = building.position.y;
+        this._screenZ = BuildingSpriteConfig.previewZ;
+        this.opacity = BuildingSpriteConfig.previewOpacity;
         
         if (inputMode === 'keyboard') {
             const x = $gameMap.canvasToMapX(TouchInput.x);
             const y = $gameMap.canvasToMapY(TouchInput.y);
-            construction.position.x = x;
-            construction.position.y = y;
+            building.position.x = x;
+            building.position.y = y;
         } else {
             if (Input.isRepeated(FieldKeyAction.MoveLeft)) {
-                construction.position.x -= 1;
+                building.position.x -= 1;
             }
             if (Input.isRepeated(FieldKeyAction.MoveRight)) {
-                construction.position.x += 1;
+                building.position.x += 1;
             }
             if (Input.isRepeated(FieldKeyAction.MoveUp)) {
-                construction.position.y -= 1;
+                building.position.y -= 1;
             }
             if (Input.isRepeated(FieldKeyAction.MoveDown)) {
-                construction.position.y += 1;
+                building.position.y += 1;
             }
         }
-        if (construction.position.x != lastX || construction.position.y != lastY) {
-            const {x, y} = construction.position;
-            this.isValidPosToPlaceObject = construction.canPlaceAt(x, y);
-            this.opacity = this.isValidPosToPlaceObject ? 255 : 100;
+        if (building.position.x != lastX || building.position.y != lastY) {
+            const {x, y} = building.position;
+            this.isValidPosToPlaceObject = building.canPlaceAt(x, y);
+            const {previewValidColor, previewInvalidColor} = BuildingSpriteConfig;
+            this.setBlendColor(this.isValidPosToPlaceObject ? previewValidColor: previewInvalidColor);
         }
         if (this.isValidPosToPlaceObject && Input.isTriggered(FieldKeyAction.Check)) {
-            construction.endMove();
+            building.endMove();
         }
     }
     /**
@@ -71,10 +80,10 @@ class Sprite_FarmConstruction extends Sprite_FarmObject {
         this.updateInput();
     }
     /**
-     * Get Farm Tile
-     * @returns {FarmConstruction}
+     * Get Farm building
+     * @returns {Building}
      */
-    construction() {
+    building() {
         return this.farmObject;
     }
     /**
@@ -96,24 +105,36 @@ class Sprite_FarmConstruction extends Sprite_FarmObject {
         super.updatePosition();
     }
     /**
+     * Get offset limit
+     * @returns {Vector2}
+     */
+    offsetLimit() {
+        const imgRect = this.building().imageRect();
+        return {
+            x: imgRect.width / 32, 
+            y: imgRect.height / 32
+        }
+    }
+    /**
      * @inheritdoc
      */
     refreshBitmap() {
-        const construction = this.construction();
-        this.displayOffset = construction.displayOffset();
-        this.bitmap = ImageManager.loadFarm(construction.imageFile());
+        const building = this.building();
+        this.displayOffset = building.displayOffset();
+        this.bitmap = ImageManager.loadFarm(building.imageFile());
         this.bitmap.addLoadListener(bitmap => {
-            const { x, y, width, height } = construction.imageRect();
+            const { x, y, width, height } = building.imageRect();
             this.setFrame(x, y, width, height);
             this.updatePosition();
             this.anchor.x = 0;
             this.anchor.y = 1.0;
             this.displayOffset.y += bitmap.height * this.anchor.y;
             
-            const imgRect = construction.imageRect();
             this.updateTopLeftOffset();
-            this.setOffscreenLimit(imgRect.width / 32, imgRect.height / 32);
+            const limit = this.offsetLimit();
+            this.setOffscreenLimit(limit.x, limit.y);
         });
+        this._screenZ = 3;
     }
     /**
      * @inheritdoc
@@ -143,7 +164,7 @@ class Sprite_FarmConstruction extends Sprite_FarmObject {
      * @inheritdoc
      */
     screenZ() {
-        return 3;
+        return this._screenZ;
     }
 
 }

@@ -66,7 +66,7 @@ class FarmObject extends SaveableObject {
      * Interact
      */
     interact(object) {
-        this.onInteract(object);
+        this.onInteract(object || this);
     }
     /**
      * Will be called when being spawned.
@@ -260,7 +260,7 @@ class FarmChildObject extends FarmObject {
      * Remove
      */
     remove() {
-        this.parentObject().remove();
+        // this.parentObject()?.remove();
     }
     /**
      * Interact

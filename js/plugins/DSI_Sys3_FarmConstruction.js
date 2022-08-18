@@ -4,7 +4,7 @@
 //========================================================================
 /*:
  * @author dsiver144
- * @plugindesc (v1.0) Farm Construction
+ * @plugindesc (v1.0) Farm Building
  * @help 
  * Empty Help
  * 
@@ -14,7 +14,7 @@ const ConstructionConfig = {
     regionIds: [111, 112],
 }
 
-class FarmConstruction extends FarmObject {
+class Building extends FarmObject {
     /**
      * Create farm object
      * @param {Vector2} position 
@@ -64,7 +64,7 @@ class FarmConstruction extends FarmObject {
      * @inheritdoc
      */
     spriteClass() {
-        return Sprite_FarmConstruction;
+        return Sprite_FarmBuilding;
     }
     /**
      * Image File
@@ -176,8 +176,8 @@ class FarmConstruction extends FarmObject {
     }
 }
 
-FarmConstruction.placeConstruction = function (constClass) {
-    /** @type {FarmConstruction} */
+Building.place = function (constClass) {
+    /** @type {Building} */
     const construction = new constClass(new Vector2(10, 10), $gameMap.mapId());
     construction.startMove();
     return construction;
