@@ -26,6 +26,15 @@ class SaveableObject {
         const result = {};
         this.saveProperties().forEach(([property, _]) => {
             let data = this[property];
+            if (property.match(/@Arr\((.+?)\):(.+)/i)) {
+                property = RegExp.$2;
+                const array = this[property];
+                const newData = [];
+                for (const entry of array) {
+                    newData.push(entry.getSaveData());
+                }
+                data = newData;
+            }
             // if (property.match(/@Map\((.+?)\):(.+?)/i)) {
             //     const klass = RegExp.$1;
             //     data = this[RegExp.$2];
@@ -51,6 +60,18 @@ class SaveableObject {
     loadSaveData(savedData) {
         this.saveProperties().forEach(([property, defaultValue]) => {
             let value = savedData[property];
+            if (property.match(/@Arr\((.+?)\):(.+)/i)) {
+                const klass = RegExp.$1;
+                property = RegExp.$2;
+                const array = savedData[property];
+                const newData = [];
+                for (const entry of array) {
+                    const obj = eval(`new ${klass}()`);
+                    obj.loadSaveData(entry)
+                    newData.push(obj);
+                }
+                value = newData;
+            }
             if (value && value.klass) {
                 value = eval(`new ${value.klass}()`);
                 value.loadSaveData(savedData[property]);
