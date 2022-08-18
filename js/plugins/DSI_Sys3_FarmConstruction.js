@@ -130,12 +130,19 @@ class FarmConstruction extends FarmObject {
         return !!this._moving;
     }
     /**
+     * Preview Sprite Key
+     * @returns {string}
+     */
+    previewSpriteKey() {
+        return 'constructionPreview';
+    }
+    /**
      * Start move construction
      */
     startMove() {
         this._moving = true;
         const sprite = this.objectSprite(true);
-        MyUtils.addMapSprite('constructionPreview', sprite);
+        MyUtils.addMapSprite(this.previewSpriteKey(), sprite);
         CameraController.inst.setTarget(sprite, 600);
     }
     /**
@@ -144,7 +151,7 @@ class FarmConstruction extends FarmObject {
     endMove() {
         this._moving = false;
         const farmland = FarmManager.inst.getFarmlandById(this.mapId);
-        MyUtils.removeMapSprite('constructionPreview');
+        MyUtils.removeMapSprite(this.previewSpriteKey());
         farmland.addObject(this);
         CameraController.inst.restore();
     }

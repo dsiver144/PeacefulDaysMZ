@@ -39,35 +39,67 @@ class CraftManager extends SaveableObject {
     constructor() {
         super();
         CraftManager.inst = this;
+        /** @type {CraftTask[]} */
+        this._tasks = [new CraftTask('Test1')];
+        this._tasks = [new CraftTask('Test2')];
     }
     /**
      * Check if player can craft
      * @param {Blueprint} blueprint 
      */
     isCraftable(blueprint) {
-        blueprint.require
+        // blueprint.require
+    }
+    /**
+     * Update when time is running
+     */
+    update() {
+
     }
     /**
      * @inheritdoc
      */
     saveProperties() {
         const data = super.saveProperties();
-        // data.push([]);
+        data.push(['@Arr(CraftTask):_tasks', null]);
         return data;
     }
 }
 /** @type {CraftManager} */
 CraftManager.inst = null;
 
-class CraftMachine extends SaveableObject {
-
-    constructor() {
+class CraftTask extends SaveableObject {
+    /**
+     * Handle crafting task
+     * @param {string} assignee 
+     */
+    constructor(assignee) {
         super();
+        /** @type {string} */
+        this._assignee = assignee;
+        this._beginTime = null;
+        this._endTime = null;
+        this._product = {
+            itemID: null,
+            number: 0,
+            level: 0
+        }
     }
-
+    /**
+     * Update
+     */
+    update() {
+        
+    }
+    /**
+     * @inheritdoc
+     */
     saveProperties() {
         return [
-            
+            ['_assignee', null],
+            ['_beginTime', null],
+            ['_endTime', null],
+            ['_product', null],
         ]
     }
 }
