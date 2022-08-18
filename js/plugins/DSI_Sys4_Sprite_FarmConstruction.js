@@ -19,32 +19,48 @@ class Sprite_FarmConstruction extends Sprite_FarmObject {
         return this.construction().isBeingMove();
     }
     /**
+     * @inheritdoc
+     */
+    checkForVisibility() {
+        if (this.isControlable()) return;
+        super.checkForVisibility();
+    }
+    /**
      * Update input
      */
     updateInput() {
         if (!this.isControlable()) return;
         const construction = this.construction();
         const inputMode = Input.getInputMode();
+        const lastX = construction.position.x;
+        const lastY = construction.position.y;
+        
         if (inputMode === 'keyboard') {
             const x = $gameMap.canvasToMapX(TouchInput.x);
             const y = $gameMap.canvasToMapY(TouchInput.y);
             construction.position.x = x;
             construction.position.y = y;
-            const valid = construction.canPlaceAt(x, y);
-            this.opacity = valid ? 255 : 100;
         } else {
             if (Input.isRepeated(FieldKeyAction.MoveLeft)) {
-                this.farmObject.position.x -= 1;
+                construction.position.x -= 1;
             }
             if (Input.isRepeated(FieldKeyAction.MoveRight)) {
-                this.farmObject.position.x += 1;
+                construction.position.x += 1;
             }
             if (Input.isRepeated(FieldKeyAction.MoveUp)) {
-                this.farmObject.position.y -= 1;
+                construction.position.y -= 1;
             }
             if (Input.isRepeated(FieldKeyAction.MoveDown)) {
-                this.farmObject. position.y += 1;
+                construction.position.y += 1;
             }
+        }
+        if (construction.position.x != lastX || construction.position.y != lastY) {
+            const {x, y} = construction.position;
+            this.isValidPosToPlaceObject = construction.canPlaceAt(x, y);
+            this.opacity = this.isValidPosToPlaceObject ? 255 : 100;
+        }
+        if (this.isValidPosToPlaceObject && Input.isTriggered(FieldKeyAction.Check)) {
+            construction.endMove();
         }
     }
     /**
@@ -94,7 +110,7 @@ class Sprite_FarmConstruction extends Sprite_FarmObject {
             this.anchor.y = 1.0;
             this.displayOffset.y += bitmap.height * this.anchor.y;
             this.updateTopLeftOffset();
-            this.setOffscreenLimit(1, 1);
+            this.setOffscreenLimit(construction.imageRect().width / 32, construction.imageRect().height / 32);
         });
     }
     /**

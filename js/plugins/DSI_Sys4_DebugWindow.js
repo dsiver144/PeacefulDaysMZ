@@ -125,8 +125,9 @@ class Window_MyDebug extends Window_Command {
      * On Custom Command
      */
     onCustomCommand() {
-        var object = new Coop(new Vector2(10, 10), 1);
-        FarmManager.inst.currentFarmland().addObject(object);
+        FarmConstruction.placeConstruction(Coop);
+        // var object = new Coop(new Vector2(10, 10), 1);
+        // FarmManager.inst.currentFarmland().addObject(object);
         // let startX = 0;
         // let startY = 0;
         // const interval = setInterval(() => {

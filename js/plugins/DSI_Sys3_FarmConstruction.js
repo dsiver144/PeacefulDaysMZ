@@ -96,9 +96,10 @@ class FarmConstruction extends FarmObject {
      * @returns {Vector2}
      */
     displayOffset() {
+        const topTiles = this.imageRect().height / 32 - this.bottomSize().y;
         return {
             x: 0,
-            y: -this.bottomSize().y * 32,
+            y: -topTiles * 32,
         }
     }
     /**
@@ -133,12 +134,19 @@ class FarmConstruction extends FarmObject {
      */
     startMove() {
         this._moving = true;
+        const sprite = this.objectSprite(true);
+        MyUtils.addMapSprite('constructionPreview', sprite);
+        CameraController.inst.setTarget(sprite, 600);
     }
     /**
      * End move construction
      */
     endMove() {
         this._moving = false;
+        const farmland = FarmManager.inst.getFarmlandById(this.mapId);
+        MyUtils.removeMapSprite('constructionPreview');
+        farmland.addObject(this);
+        CameraController.inst.restore();
     }
     /**
      * Check if this construction can be placed at specific position
@@ -164,10 +172,7 @@ class FarmConstruction extends FarmObject {
 FarmConstruction.placeConstruction = function (constClass) {
     /** @type {FarmConstruction} */
     const construction = new constClass(new Vector2(10, 10), $gameMap.mapId());
-    const sprite = construction.objectSprite();
     construction.startMove();
-    CameraController.inst.setTarget(sprite, 600);
-    console.log(sprite);
 }
 
 class Coop extends FarmConstruction {
@@ -206,5 +211,44 @@ class Coop extends FarmConstruction {
      */
     imageFile() {
         return super.imageFile() + "Coop";
+    }
+}
+
+class Windmill extends FarmConstruction {
+    /**
+     * @inheritdoc
+     */
+    init() {
+
+    }
+    /**
+     * @inheritdoc
+     */
+    bottomSize() {
+        return { x: 3, y: 2 };
+    }
+    /**
+     * @inheritdoc
+     */
+    imageRect() {
+        return {
+            x: 0,
+            y: 0,
+            width: 96,
+            height: 224
+        }
+    }
+    /**
+     * Get interaction range
+     * @returns {{x: number, y: number, width: number, height: number}}
+     */
+    interactionRange() {
+        return { x: 1, y: 1, width: 1, height: 1 };
+    }
+    /**
+     * @inheritdoc
+     */
+    imageFile() {
+        return super.imageFile() + "Windmill";
     }
 }

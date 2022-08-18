@@ -144,7 +144,11 @@ class FarmObject extends SaveableObject {
      * Get object sprite
      * @returns {Sprite_FarmObject}
      */
-    objectSprite() {
+    objectSprite(preview = false) {
+        if (preview) {
+            const constructor = this.spriteClass();
+            return new constructor(this);
+        }
         const key = this.spriteKey();
         let sprite = MyUtils.getMapSprite(key);
         if (!sprite && this.mapId == $gameMap.mapId()) {
