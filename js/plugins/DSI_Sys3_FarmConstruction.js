@@ -123,7 +123,7 @@ class FarmConstruction extends FarmObject {
         return true;
     }
     /**
-     * Check if this object is being move
+     * Check if this object is being moved
      * @returns {boolean}
      */
     isBeingMove() {
@@ -173,88 +173,4 @@ FarmConstruction.placeConstruction = function (constClass) {
     /** @type {FarmConstruction} */
     const construction = new constClass(new Vector2(10, 10), $gameMap.mapId());
     construction.startMove();
-}
-
-class Coop extends FarmConstruction {
-    /**
-     * @inheritdoc
-     */
-    init() {
-
-    }
-    /**
-     * @inheritdoc
-     */
-    bottomSize() {
-        return { x: 5, y: 2 };
-    }
-    /**
-     * @inheritdoc
-     */
-    imageRect() {
-        return {
-            x: 0,
-            y: 0,
-            width: 160,
-            height: 128
-        }
-    }
-    /**
-     * Get interaction range
-     * @returns {{x: number, y: number, width: number, height: number}}
-     */
-    interactionRange() {
-        return { x: 1, y: 1, width: 1, height: 1 };
-    }
-    /**
-     * @inheritdoc
-     */
-    imageFile() {
-        return super.imageFile() + "Coop";
-    }
-}
-
-class Windmill extends FarmConstruction {
-    /**
-     * @inheritdoc
-     */
-    init() {
-
-    }
-    /**
-     * @inheritdoc
-     */
-    bottomSize() {
-        return { x: 3, y: 2 };
-    }
-    /**
-     * @inheritdoc
-     */
-    imageRect() {
-        return {
-            x: 0,
-            y: 0,
-            width: 96,
-            height: 224
-        }
-    }
-    /**
-     * Get interaction range
-     * @returns {{x: number, y: number, width: number, height: number}}
-     */
-    interactionRange() {
-        return { x: 1, y: 1, width: 1, height: 1 };
-    }
-    /**
-     * @inheritdoc
-     */
-    imageFile() {
-        return super.imageFile() + "Windmill";
-    }
-    /**
-     * @inheritdoc
-     */
-    spriteClass() {
-        return Sprite_Windmill;
-    }
 }

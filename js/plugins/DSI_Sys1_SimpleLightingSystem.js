@@ -140,109 +140,6 @@ class LightSystem {
 }
 /** @type {LightSystem} */
 LightSystem.inst = null;
-
-class Sprite_Light extends Sprite {
-    /**
-     * This class is superclass of all light sprite.
-     */
-    constructor() {
-        super();
-        this.blendMode = PIXI.BLEND_MODES.SCREEN;
-        this._offset = new Vector2(0, 0);
-        this._imageFile = "white";
-    }
-    /**
-     * Init light
-     */
-    init() {
-        this.bitmap = ImageManager.loadLight(this.imageFile());
-        this.anchor.x = 0.5;
-        this.anchor.y = 0.5;
-        this.updatePosition();
-    }
-    /**
-     * Light texture file
-     * @returns {string}
-     */
-    imageFile() {
-        return this._imageFile;
-    }
-    /**
-     * Display X
-     * @returns {number}
-     */
-    displayX() {
-        return 0;
-    }
-    /**
-     * Display Y
-     * @returns {number}
-     */
-    displayY() {
-        return 0;
-    }
-    /**
-     * Scrolled X
-     * @returns {number}
-     */
-    scrolledX() {
-        return $gameMap.adjustX(this.displayX());
-    }
-    /**
-     * Scrolled Y
-     * @returns {number}
-     */
-    scrolledY() {
-        return $gameMap.adjustY(this.displayY());
-    }
-    /**
-     * Screen X
-     * @returns {number}
-     */
-    screenX() {
-        const tw = $gameMap.tileWidth();
-        return Math.floor(this.scrolledX() * tw + tw / 2) + this._offset.x;
-    }
-    /**
-     * Screen Y
-     * @returns {number}
-     */
-    screenY() {
-        const th = $gameMap.tileHeight();
-        return Math.floor(
-            this.scrolledY() * th + th / 2
-        ) + this._offset.y;
-    }
-    /**
-     * Update per frame
-     */
-    update() {
-        super.update();
-        this.updatePosition();
-        this.updateEffects();
-    }
-    /**
-     * Update Position
-     */
-    updatePosition() {
-        this.x = this.screenX();
-        this.y = this.screenY();
-    }
-    /**
-     * Update custom effect
-     */
-    updateEffects() {
-        
-    }
-    /**
-     * Update opacity pulse
-     */
-    updatePulse() {
-        this.opacity = 100 + Math.abs(Math.sin(Graphics.frameCount / 100) * (255 - 100));
-    }
-}
-
-
 class AmbientController extends SaveableObject {
     /**
      * AmbientController
@@ -350,6 +247,107 @@ Spriteset_Map.prototype.update = function () {
 //==================================================================================
 // DEFAULT LIGHT TYPES
 //==================================================================================
+class Sprite_Light extends Sprite {
+    /**
+     * This class is superclass of all light sprite.
+     */
+    constructor() {
+        super();
+        this.blendMode = PIXI.BLEND_MODES.SCREEN;
+        this._offset = new Vector2(0, 0);
+        this._imageFile = "white";
+    }
+    /**
+     * Init light
+     */
+    init() {
+        this.bitmap = ImageManager.loadLight(this.imageFile());
+        this.anchor.x = 0.5;
+        this.anchor.y = 0.5;
+        this.updatePosition();
+    }
+    /**
+     * Light texture file
+     * @returns {string}
+     */
+    imageFile() {
+        return this._imageFile;
+    }
+    /**
+     * Display X
+     * @returns {number}
+     */
+    displayX() {
+        return 0;
+    }
+    /**
+     * Display Y
+     * @returns {number}
+     */
+    displayY() {
+        return 0;
+    }
+    /**
+     * Scrolled X
+     * @returns {number}
+     */
+    scrolledX() {
+        return $gameMap.adjustX(this.displayX());
+    }
+    /**
+     * Scrolled Y
+     * @returns {number}
+     */
+    scrolledY() {
+        return $gameMap.adjustY(this.displayY());
+    }
+    /**
+     * Screen X
+     * @returns {number}
+     */
+    screenX() {
+        const tw = $gameMap.tileWidth();
+        return Math.floor(this.scrolledX() * tw + tw / 2) + this._offset.x;
+    }
+    /**
+     * Screen Y
+     * @returns {number}
+     */
+    screenY() {
+        const th = $gameMap.tileHeight();
+        return Math.floor(
+            this.scrolledY() * th + th / 2
+        ) + this._offset.y;
+    }
+    /**
+     * Update per frame
+     */
+    update() {
+        super.update();
+        this.updatePosition();
+        this.updateEffects();
+    }
+    /**
+     * Update Position
+     */
+    updatePosition() {
+        this.x = this.screenX();
+        this.y = this.screenY();
+    }
+    /**
+     * Update custom effect
+     */
+    updateEffects() {
+        
+    }
+    /**
+     * Update opacity pulse
+     */
+    updatePulse() {
+        this.opacity = 100 + Math.abs(Math.sin(Graphics.frameCount / 100) * (255 - 100));
+    }
+}
+
 class Sprite_PointLight extends Sprite_Light {
     /**
      * A static light on map.

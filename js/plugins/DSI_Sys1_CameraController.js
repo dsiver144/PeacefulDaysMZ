@@ -5,7 +5,7 @@
 /*:
  * @author dsiver144
  * @target MZ
- * @plugindesc (v1.0) Camera Controller
+ * @plugindesc (v1.0) Camera Controller. Inspired by Galv
  * @help 
  * Empty Help
  */

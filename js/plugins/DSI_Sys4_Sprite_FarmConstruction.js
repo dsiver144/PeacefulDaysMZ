@@ -109,8 +109,10 @@ class Sprite_FarmConstruction extends Sprite_FarmObject {
             this.anchor.x = 0;
             this.anchor.y = 1.0;
             this.displayOffset.y += bitmap.height * this.anchor.y;
+            
+            const imgRect = construction.imageRect();
             this.updateTopLeftOffset();
-            this.setOffscreenLimit(construction.imageRect().width / 32, construction.imageRect().height / 32);
+            this.setOffscreenLimit(imgRect.width / 32, imgRect.height / 32);
         });
     }
     /**
