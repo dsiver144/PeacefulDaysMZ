@@ -9,17 +9,48 @@
  * @help 
  * Empty Help
  */
-class CameraController {
+class CameraController extends SaveableObject {
     /**
      * CameraController
      */
     constructor() {
+        super();
         CameraController.inst = this;
         this._tileSize = 32;
-        this._width = Graphics.width / 2;
-        this._height = Graphics.height / 2;
+        this._width = 960 / 2;
+        this._height = 540 / 2;
         this._speed = 200;
         this._target = null;
+        this._targetType = null;
+    }
+    /**
+     * @inheritdoc
+     */
+    saveProperties() {
+        return [
+            ['_targetType', ''],
+            ['_speed', ''],
+        ]
+    }
+    /**
+     * @inheritdoc
+     */
+    getSaveData() {
+        this._targetType = this._target.constructor.name;
+       return super.getSaveData(); 
+    }
+    /**
+     * @inheritdoc
+     */
+    loadSaveData(data) {
+        super.loadSaveData(data);
+        /** @type {string} */
+        const targeType = data._targetType;
+        switch(targeType) {
+            case 'Game_Player':
+                this.setTarget($gamePlayer, this._speed);
+                break;
+        }
     }
     /**
      * Set Target
@@ -77,10 +108,10 @@ class CameraController {
 /** @type {CameraController} */
 CameraController.inst = null;
 
-Game_Map.prototype.displayX = function() {return Math.ceil(this._displayX * 32) / 32};
-Game_Map.prototype.displayY = function() {return Math.ceil(this._displayY * 32) / 32};
+Game_Map.prototype.displayX = function () { return Math.ceil(this._displayX * 32) / 32 };
+Game_Map.prototype.displayY = function () { return Math.ceil(this._displayY * 32) / 32 };
 
-Game_Player.prototype.update = function(sceneActive) {
+Game_Player.prototype.update = function (sceneActive) {
     // const lastScrolledX = this.scrolledX();
     // const lastScrolledY = this.scrolledY();
     const wasMoving = this.isMoving();
@@ -97,18 +128,18 @@ Game_Player.prototype.update = function(sceneActive) {
     this._followers.update();
 };
 
-var DSI_Sys1_CameraController_Game_Map_initialize = Game_Map.prototype.initialize;
-Game_Map.prototype.initialize = function () {
-    DSI_Sys1_CameraController_Game_Map_initialize.call(this);
+var DSI_Sys1_CameraController_Game_System_createSaveableObjects = Game_System.prototype.createSaveableObjects;
+Game_System.prototype.createSaveableObjects = function () {
+    DSI_Sys1_CameraController_Game_System_createSaveableObjects.call(this);
     this._cameraController = new CameraController();
 }
 
 Game_Map.prototype.updateScroll = function () {
-    this._cameraController.update();
+    CameraController.inst?.update();
 }
 
 var DSI_Sys1_CameraController_Game_Player_initMembers = Game_Player.prototype.initMembers;
 Game_Player.prototype.initMembers = function () {
     DSI_Sys1_CameraController_Game_Player_initMembers.call(this);
-    CameraController.inst.setTarget(this);
+    CameraController.inst?.setTarget(this);
 }
