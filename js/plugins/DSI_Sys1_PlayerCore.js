@@ -49,6 +49,23 @@ Game_CharacterBase.prototype.animationWait = function () {
     return (9 - this.realMoveSpeed()) * SpeedConfig.animationWaitMultiplier;
 };
 
+var DSI_Sys1_EngineOverhaul_Game_Player_canMove = Game_Player.prototype.canMove;
+Game_Player.prototype.canMove = function () {
+    if (this.isMoveDisable()) {
+        return false;
+    }
+    const result = DSI_Sys1_EngineOverhaul_Game_Player_canMove.call(this);
+    return result;
+};
+
+Game_Player.prototype.setMoveStatus = function(v) {
+    this._disableMove = !v;
+}
+
+Game_Player.prototype.isMoveDisable = function() {
+    return !!this._disableMove;
+}
+
 // var DSI_Sys1_EngineOverhaul_Game_Player_isDashing = Game_Player.prototype.isDashing;
 // Game_Player.prototype.isDashing = function () {
 //     const result = DSI_Sys1_EngineOverhaul_Game_Player_isDashing.call(this);

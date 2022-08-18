@@ -36239,6 +36239,18 @@ declare class Game_Player extends Game_Character {
 	 * @memberof Game_Player
 	 */
 	areFollowersGathered(): boolean;
+    /**
+     * Set the move status
+     * @param {boolean} v set to true to enable movement else false
+     * @memberof Game_Player
+     */
+    setMoveStatus(v: boolean): void;
+    /**
+     * Check if player movement is disable
+     * @returns {Bool}
+     * @memberof Game_Player
+     */
+    isMoveDisable(): boolean;
 }
 
 /**

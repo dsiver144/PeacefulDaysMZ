@@ -143,6 +143,7 @@ class Building extends FarmObject {
         this._moving = true;
         const sprite = this.objectSprite(true);
         MyUtils.addMapSprite(this.previewSpriteKey(), sprite);
+        $gamePlayer.setMoveStatus(false);
         CameraController.inst.setTarget(sprite, 600);
     }
     /**
@@ -153,6 +154,7 @@ class Building extends FarmObject {
         const farmland = FarmManager.inst.getFarmlandById(this.mapId);
         MyUtils.removeMapSprite(this.previewSpriteKey());
         farmland.addObject(this);
+        $gamePlayer.setMoveStatus(true);
         CameraController.inst.restore();
     }
     /**
