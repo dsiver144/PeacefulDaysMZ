@@ -5,7 +5,7 @@
 /*:
  * @author dsiver144
  * @target MZ
- * @plugindesc (v1.0) Sprite Farm Obstacle
+ * @plugindesc (v1.0) Sprite Farm Construction
  * @help 
  * Empty Help
  */

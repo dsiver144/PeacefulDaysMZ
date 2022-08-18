@@ -37,6 +37,7 @@ var $plugins =
 {"name":"DSI_Sys4_Sprite_FarmTile","status":true,"description":"(v1.0) Sprite Farm Tile","parameters":{}},
 {"name":"DSI_Sys4_Sprite_FarmObstacle","status":true,"description":"(v1.0) Sprite Farm Obstacle","parameters":{}},
 {"name":"DSI_Sys4_Sprite_FarmConstruction","status":true,"description":"(v1.0) Sprite Farm Obstacle","parameters":{}},
+{"name":"DSI_Sys4_Sprite_Windmill","status":true,"description":"(v1.0) Sprite Windmill","parameters":{}},
 {"name":"DSI_Sys4_Sprite_Key","status":true,"description":"(v1.0) Sprite Key","parameters":{}},
 {"name":"DSI_Sys4_DebugWindow","status":true,"description":"","parameters":{}}
 ];

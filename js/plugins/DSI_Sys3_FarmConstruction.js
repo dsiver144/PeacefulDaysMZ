@@ -251,4 +251,10 @@ class Windmill extends FarmConstruction {
     imageFile() {
         return super.imageFile() + "Windmill";
     }
+    /**
+     * @inheritdoc
+     */
+    spriteClass() {
+        return Sprite_Windmill;
+    }
 }

@@ -81,6 +81,7 @@ class Window_MyDebug extends Window_Command {
         for (var i = 0; i < $gameMap.width(); i++) {
             for (var j = 0; j < $gameMap.height(); j++) {
                 if (FarmManager.isFarmRegion(i, j)) {
+                    if (FarmManager.inst.currentFarmland().getObject(i, j)) continue;
                     var object = new FarmTile(new Vector2(i, j), 1);
                     object.applySeed(Math.randomInt(5))
                     FarmManager.inst.currentFarmland().addObject(object)
