@@ -10,6 +10,8 @@
  * Empty Help
  */
 class CameraController extends SaveableObject {
+    /** @type {CameraController} */
+    static inst = null;
     /**
      * CameraController
      */
@@ -39,6 +41,7 @@ class CameraController extends SaveableObject {
         this._targetType = this._target.constructor.name;
        return super.getSaveData(); 
     }
+    Auto
     /**
      * @inheritdoc
      */
@@ -105,8 +108,6 @@ class CameraController extends SaveableObject {
     }
 
 }
-/** @type {CameraController} */
-CameraController.inst = null;
 
 Game_Map.prototype.displayX = function () { return Math.ceil(this._displayX * 32) / 32 };
 Game_Map.prototype.displayY = function () { return Math.ceil(this._displayY * 32) / 32 };
