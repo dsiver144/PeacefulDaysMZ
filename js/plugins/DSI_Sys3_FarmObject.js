@@ -54,7 +54,8 @@ class FarmObject extends SaveableObject {
         return [
             ['position', null],
             ['type', null],
-            ['mapId', null]
+            ['mapId', null],
+            ['autotileId', null],
         ];
     }
     /**

@@ -1,3 +1,7 @@
+// TL TR BR BL L T R B
+// 1 + 1                 0
+
+
 class WoodenFence extends FarmObject {
     /**
      * @inheritdoc
@@ -26,7 +30,7 @@ class Sprite_FarmDecor extends Sprite_FarmObject {
         this.bitmap = this.bitmap || new Bitmap(32, 32);
         this.bitmap.clear();
         if (this.farmObject.autotileType()) {
-            const bitmap = ImageManager.loadFarm('WoodFence4', 'decorators');
+            const bitmap = ImageManager.loadFarm('CustomFence8b', 'decorators');
             bitmap.addLoadListener(bitmap => {
                 AutotileUtils.makeSegmentTile(bitmap, this.bitmap, this.autotileId);
 
