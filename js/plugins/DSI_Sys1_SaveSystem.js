@@ -28,7 +28,7 @@ class SaveableObject {
             let data = this[property];
             if (property.match(/@Arr\((.+?)\):(.+)/i)) {
                 property = RegExp.$2;
-                const array = this[property];
+                const array = this[property] || [];
                 const newData = [];
                 for (const entry of array) {
                     newData.push(entry.getSaveData());
