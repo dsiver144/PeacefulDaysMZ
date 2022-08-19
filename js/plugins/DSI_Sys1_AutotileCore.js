@@ -119,8 +119,8 @@ AutotileUtils.calcIndexBy8Direction = function(callback) {
  * @param {Number} autoTileId 
  */
 AutotileUtils.makeSegmentTile = function (source, bitmap, autoTileId) {
-    const tileWidth = 48;
-    const tileHeight = 48;
+    const tileWidth = 32;
+    const tileHeight = 32;
     var segments = AutotileUtils.allSegments[autoTileId];
     var x = 0; y = 0;
     for (var i = 0; i < segments.length; i++) {
