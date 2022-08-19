@@ -190,13 +190,35 @@ class Farmland extends SaveableObject {
         return this.farmObjects[this.pos(x, y)];
     }
     /**
+     * Calculate Autotile for farm object
+     * @param {FarmObject} object 
+     * @param {boolean} recursive 
+     * @returns 
+     */
+    calculateAutotileForObject(object, times = 2) {
+        const autotileType = object.autotileType();
+        if (!autotileType) return;
+        object.autotileId = AutotileUtils.calcIndexBy8Direction((offset) => {
+            const neighbor = this.getObject(object.position.x + offset.x, object.position.y + offset.y);
+            if (neighbor && neighbor.autotileType() == object.autotileType()) {
+                if (times > 0) {
+                    this.calculateAutotileForObject(neighbor, times - 1);
+                }
+                return true;
+            }
+            return false;
+        })
+    }
+    /**
      * Add Object
      * @param {FarmObject} object 
      */
-    addObject(object) {
+    addObject(object, force = true) {
         const { x, y } = object.position;
+        if (!force && this.getObject(x, y)) return;
         this.farmObjects[this.pos(x, y)] = object;
-        object.spawn();
+        // Calculate autotile
+        this.calculateAutotileForObject(object);
         // Spawm child object
         for (let ox = 0; ox < object.bottomSize().x; ox++) {
             for (let oy = 0; oy < object.bottomSize().y; oy++) {
@@ -206,6 +228,7 @@ class Farmland extends SaveableObject {
                 this.farmObjects[this.pos(x + ox, y + oy)] = childObject;
             }
         }
+        object.spawn();
     }
     /**
      * Replace Object
@@ -224,6 +247,8 @@ class Farmland extends SaveableObject {
         const { x, y } = object.position;
         delete this.farmObjects[this.pos(x, y)];
         object.remove();
+        // Calculate autotile
+        this.calculateAutotileForObject(object);
         // Remove child objects
         for (let ox = 0; ox < object.bottomSize().x; ox++) {
             for (let oy = 0; oy < object.bottomSize().y; oy++) {

@@ -17,6 +17,7 @@ class Sprite_FarmObject extends Sprite_Shakeable {
     constructor(farmObject) {
         super();
         this.farmObject = farmObject;
+        this.displayOffset = new Vector2(0, 0);
         this.createOptionalSprites();
         this.refreshBitmap();
         this.updatePosition();

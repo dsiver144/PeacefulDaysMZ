@@ -11,12 +11,41 @@
 * 
 */
 const RpgMakerTileIdSpecial = "0 = 46, 2 = 44, 8 = 45, 10 = 39, 11 = 38, 16 = 43, 18 = 41, 22 = 40, 24 = 33, 26 = 31, 27 = 30, 30 = 29, 31 = 28, 64 = 42, 66 = 32, 72 = 37, 74 = 27, 75 = 25, 80 = 35, 82 = 19, 86 = 18, 88 = 23, 90 = 15, 91 = 14, 94 = 13, 95 = 12, 104 = 36, 106 = 26, 107 = 24, 120 = 21, 122 = 7, 123 = 6, 126 = 5, 127 = 4, 208 = 34, 210 = 17, 214 = 16, 216 = 22, 218 = 11, 219 = 10, 222 = 9, 223 = 8, 248 = 20, 250 = 3, 251 = 2, 254 = 1, 255 = 0"
-const EightDirections = [[-1, 1], [0, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [0, 1], [1, 1]];
+const EightDirections = [[-1, -1], [0, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [0, 1], [1, 1]];
 var BitmaskToTileIDTable = {}
 RpgMakerTileIdSpecial.split(",").forEach((str) => {
     const [mask, tileId] = str.split("=").map(n => Number(n));
     BitmaskToTileIDTable[mask] = tileId;
 });
+
+const Autotile47TileTable =
+[
+	"empty", "empty", "empty", "empty", "A3", "B3", "C3", "D3", "A1", "B3", "C3", "D3", "A3", "B1", "C3", "D3", "A1", "B1", "C3", "D3", "A3", "B3", "C3", "D1", "A1", "B3", "C3", "D1", "A3", "B1", "C3", "D1", "A1", "B1", "C3", "D1", "A3", "B3", "C1", "D3", "A1", "B3", "C1", "D3", "A3", "B1", "C1", "D3", "A1", "B1", "C1", "D3", "A3", "B3", "C1", "D1", "A1", "B3", "C1", "D1", "A3", "B1", "C1", "D1", "A1", "B1", "C1", "D1", "A5", "B3", "C5", "D3", "A5", "B1", "C5", "D3", "A5", "B3", "C5", "D1", "A5", "B1", "C5", "D1", "A4", "B4", "C3", "D3", "A4", "B4", "C3", "D1", "A4", "B4", "C1", "D3", "A4", "B4", "C1", "D1", "A3", "B5", "C3", "D5", "A3", "B5", "C1", "D5", "A1", "B5", "C3", "D5", "A1", "B5", "C1", "D5", "A3", "B3", "C4", "D4", "A1", "B3", "C4", "D4", "A3", "B1", "C4", "D4", "A1", "B1", "C4", "D4", "A5", "B5", "C5", "D5", "A4", "B4", "C4", "D4", "A2", "B4", "C5", "D3", "A2", "B4", "C5", "D1", "A4", "B2", "C3", "D5", "A4", "B2", "C1", "D5", "A3", "B5", "C4", "D2", "A1", "B5", "C4", "D2", "A5", "B3", "C2", "D4", "A5", "B1", "C2", "D4", "A2", "B2", "C5", "D5", "A2", "B4", "C2", "D4", "A5", "B5", "C2", "D2", "A4", "B2", "C4", "D2", "A2", "B2", "C2", "D2"
+]
+
+const SubTileTable = 
+{
+	"A1": 2,
+	"B1": 3,
+	"C1": 6,
+	"D1": 7,
+	"A2": 8,
+	"B4": 9,
+	"A4": 10,
+	"B2": 11,
+	"C5": 12,
+	"D3": 13,
+	"C3": 14,
+	"D5": 15,
+	"A5": 16,
+	"B3": 17,
+	"A3": 18,
+	"B5": 19,
+	"C2": 20,
+	"D4": 21,
+	"C4": 22,
+	"D2": 23
+}
 
 function AutotileUtils() {
     return new Error("Cant init static class");
@@ -105,55 +134,44 @@ AutotileUtils.calcAutoTileIndex = function (bitmask) {
  * @returns 
  */
 AutotileUtils.calcIndexBy8Direction = function(callback) {
-    const bitmask = 0;
+    let bitmask = 0;
     EightDirections.forEach((offset, index) => {
         const value = callback(new Vector2(...offset)) ? 1 : 0;
         bitmask += value * (2 ** index);
-    })
-    return BitmaskToTileIDTable[bitmask];
+    });
+    return AutotileUtils.calcAutoTileIndex(bitmask);
+}
+AutotileUtils.getSubTileRect = function(tileID, tileSize) {
+    let value = SubTileTable[tileID];
+    console.log({tileID}, value);
+
+    let subtileSize = tileSize / 2;
+    return new Rectangle((value % 4) * subtileSize, Math.floor(value / 4) * subtileSize, subtileSize, subtileSize);
 }
 /**
  * Copy Correct Part Of Autotile Bitmap To Destinate Bitmap By `autoTileId`
  * @param {Bitmap} source 
  * @param {Bitmap} bitmap 
  * @param {Number} autoTileId 
- */
+ */ 
 AutotileUtils.makeSegmentTile = function (source, bitmap, autoTileId) {
-    const tileWidth = 32;
-    const tileHeight = 32;
-    var segments = AutotileUtils.allSegments[autoTileId];
-    var x = 0; y = 0;
-    for (var i = 0; i < segments.length; i++) {
-        var dx = x + (i % 2) * tileWidth / 2;
-        var dy = y + Math.floor(i / 2) * tileWidth / 2;
-        var index = segments[i];
-        var sx = (index % 4) * tileWidth / 2;
-        var sy = Math.floor(index / 4) * tileWidth / 2;
-        bitmap.blt(source, sx, sy, tileWidth / 2, tileHeight / 2, dx, dy);
+    const tileSize = 32;
+    var x = 0;
+    var y = 0;
+    for (var i = 0; i < 4; i++) {
+        const rect = this.getSubTileRect(Autotile47TileTable[autoTileId * 4 + i], tileSize);
+        var dx = x + (i % 2) * tileSize / 2;
+        var dy = y + Math.floor(i / 2) * tileSize / 2;
+        bitmap.blt(source, rect.x, rect.y, rect.width, rect.height, dx, dy);
     }
+    // var segments = AutotileUtils.allSegments[autoTileId];
+    // var x = 0; y = 0;
+    // for (var i = 0; i < segments.length; i++) {
+    //     var dx = x + (i % 2) * tileWidth / 2;
+    //     var dy = y + Math.floor(i / 2) * tileWidth / 2;
+    //     var index = segments[i];
+    //     var sx = (index % 4) * tileWidth / 2;
+    //     var sy = Math.floor(index / 4) * tileWidth / 2;
+    //     bitmap.blt(source, sx, sy, tileWidth / 2, tileHeight / 2, dx, dy);
+    // }
 };
-
-Game_Map.prototype.setTileId = function (x, y, z, tileId) {
-    var width = $dataMap.width;
-    var height = $dataMap.height;
-    $dataMap.data[(z * height + y) * width + x] = tileId;
-};
-
-Game_Map.prototype.getAutoTileId = function (tileId) {
-    return (tileId - 2048) % 48;
-}
-
-Game_Map.prototype.getAutotileSetIndex = function (tileId) {
-    autoTileId = this.getAutoTileId(tileId);
-    return (tileId - 2048 - autoTileId) / 48;
-}
-
-Game_Map.prototype.getTileIdAndAutotileType = function (x, y) {
-    x = x === undefined ? $gamePlayer.x : x;
-    y = y === undefined ? $gamePlayer.y : y;
-    const tileId = $gameMap.tileId(x, y, 0);
-    const autoTileId = $gameMap.getAutoTileId(tileId);
-    const setIndex = $gameMap.getAutotileSetIndex(tileId);
-    console.log({ tileId, autoTileId, setIndex });
-    return { tileId, autoTileId, setIndex };
-}

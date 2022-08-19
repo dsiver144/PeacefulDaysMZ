@@ -126,7 +126,15 @@ class Window_MyDebug extends Window_Command {
      * On Custom Command
      */
     onCustomCommand() {
-        Building.place(Coop);
+        setInterval(() => {
+            if (Input.isTriggered(FieldKeyAction.Map)) {
+                const {x, y} = $gamePlayer.frontPosition();
+                const object = new WoodenFence(new Vector2(x, y), $gameMap.mapId());
+                FarmManager.inst.currentFarmland().addObject(object, false);
+            }
+        }, 60 / 1000);
+        // Building.place(Coop);
+
         // var object = new Coop(new Vector2(10, 10), 1);
         // FarmManager.inst.currentFarmland().addObject(object);
         // let startX = 0;
