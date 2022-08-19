@@ -51,11 +51,8 @@ Game_CharacterBase.prototype.animationWait = function () {
 
 var DSI_Sys1_EngineOverhaul_Game_Player_canMove = Game_Player.prototype.canMove;
 Game_Player.prototype.canMove = function () {
-    if (this.isMoveDisable()) {
-        return false;
-    }
-    const result = DSI_Sys1_EngineOverhaul_Game_Player_canMove.call(this);
-    return result;
+    if (this.isMoveDisable()) return false;
+    return DSI_Sys1_EngineOverhaul_Game_Player_canMove.call(this);
 };
 
 Game_Player.prototype.setMoveStatus = function(v) {
