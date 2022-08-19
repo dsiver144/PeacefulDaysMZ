@@ -32,7 +32,6 @@ var $plugins =
 {"name":"DSI_Sys3_FarmObstacle","status":true,"description":"(v1.0) Farm Obstacle","parameters":{}},
 {"name":"DSI_Sys3_FarmTile","status":true,"description":"(v1.0) Farm Tile","parameters":{}},
 {"name":"DSI_Sys3_FarmConstruction","status":true,"description":"(v1.0) Farm Construction","parameters":{}},
-{"name":"DSI_Sys3_FarmMachine","status":true,"description":"(v1.0) Farm Machine","parameters":{}},
 {"name":"DSI_Sys3_Farmland","status":true,"description":"","parameters":{}},
 {"name":"DSI_Sys4_Sprite_FarmObject","status":true,"description":"(v1.0) Sprite Farm Object","parameters":{}},
 {"name":"DSI_Sys4_Sprite_FarmTile","status":true,"description":"(v1.0) Sprite Farm Tile","parameters":{}},
@@ -40,7 +39,7 @@ var $plugins =
 {"name":"DSI_Sys4_Sprite_FarmConstruction","status":true,"description":"(v1.0) Sprite Farm Obstacle","parameters":{}},
 {"name":"DSI_Sys4_Sprite_Key","status":true,"description":"(v1.0) Sprite Key","parameters":{}},
 {"name":"DSI_Sys4_DebugWindow","status":true,"description":"","parameters":{}},
-{"name":"DSI_Sys5_Coop","status":true,"description":"(v1.0) Sprite Windmill","parameters":{}},
-{"name":"DSI_Sys5_Windmill","status":true,"description":"(v1.0) Sprite Windmill","parameters":{}},
-{"name":"DSI_Sys6_Sprite_Windmill","status":true,"description":"(v1.0) Sprite Windmill","parameters":{}},
+{"name":"DSI_Sys5_Coop","status":true,"description":"(v1.0) Coop","parameters":{}},
+{"name":"DSI_Sys5_Windmill","status":true,"description":"(v1.0) Windmill","parameters":{}},
+{"name":"DSI_Sys6_Sprite_Windmill","status":true,"description":"(v1.0) Sprite Windmill","parameters":{}}
 ];
