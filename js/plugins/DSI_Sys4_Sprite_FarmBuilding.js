@@ -1,5 +1,5 @@
 //=======================================================================
-// * Plugin Name  : DSI_Sys4_Sprite_FarmConstruction.js
+// * Plugin Name  : DSI_Sys4_Sprite_FarmBuilding.js
 // * Last Updated : 8/17/2022
 //========================================================================
 /*:

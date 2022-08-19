@@ -1,17 +1,20 @@
-// TL TR BR BL L T R B
-// 1 + 1                 0
-
-
-class WoodenFence extends FarmObject {
+//=======================================================================
+// * Plugin Name  : DSI_Sys5_DecoratingObjects.js
+// * Last Updated : 8/20/2022
+//========================================================================
+/*:
+ * @author dsiver144
+ * @plugindesc (v1.0) A custom plugin by dsiver144
+ * @help 
+ * Empty Help
+ * 
+ */
+class DecoratingObject extends Building {
     /**
      * @inheritdoc
      */
-    autotileType() {
-        return 'WoodenPath';
-    }
-
-    isCollidable() {
-        return true;
+    imageFile() {
+        return "decorators/";   
     }
     /**
      * @inheritdoc
@@ -21,63 +24,47 @@ class WoodenFence extends FarmObject {
     }
 }
 
-class Sprite_FarmDecor extends Sprite_FarmObject {
+class WoodenFence extends DecoratingObject {
     /**
      * @inheritdoc
      */
-    refreshBitmap() {
-        this.autotileId = this.farmObject.autotileId;
-        this.bitmap = this.bitmap || new Bitmap(32, 32);
-        this.bitmap.clear();
-        if (this.farmObject.autotileType()) {
-            const bitmap = ImageManager.loadFarm('CustomFence8b', 'decorators');
-            bitmap.addLoadListener(bitmap => {
-                AutotileUtils.makeSegmentTile(bitmap, this.bitmap, this.autotileId);
+    autotileType() {
+        return 'WoodenFence';
+    }
+    /**
+     * @inheritdoc
+     */
+    imageFile() {
+        return super.imageFile() + "WoodFenceb";
+    }
+    /**
+     * @inheritdoc
+     */
+    spriteClass() {
+        return Sprite_FarmDecor;
+    }
+}
 
-                // const posX = this.autotileId % 8;
-                // const posY = Math.floor(this.autotileId / 8);
-                // this.bitmap.blt(bitmap, posX * 32, posY * 32, 32, 32, 0, 0);
-            });
-            // AutotileUtils.makeSegmentTile(ImageManager.loadFarm('WoodFence2', 'decorators'), this.bitmap, this.autotileId);
+class GardenLamp extends DecoratingObject {
+    imageFile() {
+        return super.imageFile() + "GardenLamp";
+    }
+
+    bottomSize() {
+        return {x: 1, y: 1};
+    }
+
+    imageRect() {
+        return {
+            x: 0,
+            y: 0,
+            width: 32, 
+            height: 96
         }
     }
-    /**
-     * Check for autotile changed
-     */
-    checkAutotileChange() {
-        if (this.autotileId == this.farmObject.autotileId) return;
-        console.log(this.farmObject.autotileId);
-        this.refreshBitmap();
-    }
-    /**
-     * @inheritdoc
-     */
-    onCollideWithObject() {
-        return;
-    }
-    /**
-     * Screen X
-     * @returns {number}
-     */
-    screenX() {
-        const tw = $gameMap.tileWidth();
-        return Math.floor(this.scrolledX() * tw) + this.displayOffset.x;
-    }
-    /**
-     * Screen Y
-     * @returns {number}
-     */
-    screenY() {
-        const th = $gameMap.tileHeight();
-        return Math.floor(
-            this.scrolledY() * th
-        ) + this.displayOffset.y;
-    }
-    /**
-     * @inheritdoc
-     */
-    update() {
-        super.update()
-        this.checkAutotileChange();
+
+    onObjectSpriteCreated() {
+        const {x, y} = this.position;
+        LightSystem.inst.addLight(new Sprite_PointLight(x, y, "yellow", 0, -64));
     }
 }

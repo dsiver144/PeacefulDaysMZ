@@ -22,9 +22,9 @@ class FarmObject extends SaveableObject {
         /** @type {number} */
         this.mapId = mapId;
         /** @type {string} */
-        this.type = 'FarmObject';
+        this.type = this.constructor.name;
         /** @type {number} */
-        this.autotileId = 0;
+        this.autotileId = 46;
     }
     /**
      * Get autotile type

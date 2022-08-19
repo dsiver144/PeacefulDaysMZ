@@ -1,5 +1,5 @@
 //=======================================================================
-// * Plugin Name  : DSI_Sys3_FarmConstruction.js
+// * Plugin Name  : DSI_Sys3_FarmBuilding.js
 // * Last Updated : 8/17/2022
 //========================================================================
 /*:
@@ -22,7 +22,6 @@ class Building extends FarmObject {
      */
     constructor(position, mapId) {
         super(position, mapId);
-        this.type = this.constructor.name;
         this.init();
     }
     /**
