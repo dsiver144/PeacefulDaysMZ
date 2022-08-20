@@ -426,7 +426,7 @@ function ConfigManager() {
 
 ConfigManager.alwaysDash = false;
 ConfigManager.commandRemember = false;
-ConfigManager.touchUI = true;
+ConfigManager.touchUI = false;
 ConfigManager._isLoaded = false;
 
 Object.defineProperty(ConfigManager, "bgmVolume", {
