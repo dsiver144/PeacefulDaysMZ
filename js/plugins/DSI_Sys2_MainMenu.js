@@ -61,7 +61,7 @@ class Scene_MainMenu extends Scene_MenuBase {
             if (this.canReturnToMap()) {
                 this.returnToMap();
             } else {
-                SoundManager.playBuzzer();
+                AudioController.playBuzzer();
             }
         }
     }
@@ -76,7 +76,7 @@ class Scene_MainMenu extends Scene_MenuBase {
      * Return to map function
      */
     returnToMap() {
-        SoundManager.playOk();
+        AudioController.playOk();
         this.popScene();
     }
     /**
@@ -110,7 +110,7 @@ class Scene_MainMenu extends Scene_MenuBase {
 //==================================================================================
 
 Scene_Map.prototype.callMenu = function() {
-    SoundManager.playOk();
+    AudioController.playOk();
     SceneManager.push(Scene_MainMenu);
     $gameTemp.clearDestination();
     this._mapNameWindow.hide();

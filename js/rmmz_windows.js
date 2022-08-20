@@ -567,15 +567,15 @@ Window_Base.prototype.refreshDimmerBitmap = function() {
 };
 
 Window_Base.prototype.playCursorSound = function() {
-    SoundManager.playCursor();
+    AudioController.playCursor();
 };
 
 Window_Base.prototype.playOkSound = function() {
-    SoundManager.playOk();
+    AudioController.playOk();
 };
 
 Window_Base.prototype.playBuzzerSound = function() {
-    SoundManager.playBuzzer();
+    AudioController.playBuzzer();
 };
 
 //-----------------------------------------------------------------------------
@@ -1280,7 +1280,7 @@ Window_Selectable.prototype.callOkHandler = function() {
 };
 
 Window_Selectable.prototype.processCancel = function() {
-    SoundManager.playCancel();
+    AudioController.playCancel();
     this.updateInputData();
     this.deactivate();
     this.callCancelHandler();
@@ -4160,7 +4160,7 @@ Window_NameInput.prototype.processJump = function() {
 
 Window_NameInput.prototype.processBack = function() {
     if (this._editWindow.back()) {
-        SoundManager.playCancel();
+        AudioController.playCancel();
     }
 };
 

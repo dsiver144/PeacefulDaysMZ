@@ -142,7 +142,7 @@ class ToolManager extends SaveableObject {
         }
         if (this._pressingToolBtn) {
             if (this._toolChargeAble && Input.isTriggered(FieldKeyAction.Check) || Input.isTriggered(FieldKeyAction.Cancel)) {
-                SoundManager.playCancel();
+                AudioController.playCancel();
                 this._pressingToolBtn = false;
                 return;
             }
