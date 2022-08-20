@@ -256,10 +256,10 @@ Game_Player.prototype._moveByInput = function (direction) {
                 if (Math.round(this._x) > roundX) {
                     walkStep();
                 }
-                // if (this._y > roundY && !rightTest(1) ||
-                //     this._y < roundY && !rightTest(-1)) {
-                //     this._y = roundY;
-                // }
+                if (this._y > roundY && !rightTest(1) ||
+                    this._y < roundY && !rightTest(-1)) {
+                    this._y = roundY;
+                }
                 return direction;
             }
             break;

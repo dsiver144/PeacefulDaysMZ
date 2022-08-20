@@ -46,9 +46,13 @@ class Sprite_FarmObject extends Sprite_Shakeable {
      */
     checkForCollision() {
         if (!this.farmObject) return;
-        const x = Math.round($gamePlayer._x);
-        const y = Math.round($gamePlayer._y);
-        if (x === this.farmObject.position.x && y === this.farmObject.position.y) {
+        const x = Math.ceil($gamePlayer._x);
+        const y = Math.ceil($gamePlayer._y);
+        const x2 = Math.floor($gamePlayer._x);
+        const y2 = Math.floor($gamePlayer._y);
+        const ox = this.farmObject.position.x;
+        const oy = this.farmObject.position.y;
+        if ((x === ox && y === oy) || (x2 === ox && y2 === oy)) {
             if (!this._collided) {
                 this._collided = true;
                 this.onCollideWithObject();
