@@ -75,14 +75,13 @@ Game_Player.prototype.checkEventTriggerThere = function (triggers) {
         // const cy = Math.round(this.y);
         // const x2 = $gameMap.roundXWithDirection(cx, this.direction());
         // const y2 = $gameMap.roundYWithDirection(cy, this.direction());
-        const x2 = this.x;
-        const y2 = this.y;
+        const {x: x2, y: y2} = this.frontPosition();
         let events = $gameMap.events().filter((eventA) => {
             const dxA = eventA.x - x2;
             const dyA = eventA.y - y2;
             const distA = Math.sqrt(dxA ** 2 + dyA ** 2);
             eventA._tempDist = distA;
-            return distA <= 1.4;
+            return distA <= 0.5;
         });
         events = events.sort((a, b) => a._tempDist - b._tempDist);
         if (events.length > 0) {

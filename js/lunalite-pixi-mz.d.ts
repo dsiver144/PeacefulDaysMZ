@@ -32652,6 +32652,12 @@ declare class Game_CharacterBase {
 	 * @memberof Game_CharacterBase
 	 */
 	endBalloon(): void;
+    /**
+     * Get the pront position
+     * @returns {Vector2}
+     * @memberof Game_CharacterBase
+     */
+    frontPosition(): Vector2;
 }
 
 declare namespace rm.types {
