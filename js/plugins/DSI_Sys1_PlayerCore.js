@@ -68,3 +68,50 @@ Game_Player.prototype.isMoveDisable = function() {
 //     const result = DSI_Sys1_EngineOverhaul_Game_Player_isDashing.call(this);
 //     return result || true;
 // }
+
+Game_Player.prototype.checkEventTriggerThere = function (triggers) {
+    if (this.canStartLocalEvents()) {
+        // const cx = Math.round(this.x);
+        // const cy = Math.round(this.y);
+        // const x2 = $gameMap.roundXWithDirection(cx, this.direction());
+        // const y2 = $gameMap.roundYWithDirection(cy, this.direction());
+        const x2 = this.x;
+        const y2 = this.y;
+        let events = $gameMap.events().filter((eventA) => {
+            const dxA = eventA.x - x2;
+            const dyA = eventA.y - y2;
+            const distA = Math.sqrt(dxA ** 2 + dyA ** 2);
+            eventA._tempDist = distA;
+            return distA <= 1.4;
+        });
+        events = events.sort((a, b) => a._tempDist - b._tempDist);
+        if (events.length > 0) {
+            const event = events.shift();
+            this.turnTowardCharacter(event);
+            this.startMapEvent(event.x, event.y, triggers, true);
+        }
+        // const direction = this.direction();
+        // const x11 = Math.ceil(this.x);
+        // const y11 = Math.ceil(this.y);
+        // const x12 = Math.floor(this.x);
+        // const y12 = Math.floor(this.y);
+        // const x21 = $gameMap.roundXWithDirection(x11, direction);
+        // const y21 = $gameMap.roundYWithDirection(y11, direction);
+        // const x22 = $gameMap.roundXWithDirection(x12, direction);
+        // const y22 = $gameMap.roundYWithDirection(y12, direction);
+        // this.startMapEvent(x21, y21, triggers, true);
+        // if (!$gameMap.isAnyEventStarting()) {
+        //     this.startMapEvent(x22, y22, triggers, true);
+        // }
+        // if (!$gameMap.isAnyEventStarting() && $gameMap.isCounter(x21, y21)) {
+        //     const x3 = $gameMap.roundXWithDirection(x21, direction);
+        //     const y3 = $gameMap.roundYWithDirection(y21, direction);
+        //     this.startMapEvent(x3, y3, triggers, true);
+        // }
+        // if (!$gameMap.isAnyEventStarting() && $gameMap.isCounter(x22, y22)) {
+        //     const x3 = $gameMap.roundXWithDirection(x22, direction);
+        //     const y3 = $gameMap.roundYWithDirection(y22, direction);
+        //     this.startMapEvent(x3, y3, triggers, true);
+        // }
+    }
+}
