@@ -3429,7 +3429,7 @@ Spriteset_Map.prototype.loadTileset = function() {
 Spriteset_Map.prototype.createCharacters = function() {
     this._characterSprites = [];
     for (const event of $gameMap.events()) {
-        this._characterSprites.push(new Sprite_Character(event));
+        this._characterSprites.push(new Sprite_EventCharacter(event));
     }
     for (const vehicle of $gameMap.vehicles()) {
         this._characterSprites.push(new Sprite_Character(vehicle));
