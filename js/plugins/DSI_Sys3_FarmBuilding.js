@@ -163,17 +163,24 @@ class Building extends FarmObject {
      * @returns {boolean}
      */
     canPlaceAt(x, y) {
+        const validRegionIDs = this.validRegionIDs();
         const farmland = FarmManager.inst.getFarmlandById(this.mapId);
         for (let ox = 0; ox < this.bottomSize().x; ox++) {
             for (let oy = 0; oy < this.bottomSize().y; oy++) {
                 const checkX = x + ox;
                 const checkY = y + oy;
                 const regionId = $gameMap.regionId(checkX, checkY);
-
-                if (farmland.getObject(checkX, checkY) || !ConstructionConfig.regionIds.includes(regionId)) return false;
+                if (farmland.getObject(checkX, checkY) || !validRegionIDs.includes(regionId)) return false;
             }
         }
         return true;
+    }
+    /**
+     * Get valid region ids that object can be placed at.
+     * @returns {number[]}
+     */
+    validRegionIDs() {
+        return ConstructionConfig.regionIds;
     }
 }
 
