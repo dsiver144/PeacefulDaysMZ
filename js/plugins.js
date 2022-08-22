@@ -14,6 +14,7 @@ var $plugins =
 {"name":"DSI_Utils","status":true,"description":"(v1.0) An Utils plugin by dsiver144","parameters":{}},
 {"name":"DSI_Sys1_AutotileCore","status":true,"description":"(v1.0) An utility plugin for handling autotiling for Nhat Nguyen's plugins.","parameters":{}},
 {"name":"DSI_Sys1_Localization","status":true,"description":"(v1.0) A custom plugin by dsiver144","parameters":{}},
+{"name":"DSI_Sys1_EventCore","status":true,"description":"(v1.0) RPG Maker Engine Overhaul","parameters":{}},
 {"name":"DSI_Sys1_PlayerCore","status":true,"description":"(v1.0) RPG Maker Engine Overhaul","parameters":{}},
 {"name":"DSI_Sys1_CameraController","status":true,"description":"","parameters":{}},
 {"name":"DSI_Sys1_MultiplayerCore","status":true,"description":"","parameters":{}},
@@ -34,6 +35,7 @@ var $plugins =
 {"name":"DSI_Sys3_FarmObstacle","status":true,"description":"(v1.0) Farm Obstacle","parameters":{}},
 {"name":"DSI_Sys3_FarmTile","status":true,"description":"(v1.0) Farm Tile","parameters":{}},
 {"name":"DSI_Sys3_FarmBuilding","status":true,"description":"(v1.0) Farm Building","parameters":{}},
+{"name":"DSI_Sys3_FarmMachine","status":true,"description":"(v1.0) Farm Machine","parameters":{}},
 {"name":"DSI_Sys3_Farmland","status":true,"description":"","parameters":{}},
 {"name":"DSI_Sys4_Sprite_FarmObject","status":true,"description":"(v1.0) Sprite Farm Object","parameters":{}},
 {"name":"DSI_Sys4_Sprite_FarmTile","status":true,"description":"(v1.0) Sprite Farm Tile","parameters":{}},
@@ -43,6 +45,7 @@ var $plugins =
 {"name":"DSI_Sys4_DebugWindow","status":true,"description":"","parameters":{}},
 {"name":"DSI_Sys5_Coop","status":true,"description":"(v1.0) Coop","parameters":{}},
 {"name":"DSI_Sys5_Windmill","status":true,"description":"(v1.0) Windmill","parameters":{}},
+{"name":"DSI_Sys5_Machine_Fermenter","status":true,"description":"(v1.0) Windmill","parameters":{}},
 {"name":"DSI_Sys5_DecoratingObjects","status":true,"description":"","parameters":{}},
 {"name":"DSI_Sys6_Sprite_Windmill","status":true,"description":"(v1.0) Sprite Windmill","parameters":{}},
 {"name":"DSI_Sys6_Sprite_FarmDecor","status":true,"description":"(v1.0) A custom plugin by dsiver144","parameters":{}}

@@ -422,23 +422,10 @@ Sprite_Character.prototype.updatePosition = function() {
     this.z = this._character.screenZ();
 };
 
-Sprite_Character.prototype.isInRange = function(x, y) {
-    if (x >= this.x - this.anchor.x * this.width && x <= this.x + this.width - this.anchor.x * this.width &&
-        y >= this.y - this.anchor.y * this.height && y <= this.y + this.height - this.anchor.y * this.height) {
-            return true;
-        }
-    return false;
-}
-
 Sprite_Character.prototype.updateOther = function() {
     this.opacity = this._character.opacity();
     this.blendMode = this._character.blendMode();
     this._bushDepth = this._character.bushDepth();
-    if (Input.isTriggered(FieldKeyAction.Check)) {
-        if (this.isInRange(TouchInput.x, TouchInput.y)) {
-            console.log(this._character);
-        }
-    }
 };
 
 //-----------------------------------------------------------------------------

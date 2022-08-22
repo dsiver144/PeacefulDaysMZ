@@ -1,25 +1,27 @@
 //=======================================================================
-// * Plugin Name  : DSI_Sys1_EngineOverhaul.js
-// * Last Updated : 8/9/2022
+// * Plugin Name  : DSI_Sys1_PlayerCore.js
+// * Last Updated : 8/22/2022
 //========================================================================
 /*:
  * @author dsiver144
  * @target MZ
- * @plugindesc (v1.0) RPG Maker Engine Overhaul
+ * @plugindesc (v1.0) Player Core
  * @help 
  * Empty Help
  */
 
-const SpeedConfig = {
+const PlayerCoreConfig = {
     offset: 2, // This is to prevent speed is too low at default.
     runBonus: 0.75,
     speedRatio: Math.pow(2, 10), // This should be power of 2. The bigger the slower the speed
     animationWaitMultiplier: 5, // The bigger the slower the animation is
-    horseMoveSpeed: 7.25
+    horseMoveSpeed: 7.25,
+    normalInteractionRange: 0.5,
+    npcInteractionRange: 1.35,
 }
 
 Game_CharacterBase.prototype.horseMoveSpeed = function () {
-    return SpeedConfig.horseMoveSpeed;
+    return PlayerCoreConfig.horseMoveSpeed;
 }
 
 Game_CharacterBase.prototype.isRidingHorse = function () {
@@ -38,15 +40,15 @@ Game_CharacterBase.prototype.realMoveSpeed = function () {
     if (this.isRidingHorse()) {
         return this.horseMoveSpeed();
     }
-    return SpeedConfig.offset + this._moveSpeed + (this.isDashing() ? SpeedConfig.runBonus : 0) + this.bonusSpeed();
+    return PlayerCoreConfig.offset + this._moveSpeed + (this.isDashing() ? PlayerCoreConfig.runBonus : 0) + this.bonusSpeed();
 };
 
 Game_CharacterBase.prototype.distancePerFrame = function () {
-    return Math.pow(2, this.realMoveSpeed()) / SpeedConfig.speedRatio;
+    return Math.pow(2, this.realMoveSpeed()) / PlayerCoreConfig.speedRatio;
 };
 
 Game_CharacterBase.prototype.animationWait = function () {
-    return (9 - this.realMoveSpeed()) * SpeedConfig.animationWaitMultiplier;
+    return (9 - this.realMoveSpeed()) * PlayerCoreConfig.animationWaitMultiplier;
 };
 
 var DSI_Sys1_EngineOverhaul_Game_Player_canMove = Game_Player.prototype.canMove;
@@ -70,18 +72,20 @@ Game_Player.prototype.isMoveDisable = function() {
 // }
 
 Game_Player.prototype.checkEventTriggerThere = function (triggers) {
+    if (Input.getInputMode() === 'keyboard') return;
     if (this.canStartLocalEvents()) {
         // const cx = Math.round(this.x);
         // const cy = Math.round(this.y);
         // const x2 = $gameMap.roundXWithDirection(cx, this.direction());
         // const y2 = $gameMap.roundYWithDirection(cy, this.direction());
         const {x: x2, y: y2} = this.frontPosition();
-        let events = $gameMap.events().filter((eventA) => {
-            const dxA = eventA.x - x2;
-            const dyA = eventA.y - y2;
-            const distA = Math.sqrt(dxA ** 2 + dyA ** 2);
-            eventA._tempDist = distA;
-            return distA <= 0.5;
+        let events = $gameMap.events().filter((event) => {
+            const dx = event.x - x2;
+            const dy = event.y - y2;
+            const dist = Math.sqrt(dx ** 2 + dy ** 2);
+            event._tempDist = dist;
+            const maxDist = event.isNPC() ? PlayerCoreConfig.npcInteractionRange : PlayerCoreConfig.normalInteractionRange;
+            return dist <= maxDist;
         });
         events = events.sort((a, b) => a._tempDist - b._tempDist);
         if (events.length > 0) {
