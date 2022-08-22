@@ -24,6 +24,9 @@ class DecoratingObject extends Building {
     }
 }
 
+// ===============================================================================
+// Peaceful Days Decors
+// ===============================================================================
 class WoodenFence extends DecoratingObject {
     /**
      * @inheritdoc
@@ -46,14 +49,21 @@ class WoodenFence extends DecoratingObject {
 }
 
 class GardenLamp extends DecoratingObject {
+    /**
+     * @inheritdoc
+     */
     imageFile() {
         return super.imageFile() + "GardenLamp";
     }
-
+    /**
+     * @inheritdoc
+     */
     bottomSize() {
         return {x: 1, y: 1};
     }
-
+    /**
+     * @inheritdoc
+     */
     imageRect() {
         return {
             x: 0,
@@ -62,7 +72,9 @@ class GardenLamp extends DecoratingObject {
             height: 96
         }
     }
-
+    /**
+     * @inheritdoc
+     */
     onObjectSpriteCreated() {
         const {x, y} = this.position;
         LightSystem.inst.addLight(new Sprite_PointLight(x, y, "yellow", 0, -64));
