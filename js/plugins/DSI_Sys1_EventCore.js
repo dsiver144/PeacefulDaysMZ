@@ -15,7 +15,8 @@
  * @returns {boolean}
  */
 Game_Event.prototype.isNPC = function() {
-    return false;
+    this._isNPC = this._isNPC != null ? this._isNPC : this.event().note.includes('NPC');
+    return this._isNPC;
 }
 
 class Sprite_EventCharacter extends Sprite_Character {
@@ -45,7 +46,7 @@ class Sprite_EventCharacter extends Sprite_Character {
      */
     updateOther() {
         super.updateOther();
-        this.updateTriggerEvent();
+        // this.updateTriggerEvent();
     }
     /**
      * Update trigger event by mouse

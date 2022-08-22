@@ -207,22 +207,22 @@ Game_Player.prototype.updateUseToolInput = function() {
     ToolManager.inst.update();
 };
 
-Game_Player.prototype.checkInteractWithFarmObjects = function() {
-    /** @type {Vector2} */
-    if (Input.getInputMode() === 'keyboard') {
-        const px = Math.round(this._x);
-        const py = Math.round(this._y);
-        const x = $gameMap.canvasToMapX(TouchInput.x);
-        const y = $gameMap.canvasToMapY(TouchInput.y);
-        const dist = Math.sqrt((x - px) * (x - px) + (y - py) * (y - py));
-        if (dist > 1.5) {
-            return false;
-        }
-        pos = new Vector2(x, y);
-    } else {
-        pos = this.frontPosition();
-    }
-    const result = FarmManager.inst.checkInteract(pos.x, pos.y);
+Game_Player.prototype.checkInteractWithFarmObjects = function(x, y) {
+    // /** @type {Vector2} */
+    // if (Input.getInputMode() === 'keyboard') {
+    //     const px = Math.round(this._x);
+    //     const py = Math.round(this._y);
+    //     const x = $gameMap.canvasToMapX(TouchInput.x);
+    //     const y = $gameMap.canvasToMapY(TouchInput.y);
+    //     const dist = Math.sqrt((x - px) * (x - px) + (y - py) * (y - py));
+    //     if (dist > 1.5) {
+    //         return false;
+    //     }
+    //     pos = new Vector2(x, y);
+    // } else {
+    //     pos = this.frontPosition();
+    // }
+    const result = FarmManager.inst.checkInteract(x, y);
     return result;
 }
 // ================================================================================

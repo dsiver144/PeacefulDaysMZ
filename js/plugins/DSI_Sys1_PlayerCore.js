@@ -16,8 +16,8 @@ const PlayerCoreConfig = {
     speedRatio: Math.pow(2, 10), // This should be power of 2. The bigger the slower the speed
     animationWaitMultiplier: 5, // The bigger the slower the animation is
     horseMoveSpeed: 7.25,
-    normalInteractionRange: 0.5,
-    npcInteractionRange: 1.35,
+    normalInteractionRange: 1.8,
+    npcInteractionRange: 2.0,
 }
 
 Game_CharacterBase.prototype.horseMoveSpeed = function () {
@@ -36,18 +36,18 @@ Game_CharacterBase.prototype.bonusSpeed = function () {
     return 0;
 }
 
-Game_CharacterBase.prototype.realMoveSpeed = function () {
+Game_Player.prototype.realMoveSpeed = function () {
     if (this.isRidingHorse()) {
         return this.horseMoveSpeed();
     }
     return PlayerCoreConfig.offset + this._moveSpeed + (this.isDashing() ? PlayerCoreConfig.runBonus : 0) + this.bonusSpeed();
 };
 
-Game_CharacterBase.prototype.distancePerFrame = function () {
+Game_Player.prototype.distancePerFrame = function () {
     return Math.pow(2, this.realMoveSpeed()) / PlayerCoreConfig.speedRatio;
 };
 
-Game_CharacterBase.prototype.animationWait = function () {
+Game_Player.prototype.animationWait = function () {
     return (9 - this.realMoveSpeed()) * PlayerCoreConfig.animationWaitMultiplier;
 };
 
@@ -71,50 +71,69 @@ Game_Player.prototype.isMoveDisable = function() {
 //     return result || true;
 // }
 
-Game_Player.prototype.checkEventTriggerThere = function (triggers) {
-    if (Input.getInputMode() === 'keyboard') return;
-    if (this.canStartLocalEvents()) {
-        // const cx = Math.round(this.x);
-        // const cy = Math.round(this.y);
-        // const x2 = $gameMap.roundXWithDirection(cx, this.direction());
-        // const y2 = $gameMap.roundYWithDirection(cy, this.direction());
-        const {x: x2, y: y2} = this.frontPosition();
-        let events = $gameMap.events().filter((event) => {
-            const dx = event.x - x2;
-            const dy = event.y - y2;
-            const dist = Math.sqrt(dx ** 2 + dy ** 2);
-            event._tempDist = dist;
-            const maxDist = event.isNPC() ? PlayerCoreConfig.npcInteractionRange : PlayerCoreConfig.normalInteractionRange;
-            return dist <= maxDist;
-        });
-        events = events.sort((a, b) => a._tempDist - b._tempDist);
-        if (events.length > 0) {
-            const event = events.shift();
-            this.turnTowardCharacter(event);
-            this.startMapEvent(event.x, event.y, triggers, true);
+Game_Player.prototype.triggerButtonAction = function() {
+    if (Input.isTriggered(FieldKeyAction.Check)) {
+        /** @type {Vector2[]} */
+        let checkPositions = [];
+        if (Input.getInputMode() === 'keyboard') {
+            const px = Math.round(this._x);
+            const py = Math.round(this._y);
+            const x = $gameMap.canvasToMapX(TouchInput.x);
+            const y = $gameMap.canvasToMapY(TouchInput.y);
+            const dist = Math.sqrt((x - px) * (x - px) + (y - py) * (y - py));
+            if (dist > 1.5) {
+                return false;
+            }
+            checkPositions.push(new Vector2(x, y));
+        } else {
+            const offsets = [[Math.floor(this._x), Math.floor(this._y)], [Math.ceil(this._x), Math.ceil(this._y)]];
+            const d = this.direction();
+            offsets.forEach(([ox, oy]) => {
+                var dx = $gameMap.roundXWithDirection(ox, d);
+                var dy = $gameMap.roundYWithDirection(oy, d);
+                checkPositions.push(new Vector2(dx, dy));
+            });
         }
-        // const direction = this.direction();
-        // const x11 = Math.ceil(this.x);
-        // const y11 = Math.ceil(this.y);
-        // const x12 = Math.floor(this.x);
-        // const y12 = Math.floor(this.y);
-        // const x21 = $gameMap.roundXWithDirection(x11, direction);
-        // const y21 = $gameMap.roundYWithDirection(y11, direction);
-        // const x22 = $gameMap.roundXWithDirection(x12, direction);
-        // const y22 = $gameMap.roundYWithDirection(y12, direction);
-        // this.startMapEvent(x21, y21, triggers, true);
-        // if (!$gameMap.isAnyEventStarting()) {
-        //     this.startMapEvent(x22, y22, triggers, true);
-        // }
-        // if (!$gameMap.isAnyEventStarting() && $gameMap.isCounter(x21, y21)) {
-        //     const x3 = $gameMap.roundXWithDirection(x21, direction);
-        //     const y3 = $gameMap.roundYWithDirection(y21, direction);
-        //     this.startMapEvent(x3, y3, triggers, true);
-        // }
-        // if (!$gameMap.isAnyEventStarting() && $gameMap.isCounter(x22, y22)) {
-        //     const x3 = $gameMap.roundXWithDirection(x22, direction);
-        //     const y3 = $gameMap.roundYWithDirection(y22, direction);
-        //     this.startMapEvent(x3, y3, triggers, true);
-        // }
+        for (var i = 0; i < checkPositions.length; i++) {
+            const v = checkPositions[i];
+            const event = $gameMap.eventsXy(v.x, v.y)[0];
+            if (event) {
+                this.turnTowardCharacter(event);
+                event.start();
+            }
+            if ($gameMap.setupStartingEvent()) {
+                return true;
+            }
+            if (this.checkInteractWithFarmObjects(v.x, v.y)) {
+                return true;
+            }
+        }
+        if (this.checkInteractWithEventInACircle()) {
+            return true;
+        }
     }
-}
+    return false;
+};
+
+Game_Player.prototype.checkInteractWithEventInACircle = function() {
+    let events = $gameMap.events().filter((event) => {
+        const dx = event.x - this.x;
+        const dy = event.y - this.y;
+        const dist = Math.sqrt(dx ** 2 + dy ** 2);
+        event._tempDist = dist;
+        const maxDist = event.isMoving() ? event.isNPC() ? PlayerCoreConfig.npcInteractionRange : PlayerCoreConfig.normalInteractionRange : 0.1;
+        return dist <= maxDist;
+    });
+    events = events.sort((a, b) => a._tempDist - b._tempDist);
+    if (events.length > 0) {
+        const event = events.shift();
+        this.turnTowardCharacter(event);
+        event.start();
+        return true;
+    }
+    return false;
+};
+
+Game_Player.prototype.checkInteractWithFarmObjects = function() {
+    return false;
+};
