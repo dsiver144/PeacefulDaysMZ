@@ -223,6 +223,7 @@ class Farmland extends SaveableObject {
         for (let ox = 0; ox < object.bottomSize().x; ox++) {
             for (let oy = 0; oy < object.bottomSize().y; oy++) {
                 if (ox == 0 && oy == 0) continue;
+                if (!object.collisionCondition(ox, oy)) continue;
                 const childObject = new FarmChildObject(new Vector2(x + ox, y + oy), object.mapId);
                 childObject.setParentPosition(object.position);
                 this.farmObjects[this.pos(x + ox, y + oy)] = childObject;
@@ -253,6 +254,7 @@ class Farmland extends SaveableObject {
         for (let ox = 0; ox < object.bottomSize().x; ox++) {
             for (let oy = 0; oy < object.bottomSize().y; oy++) {
                 if (ox == 0 && oy == 0) continue;
+                if (!object.collisionCondition(ox, oy)) continue;
                 const checkX = x + ox;
                 const checkY = y + oy;
                 const childObject = this.farmObjects[this.pos(checkX, checkY)];

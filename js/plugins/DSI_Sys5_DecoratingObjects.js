@@ -14,7 +14,14 @@ class DecoratingObject extends Building {
      * @inheritdoc
      */
     imageFile() {
-        return "decorators/";   
+        return "decorators/" + this.displayFilename();   
+    }
+    /**
+     * Get display filename
+     * @returns {string}
+     */
+    displayFilename() {
+        return ""
     }
     /**
      * @inheritdoc
@@ -37,8 +44,8 @@ class WoodenFence extends DecoratingObject {
     /**
      * @inheritdoc
      */
-    imageFile() {
-        return super.imageFile() + "WoodFenceb";
+    displayFilename() {
+        return "WoodFenceb";
     }
     /**
      * @inheritdoc
@@ -52,8 +59,8 @@ class GardenLamp extends DecoratingObject {
     /**
      * @inheritdoc
      */
-    imageFile() {
-        return super.imageFile() + "GardenLamp";
+     displayFilename() {
+        return "GardenLamp";
     }
     /**
      * @inheritdoc
@@ -78,5 +85,47 @@ class GardenLamp extends DecoratingObject {
     onObjectSpriteCreated() {
         const {x, y} = this.position;
         LightSystem.inst.addLight(new Sprite_PointLight(x, y, "yellow", 0, -64));
+    }
+}
+
+class FarmGate extends DecoratingObject {
+    /**
+     * @inheritdoc
+     */
+    displayFilename() {
+        return "FarmGate";
+    }
+    /**
+     * @inheritdoc
+     */
+    bottomSize() {
+        return {x: 5, y: 1}
+    }
+    /**
+     * @inheritdoc
+     */
+    collisionCondition(x, y) {
+        const size = this.bottomSize();
+        return x == 0 || x == size.x - 1;
+    } 
+    /**
+     * @inheritdoc
+     */
+    imageRect() {
+        return {
+            x: 0,
+            y: 0,
+            width: 160,
+            height: 128
+        }
+    }
+}
+
+class ToriiGate extends FarmGate {
+    /**
+     * @inheritdoc
+     */
+    displayFilename() {
+        return "ToriiGate";
     }
 }

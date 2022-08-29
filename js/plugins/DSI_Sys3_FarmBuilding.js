@@ -167,6 +167,7 @@ class Building extends FarmObject {
         const farmland = FarmManager.inst.getFarmlandById(this.mapId);
         for (let ox = 0; ox < this.bottomSize().x; ox++) {
             for (let oy = 0; oy < this.bottomSize().y; oy++) {
+                if (!this.collisionCondition(ox, oy)) continue;
                 const checkX = x + ox;
                 const checkY = y + oy;
                 const regionId = $gameMap.regionId(checkX, checkY);

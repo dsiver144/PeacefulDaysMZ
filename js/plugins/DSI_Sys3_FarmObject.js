@@ -48,6 +48,16 @@ class FarmObject extends SaveableObject {
         return {x: 1, y: 1};
     }
     /**
+     * Collision Condition
+     * @param {number} x 
+     * @param {number} y 
+     * @returns {boolean}
+     */
+    collisionCondition(x, y) {
+        const size = this.bottomSize();
+        return x >= 0 && x <= size.x && y >= 0 && y <= size.y;
+    }
+    /**
      * Override: saveProperties
      */
     saveProperties() {
