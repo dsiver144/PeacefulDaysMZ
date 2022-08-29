@@ -17,6 +17,7 @@
  */
 const DatabaseConfig = {
     defaultLevelPriceBonus: 100,
+    filenames: ["itemTable", "animalProduct", "craftItemTable", "decoratorTable", "forageItemList", "materialTable"]
 }
 
 const ItemRef = {};
@@ -86,7 +87,7 @@ ItemDB.getById = function(id) {
 }
 
 class PD_Item {
-    constructor({iconIndex, localizeKey, name, note, price, shipPrice, tag, stamina, levelPriceBonus}) {
+    constructor({iconIndex, localizeKey, name, note, price, shipPrice, tag, stamina, levelPriceBonus, nonDiscardable}) {
         /** @type {number} */
         this.iconIndex = Number(iconIndex);
         /** @type {string} */
@@ -105,6 +106,8 @@ class PD_Item {
         this.staminaData = stamina.split(";").map(t => Number(t));
         /** @type {number} */
         this.levelPriceBonus = levelPriceBonus ? Number(levelPriceBonus) : DatabaseConfig.defaultLevelPriceBonus;
+        /** @type {boolean} */
+        this.nonDiscardable = nonDiscardable ? nonDiscardable == 'true': false;
     }
 }
 
@@ -120,11 +123,18 @@ Scene_Boot.prototype.create = function() {
 
 Scene_Boot.prototype.loadCustomDatabase = function() {
     new ItemDB();
-    MyUtils.parseCSV("Database/itemTable.csv", (data) => {
-        data.forEach(i => {
-            if (!i || !i.name) return;
-            ItemDB.getInstance().addItem(new PD_Item(i));
+    const promises = DatabaseConfig.filenames.map(filename => {
+        return new Promise((resolve, reject) => {
+            MyUtils.parseCSV(`Database/${filename}.csv`, (data) => {
+                data.forEach(i => {
+                    if (!i || !i.name) return;
+                    ItemDB.getInstance().addItem(new PD_Item(i));
+                })
+                resolve();
+            })
         })
+    })
+    Promise.all(promises).then(() => {
         this.customDatabaseLoaded = true;
         this.onItemDatabaseCreated();
     })

@@ -12,7 +12,7 @@
 
 const ContainerConfig = {
     unlockedRows: 1,
-    maxSlotPerRow: 4,
+    maxSlotPerRow: 12,
     maxRows: 4,
     maxItemPerStacks: 100,
 }
@@ -21,7 +21,7 @@ class ItemContainer extends SaveableObject {
     /**
      * This class handle Inventory system for Peaceful Days
      */
-    constructor(unlockedRows = ContainerConfig.unlockedRows) {
+    constructor(unlockedRows = ContainerConfig.maxRows) {
         super();
         /** @type {Map<number, GameItem>} */
         this._items = new Map();
@@ -126,6 +126,7 @@ class ItemContainer extends SaveableObject {
     }
     /**
      * Find available slot id to add item to
+     * @private
      * @param {number} id 
      * @param {number} number 
      * @returns {number}
@@ -148,6 +149,7 @@ class ItemContainer extends SaveableObject {
     /**
      * Check if a slot is available
      * @param {number} slotId 
+     * @private
      */
     isSlotAvailable(slotId) {
         return slotId <= this.maxAvailableIndex() && !this._items.get(slotId);
@@ -155,6 +157,7 @@ class ItemContainer extends SaveableObject {
     /**
      * Get the max bag slot index at the moment
      * @returns {number}
+     * @private
      */
     maxAvailableIndex() {
         return ContainerConfig.maxSlotPerRow * this._unlockedRows - 1;
@@ -162,6 +165,7 @@ class ItemContainer extends SaveableObject {
     /**
      * Get the max slot of a page
      * @returns {number}
+     * @private
      */
     maxPageSlots() {
         return ContainerConfig.maxRows * ContainerConfig.maxSlotPerRow;
@@ -169,6 +173,7 @@ class ItemContainer extends SaveableObject {
     /**
      * Get the max possible page index
      * @returns {number}
+     * @private
      */
     availablePageIndex() {
         return Math.floor((this.maxAvailableIndex()) / this.maxPageSlots());
@@ -204,12 +209,12 @@ class ItemContainer extends SaveableObject {
 class GameItem extends SaveableObject {
     /**
      * Container Item
-     * @param {number} id id of the item
+     * @param {string} id id of the item
      * @param {number} quantity number of the item in the Inventory
      */
     constructor(id, quantity, level = 0) {
         super();
-        /** @type {number} */
+        /** @type {string} */
         this.id = id;
         /** @type {number} */
         this.quantity = quantity;
