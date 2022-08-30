@@ -88,6 +88,109 @@
 		}
 	},
 	{
+		"key": "WheatSeeds",
+		"lang": {
+			"vn": "Hạt Giống Lúa Mì",
+			"en": "Wheat Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống trồng cây lúa mì.",
+			"en": ""
+		}
+	}, {
+		"key": "Wheat",
+		"lang": {
+			"vn": "Lúa Mì",
+			"en": "Wheat"
+		},
+		"description": {
+			"vn": "Chứa nhiều tinh bột, cây lương thực phổ biến.",
+			"en": ""
+		}
+	},
+	{
+		"key": "RiceSeeds",
+		"lang": {
+			"vn": "Hạt Giống Lúa Gạo",
+			"en": "Rice Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống trồng cây lúa gạo.",
+			"en": ""
+		}
+	}, {
+		"key": "Rice",
+		"lang": {
+			"vn": "Lúa Gạo",
+			"en": "Rice"
+		},
+		"description": {
+			"vn": "Chứa nhiều tinh bột, là cây lương thực phổ biến ở khu vực nhiệt đới.",
+			"en": ""
+		}
+	},
+	{
+		"key": "SugarcaneSeeds",
+		"lang": {
+			"vn": "Hạt Giống Cây Mía",
+			"en": "Sugarcane Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống trồng cây mía.",
+			"en": ""
+		}
+	}, {
+		"key": "Sugarcane",
+		"lang": {
+			"vn": "Cây Mía",
+			"en": "Sugarcane"
+		},
+		"description": {
+			"vn": "Hàm lượng đường chứa đựng trong cây mía là rất nhiều.",
+			"en": ""
+		}
+	}, {
+		"key": "CoffeeSeeds",
+		"lang": {
+			"vn": "Hạt Giống Cà Phê",
+			"en": "Coffee Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng cây cà phê.",
+			"en": ""
+		}
+	}, {
+		"key": "CoffeeBean",
+		"lang": {
+			"vn": "Hạt Cà Phê",
+			"en": "Coffee Bean"
+		},
+		"description": {
+			"vn": "Được thu hoạch từ cây cà phê. Có mùi hương rất đặc trưng.",
+			"en": ""
+		}
+	}, {
+		"key": "CocoaSapling",
+		"lang": {
+			"vn": "Cây Ca Cao Non",
+			"en": "Cocoa Sapling"
+		},
+		"description": {
+			"vn": "Trồng cây con xuống đất để chúng phát triển.",
+			"en": ""
+		}
+	}, {
+		"key": "CocoaPod",
+		"lang": {
+			"vn": "Trái Ca Cao",
+			"en": "Cocoa Pod"
+		},
+		"description": {
+			"vn": "Chứa nhiều hạt ca cao có thể được xay thành bột.",
+			"en": ""
+		}
+	},
+	{
 		"key": "Hoe",
 		"lang": {
 			"vn": "Cuốc",
@@ -953,6 +1056,66 @@
 		},
 		"description": {
 			"vn": "Những con ong sẽ đến làm tổ ở đây và sản xuất mật ong.",
+			"en": ""
+		}
+	}, {
+		"key": "BasicFeeds",
+		"lang": {
+			"vn": "Thức Ăn Cơ Bản",
+			"en": "Basic Feeds"
+		},
+		"description": {
+			"vn": "Thức ăn dành cho thú nuôi của bạn.",
+			"en": ""
+		}
+	}, {
+		"key": "PremiumFeeds",
+		"lang": {
+			"vn": "Thức Ăn Xịn",
+			"en": "Premium Feeds"
+		},
+		"description": {
+			"vn": "Thức ăn chất lượng cao dành cho thú nuôi của bạn.",
+			"en": ""
+		}
+	}, {
+		"key": "FlourPack",
+		"lang": {
+			"vn": "Túi Bột Mì",
+			"en": "Flour Pack"
+		},
+		"description": {
+			"vn": "Được xay từ @[Wheat], nguyên liệu nấu ăn phổ biến.",
+			"en": ""
+		}
+	}, {
+		"key": "SugarPack",
+		"lang": {
+			"vn": "Túi Đường",
+			"en": "Sugar Pack"
+		},
+		"description": {
+			"vn": "Được xay từ @[Sugarcane], nguyên liệu nấu ăn phổ biến.",
+			"en": ""
+		}
+	}, {
+		"key": "CoffeePack",
+		"lang": {
+			"vn": "Túi Cà Phê",
+			"en": "Coffee Pack"
+		},
+		"description": {
+			"vn": "Được xay từ @[CoffeeBean], dùng để chế biến cà phê.",
+			"en": ""
+		}
+	}, {
+		"key": "CocoaPack",
+		"lang": {
+			"vn": "Túi Ca Cao",
+			"en": "Cocoa Pack"
+		},
+		"description": {
+			"vn": "Được xay từ @[CocoaPod], dùng để chế biến các món socola.",
 			"en": ""
 		}
 	}
