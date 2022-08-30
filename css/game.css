@@ -59,7 +59,7 @@ body {
     line-height: 32px;
     font-size: 12px;
     font-family: rmmz-numberfont, sans-serif;
-    color: #fff;
+    color: rgb(129, 211, 28);
     text-align: left;
 }
 #fpsCounterNumber {
