@@ -33,6 +33,28 @@
 		}
 	},
 	{
+		"key": "StrawberrySeeds",
+		"lang": {
+			"vn": "Hạt Giống Dâu Tây",
+			"en": "Strawberry Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng dâu tây.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Strawberry",
+		"lang": {
+			"vn": "Dâu Tây",
+			"en": "Strawberry"
+		},
+		"description": {
+			"vn": "Mọng nước, có vị ngọt kèm chua nhẹ.",
+			"en": ""
+		}
+	},
+	{
 		"key": "Carrot",
 		"lang": {
 			"vn": "Cà Rốt",
@@ -40,6 +62,28 @@
 		},
 		"description": {
 			"vn": "Chứa nhiều vitamin A rất tốt cho sức khỏe.",
+			"en": ""
+		}
+	},
+	{
+		"key": "TurnipSeeds",
+		"lang": {
+			"vn": "Hạt Giống Củ Cải",
+			"en": "Turnip Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng củ cải.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Turnip",
+		"lang": {
+			"vn": "Củ Cải",
+			"en": "Turnip"
+		},
+		"description": {
+			"vn": "Là cây thân củ có màu trắng đặc trưng.",
 			"en": ""
 		}
 	},
@@ -97,7 +141,8 @@
 			"vn": "Hạt giống trồng cây lúa mì.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "Wheat",
 		"lang": {
 			"vn": "Lúa Mì",
@@ -118,7 +163,8 @@
 			"vn": "Hạt giống trồng cây lúa gạo.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "Rice",
 		"lang": {
 			"vn": "Lúa Gạo",
@@ -139,7 +185,8 @@
 			"vn": "Hạt giống trồng cây mía.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "Sugarcane",
 		"lang": {
 			"vn": "Cây Mía",
@@ -149,7 +196,8 @@
 			"vn": "Hàm lượng đường chứa đựng trong cây mía là rất nhiều.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "CoffeeSeeds",
 		"lang": {
 			"vn": "Hạt Giống Cà Phê",
@@ -159,7 +207,8 @@
 			"vn": "Hạt giống để trồng cây cà phê.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "CoffeeBean",
 		"lang": {
 			"vn": "Hạt Cà Phê",
@@ -169,7 +218,8 @@
 			"vn": "Được thu hoạch từ cây cà phê. Có mùi hương rất đặc trưng.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "CocoaSapling",
 		"lang": {
 			"vn": "Cây Ca Cao Non",
@@ -179,7 +229,8 @@
 			"vn": "Trồng cây con xuống đất để chúng phát triển.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "CocoaPod",
 		"lang": {
 			"vn": "Trái Ca Cao",
@@ -187,6 +238,26 @@
 		},
 		"description": {
 			"vn": "Chứa nhiều hạt ca cao có thể được xay thành bột.",
+			"en": ""
+		}
+	}, {
+		"key": "TomatoSeeds",
+		"lang": {
+			"vn": "Hạt Giống Cà Chua",
+			"en": "Tomato Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng Cà Chua",
+			"en": ""
+		}
+	}, {
+		"key": "Tomato",
+		"lang": {
+			"vn": "Quả Cà Chua",
+			"en": "Tomato"
+		},
+		"description": {
+			"vn": "Là một loại quả mọng nước chứa nhiều vitamin A và chất xơ.",
 			"en": ""
 		}
 	},
@@ -1058,7 +1129,8 @@
 			"vn": "Những con ong sẽ đến làm tổ ở đây và sản xuất mật ong.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "BasicFeeds",
 		"lang": {
 			"vn": "Thức Ăn Cơ Bản",
@@ -1068,7 +1140,8 @@
 			"vn": "Thức ăn dành cho thú nuôi của bạn.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "PremiumFeeds",
 		"lang": {
 			"vn": "Thức Ăn Xịn",
@@ -1078,7 +1151,8 @@
 			"vn": "Thức ăn chất lượng cao dành cho thú nuôi của bạn.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "FlourPack",
 		"lang": {
 			"vn": "Túi Bột Mì",
@@ -1088,7 +1162,8 @@
 			"vn": "Được xay từ @[Wheat], nguyên liệu nấu ăn phổ biến.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "SugarPack",
 		"lang": {
 			"vn": "Túi Đường",
@@ -1098,7 +1173,8 @@
 			"vn": "Được xay từ @[Sugarcane], nguyên liệu nấu ăn phổ biến.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "CoffeePack",
 		"lang": {
 			"vn": "Túi Cà Phê",
@@ -1108,7 +1184,8 @@
 			"vn": "Được xay từ @[CoffeeBean], dùng để chế biến cà phê.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "CocoaPack",
 		"lang": {
 			"vn": "Túi Ca Cao",

@@ -1,0 +1,129 @@
+[
+    {
+        "itemID": "SunflowerSeeds",
+        "productID": "Sunflower",
+        "comment": "4 days",
+        "stages": [
+            1,
+            1,
+            1,
+            1
+        ],
+        "imageFile": "PD_Sunflower",
+        "seasons": [
+            0,
+            1,
+            2,
+            3
+        ],
+        "resetable": false,
+        "resetStageIndex": 0,
+        "resetTimes": 0,
+        "sickleRequired": false,
+        "isCollidable": false,
+        "waterfieldFlag": false,
+        "treeFlag": false
+    },
+    {
+        "itemID": "CarrotSeeds",
+        "productID": "Carrot",
+        "comment": "5 days",
+        "stages": [
+            1,
+            1,
+            1,
+            2
+        ],
+        "imageFile": "PD_Carrot",
+        "seasons": [
+            0
+        ]
+    },
+    {
+        "itemID": "StrawberrySeeds",
+        "productID": "Strawberry",
+        "comment": "7 days",
+        "stages": [
+            1,
+            1,
+            1,
+            2,
+            2
+        ],
+        "imageFile": "PD_Strawberry",
+        "seasons": [
+            0
+        ],
+        "resetable": true,
+        "resetStageIndex": 4,
+        "resetTimes": 3
+    },
+    {
+        "itemID": "WheatSeeds",
+        "productID": "Wheat",
+        "comment": "8 days",
+        "stages": [
+            1,
+            1,
+            2,
+            2,
+            3
+        ],
+        "imageFile": "PD_Wheat",
+        "seasons": [
+            0,
+            2
+        ],
+        "sickleRequired": true
+    },
+    {
+        "itemID": "TurnipSeeds",
+        "productID": "Turnip",
+        "comment": "6 days",
+        "stages": [
+            1,
+            1,
+            2,
+            2
+        ],
+        "imageFile": "PD_Turnip",
+        "seasons": [
+            1
+        ]
+    },
+    {
+        "itemID": "SugarcaneSeeds",
+        "productID": "Sugarcane",
+        "comment": "7 days",
+        "stages": [
+            1,
+            1,
+            2,
+            3
+        ],
+        "imageFile": "PD_Sugarcane",
+        "seasons": [
+            1
+        ],
+        "sickleRequired": true
+    },
+    {
+        "itemID": "TomatoSeeds",
+        "productID": "Tomato",
+        "comment": "9 days",
+        "stages": [
+            1,
+            1,
+            2,
+            2,
+            3
+        ],
+        "imageFile": "PD_Tomato",
+        "seasons": [
+            1
+        ],
+        "resetable": true,
+        "resetStageIndex": 4,
+        "resetTimes": 3
+    }
+]
