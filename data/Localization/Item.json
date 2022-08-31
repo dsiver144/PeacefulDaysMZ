@@ -240,7 +240,8 @@
 			"vn": "Chứa nhiều hạt ca cao có thể được xay thành bột.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "TomatoSeeds",
 		"lang": {
 			"vn": "Hạt Giống Cà Chua",
@@ -250,7 +251,8 @@
 			"vn": "Hạt giống để trồng Cà Chua",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "Tomato",
 		"lang": {
 			"vn": "Quả Cà Chua",
@@ -258,6 +260,226 @@
 		},
 		"description": {
 			"vn": "Là một loại quả mọng nước chứa nhiều vitamin A và chất xơ.",
+			"en": ""
+		}
+	},
+	{
+		"key": "WatermelonSeeds",
+		"lang": {
+			"vn": "Hạt Giống Dưa Hấu",
+			"en": "Watermelon Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng cây dưa hấu",
+			"en": ""
+		}
+	},
+	{
+		"key": "Watermelon",
+		"lang": {
+			"vn": "Dưa Hấu",
+			"en": "Watermelon"
+		},
+		"description": {
+			"vn": "Mọng nước và chứa nhiều đường. Thích hợp để làm nước ép.",
+			"en": ""
+		}
+	},
+	{
+		"key": "SweetPotatoSeeds",
+		"lang": {
+			"vn": "Hạt Giống Khoai Lang",
+			"en": "Sweet Potato Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng Khoai Lang",
+			"en": ""
+		}
+	},
+	{
+		"key": "SweetPotato",
+		"lang": {
+			"vn": "Khoai Lang",
+			"en": "Sweet Potato"
+		},
+		"description": {
+			"vn": "Chứa nhiều tinh bột, ăn có vị ngọt khi nấu lên.",
+			"en": ""
+		}
+	},
+	{
+		"key": "ChiliPepperSeeds",
+		"lang": {
+			"vn": "Hạt Giống Ớt",
+			"en": "Chili Pepper Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng Ớt",
+			"en": ""
+		}
+	},
+	{
+		"key": "ChiliPepper",
+		"lang": {
+			"vn": "Trái Ớt",
+			"en": "Chili Pepper"
+		},
+		"description": {
+			"vn": "Ăn vào có vị cay nồng, nguyên liệu nấu ăn phổ biến.",
+			"en": ""
+		}
+	},
+	{
+		"key": "PumpkinSeeds",
+		"lang": {
+			"vn": "Hạt Giống Bí Ngô",
+			"en": "Pumpkin Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng bí ngô.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Pumpkin",
+		"lang": {
+			"vn": "Bí Ngô",
+			"en": "Pumpkin"
+		},
+		"description": {
+			"vn": "Một loại quả có giá trị dinh dưỡng cao. Có thể dùng để chế tạo đèn lồng vào dịp lễ.",
+			"en": ""
+		}
+	},
+	{
+		"key": "SoybeanSeeds",
+		"lang": {
+			"vn": "Hạt Giống Đậu Nành",
+			"en": "Soybean Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng cây đậu nành.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Soybean",
+		"lang": {
+			"vn": "Đậu Nành",
+			"en": "Soybean"
+		},
+		"description": {
+			"vn": "Dùng để chế biến dầu ăn là chính.",
+			"en": ""
+		}
+	},
+	{
+		"key": "CucumberSeeds",
+		"lang": {
+			"vn": "Hạt Giống Dưa Chuột",
+			"en": "Cucumber Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng dưa chuột.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Cucumber",
+		"lang": {
+			"vn": "Dưa Chuột",
+			"en": "Cucumber"
+		},
+		"description": {
+			"vn": "Giàu chất xơ, một nguyên liệu không thể thiếu cho các món salad.",
+			"en": ""
+		}
+	},
+	{
+		"key": "SpinachSeeds",
+		"lang": {
+			"vn": "Hạt Giống Rau Chân Vịt",
+			"en": "Spinach Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng rau chân vịt.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Spinach",
+		"lang": {
+			"vn": "Rau Chân Vịt",
+			"en": "Spinach"
+		},
+		"description": {
+			"vn": "Rất tốt cho sức khỏe, có thể ăn sống hoặc nấu chín lên.",
+			"en": ""
+		}
+	},
+	{
+		"key": "ParnipSeeds",
+		"lang": {
+			"vn": "Hạt Giống Củ Cải Vàng",
+			"en": "Parnip Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng củ cải vàng.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Parnip",
+		"lang": {
+			"vn": "Củ Cải Vàng",
+			"en": "Parnip"
+		},
+		"description": {
+			"vn": "Giống với @[Carrot], chứa nhiều protein.",
+			"en": ""
+		}
+	},
+	{
+		"key": "CabbageSeeds",
+		"lang": {
+			"vn": "Hạt Giống Bắp Cải",
+			"en": "Cabbage Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng bắp cải.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Cabbage",
+		"lang": {
+			"vn": "Bắp Cải",
+			"en": "Cabbage"
+		},
+		"description": {
+			"vn": "Nhiều chất xơ và nguồn vitamin K dồi dào.",
+			"en": ""
+		}
+	},
+	{
+		"key": "CauliflowerSeeds",
+		"lang": {
+			"vn": "Hạt Giống Súp Lơ",
+			"en": "Cauliflower Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng súp lơ.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Cauliflower",
+		"lang": {
+			"vn": "Súp Lơ",
+			"en": "Cauliflower"
+		},
+		"description": {
+			"vn": "Chứa lượng calo thấp và cung cấp nhiều vitamin và khoáng chất quan trọng.",
 			"en": ""
 		}
 	},

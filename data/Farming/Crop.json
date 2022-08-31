@@ -59,6 +59,26 @@
         "resetTimes": 3
     },
     {
+        "itemID": "ChiliPepperSeeds",
+        "productID": "ChiliPepper",
+        "comment": "6 days",
+        "stages": [
+            1,
+            1,
+            1,
+            1,
+            2
+        ],
+        "imageFile": "PD_Strawberry",
+        "seasons": [
+            0,
+            1
+        ],
+        "resetable": true,
+        "resetStageIndex": 4,
+        "resetTimes": 3
+    },
+    {
         "itemID": "WheatSeeds",
         "productID": "Wheat",
         "comment": "8 days",
@@ -108,6 +128,23 @@
         "sickleRequired": true
     },
     {
+        "itemID": "CabbageSeeds",
+        "productID": "Cabbage",
+        "comment": "8 days",
+        "stages": [
+            1,
+            1,
+            2,
+            2,
+            2
+        ],
+        "imageFile": "PD_Cabbage",
+        "seasons": [
+            0,
+            1
+        ]
+    },
+    {
         "itemID": "TomatoSeeds",
         "productID": "Tomato",
         "comment": "9 days",
@@ -125,5 +162,165 @@
         "resetable": true,
         "resetStageIndex": 4,
         "resetTimes": 3
+    },
+    {
+        "itemID": "SoybeanSeeds",
+        "productID": "Soybean",
+        "comment": "8 days",
+        "stages": [
+            2,
+            2,
+            2,
+            2
+        ],
+        "imageFile": "PD_Soybean",
+        "seasons": [
+            1,
+            2
+        ],
+        "resetable": true,
+        "resetStageIndex": 3,
+        "resetTimes": 3
+    },
+    {
+        "itemID": "CornSeeds",
+        "productID": "Corn",
+        "comment": "10 days",
+        "stages": [
+            2,
+            2,
+            2,
+            2,
+            2
+        ],
+        "imageFile": "PD_Corn",
+        "seasons": [
+            1,
+            2
+        ],
+        "resetable": true,
+        "resetStageIndex": 3,
+        "resetTimes": 3
+    },
+    {
+        "itemID": "WatermelonSeeds",
+        "productID": "Watermelon",
+        "comment": "8 days",
+        "stages": [
+            1,
+            1,
+            2,
+            2,
+            2
+        ],
+        "imageFile": "PD_Watermelon",
+        "seasons": [
+            1,
+            2
+        ],
+        "resetable": true,
+        "resetStageIndex": 3,
+        "resetTimes": 3
+    },
+    {
+        "itemID": "SweetPotatoSeeds",
+        "productID": "SweetPotato",
+        "comment": "6 days",
+        "stages": [
+            1,
+            1,
+            2,
+            2
+        ],
+        "imageFile": "PD_SweetPotato",
+        "seasons": [
+            2
+        ]
+    },
+    {
+        "itemID": "PumpkinSeeds",
+        "productID": "Pumpkin",
+        "comment": "12 days",
+        "stages": [
+            2,
+            3,
+            3,
+            2,
+            2
+        ],
+        "imageFile": "PD_Pumpkin",
+        "seasons": [
+            2
+        ],
+        "resetable": true,
+        "resetStageIndex": 4,
+        "resetTimes": 3
+    },
+    {
+        "itemID": "CucumberSeeds",
+        "productID": "Cucumber",
+        "comment": "10 days",
+        "stages": [
+            2,
+            2,
+            2,
+            2,
+            2
+        ],
+        "imageFile": "PD_Cucumber",
+        "seasons": [
+            2,
+            3
+        ],
+        "resetable": true,
+        "resetStageIndex": 4,
+        "resetTimes": 3
+    },
+    {
+        "itemID": "CauliflowerSeeds",
+        "productID": "Cauliflower",
+        "comment": "8 days",
+        "stages": [
+            1,
+            1,
+            2,
+            2,
+            2
+        ],
+        "imageFile": "PD_Cauliflower",
+        "seasons": [
+            2,
+            3
+        ]
+    },
+    {
+        "itemID": "SpinachSeeds",
+        "productID": "Spinach",
+        "comment": "6",
+        "stages": [
+            1,
+            1,
+            2,
+            2
+        ],
+        "imageFile": "PD_Spinach",
+        "seasons": [
+            3
+        ]
+    },
+    {
+        "itemID": "ParnipSeeds",
+        "productID": "Parnip",
+        "comment": "12 days",
+        "stages": [
+            3,
+            3,
+            3,
+            3
+        ],
+        "imageFile": "PD_Parsnip",
+        "seasons": [
+            3
+        ]
     }
 ]
