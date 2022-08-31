@@ -102,7 +102,7 @@ class Sprite_FarmTile extends Sprite_FarmObject {
         const farmTile = this.farmTile();
         if (!farmTile.hasSeed()) return false;
         const seedConfig = farmTile.seedData();
-        this.bitmap = ImageManager.loadFarm(seedConfig.imageFile);
+        this.bitmap = ImageManager.loadFarm(seedConfig.imageFile, "crops");
         this.bitmap.addLoadListener(bitmap => {
             const stageIndex = farmTile.currentStage;
             const frameWidth = bitmap.width / (seedConfig.stages.length + 1);
@@ -115,7 +115,7 @@ class Sprite_FarmTile extends Sprite_FarmObject {
             this.updateTopLeftOffset();
         });
         // Separate between fruit tree display and normal display.
-        if (seedConfig.isTree) {
+        if (seedConfig.treeFlag) {
             // Hide soil sprite when it's fruit tree.
             this._soilSprite.opacity = 0;
             this.setOffscreenLimit(3, 4);
