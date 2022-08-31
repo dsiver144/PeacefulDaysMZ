@@ -117,7 +117,7 @@ class Farmland extends SaveableObject {
      * Use Seed Pack
      * @param {number} x 
      * @param {number} y 
-     * @param {number} seedId
+     * @param {string} seedId
      */
     useSeed(x, y, seedId) {
         const object = this.getObject(x, y);
@@ -128,7 +128,7 @@ class Farmland extends SaveableObject {
      * Use Sapling
      * @param {number} x 
      * @param {number} y 
-     * @param {number} seedId
+     * @param {string} seedId
      */
     useSapling(x, y, seedId) {
         let object = this.getObject(x, y);

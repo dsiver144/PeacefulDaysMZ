@@ -28,6 +28,39 @@ const FarmConfig = {
     nonWaterDayThreshold: 3,
     treeHP: 100,
     farmableRegionIDs: [111, 112],
+    filenames: ["Crop", "Tree"]
+}
+
+class SeedConfig {
+    /**
+     * Farm Crop Config
+     */
+    constructor() {
+        /** @type {string} */
+        this.itemID = null;
+        /** @type {string} */
+        this.productID = null;
+        /** @type {string} */
+        this.imageFile = null;
+        /** @type {number[]} */
+        this.stages = [];
+        /** @type {number[]} */
+        this.seasons = [];
+        /** @type {boolean} */
+        this.resetable = false;
+        /** @type {number} */
+        this.resetStageIndex = 0;
+        /** @type {number} */
+        this.resetTimes = 0;
+        /** @type {boolean} */
+        this.sickleRequired = false;
+        /** @type {boolean} */
+        this.isCollidable = false;
+        /** @type {boolean} */
+        this.waterfieldFlag = false;
+        /** @type {boolean} */
+        this.treeFlag = false;
+    }
 }
 
 /** @type {PluginParams} */
@@ -41,18 +74,27 @@ PluginManager.registerCommand('DSI_Sys2_FarmingSystem', 'updateNewDay', () => {
 var DSI_Sys2_FarmingSystem_Scene_Boot_onItemDatabaseCreated = Scene_Boot.prototype.onItemDatabaseCreated;
 Scene_Boot.prototype.onItemDatabaseCreated = function() {
 	DSI_Sys2_FarmingSystem_Scene_Boot_onItemDatabaseCreated.call(this);
-    // ================================================
-    // Set seedId ref to each seed item.
-    // ================================================
-    /** @type {StrFarmCrop[]} */
-    const allSeeds = FarmParams.seedConfig.concat(FarmParams.treeConfig);
-    FarmParams.allSeeds = allSeeds;
-    allSeeds.forEach((seedConfig, index) => {
-        const seedItem = ItemDB.get(seedConfig.seedItemID);
-        if (seedItem) {
-            seedItem.seedId = index;
-        }
-    });
+    // // ================================================
+    // // Set seedId ref to each seed item.
+    // // ================================================
+    // /** @type {StrFarmCrop[]} */
+    // const allSeeds = FarmParams.seedConfig.concat(FarmParams.treeConfig);
+    // FarmParams.allSeeds = allSeeds;
+    // allSeeds.forEach((seedConfig, index) => {
+    //     const seedItem = ItemDB.get(seedConfig.seedItemID);
+    //     if (seedItem) {
+    //         seedItem.seedId = index;
+    //     }
+    // });
+    FarmParams.allSeeds = {};
+    FarmConfig.filenames.forEach(filename => {
+        MyUtils.loadFile(`Farming/${filename}.json`, (data) => {
+            const arr = JSON.parse(data);
+            for (const obj of arr) {
+                FarmParams.allSeeds[obj.itemID] = obj;
+            }
+        })
+    })
 };
 
 class FarmManager extends SaveableObject {
@@ -182,11 +224,11 @@ ImageManager.loadFarm = function(filename, dir = "") {
 FarmManager.inst = null;
 /**
  * Get Seed Data
- * @param {number} seedId 
- * @returns {StrFarmCrop}
+ * @param {string} seedId 
+ * @returns {SeedConfig}
  */
-FarmManager.getSeedData = function(seedId) {
-    return FarmParams.allSeeds[seedId];
+FarmManager.getSeedData = function(itemID) {
+    return FarmParams.allSeeds[itemID];
 }
 /**
  * Check if this region id is farm region.
@@ -255,39 +297,6 @@ Spriteset_Map.prototype.createFarmObjectSprites = function() {
     })
 }
 
-//========================================================================
-// END OF PLUGIN
-//========================================================================
-class StrFarmCrop {
-    constructor() {
-         /** @type {number} */
-         this.itemPreview = null;
-         /** @type {string} */
-         this.seedItemID = null;
-         /** @type {string} */
-         this.productID = null;
-         /** @type {number[]} */
-         this.stages = null;
-         /** @type {boolean} */
-         this.resetable = null;
-         /** @type {number} */
-         this.resetStageIndex = null;
-         /** @type {number} */
-         this.resetTimes = null;
-         /** @type {boolean} */
-         this.sickleRequired = null;
-         /** @type {boolean} */
-         this.isTree = null;
-         /** @type {boolean} */
-         this.isCollidable = null;
-         /** @type {boolean} */
-         this.nonWaterFlag = null;
-         /** @type {number[]} */
-         this.seasons = null;
-         /** @type {string} */
-         this.imageFile = null;
-     }
- }
 /*~struct~StrFarmCrop:
  * 
  * @param itemPreview:num

@@ -79,7 +79,7 @@ class FarmTile extends FarmObject {
     }
     /**
      * Get current seed data
-     * @returns {StrFarmCrop}
+     * @returns {SeedConfig}
      */
     seedData() {
         return FarmManager.getSeedData(this.seedId);
