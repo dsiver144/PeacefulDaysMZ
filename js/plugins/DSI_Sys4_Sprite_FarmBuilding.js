@@ -78,6 +78,7 @@ class Sprite_FarmBuilding extends Sprite_FarmObject {
     update() {
         super.update();
         this.updateInput();
+        this.updateAnimation();
     }
     /**
      * Get Farm building
@@ -133,8 +134,35 @@ class Sprite_FarmBuilding extends Sprite_FarmObject {
             this.updateTopLeftOffset();
             const limit = this.offsetLimit();
             this.setOffscreenLimit(limit.x, limit.y);
+
+            this._hasAnim = building.animationFrames() > 0;
+            this._animIndex = 0;
+            this._animationCount = 0;
         });
         this._screenZ = 3;
+    }
+    /**
+     * Update animation
+     * @returns {void}
+     */
+    updateAnimation() {
+        if (!this.hasAnimation()) return;
+        this._animationCount += 1;
+        console.log("Update anime");
+        if (this._animationCount >= this.building().animationInterval()) {
+            const building = this.building();
+            this._animIndex = (this._animIndex + 1) % building.animationFrames();
+            const { y, width, height } = building.imageRect();
+            this.setFrame(width * this._animIndex, y, width, height);
+            this._animationCount = 0;
+        }
+    }
+    /**
+     * Has Animation
+     * @returns {boolean}
+     */
+    hasAnimation() {
+        return this._hasAnim;
     }
     /**
      * @inheritdoc

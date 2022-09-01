@@ -12,6 +12,7 @@
  */
 const ConstructionConfig = {
     regionIds: [111, 112],
+    defaultAnimationInterval: 60 // Animation will changes after 60 frames.
 }
 
 class Building extends FarmObject {
@@ -89,6 +90,20 @@ class Building extends FarmObject {
             width: 32,
             height: 32
         }
+    }
+    /**
+     * Total animation frames
+     * @returns {number}
+     */
+    animationFrames() {
+        return 1;
+    }
+    /**
+     * Animation Interval
+     * @returns {number}
+     */
+    animationInterval() {
+        return ConstructionConfig.defaultAnimationInterval;
     }
     /**
      * Display Offset

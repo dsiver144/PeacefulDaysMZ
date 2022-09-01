@@ -45,8 +45,10 @@ var $plugins =
 {"name":"DSI_Sys4_DebugWindow","status":true,"description":"","parameters":{}},
 {"name":"DSI_Sys5_Coop","status":true,"description":"(v1.0) Coop","parameters":{}},
 {"name":"DSI_Sys5_Windmill","status":true,"description":"(v1.0) Windmill","parameters":{}},
+{"name":"DSI_Sys5_Well","status":true,"description":"(v1.0) Coop","parameters":{}},
 {"name":"DSI_Sys5_Machine_Fermenter","status":true,"description":"(v1.0) Windmill","parameters":{}},
 {"name":"DSI_Sys5_DecoratingObjects","status":true,"description":"","parameters":{}},
 {"name":"DSI_Sys6_Sprite_Windmill","status":true,"description":"(v1.0) Sprite Windmill","parameters":{}},
+{"name":"DSI_Sys6_Sprite_Well","status":true,"description":"(v1.0) Sprite Windmill","parameters":{}},
 {"name":"DSI_Sys6_Sprite_FarmDecor","status":true,"description":"(v1.0) A custom plugin by dsiver144","parameters":{}}
 ];
