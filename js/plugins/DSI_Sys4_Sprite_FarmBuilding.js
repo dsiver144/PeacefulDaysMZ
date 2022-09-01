@@ -127,8 +127,8 @@ class Sprite_FarmBuilding extends Sprite_FarmObject {
             const { x, y, width, height } = building.imageRect();
             this.setFrame(x, y, width, height);
             this.updatePosition();
-            this.anchor.x = 0;
-            this.anchor.y = 1.0;
+            this.anchor.x = building.displayAnchor().x;
+            this.anchor.y = building.displayAnchor().y;
             this.displayOffset.y += bitmap.height * this.anchor.y;
             
             this.updateTopLeftOffset();

@@ -92,6 +92,13 @@ class Building extends FarmObject {
         }
     }
     /**
+     * Display Anchor
+     * @returns {Vector2}
+     */
+    displayAnchor() {
+        return {x: 0, y: 1.0};
+    }
+    /**
      * Total animation frames
      * @returns {number}
      */

@@ -29,15 +29,27 @@ class Coop extends Building {
             x: 0,
             y: 0,
             width: 160,
-            height: 128
+            height: 192
         }
+    }
+    /**
+     * @inheritdoc
+     */
+    displayAnchor() {
+        return {x: 0.0, y: 0.65};
+    }
+    /**
+     * @inheritdoc
+     */
+    collisionCondition(x, y) {
+        return !(x == 1 && y == 1);
     }
     /**
      * Get interaction range
      * @returns {{x: number, y: number, width: number, height: number}}
      */
     interactionRange() {
-        return { x: 1, y: 1, width: 1, height: 1 };
+        return { x: 1, y: 0, width: 1, height: 1 };
     }
     /**
      * @inheritdoc
