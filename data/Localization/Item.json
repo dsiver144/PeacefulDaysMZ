@@ -1417,5 +1417,26 @@
 			"vn": "Được xay từ @[CocoaPod], dùng để chế biến các món socola.",
 			"en": ""
 		}
+	}, 
+	{
+		"key": "Breadfruit",
+		"lang": {
+			"vn": "Trái Bánh Mì",
+			"en": "Breadfruit"
+		},
+		"description": {
+			"vn": "Có thể đem nướng để ăn có mùi vị thơm ngon như bánh mì.",
+			"en": ""
+		}
+	}, {
+		"key": "RoastedBreadfruit",
+		"lang": {
+			"vn": "Trái Bánh Mì Nướng",
+			"en": "Roasted Breadfruit"
+		},
+		"description": {
+			"vn": "Ăn có mùi vị như bánh mì, hồi một lượng thể lực vừa đủ.",
+			"en": ""
+		}
 	}
 ]

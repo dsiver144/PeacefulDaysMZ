@@ -7,13 +7,15 @@
             {
                 "itemID": "WildGrass",
                 "number": 5
-            }, {
+            },
+            {
                 "tag": "vegetable",
                 "number": 1
             }
         ],
         "require": "Windmill"
-    }, {
+    },
+    {
         "itemID": "PremiumFeeds",
         "comment": "Should be a reward for small quest in the future",
         "quantity": 5,
@@ -22,16 +24,19 @@
             {
                 "itemID": "WildGrass",
                 "number": 5
-            }, {
+            },
+            {
                 "tag": "vegetable",
                 "number": 1
-            }, {
+            },
+            {
                 "itemID": "OatGrain",
                 "number": 1
             }
         ],
         "require": "Windmill"
-    }, {
+    },
+    {
         "itemID": "FlourPack",
         "quality": true,
         "quantity": 5,
@@ -41,8 +46,10 @@
                 "itemID": "Wheat",
                 "number": 1
             }
-        ]
-    }, {
+        ],
+        "require": "Windmill"
+    },
+    {
         "itemID": "RicePack",
         "quality": true,
         "quantity": 5,
@@ -52,8 +59,10 @@
                 "itemID": "Rice",
                 "number": 1
             }
-        ]
-    }, {
+        ],
+        "require": "Windmill"
+    },
+    {
         "itemID": "SugarPack",
         "quality": true,
         "quantity": 5,
@@ -63,8 +72,10 @@
                 "itemID": "Sugarcane",
                 "number": 1
             }
-        ]
-    }, {
+        ],
+        "require": "Windmill"
+    },
+    {
         "itemID": "CoffeePack",
         "quality": true,
         "quantity": 5,
@@ -74,8 +85,10 @@
                 "itemID": "CoffeeBean",
                 "number": 1
             }
-        ]
-    }, {
+        ],
+        "require": "Windmill"
+    },
+    {
         "itemID": "CocoaPack",
         "quality": true,
         "quantity": 5,
@@ -85,6 +98,20 @@
                 "itemID": "CocoaPod",
                 "number": 1
             }
-        ]
+        ],
+        "require": "Windmill"
+    },
+    {
+        "itemID": "CookingOil",
+        "quality": true,
+        "quantity": 1,
+        "duration": 300,
+        "components": [
+            {
+                "itemID": "Soybean",
+                "number": 1
+            }
+        ],
+        "require": "Windmill"
     }
 ]
