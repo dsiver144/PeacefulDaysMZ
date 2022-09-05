@@ -148,7 +148,6 @@ class Sprite_FarmBuilding extends Sprite_FarmObject {
     updateAnimation() {
         if (!this.hasAnimation()) return;
         this._animationCount += 1;
-        console.log("Update anime");
         if (this._animationCount >= this.building().animationInterval()) {
             const building = this.building();
             this._animIndex = (this._animIndex + 1) % building.animationFrames();

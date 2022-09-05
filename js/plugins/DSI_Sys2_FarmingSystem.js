@@ -107,7 +107,9 @@ class FarmManager extends SaveableObject {
         /** @type {Object.<string, Farmland>} */
         this.farmlands = {};
     }
-    
+    /**
+     * Test function
+     */
     test() {
         var object = new OHugeStone(new Vector2(3, 5), 1);
         FarmManager.inst.currentFarmland().addObject(object)
