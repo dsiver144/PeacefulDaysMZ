@@ -1421,7 +1421,7 @@
 	{
 		"key": "Breadfruit",
 		"lang": {
-			"vn": "Trái Bánh Mì",
+			"vn": "Quả Bánh Mì",
 			"en": "Breadfruit"
 		},
 		"description": {
@@ -1432,7 +1432,7 @@
 	{
 		"key": "RoastedBreadfruit",
 		"lang": {
-			"vn": "Trái Bánh Mì Nướng",
+			"vn": "Quả Bánh Mì Nướng",
 			"en": "Roasted Breadfruit"
 		},
 		"description": {
