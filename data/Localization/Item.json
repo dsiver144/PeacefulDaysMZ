@@ -1417,7 +1417,7 @@
 			"vn": "Được xay từ @[CocoaPod], dùng để chế biến các món socola.",
 			"en": ""
 		}
-	}, 
+	},
 	{
 		"key": "Breadfruit",
 		"lang": {
@@ -1428,7 +1428,8 @@
 			"vn": "Có thể đem nướng để ăn có mùi vị thơm ngon như bánh mì.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "RoastedBreadfruit",
 		"lang": {
 			"vn": "Trái Bánh Mì Nướng",
@@ -1436,6 +1437,28 @@
 		},
 		"description": {
 			"vn": "Ăn có mùi vị như bánh mì, hồi một lượng thể lực vừa đủ.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Raspberry",
+		"lang": {
+			"vn": "Quả Mâm Xôi",
+			"en": "Raspberry"
+		},
+		"description": {
+			"vn": "Chứa nhiều chất xơ và vitamin C.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Gooseberry",
+		"lang": {
+			"vn": "Quả Lý Gai",
+			"en": "Gooseberry"
+		},
+		"description": {
+			"vn": "Mọng nước, có thể dùng để làm rượu.",
 			"en": ""
 		}
 	}

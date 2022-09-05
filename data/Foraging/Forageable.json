@@ -1,0 +1,16 @@
+[
+    {
+        "itemID": "Raspberry",
+        "seasons": [
+            1
+        ],
+        "comment": "Các bụi cây mâm xôi mọc rải rác quanh thị trấn vào mùa hạ."
+    },
+    {
+        "itemID": "Gooseberry",
+        "seasons": [
+            2
+        ],
+        "comment": "Đa số mọc ở các bụi cây trong rừng. Có thể làm rượu."
+    }
+]
