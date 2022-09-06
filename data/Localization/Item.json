@@ -1593,5 +1593,60 @@
 			"vn": "Mọc ngoài tự nhiên vào mùa đông và không ngọt như nho tự trồng.",
 			"en": ""
 		}
+	},
+	{
+		"key": "Morel",
+		"lang": {
+			"vn": "Nấm Bụng Dê",
+			"en": "Morel"
+		},
+		"description": {
+			"vn": "Được đánh giá cao bởi các đầu bếp sành ăn. Không nên ăn sống.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Shiitake",
+		"lang": {
+			"vn": "Nấm Hương",
+			"en": "Shiitake"
+		},
+		"description": {
+			"vn": "Có hình dạng như chiếc ô, khi nấu lên có vị thơm đặc trưng.",
+			"en": ""
+		}
+	},
+	{
+		"key": "StrawMushroom",
+		"lang": {
+			"vn": "Nấm Rơm",
+			"en": "Straw Mushroom"
+		},
+		"description": {
+			"vn": "Mọc lên từ các bụi rơm, có hàm lượng dinh dưỡng cao.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Truffle",
+		"lang": {
+			"vn": "Nấm Cục",
+			"en": "Truffle"
+		},
+		"description": {
+			"vn": "Là một loài nấm hiếm, chúng ẩn sâu dưới lòng đất.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Matsutake",
+		"lang": {
+			"vn": "Nấm Matsutake",
+			"en": "Matsutake"
+		},
+		"description": {
+			"vn": "Một loại nấm hiếm và đắc đỏ. Mọc ở những vùng núi cao và nhiều độ ẩm.",
+			"en": ""
+		}
 	}
 ]

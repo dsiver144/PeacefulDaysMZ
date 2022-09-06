@@ -82,6 +82,46 @@
         "comment": ""
     },
     {
+        "itemID": "Morel",
+        "seasons": [
+            2
+        ]
+    },
+    {
+        "itemID": "Shiitake",
+        "seasons": [
+            2,
+            3
+        ],
+        "comment": "Xuất hiện trên các thân cây đã mục."
+    },
+    {
+        "itemID": "StrawMushroom",
+        "seasons": [
+            2
+        ],
+        "comment": "Mọc trên các bụi rơm xung quanh thị trấn vào mùa thu."
+    },
+    {
+        "itemID": "Shimeji",
+        "seasons": [
+            2
+        ]
+    },
+    {
+        "itemID": "Truffle",
+        "seasons": [
+            2
+        ]
+    },
+    {
+        "itemID": "Matsutake",
+        "seasons": [
+            2
+        ],
+        "comment": "Mọc ở vùng rừng núi cao và chỉ mọc vào ngày mưa. Tỉ lệ thấp."
+    },
+    {
         "itemID": "Snowdrop",
         "seasons": [
             3
