@@ -1571,7 +1571,8 @@
 			"vn": "Là một loài hoa đẹp, tượng trưng cho sự giàu có, thịnh vượng.",
 			"en": ""
 		}
-	},{
+	},
+	{
 		"key": "Acorn",
 		"lang": {
 			"vn": "Quả Sồi",
@@ -1579,6 +1580,17 @@
 		},
 		"description": {
 			"vn": "Có hàm lượng dinh dưỡng cao.",
+			"en": ""
+		}
+	},
+	{
+		"key": "WildGrape",
+		"lang": {
+			"vn": "Chùm Nho Dại",
+			"en": "Wild Grapes"
+		},
+		"description": {
+			"vn": "Mọc ngoài tự nhiên vào mùa đông và không ngọt như nho tự trồng.",
 			"en": ""
 		}
 	}

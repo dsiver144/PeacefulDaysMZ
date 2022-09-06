@@ -100,5 +100,12 @@
             3
         ],
         "comment": "Rơi ở dưới các tán cây sồi."
+    },
+    {
+        "itemID": "WildGrape",
+        "seasons": [
+            3
+        ],
+        "comment": "Mọc ở bụi dây leo ven các hàng rào gần khu rừng."
     }
 ]
