@@ -9,6 +9,14 @@
         ]
     },
     {
+        "itemID": "Coconut",
+        "seasons": [
+            0,
+            1,
+            2
+        ]
+    },
+    {
         "itemID": "Pursley",
         "seasons": [
             0

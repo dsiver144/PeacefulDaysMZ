@@ -1,5 +1,49 @@
 [
     {
+        "itemID": "HotMilk",
+        "quality": true,
+        "quantity": 1,
+        "minDuration": 5,
+        "maxDuration": 10,
+        "components": [
+            {
+                "tag": "milk",
+                "number": 1
+            },
+            {
+                "itemID": "EmptyJar",
+                "number": 1
+            }
+        ],
+        "utensil": "Pot",
+        "exp": 1,
+        "require": "Kitchen"
+    },
+    {
+        "itemID": "CondensedMilk",
+        "quality": true,
+        "quantity": 1,
+        "minDuration": 10,
+        "maxDuration": 20,
+        "components": [
+            {
+                "tag": "milk",
+                "number": 1
+            },
+            {
+                "itemID": "SugarPack",
+                "number": 1
+            },
+            {
+                "itemID": "EmptyJar",
+                "number": 1
+            }
+        ],
+        "utensil": "Pot",
+        "exp": 1,
+        "require": "Kitchen"
+    },
+    {
         "itemID": "FriedEgg",
         "quality": true,
         "quantity": 1,
@@ -33,6 +77,210 @@
         ],
         "utensil": "Pot",
         "exp": 1,
+        "require": "Kitchen"
+    },
+    {
+        "itemID": "EggTart",
+        "quality": true,
+        "quantity": 5,
+        "minDuration": 10,
+        "maxDuration": 15,
+        "components": [
+            {
+                "tag": "egg",
+                "number": 1
+            },
+            {
+                "itemID": "SugarPack",
+                "number": 1
+            },
+            {
+                "itemID": "FlourPack",
+                "number": 1
+            }
+        ],
+        "utensil": "Pot",
+        "exp": 2,
+        "require": "Kitchen"
+    },
+    {
+        "itemID": "EggCurry",
+        "quality": true,
+        "quantity": 1,
+        "minDuration": 10,
+        "maxDuration": 15,
+        "components": [
+            {
+                "itemID": "RicePack",
+                "number": 1
+            },
+            {
+                "itemID": "CurryPowder",
+                "number": 1
+            },
+            {
+                "tag": "egg",
+                "number": 1
+            },
+            {
+                "itemID": "SaltPack",
+                "number": 1
+            }
+        ],
+        "utensil": "FryingPan",
+        "exp": 2,
+        "require": "Kitchen"
+    },
+    {
+        "itemID": "CurryRice",
+        "quality": true,
+        "quantity": 1,
+        "minDuration": 10,
+        "maxDuration": 15,
+        "components": [
+            {
+                "itemID": "RicePack",
+                "number": 1
+            },
+            {
+                "itemID": "CurryPowder",
+                "number": 1
+            },
+            {
+                "itemID": "SaltPack",
+                "number": 1
+            }
+        ],
+        "utensil": "FryingPan",
+        "exp": 2,
+        "require": "Kitchen"
+    },
+    {
+        "itemID": "ThaiRedCurry",
+        "quality": true,
+        "quantity": 1,
+        "minDuration": 10,
+        "maxDuration": 15,
+        "components": [
+            {
+                "itemID": "RicePack",
+                "number": 1
+            },
+            {
+                "itemID": "CurryPowder",
+                "number": 1
+            },
+            {
+                "itemID": "ChiliPepper",
+                "number": 1
+            },
+            {
+                "itemID": "SaltPack",
+                "number": 1
+            }
+        ],
+        "utensil": "FryingPan",
+        "exp": 2,
+        "require": "Kitchen"
+    },
+    {
+        "itemID": "ChocolateMilk",
+        "quality": true,
+        "quantity": 1,
+        "minDuration": 5,
+        "maxDuration": 10,
+        "components": [
+            {
+                "tag": "milk",
+                "number": 1
+            },
+            {
+                "itemID": "CocoaPack",
+                "number": 1
+            },
+            {
+                "itemID": "EmptyJar",
+                "number": 1
+            }
+        ],
+        "utensil": "Pot",
+        "exp": 2,
+        "require": "Kitchen"
+    },
+    {
+        "itemID": "IceCream",
+        "quality": true,
+        "quantity": 1,
+        "minDuration": 5,
+        "maxDuration": 10,
+        "components": [
+            {
+                "itemID": "CondensedMilk",
+                "number": 1
+            },
+            {
+                "itemID": "Strawberry",
+                "number": 1
+            },
+            {
+                "itemID": "Coconut",
+                "number": 1
+            },
+            {
+                "itemID": "SugarPack",
+                "number": 1
+            }
+        ],
+        "utensil": "Freezer",
+        "exp": 2,
+        "require": "Kitchen"
+    },
+    {
+        "itemID": "EggCoffee",
+        "quality": true,
+        "quantity": 1,
+        "minDuration": 10,
+        "maxDuration": 20,
+        "components": [
+            {
+                "tag": "egg",
+                "number": 1
+            },
+            {
+                "itemID": "CondensedMilk",
+                "number": 1
+            },
+            {
+                "itemID": "CoffeePack",
+                "number": 1
+            }
+        ],
+        "utensil": "",
+        "exp": 3,
+        "require": "Kitchen"
+    },
+    {
+        "itemID": "Tamagozake",
+        "quality": true,
+        "quantity": 1,
+        "minDuration": 10,
+        "maxDuration": 20,
+        "components": [
+            {
+                "tag": "egg",
+                "number": 1
+            },
+            {
+                "itemID": "Sake",
+                "number": 1
+            },
+            {
+                "itemID": "SugarPack",
+                "number": 1
+            }
+        ],
+        "utensil": "",
+        "exp": 3,
         "require": "Kitchen"
     }
 ]

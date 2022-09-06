@@ -671,17 +671,6 @@
 		}
 	},
 	{
-		"key": "GreenHerb",
-		"lang": {
-			"vn": "Cây thảo mộc xanh",
-			"en": "Green Herb"
-		},
-		"description": {
-			"vn": "Là cây thảo mộc dại mọc ở thị trấn Aurora. Có thể ăn để hồi một tí năng lượng.",
-			"en": ""
-		}
-	},
-	{
 		"key": "BasicChest",
 		"lang": {
 			"vn": "Rương Đồ",
@@ -1199,6 +1188,17 @@
 		}
 	},
 	{
+		"key": "Sake",
+		"lang": {
+			"vn": "Rượu Sake",
+			"en": "Sake"
+		},
+		"description": {
+			"vn": "Rượu hảo hạn được lên men từ gạo.",
+			"en": ""
+		}
+	},
+	{
 		"key": "CookingOil",
 		"lang": {
 			"vn": "Dầu Ăn",
@@ -1415,6 +1415,28 @@
 		},
 		"description": {
 			"vn": "Được xay từ @[CocoaPod], dùng để chế biến các món socola.",
+			"en": ""
+		}
+	},
+	{
+		"key": "GreenHerb",
+		"lang": {
+			"vn": "Cây thảo mộc xanh",
+			"en": "Green Herb"
+		},
+		"description": {
+			"vn": "Là cây thảo mộc dại mọc ở thị trấn Aurora. Có thể ăn để hồi một tí năng lượng.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Coconut",
+		"lang": {
+			"vn": "Trái Dừa",
+			"en": "Coconut"
+		},
+		"description": {
+			"vn": "Thường được tìm thấy ở các bãi biển.",
 			"en": ""
 		}
 	},
@@ -1650,6 +1672,17 @@
 		}
 	},
 	{
+		"key": "CurryPowder",
+		"lang": {
+			"vn": "Bột Cà Ri",
+			"en": "Curry Powder"
+		},
+		"description": {
+			"vn": "Loại bột chuyên dụng để làm các món Cà Ri.",
+			"en": ""
+		}
+	},
+	{
 		"key": "FriedEgg",
 		"lang": {
 			"vn": "Trứng Ốp La",
@@ -1668,6 +1701,105 @@
 		},
 		"description": {
 			"vn": "Món ăn phổ biến, giúp hồi phục một lượng thể lực.",
+			"en": ""
+		}
+	},
+	{
+		"key": "CurryRice",
+		"lang": {
+			"vn": "Cơm Cà Ri",
+			"en": "Curry Rice"
+		},
+		"description": {
+			"vn": "Món ăn phổ biến, giúp hồi phục một lượng thể lực.",
+			"en": ""
+		}
+	},
+	{
+		"key": "ThaiRedCurry",
+		"lang": {
+			"vn": "Cà Ri Thái Đỏ",
+			"en": "Thai Red Curry"
+		},
+		"description": {
+			"vn": "Món ăn phổ biến, có vị cay nồng, giúp hồi phục một lượng thể lực.",
+			"en": ""
+		}
+	},
+	{
+		"key": "EggCurry",
+		"lang": {
+			"vn": "Cà Ri Trứng",
+			"en": "Egg Curry"
+		},
+		"description": {
+			"vn": "Món ăn phổ biến, giúp hồi phục một lượng thể lực.",
+			"en": ""
+		}
+	},
+	{
+		"key": "HotMilk",
+		"lang": {
+			"vn": "Sữa Nóng",
+			"en": "Hot Milk"
+		},
+		"description": {
+			"vn": "Một ly sữa nóng vào những ngày đông lạnh lẽo thật tuyệt vời.",
+			"en": ""
+		}
+	},
+	{
+		"key": "CondensedMilk",
+		"lang": {
+			"vn": "Sữa Cô Đặc",
+			"en": "Condensed Milk"
+		},
+		"description": {
+			"vn": "Được chế biến từ sữa tươi và đường. Dùng trong các loại đồ uống liên quan đến sữa.",
+			"en": ""
+		}
+	},
+	{
+		"key": "EggCoffee",
+		"lang": {
+			"vn": "Cà Phê Trứng",
+			"en": "Egg Coffee"
+		},
+		"description": {
+			"vn": "Một món đồ uống độc đáo từ Việt Nam. Không hề có vị tanh nhé.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Tamagozake",
+		"lang": {
+			"vn": "Tamagozake",
+			"en": "Tamagozake"
+		},
+		"description": {
+			"vn": "Một món đồ uống độc đáo từ Nhật Bản, có thể dùng để chữa cảm lạnh.",
+			"en": ""
+		}
+	},
+	{
+		"key": "ChocolateMilk",
+		"lang": {
+			"vn": "Sữa Socola",
+			"en": "Chocolate Milk"
+		},
+		"description": {
+			"vn": "Một loại đồ uống từ sữa phổ biến. Có vị đắng nhẹ của socola.",
+			"en": ""
+		}
+	},
+	{
+		"key": "IceCream",
+		"lang": {
+			"vn": "Kem",
+			"en": "Ice-Cream"
+		},
+		"description": {
+			"vn": "Món ăn ưa thích của mọi người, thích hợp cho một ngày hè nóng nực.",
 			"en": ""
 		}
 	},
