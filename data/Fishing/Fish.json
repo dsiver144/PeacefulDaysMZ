@@ -1,0 +1,14 @@
+[
+    {
+        "itemID": "Sardine",
+        "locations": [
+            "Beach"
+        ],
+        "seasons": [
+            0,
+            3
+        ],
+        "weathers": [],
+        "rate": 30
+    }
+]
