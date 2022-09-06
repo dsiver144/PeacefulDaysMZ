@@ -1,0 +1,38 @@
+[
+    {
+        "itemID": "FriedEgg",
+        "quality": true,
+        "quantity": 1,
+        "minDuration": 5,
+        "maxDuration": 8,
+        "components": [
+            {
+                "tag": "egg",
+                "number": 1
+            },
+            {
+                "itemID": "CookingOil",
+                "number": 1
+            }
+        ],
+        "utensil": "FryingPan",
+        "exp": 1,
+        "require": "Kitchen"
+    },
+    {
+        "itemID": "BoiledEgg",
+        "quality": true,
+        "quantity": 1,
+        "minDuration": 5,
+        "maxDuration": 8,
+        "components": [
+            {
+                "tag": "egg",
+                "number": 1
+            }
+        ],
+        "utensil": "Pot",
+        "exp": 1,
+        "require": "Kitchen"
+    }
+]
