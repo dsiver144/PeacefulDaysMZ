@@ -9,6 +9,7 @@
             3
         ],
         "weathers": [],
-        "rate": 30
+        "rate": 30,
+        "legendary": false
     }
 ]
