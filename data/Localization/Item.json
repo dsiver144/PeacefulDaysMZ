@@ -1648,5 +1648,38 @@
 			"vn": "Một loại nấm hiếm và đắc đỏ. Mọc ở những vùng núi cao và nhiều độ ẩm.",
 			"en": ""
 		}
+	},
+	{
+		"key": "FriedEgg",
+		"lang": {
+			"vn": "Trứng Ốp La",
+			"en": "Fried Egg"
+		},
+		"description": {
+			"vn": "Món ăn phổ biến, giúp hồi phục một lượng thể lực.",
+			"en": ""
+		}
+	},
+	{
+		"key": "BoiledEgg",
+		"lang": {
+			"vn": "Trứng Luộc",
+			"en": "Boiled Egg"
+		},
+		"description": {
+			"vn": "Món ăn phổ biến, giúp hồi phục một lượng thể lực.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Sardine",
+		"lang": {
+			"vn": "Cá Mòi",
+			"en": "Sardine"
+		},
+		"description": {
+			"vn": "Loài cá dầu nhỏ thường được tìm thấy ở đại dương.",
+			"en": ""
+		}
 	}
 ]
