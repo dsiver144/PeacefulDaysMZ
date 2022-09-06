@@ -12,6 +12,7 @@
  */
 const ConstructionConfig = {
     regionIds: [111, 112],
+    defaultAnimationInterval: 60 // Animation will changes after 60 frames.
 }
 
 class Building extends FarmObject {
@@ -91,6 +92,27 @@ class Building extends FarmObject {
         }
     }
     /**
+     * Display Anchor
+     * @returns {Vector2}
+     */
+    displayAnchor() {
+        return {x: 0, y: 1.0};
+    }
+    /**
+     * Total animation frames
+     * @returns {number}
+     */
+    animationFrames() {
+        return 1;
+    }
+    /**
+     * Animation Interval
+     * @returns {number}
+     */
+    animationInterval() {
+        return ConstructionConfig.defaultAnimationInterval;
+    }
+    /**
      * Display Offset
      * @returns {Vector2}
      */
@@ -165,8 +187,9 @@ class Building extends FarmObject {
     canPlaceAt(x, y) {
         const validRegionIDs = this.validRegionIDs();
         const farmland = FarmManager.inst.getFarmlandById(this.mapId);
-        for (let ox = 0; ox < this.bottomSize().x; ox++) {
-            for (let oy = 0; oy < this.bottomSize().y; oy++) {
+        const bottomSize = this.bottomSize();
+        for (let ox = 0; ox < bottomSize.x; ox++) {
+            for (let oy = 0; oy < bottomSize.y; oy++) {
                 if (!this.collisionCondition(ox, oy)) continue;
                 const checkX = x + ox;
                 const checkY = y + oy;

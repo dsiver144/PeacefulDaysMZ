@@ -4,11 +4,11 @@
 //========================================================================
 /*:
  * @author dsiver144
- * @plugindesc (v1.0) Coop
+ * @plugindesc (v1.0) The Well
  * @help 
  * Empty Help
  */
-class Coop extends Building {
+class TheWell extends Building {
     /**
      * @inheritdoc
      */
@@ -19,7 +19,7 @@ class Coop extends Building {
      * @inheritdoc
      */
     bottomSize() {
-        return { x: 5, y: 2 };
+        return { x: 2, y: 1 };
     }
     /**
      * @inheritdoc
@@ -28,33 +28,40 @@ class Coop extends Building {
         return {
             x: 0,
             y: 0,
-            width: 160,
-            height: 192
+            width: 64,
+            height: 96
         }
     }
     /**
      * @inheritdoc
      */
-    displayAnchor() {
-        return {x: 0.0, y: 0.65};
+    animationFrames() {
+        return 2;
     }
     /**
      * @inheritdoc
      */
-    collisionCondition(x, y) {
-        return !(x == 1 && y == 1);
+    onHitByTool(toolType, extraData) {
+        let result = false;
+        switch (toolType) {
+            case 'wateringCan':
+                console.log("Refill ", toolType);
+                result = true;
+                break;
+        }
+        return result;
     }
     /**
      * Get interaction range
      * @returns {{x: number, y: number, width: number, height: number}}
      */
     interactionRange() {
-        return { x: 1, y: 0, width: 1, height: 1 };
+        return { x: 0, y: 0, width: 2, height: 1 };
     }
     /**
      * @inheritdoc
      */
     imageFile() {
-        return super.imageFile() + "Coop";
+        return super.imageFile() + "TheWell";
     }
 }

@@ -47,7 +47,8 @@
             {
                 "itemID": "ChickenEgg",
                 "number": 1
-            }, {
+            },
+            {
                 "itemID": "CookingOil",
                 "number": 1
             }
@@ -63,7 +64,8 @@
             {
                 "itemID": "DuckEgg",
                 "number": 1
-            }, {
+            },
+            {
                 "itemID": "CookingOil",
                 "number": 1
             }
@@ -79,7 +81,8 @@
             {
                 "itemID": "OstrichEgg",
                 "number": 1
-            }, {
+            },
+            {
                 "itemID": "CookingOil",
                 "number": 1
             }
@@ -95,7 +98,8 @@
             {
                 "itemID": "AustraEgg",
                 "number": 1
-            }, {
+            },
+            {
                 "itemID": "CookingOil",
                 "number": 1
             }
@@ -111,13 +115,15 @@
             {
                 "itemID": "LeghornEgg",
                 "number": 1
-            }, {
+            },
+            {
                 "itemID": "CookingOil",
                 "number": 1
             }
         ],
         "require": "Fermenter"
-    },{
+    },
+    {
         "itemID": "GoldenMayo",
         "quality": true,
         "quantity": 1,
@@ -126,8 +132,26 @@
             {
                 "itemID": "GoldenEgg",
                 "number": 1
-            }, {
+            },
+            {
                 "itemID": "CookingOil",
+                "number": 1
+            }
+        ],
+        "require": "Fermenter"
+    },
+    {
+        "itemID": "Sake",
+        "quality": true,
+        "quantity": 1,
+        "duration": 500,
+        "components": [
+            {
+                "itemID": "Rice",
+                "number": 2
+            },
+            {
+                "itemID": "EmptyJar",
                 "number": 1
             }
         ],

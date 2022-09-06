@@ -27,6 +27,13 @@ class FarmObject extends SaveableObject {
         this.autotileId = 46;
     }
     /**
+     * Layer Index
+     * @returns {number}
+     */
+    get layerIndex() {
+        return 0;
+    }
+    /**
      * Get autotile type
      * @returns {string}
      */

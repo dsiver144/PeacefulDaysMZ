@@ -1,0 +1,159 @@
+[
+    {
+        "itemID": "GreenHerb",
+        "seasons": [
+            0,
+            1,
+            2,
+            3
+        ]
+    },
+    {
+        "itemID": "Coconut",
+        "seasons": [
+            0,
+            1,
+            2
+        ]
+    },
+    {
+        "itemID": "Pursley",
+        "seasons": [
+            0
+        ]
+    },
+    {
+        "itemID": "CherryBlossom",
+        "seasons": [
+            0
+        ],
+        "comment": "Xuất hiện rải rác dưới các tán cây anh đào."
+    },
+    {
+        "itemID": "Bluebell",
+        "seasons": [
+            0
+        ],
+        "comment": "Mọc nhiều theo chùm vào mùa xuân."
+    },
+    {
+        "itemID": "Breadfruit",
+        "seasons": [
+            0
+        ]
+    },
+    {
+        "itemID": "Raspberry",
+        "seasons": [
+            1
+        ],
+        "comment": "Các bụi cây mâm xôi mọc rải rác quanh thị trấn vào mùa hạ."
+    },
+    {
+        "itemID": "Groundcherry",
+        "seasons": [
+            1
+        ],
+        "comment": "Mọc dại ở các bụi cây ven bờ hồ, sông."
+    },
+    {
+        "itemID": "Daisy",
+        "seasons": [
+            1
+        ]
+    },
+    {
+        "itemID": "Lavender",
+        "seasons": [
+            1
+        ],
+        "comment": "Thường mọc chụm một chỗ vào mùa hạ."
+    },
+    {
+        "itemID": "Gooseberry",
+        "seasons": [
+            2
+        ],
+        "comment": "Đa số mọc ở các bụi cây trong rừng. Có thể làm rượu."
+    },
+    {
+        "itemID": "Jasmine",
+        "seasons": [
+            2
+        ]
+    },
+    {
+        "itemID": "Scabiosa",
+        "seasons": [
+            2
+        ],
+        "comment": ""
+    },
+    {
+        "itemID": "Morel",
+        "seasons": [
+            2
+        ]
+    },
+    {
+        "itemID": "Shiitake",
+        "seasons": [
+            2,
+            3
+        ],
+        "comment": "Xuất hiện trên các thân cây đã mục."
+    },
+    {
+        "itemID": "StrawMushroom",
+        "seasons": [
+            2
+        ],
+        "comment": "Mọc trên các bụi rơm xung quanh thị trấn vào mùa thu."
+    },
+    {
+        "itemID": "Shimeji",
+        "seasons": [
+            2
+        ]
+    },
+    {
+        "itemID": "Truffle",
+        "seasons": [
+            2
+        ]
+    },
+    {
+        "itemID": "Matsutake",
+        "seasons": [
+            2
+        ],
+        "comment": "Mọc ở vùng rừng núi cao và chỉ mọc vào ngày mưa. Tỉ lệ thấp."
+    },
+    {
+        "itemID": "Snowdrop",
+        "seasons": [
+            3
+        ]
+    },
+    {
+        "itemID": "Daffodil",
+        "seasons": [
+            3
+        ],
+        "comment": "Mọc vào cuối mùa đông từ ngày 18."
+    },
+    {
+        "itemID": "Acorn",
+        "seasons": [
+            3
+        ],
+        "comment": "Rơi ở dưới các tán cây sồi."
+    },
+    {
+        "itemID": "WildGrape",
+        "seasons": [
+            3
+        ],
+        "comment": "Mọc ở bụi dây leo ven các hàng rào gần khu rừng."
+    }
+]

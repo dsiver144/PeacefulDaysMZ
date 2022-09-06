@@ -79,7 +79,7 @@ class FarmTile extends FarmObject {
     }
     /**
      * Get current seed data
-     * @returns {StrFarmCrop}
+     * @returns {SeedConfig}
      */
     seedData() {
         return FarmManager.getSeedData(this.seedId);
@@ -119,8 +119,8 @@ class FarmTile extends FarmObject {
      */
     isTree() {
         if (!this.hasSeed()) return false;
-        const { isTree } = this.seedData();
-        return !!isTree;
+        const { treeFlag } = this.seedData();
+        return !!treeFlag;
     }
     /**
      * Check if the crop is still in seed / sapling stage.
@@ -166,8 +166,8 @@ class FarmTile extends FarmObject {
         this.isWatered = false;
         if (!this.hasSeed()) return;
         if (this.isDead()) return;
-        const {nonWaterFlag, isTree} = this.seedData();
-        const isGrownable = isWatered || nonWaterFlag || isTree;
+        const {waterfieldFlag, treeFlag} = this.seedData();
+        const isGrownable = isWatered || waterfieldFlag || treeFlag;
         if (isGrownable) {
             this.growUp();
         } else {
@@ -209,6 +209,7 @@ class FarmTile extends FarmObject {
     seasonCheck() {
         if (!this.hasSeed()) return;
         if (this.isDead()) return;
+        if (MyUtils.DEBUG.seasonHack) return;
         const { seasons } = this.seedData();
         if (seasons.includes(GameTime.season())) return;
         if (this.isTree()) {

@@ -9,6 +9,7 @@ class DebugConfig {
         this.status = false;
         this.wallHack = false;
         this.waterHack = false;
+        this.seasonHack = false;
     }
 }
 
@@ -37,6 +38,7 @@ class Window_MyDebug extends Window_Command {
         this.addOption('Save', 'save', this.onSaveCommand.bind(this));
         this.addOption('Wallhack', 'wallHack', this.onWallHack.bind(this));
         this.addOption('Always Water', 'water', this.onWaterHack.bind(this));
+        this.addOption('Ignore Crop Season', 'seasonHack', this.onSeasonHack.bind(this));
         this.addOption('Spawn Farm Objects', 'spawnFarmObject', this.onSpawnFarmObjects.bind(this));
         this.addOption('New Day', 'newDay', this.onNewDay.bind(this));
         this.addOption('Test Tree Swing', 'testTreeSwing', this.onTestTreeSwing.bind(this));
@@ -83,6 +85,13 @@ class Window_MyDebug extends Window_Command {
         this.onCommandOK();
     }
     /**
+     * On Season Hack
+     */
+    onSeasonHack() {
+        MyUtils.DEBUG.seasonHack = !MyUtils.DEBUG.seasonHack;
+        this.onCommandOK();
+    }
+    /**
      * On Spawn Farm Objects
      */
     onSpawnFarmObjects() {
@@ -91,7 +100,8 @@ class Window_MyDebug extends Window_Command {
                 if (FarmManager.isFarmRegion(i, j)) {
                     if (FarmManager.inst.currentFarmland().getObject(i, j)) continue;
                     var object = new FarmTile(new Vector2(i, j), 1);
-                    object.applySeed(Math.randomInt(5))
+                    const seedID = Object.values(FarmParams.allSeeds).randomizeItem().itemID;
+                    object.applySeed(seedID);
                     FarmManager.inst.currentFarmland().addObject(object)
                 }
             }
@@ -136,7 +146,7 @@ class Window_MyDebug extends Window_Command {
     onCustomCommand() {
         setInterval(() => {
             if (Input.isTriggered(FieldKeyAction.Map)) {
-                const {x, y} = $gamePlayer.frontPosition();
+                const { x, y } = $gamePlayer.frontPosition();
                 const object = new WoodenFence(new Vector2(x, y), $gameMap.mapId());
                 FarmManager.inst.currentFarmland().addObject(object, false);
             }
@@ -181,6 +191,8 @@ class Window_MyDebug extends Window_Command {
                 return MyUtils.DEBUG.wallHack ? "ON" : "OFF";
             case 'water':
                 return MyUtils.DEBUG.waterHack ? "ON" : "OFF";
+            case 'seasonHack':
+                return MyUtils.DEBUG.seasonHack ? "ON" : "OFF";
         }
         return null;
     }

@@ -9,6 +9,104 @@
  * @help 
  * Empty Help
  */
+class FarmLayer extends SaveableObject {
+    /**
+     * Farm Layer
+     * @param {number} index 
+     */
+    constructor(index) {
+        super();
+        /** @type {Object.<string, FarmObject>} */
+        this.objects = {};
+        /** @type {number} */
+        this.index = index;
+    }
+    /**
+     * On New Day
+     */
+    onNewDay() {
+        for (const pos in this.objects) {
+            this.objects[pos].onNewDay();
+        }
+    }
+    /**
+     * Check interact with farm object;
+     * @param {number} x 
+     * @param {number} y 
+     */
+    checkInteract(x, y) {
+        const object = this.getObject(x, y);
+        if (!object) return false;
+        if (!object.interactable()) return false;
+        object.interact();
+        return true;
+    }
+    /**
+     * Get Object At
+     * @param {number} x 
+     * @param {number} y 
+     * @returns {FarmObject}
+     */
+    getObject(x, y) {
+        return this.objects[this.pos(x, y)];
+    }
+    /**
+     * Set Farm Object
+     * @param {number} x 
+     * @param {number} y 
+     * @param {FarmObject} object 
+     */
+    set(x, y, object) {
+        this.objects[this.pos(x, y)] = object;
+    }
+    /**
+     * Remove Farm Object
+     * @param {number} x 
+     * @param {number} y 
+     */
+    remove(x, y) {
+        delete this.objects[this.pos(x, y)];
+    }
+    /**
+     * Convert position to array position.
+     * @param {number} x 
+     * @param {number} y 
+     * @returns {number}
+     */
+    pos(x, y) {
+        return new Vector2(x, y).toString();
+    }
+    /**
+     * Get Save Data
+     * @returns {any}
+     */
+    getSaveData() {
+        const result = super.getSaveData();
+        const savedObjects = {};
+        for (const position in this.objects) {
+            savedObjects[position] = this.objects[position].getSaveData();
+        }
+        result['objects'] = savedObjects;
+        return result;
+    }
+    /**
+     * Load Save Data
+     * @param {any} data 
+     */
+    loadSaveData(data) {
+        super.loadSaveData(data);
+        this.objects = {};
+        for (const position in data['objects']) {
+            let savedObject = data['objects'][position];
+            if (!savedObject.type) {
+                console.warn("@@ Save handle error for :", savedObject);
+            }
+            let newFarmObject = eval(`new ${savedObject.type}()`);
+            newFarmObject.loadSaveData(savedObject);
+            this.objects[position] = newFarmObject;
+        }
+    }
+}
 class Farmland extends SaveableObject {
     /**
      * Create a farm land
@@ -19,16 +117,14 @@ class Farmland extends SaveableObject {
         super();
         /** @type {number} */
         this.mapId = mapId;
-        /** @type {Object.<string, FarmObject>} */
-        this.farmObjects = {};
+        /** @type {FarmLayer[]} */
+        this.layers = [new FarmLayer(0), new FarmLayer(1)];
     }
     /**
      * On New Day
      */
     onNewDay() {
-        for (const pos in this.farmObjects) {
-            this.farmObjects[pos].onNewDay();
-        }
+        this.layers.forEach(layer => layer.onNewDay());
     }
     /**
      * Check interact with farm object;
@@ -52,7 +148,7 @@ class Farmland extends SaveableObject {
      */
     useTool(toolType, x, y, toolEx = null) {
         let result = false;
-        switch(toolType) {
+        switch (toolType) {
             case ToolType.hoe:
                 result = this.useHoe(x, y);
                 break;
@@ -117,7 +213,7 @@ class Farmland extends SaveableObject {
      * Use Seed Pack
      * @param {number} x 
      * @param {number} y 
-     * @param {number} seedId
+     * @param {string} seedId
      */
     useSeed(x, y, seedId) {
         const object = this.getObject(x, y);
@@ -128,7 +224,7 @@ class Farmland extends SaveableObject {
      * Use Sapling
      * @param {number} x 
      * @param {number} y 
-     * @param {number} seedId
+     * @param {string} seedId
      */
     useSapling(x, y, seedId) {
         let object = this.getObject(x, y);
@@ -186,8 +282,16 @@ class Farmland extends SaveableObject {
      * @param {number} y 
      * @returns {FarmObject}
      */
-    getObject(x, y) {
-        return this.farmObjects[this.pos(x, y)];
+    getObject(x, y, layerIndex = -1) {
+        const objects = [];
+        if (layerIndex >= 0) {
+            return this.layers[layerIndex].getObject(x, y);
+        }
+        for (let i = this.layers.length - 1; i >= 0; i--) {
+            const obj = this.layers[i].getObject(x, y);
+            obj && objects.push(obj);
+        }
+        return objects[0];
     }
     /**
      * Calculate Autotile for farm object
@@ -199,7 +303,7 @@ class Farmland extends SaveableObject {
         const autotileType = object.autotileType();
         if (!autotileType) return;
         object.autotileId = AutotileUtils.calcIndexBy8Direction((offset) => {
-            const neighbor = this.getObject(object.position.x + offset.x, object.position.y + offset.y);
+            const neighbor = this.getObject(object.position.x + offset.x, object.position.y + offset.y, object.layerIndex);
             if (neighbor && neighbor.autotileType() == object.autotileType()) {
                 if (times > 0) {
                     this.calculateAutotileForObject(neighbor, times - 1);
@@ -215,8 +319,9 @@ class Farmland extends SaveableObject {
      */
     addObject(object, force = true) {
         const { x, y } = object.position;
-        if (!force && this.getObject(x, y)) return;
-        this.farmObjects[this.pos(x, y)] = object;
+        const layerIndex = object.layerIndex;
+        if (!force && this.getObject(x, y, layerIndex)) return;
+        this.layers[layerIndex].set(x, y, object);
         // Calculate autotile
         this.calculateAutotileForObject(object);
         // Spawm child object
@@ -226,14 +331,15 @@ class Farmland extends SaveableObject {
                 if (!object.collisionCondition(ox, oy)) continue;
                 const childObject = new FarmChildObject(new Vector2(x + ox, y + oy), object.mapId);
                 childObject.setParentPosition(object.position);
-                this.farmObjects[this.pos(x + ox, y + oy)] = childObject;
+                this.layers[layerIndex].set(x + ox, y + oy, childObject);
             }
         }
         object.spawn();
     }
     /**
      * Replace Object
-     * @param {FarmObject} object 
+     * @param {FarmObject} object
+     * @deprecated 
      */
     replaceObject(object) {
         const { x, y } = object.position;
@@ -246,7 +352,9 @@ class Farmland extends SaveableObject {
      */
     removeObject(object) {
         const { x, y } = object.position;
-        delete this.farmObjects[this.pos(x, y)];
+        const layerIndex = object.layerIndex;
+        // delete this.farmObjects[this.pos(x, y)];
+        this.layers[layerIndex].remove(x, y);
         object.remove();
         // Calculate autotile
         this.calculateAutotileForObject(object);
@@ -269,20 +377,11 @@ class Farmland extends SaveableObject {
      * @param {number} y 
      * @returns {boolean}
      */
-    removeObjectAt(x, y) {
-        const object = this.farmObjects[this.pos(x, y)];
+    removeObjectAt(x, y, layerIndex = -1) {
+        const object = this.getObject(x, y, layerIndex);
         if (!object) return false;
         this.removeObject(object);
         return true;
-    }
-    /**
-     * Convert position to array position.
-     * @param {number} x 
-     * @param {number} y 
-     * @returns {number}
-     */
-    pos(x, y) {
-        return new Vector2(x, y).toString();
     }
     /**
      * Get All Save Properties
@@ -291,43 +390,48 @@ class Farmland extends SaveableObject {
     saveProperties() {
         return [
             ["mapId", null],
+            ["@Arr(FarmLayer):layers", null]
         ]
     }
-    /**
-     * Get Save Data
-     * @returns {any}
-     */
-    getSaveData() {
-        const result = super.getSaveData();
-        const savedObjects = {};
-        for (const position in this.farmObjects) {
-            savedObjects[position] = this.farmObjects[position].getSaveData();
-        }
-        result['farmObjects'] = savedObjects;
-        return result;
-    }
-    /**
-     * Load Save Data
-     * @param {any} data 
-     */
-    loadSaveData(data) {
-        super.loadSaveData(data);
-        this.farmObjects = {};  
-        for (const position in data['farmObjects']) {
-            let savedObject = data['farmObjects'][position];
-            if (!savedObject.type) {
-                console.warn("@@ Save handle error for :", savedObject);
-            }
-            let newFarmObject = eval(`new ${savedObject.type}()`);
-            newFarmObject.loadSaveData(savedObject);
-            this.farmObjects[position] = newFarmObject;
-        }
-    }
+    // /**
+    //  * Get Save Data
+    //  * @returns {any}
+    //  */
+    // getSaveData() {
+    //     const result = super.getSaveData();
+    //     const savedObjects = {};
+    //     for (const position in this.farmObjects) {
+    //         savedObjects[position] = this.farmObjects[position].getSaveData();
+    //     }
+    //     result['farmObjects'] = savedObjects;
+    //     return result;
+    // }
+    // /**
+    //  * Load Save Data
+    //  * @param {any} data 
+    //  */
+    // loadSaveData(data) {
+    //     super.loadSaveData(data);
+    //     this.farmObjects = {};
+    //     for (const position in data['farmObjects']) {
+    //         let savedObject = data['farmObjects'][position];
+    //         if (!savedObject.type) {
+    //             console.warn("@@ Save handle error for :", savedObject);
+    //         }
+    //         let newFarmObject = eval(`new ${savedObject.type}()`);
+    //         newFarmObject.loadSaveData(savedObject);
+    //         this.farmObjects[position] = newFarmObject;
+    //     }
+    // }
     /**
      * Get array of all farm objects
      * @returns {FarmObject[]}
      */
     allObjects() {
-        return Object.values(this.farmObjects);
+        let allObjects = [];
+        for (const layer of this.layers) {
+            allObjects = allObjects.concat(Object.values(layer.objects));
+        }
+        return allObjects;
     }
 }
