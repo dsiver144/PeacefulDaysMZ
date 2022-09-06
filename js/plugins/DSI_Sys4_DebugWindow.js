@@ -34,6 +34,7 @@ class Window_MyDebug extends Window_Command {
      */
     makeCommandList() {
         // if (!this._options) return;
+        this.addOption('Save', 'save', this.onSaveCommand.bind(this));
         this.addOption('Wallhack', 'wallHack', this.onWallHack.bind(this));
         this.addOption('Always Water', 'water', this.onWaterHack.bind(this));
         this.addOption('Spawn Farm Objects', 'spawnFarmObject', this.onSpawnFarmObjects.bind(this));
@@ -58,6 +59,13 @@ class Window_MyDebug extends Window_Command {
      */
     onDebugModeOK() {
         MyUtils.DEBUG.status = !MyUtils.DEBUG.status;
+        this.onCommandOK();
+    }
+    /**
+     * On Save Command
+     */
+    onSaveCommand() {
+        SceneManager.push(Scene_Save);
         this.onCommandOK();
     }
     /**
