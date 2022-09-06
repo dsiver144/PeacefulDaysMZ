@@ -1419,6 +1419,17 @@
 		}
 	},
 	{
+		"key": "CherryBlossom",
+		"lang": {
+			"vn": "Hoa Anh Đào",
+			"en": "Cherry Blossom"
+		},
+		"description": {
+			"vn": "Là một loài hoa đẹp chỉ mọc vào mùa xuân.",
+			"en": ""
+		}
+	},
+	{
 		"key": "Breadfruit",
 		"lang": {
 			"vn": "Quả Bánh Mì",
@@ -1459,6 +1470,115 @@
 		},
 		"description": {
 			"vn": "Mọng nước, có thể dùng để làm rượu.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Pursley",
+		"lang": {
+			"vn": "Rau Sam",
+			"en": "Pursley"
+		},
+		"description": {
+			"vn": "Là một loại rau dại, có vị chua và mặn.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Bluebell",
+		"lang": {
+			"vn": "Hoa Chuông Xanh",
+			"en": "Bluebell"
+		},
+		"description": {
+			"vn": "Là một loài hoa mỏng manh có mùi thơm dịu nhẹ và là dấu hiệu báo hiệu mùa Xuân.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Groundcherry",
+		"lang": {
+			"vn": "Quả Tầm Bóp",
+			"en": "Groundcherry"
+		},
+		"description": {
+			"vn": "Là một loại quả mọng có vị độc lạ. Mọc dại vào mùa Hạ.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Daisy",
+		"lang": {
+			"vn": "Hoa Cúc",
+			"en": "Daisy"
+		},
+		"description": {
+			"vn": "Là một loại hoa mọc vào mùa Hạ, có nhiều công dụng trong y học.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Lavender",
+		"lang": {
+			"vn": "Hoa Oải Hương",
+			"en": "Lavender"
+		},
+		"description": {
+			"vn": "Là một loài hoa nổi tiếng vì vẻ đẹp cùng với mùi hương của nó.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Jasmine",
+		"lang": {
+			"vn": "Hoa Nhài",
+			"en": "Jasmine"
+		},
+		"description": {
+			"vn": "Chúng thu hút rất nhiều loài để thụ phấn, đặc biệt là ong.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Scabiosa",
+		"lang": {
+			"vn": "Hoa Tai Thỏ",
+			"en": "Scabiosa"
+		},
+		"description": {
+			"vn": "Có mùi dịu nhẹ và rất thu hút côn trùng.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Snowdrop",
+		"lang": {
+			"vn": "Hoa Tuyết Điểm",
+			"en": "Snowdrop"
+		},
+		"description": {
+			"vn": "Là biểu tượng của niềm an ủi và hy vọng.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Daffodil",
+		"lang": {
+			"vn": "Hoa Thủy Tiên",
+			"en": "Daffodil"
+		},
+		"description": {
+			"vn": "Là một loài hoa đẹp, tượng trưng cho sự giàu có, thịnh vượng.",
+			"en": ""
+		}
+	},{
+		"key": "Acorn",
+		"lang": {
+			"vn": "Quả Sồi",
+			"en": "Acorn"
+		},
+		"description": {
+			"vn": "Có hàm lượng dinh dưỡng cao.",
 			"en": ""
 		}
 	}
