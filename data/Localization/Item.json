@@ -1835,7 +1835,8 @@
 			"vn": "Loài cá dầu nhỏ thường được tìm thấy ở đại dương.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "GrilledFish",
 		"lang": {
 			"vn": "Cá Nướng",
@@ -1887,6 +1888,105 @@
 		},
 		"description": {
 			"vn": "Thuộc họ cá hồi nhưng chúng không di cư.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Smelt",
+		"lang": {
+			"vn": "Cá Smelt",
+			"en": "Smelt"
+		},
+		"description": {
+			"vn": "Loài cá nước ngọt, thường được tìm thấy trong các ao hồ, suối.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Perch",
+		"lang": {
+			"vn": "Cá Rô",
+			"en": "Perch"
+		},
+		"description": {
+			"vn": "Loài cá có giá trị kinh tế cao. Chỉ xuất hiện vào ngày mưa.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Carp",
+		"lang": {
+			"vn": "Cá Chép",
+			"en": "Carp"
+		},
+		"description": {
+			"vn": "Loài cá nước ngọt phổ biến. Có thể sống được trong nhiều điều kiện môi trường.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Catfish",
+		"lang": {
+			"vn": "Cá Trê",
+			"en": "Catfish"
+		},
+		"description": {
+			"vn": "Chúng có những chiếc râu mọc ra từ miệng.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Tilapia",
+		"lang": {
+			"vn": "Cá Rô Phi",
+			"en": "Tilapia"
+		},
+		"description": {
+			"vn": "Loài cá có giá trị kinh tế cao. Gần gũi với đời sống con người từ xa xưa.",
+			"en": ""
+		}
+	},
+	{
+		"key": "BlueTilapia",
+		"lang": {
+			"vn": "Cá Rô Phi Xanh",
+			"en": "Blue Tilapia"
+		},
+		"description": {
+			"vn": "Loài cá có giá trị kinh tế cao. Hiếm gặp hơn cá rô phi bình thường.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Bass",
+		"lang": {
+			"vn": "Cá Vược",
+			"en": "Bass"
+		},
+		"description": {
+			"vn": "Loài cá dễ thích nghi với mọi loại môi trường sống.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Bluegill",
+		"lang": {
+			"vn": "Cá Mang Xanh",
+			"en": "Bluegill"
+		},
+		"description": {
+			"vn": "Là loài cá có tính xâm lấn cao.",
+			"en": ""
+		}
+	},
+	{
+		"key": "AlligatorGar",
+		"lang": {
+			"vn": "Cá Sấu Mõm Dài",
+			"en": "Alligator Gar"
+		},
+		"description": {
+			"vn": "Một con quái thú vùng sông nước thực thụ.",
 			"en": ""
 		}
 	}

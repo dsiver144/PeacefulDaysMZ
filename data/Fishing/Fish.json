@@ -9,6 +9,9 @@
                 "Beach"
             ]
         },
+        "comment": "Size will be counted in inch",
+        "size": "6,12",
+        "difficulty": 1,
         "time": "",
         "weathers": [],
         "rate": 30,
@@ -21,6 +24,8 @@
                 "Beach"
             ]
         },
+        "size": "8,15",
+        "difficulty": 2,
         "time": "",
         "weathers": [],
         "rate": 20,
@@ -36,6 +41,8 @@
                 "Beach"
             ]
         },
+        "size": "78,98",
+        "difficulty": 5,
         "time": "",
         "weathers": [],
         "rate": 15,
@@ -54,6 +61,8 @@
                 "Beach"
             ]
         },
+        "size": "20,60",
+        "difficulty": 3,
         "time": "",
         "weathers": [],
         "rate": 15,
@@ -79,9 +88,184 @@
                 "River"
             ]
         },
+        "size": "20,48",
+        "difficulty": 2,
         "time": "",
         "weathers": [],
         "rate": 30,
         "legendary": false
+    },
+    {
+        "itemID": "Smelt",
+        "seasons": {
+            "1": [
+                "Lake",
+                "River"
+            ],
+            "3": [
+                "Lake",
+                "River"
+            ]
+        },
+        "size": "8,28",
+        "difficulty": 1,
+        "time": "noon",
+        "weathers": [],
+        "rate": 35,
+        "legendary": false
+    },
+    {
+        "itemID": "Perch",
+        "seasons": {
+            "0": [
+                "Lake"
+            ],
+            "2": [
+                "River"
+            ]
+        },
+        "size": "4,10",
+        "difficulty": 2,
+        "time": "",
+        "weathers": [
+            "rain"
+        ],
+        "rate": 30,
+        "legendary": false
+    },
+    {
+        "itemID": "Carp",
+        "seasons": {
+            "1": [
+                "Lake",
+                "River"
+            ]
+        },
+        "size": "15,30",
+        "difficulty": 3,
+        "time": "",
+        "weathers": [],
+        "rate": 20,
+        "legendary": false
+    },
+    {
+        "itemID": "Catfish",
+        "seasons": {
+            "0": [
+                "Lake",
+                "River"
+            ],
+            "1": [
+                "Lake"
+            ]
+        },
+        "size": "22,52",
+        "difficulty": 6,
+        "time": "night",
+        "weathers": [
+            "rain"
+        ],
+        "rate": 30,
+        "legendary": false
+    },
+    {
+        "itemID": "Tilapia",
+        "seasons": {
+            "1": [
+                "Lake",
+                "River"
+            ],
+            "2": [
+                "Lake",
+                "River"
+            ]
+        },
+        "size": "5,8",
+        "difficulty": 2,
+        "time": "morning",
+        "weathers": [],
+        "rate": 30,
+        "legendary": false
+    },
+    {
+        "itemID": "BlueTilapia",
+        "seasons": {
+            "1": [
+                "Lake",
+                "River"
+            ],
+            "2": [
+                "Lake",
+                "River"
+            ]
+        },
+        "size": "5,8",
+        "difficulty": 3,
+        "time": "morning",
+        "weathers": [
+            "rain"
+        ],
+        "rate": 15,
+        "legendary": false
+    },
+    {
+        "itemID": "Bass",
+        "seasons": {
+            "1": [
+                "Lake",
+                "River",
+                "Beach"
+            ],
+            "3": [
+                "Lake",
+                "River",
+                "Beach"
+            ]
+        },
+        "size": "16,32",
+        "difficulty": 2,
+        "time": "",
+        "weathers": [],
+        "rate": 25,
+        "legendary": false
+    },
+    {
+        "itemID": "Bluegill",
+        "seasons": {
+            "2": [
+                "Lake",
+                "River"
+            ]
+        },
+        "size": "7,16",
+        "difficulty": 1,
+        "time": "noon",
+        "weathers": [],
+        "rate": 35,
+        "legendary": false
+    },
+    {
+        "itemID": "AlligatorGar",
+        "comment": "Là một con cá Legendary, sẽ có nhiệm vụ ẩn để truy tìm con cá này. Nó sẽ không xuất hiện khi kích hoạt flag đặc biệt.",
+        "flag": "HuntAlligatorGar",
+        "seasons": {
+            "0": [
+                "River"
+            ],
+            "1": [
+                "Lake"
+            ],
+            "2": [
+                "River"
+            ],
+            "3": [
+                "Lake"
+            ]
+        },
+        "size": "96,96",
+        "difficulty": 10,
+        "time": "night",
+        "rate": 5,
+        "legendary": true
     }
 ]
