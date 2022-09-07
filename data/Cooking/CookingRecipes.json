@@ -350,5 +350,53 @@
         "utensil": "FryingPan",
         "exp": 1,
         "require": "Kitchen"
+    },
+    {
+        "itemID": "PanfriedTrout",
+        "quality": true,
+        "quantity": 1,
+        "minDuration": 5,
+        "maxDuration": 10,
+        "components": [
+            {
+                "itemID": "Trout",
+                "number": 1
+            },
+            {
+                "itemID": "CookingOil",
+                "number": 1
+            },
+            {
+                "itemID": "Garlic",
+                "number": 1
+            }
+        ],
+        "utensil": "FryingPan",
+        "exp": 2,
+        "require": "Kitchen"
+    },
+    {
+        "itemID": "FishTaco",
+        "quality": true,
+        "quantity": 1,
+        "minDuration": 5,
+        "maxDuration": 10,
+        "components": [
+            {
+                "tag": "fish",
+                "number": 1
+            },
+            {
+                "itemID": "FlourPack",
+                "number": 1
+            },
+            {
+                "itemID": "Corn",
+                "number": 1
+            }
+        ],
+        "utensil": "FryingPan",
+        "exp": 2,
+        "require": "Kitchen"
     }
 ]

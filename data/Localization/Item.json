@@ -1848,6 +1848,28 @@
 		}
 	},
 	{
+		"key": "PanfriedTrout",
+		"lang": {
+			"vn": "Cá Hồi Chấm Áp Chảo",
+			"en": "Pan-Fried Trout"
+		},
+		"description": {
+			"vn": "Món ăn có thể tận dụng vị ngon của thịt cá hồi chấm.",
+			"en": ""
+		}
+	},
+	{
+		"key": "FishTaco",
+		"lang": {
+			"vn": "Taco Vị Cá",
+			"en": "Fish Taco"
+		},
+		"description": {
+			"vn": "Một món ăn hấp dẫn, mang đậm hương vị cá.",
+			"en": ""
+		}
+	},
+	{
 		"key": "Herring",
 		"lang": {
 			"vn": "Cá Trích",
