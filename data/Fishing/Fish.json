@@ -245,6 +245,29 @@
         "legendary": false
     },
     {
+        "itemID": "Anchovy",
+        "seasons": {
+            "0": [
+                "Beach"
+            ],
+            "1": [
+                "Beach"
+            ],
+            "2": [
+                "Beach"
+            ],
+            "3": [
+                "Beach"
+            ]
+        },
+        "size": "4,10",
+        "difficulty": 2,
+        "time": "night",
+        "weathers": [],
+        "rate": 40,
+        "legendary": false
+    },
+    {
         "itemID": "AlligatorGar",
         "comment": "Là một con cá Legendary, sẽ có nhiệm vụ ẩn để truy tìm con cá này. Nó sẽ không xuất hiện khi kích hoạt flag đặc biệt.",
         "flag": "HuntAlligatorGar",

@@ -2000,6 +2000,16 @@
 			"vn": "Là loài cá có tính xâm lấn cao.",
 			"en": ""
 		}
+	}, {
+		"key": "Anchovy",
+		"lang": {
+			"vn": "Cá Cơm",
+			"en": "Anchovy"
+		},
+		"description": {
+			"vn": "Là loài cá nhỏ sống ở các vùng nước ven biển.",
+			"en": ""
+		}
 	},
 	{
 		"key": "AlligatorGar",
