@@ -33,6 +33,7 @@ class MyBag extends ItemContainer {
         for (var i = startIndex; i <= endIndex; i++) {
             items.push(this._items.get(i));
         }
+        return items;
     }
     /**
      * @inheritdoc
