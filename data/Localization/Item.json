@@ -1804,6 +1804,28 @@
 		}
 	},
 	{
+		"key": "SardineFishcake",
+		"lang": {
+			"vn": "Bánh Cá Mòi",
+			"en": "Sardine Fishcake"
+		},
+		"description": {
+			"vn": "Đậm đà vị cá mòi.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Sashimi",
+		"lang": {
+			"vn": "Sashimi",
+			"en": "Sashimi"
+		},
+		"description": {
+			"vn": "Dường như có thể cảm nhận được hương vị của biển cả trong từng lát cá.",
+			"en": ""
+		}
+	},
+	{
 		"key": "Sardine",
 		"lang": {
 			"vn": "Cá Mòi",
@@ -1811,6 +1833,60 @@
 		},
 		"description": {
 			"vn": "Loài cá dầu nhỏ thường được tìm thấy ở đại dương.",
+			"en": ""
+		}
+	}, {
+		"key": "GrilledFish",
+		"lang": {
+			"vn": "Cá Nướng",
+			"en": "Grilled Fish"
+		},
+		"description": {
+			"vn": "Món ăn phổ biến của các ngư dân.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Herring",
+		"lang": {
+			"vn": "Cá Trích",
+			"en": "Herring"
+		},
+		"description": {
+			"vn": "Loài cá phổ biến, sống ở các vùng nước nông ven bờ.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Tuna",
+		"lang": {
+			"vn": "Cá Ngừ",
+			"en": "Tuna"
+		},
+		"description": {
+			"vn": "Loài cá có giá trị kinh tế cao.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Salmon",
+		"lang": {
+			"vn": "Cá Hồi",
+			"en": "Salmon"
+		},
+		"description": {
+			"vn": "Là loài cá có khả năng di cư ngược dòng nước.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Trout",
+		"lang": {
+			"vn": "Cá Hồi Chấm",
+			"en": "Trout"
+		},
+		"description": {
+			"vn": "Thuộc họ cá hồi nhưng chúng không di cư.",
 			"en": ""
 		}
 	}

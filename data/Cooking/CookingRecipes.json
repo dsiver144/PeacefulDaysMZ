@@ -232,7 +232,7 @@
             }
         ],
         "utensil": "Freezer",
-        "exp": 2,
+        "exp": 3,
         "require": "Kitchen"
     },
     {
@@ -281,6 +281,74 @@
         ],
         "utensil": "",
         "exp": 3,
+        "require": "Kitchen"
+    },
+    {
+        "itemID": "SardineFishcake",
+        "quality": true,
+        "quantity": 1,
+        "minDuration": 10,
+        "maxDuration": 20,
+        "components": [
+            {
+                "itemID": "Sardine",
+                "number": 1
+            },
+            {
+                "tag": "egg",
+                "number": 1
+            },
+            {
+                "itemID": "FlourPack",
+                "number": 1
+            },
+            {
+                "itemID": "CookingOil",
+                "number": 1
+            }
+        ],
+        "utensil": "FryingPan",
+        "exp": 2,
+        "require": "Kitchen"
+    },
+    {
+        "itemID": "Sashimi",
+        "quality": true,
+        "quantity": 1,
+        "minDuration": 5,
+        "maxDuration": 10,
+        "components": [
+            {
+                "itemID": "Salmon",
+                "number": 1
+            },
+            {
+                "itemID": "Herring",
+                "number": 1
+            },
+            {
+                "itemID": "Tuna",
+                "number": 1
+            }
+        ],
+        "utensil": "",
+        "exp": 2,
+        "require": "Kitchen"
+    },
+    {
+        "itemID": "GrilledFish",
+        "quality": true,
+        "quantity": 1,
+        "minDuration": 5,
+        "maxDuration": 10,
+        "components": [
+            {
+                "tag": "fish",
+                "number": 1
+            }
+        ],
+        "utensil": "FryingPan",
+        "exp": 1,
         "require": "Kitchen"
     }
 ]

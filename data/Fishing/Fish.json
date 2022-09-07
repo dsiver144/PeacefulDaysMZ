@@ -1,13 +1,85 @@
 [
     {
         "itemID": "Sardine",
-        "locations": [
-            "Beach"
-        ],
-        "seasons": [
-            0,
-            3
-        ],
+        "seasons": {
+            "0": [
+                "Beach"
+            ],
+            "3": [
+                "Beach"
+            ]
+        },
+        "time": "",
+        "weathers": [],
+        "rate": 30,
+        "legendary": false
+    },
+    {
+        "itemID": "Herring",
+        "seasons": {
+            "0": [
+                "Beach"
+            ]
+        },
+        "time": "",
+        "weathers": [],
+        "rate": 20,
+        "legendary": false
+    },
+    {
+        "itemID": "Tuna",
+        "seasons": {
+            "1": [
+                "Beach"
+            ],
+            "2": [
+                "Beach"
+            ]
+        },
+        "time": "",
+        "weathers": [],
+        "rate": 15,
+        "legendary": false
+    },
+    {
+        "itemID": "Salmon",
+        "seasons": {
+            "0": [
+                "Lake"
+            ],
+            "1": [
+                "River"
+            ],
+            "2": [
+                "Beach"
+            ]
+        },
+        "time": "",
+        "weathers": [],
+        "rate": 15,
+        "legendary": false
+    },
+    {
+        "itemID": "Trout",
+        "seasons": {
+            "0": [
+                "Lake",
+                "River"
+            ],
+            "1": [
+                "Lake",
+                "River"
+            ],
+            "2": [
+                "Lake",
+                "River"
+            ],
+            "3": [
+                "Lake",
+                "River"
+            ]
+        },
+        "time": "",
         "weathers": [],
         "rate": 30,
         "legendary": false
