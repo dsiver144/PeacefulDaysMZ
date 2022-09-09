@@ -671,6 +671,28 @@
 		}
 	},
 	{
+		"key": "Amethyst",
+		"lang": {
+			"vn": "Thạch Anh Tím",
+			"en": "Amethyst"
+		},
+		"description": {
+			"vn": "Một loại đá quý quan trọng để nâng cấp các loại vật dụng của bạn.",
+			"en": ""
+		}
+	},
+	{
+		"key": "PurpleHerb",
+		"lang": {
+			"vn": "Cây thảo mộc tím",
+			"en": "Purple Herb"
+		},
+		"description": {
+			"vn": "Là cây thảo mộc dại mọc ở trong các hang động. Có thể ăn để hồi một tí năng lượng.",
+			"en": ""
+		}
+	},
+	{
 		"key": "BasicChest",
 		"lang": {
 			"vn": "Rương Đồ",
