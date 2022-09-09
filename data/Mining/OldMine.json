@@ -7,7 +7,8 @@
         ],
         "floor": "1,100",
         "rate": 10
-    },{
+    },
+    {
         "itemID": "PurpleHerb",
         "ore": false,
         "locations": [
@@ -15,6 +16,16 @@
         ],
         "floor": "1,100",
         "rate": 10
+    },
+    {
+        "itemID": "ScrapOre",
+        "comment": "Có thể làm nguyên liệu cho Recycle Machine",
+        "ore": true,
+        "locations": [
+            "OldMine"
+        ],
+        "floor": "1,100",
+        "rate": 30
     },
     {
         "itemID": "Jasper",
@@ -157,7 +168,7 @@
         "locations": [
             "OldMine"
         ],
-        "floor": "90,100",
+        "floor": "95,100",
         "rate": 2
     }
 ]

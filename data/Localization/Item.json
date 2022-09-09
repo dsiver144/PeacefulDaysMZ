@@ -693,6 +693,138 @@
 		}
 	},
 	{
+		"key": "ScrapOre",
+		"lang": {
+			"vn": "Quặng Phế Liệu",
+			"en": "Scrap Ore"
+		},
+		"description": {
+			"vn": "Một cục quặng vô dụng, bạn có thể ném nó đi bất cứ lúc nào.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Jasper",
+		"lang": {
+			"vn": "Thạch Anh",
+			"en": "Jasper"
+		},
+		"description": {
+			"vn": "Một loại đá quý mờ đục có màu nâu đỏ.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Jade",
+		"lang": {
+			"vn": "Ngọc Thạch",
+			"en": "Jade"
+		},
+		"description": {
+			"vn": "Một loại đá quý màu xanh lục, thường dùng làm đồ trang sức.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Agate",
+		"lang": {
+			"vn": "Mã Não",
+			"en": "Agate"
+		},
+		"description": {
+			"vn": "Một biến thể của thạch anh.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Peridot",
+		"lang": {
+			"vn": "Đá Ô-liu",
+			"en": "Peridot"
+		},
+		"description": {
+			"vn": "Có màu xanh lục tuyệt đẹp. Người ta bảo rằng nó từ ngoài hành tinh.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Sapphire",
+		"lang": {
+			"vn": "Đá Sapphire",
+			"en": "Sapphire"
+		},
+		"description": {
+			"vn": "Có màu xanh lục và có độ bền cực cao.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Turquoise",
+		"lang": {
+			"vn": "Ngọc Lam",
+			"en": "Turquoise"
+		},
+		"description": {
+			"vn": "Có màu xanh nước biển ngả sang xanh lá cây, không trong suốt.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Aquamarine",
+		"lang": {
+			"vn": "Ngọc Berin",
+			"en": "Aquamarine"
+		},
+		"description": {
+			"vn": "Nó có màu xanh như màu của biển cả.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Emerald",
+		"lang": {
+			"vn": "Ngọc Lục Bảo",
+			"en": "Emerald"
+		},
+		"description": {
+			"vn": "Loại ngọc quý hiếm có màu xanh lục. Thường dùng làm đồ trang sức.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Ruby",
+		"lang": {
+			"vn": "Hồng Ngọc",
+			"en": "Ruby"
+		},
+		"description": {
+			"vn": "Đa phần giống với Sapphire nhưng có màu đỏ.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Diamond",
+		"lang": {
+			"vn": "Kim Cương",
+			"en": "Diamond"
+		},
+		"description": {
+			"vn": "Loại đá quý đắt đỏ bậc nhất.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Jadeite",
+		"lang": {
+			"vn": "Đá Cẩm Thạch",
+			"en": "Jadeite"
+		},
+		"description": {
+			"vn": "Loại đá siêu quý hiếm, tượng trưng cho sự trường thọ và sức khỏe.",
+			"en": ""
+		}
+	},
+	{
 		"key": "BasicChest",
 		"lang": {
 			"vn": "Rương Đồ",
