@@ -2000,7 +2000,8 @@
 			"vn": "Là loài cá có tính xâm lấn cao.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "Anchovy",
 		"lang": {
 			"vn": "Cá Cơm",
@@ -2012,6 +2013,138 @@
 		}
 	},
 	{
+		"key": "Loach",
+		"lang": {
+			"vn": "Cá Chạch",
+			"en": "Loach"
+		},
+		"description": {
+			"vn": "Chúng thường ẩn nấp ở dưới đáy sông.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Octopus",
+		"lang": {
+			"vn": "Bạch Tuột",
+			"en": "Octopus"
+		},
+		"description": {
+			"vn": "Bạn có biết rằng 1 con bạch tuột có đến tận 3 trái tim?",
+			"en": ""
+		}
+	},
+	{
+		"key": "Lobster",
+		"lang": {
+			"vn": "Tôm Hùm",
+			"en": "Lobster"
+		},
+		"description": {
+			"vn": "Có giá trị kinh tế và thịt của chúng rất ngon.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Squid",
+		"lang": {
+			"vn": "Con Mực",
+			"en": "Squid"
+		},
+		"description": {
+			"vn": "Lúc gặp nguy hiểm, chúng phóng ra một hợp chất màu đen trong cơ thể để chạy trốn.",
+			"en": ""
+		}
+	},
+	{
+		"key": "BlueCrab",
+		"lang": {
+			"vn": "Ghẹ",
+			"en": "Blue Crab"
+		},
+		"description": {
+			"vn": "Loài cua phổ biến được đánh bắt ở biển.",
+			"en": ""
+		}
+	},
+	{
+		"key": "StoneCrab",
+		"lang": {
+			"vn": "Cua Đá",
+			"en": "Stone Crab"
+		},
+		"description": {
+			"vn": "Có thể đánh bắt chúng ở sông.",
+			"en": ""
+		}
+	},
+	{
+		"key": "GreenCrab",
+		"lang": {
+			"vn": "Cua Xanh",
+			"en": "Green Crab"
+		},
+		"description": {
+			"vn": "Loài động vật xâm lấn, cần được đánh bắt.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Crawfish",
+		"lang": {
+			"vn": "Tôm Hùm Đất",
+			"en": "Crawfish"
+		},
+		"description": {
+			"vn": "Loài tôm nước ngọt có càng nhỏ.",
+			"en": ""
+		}
+	},
+	{
+		"key": "AppleSnail",
+		"lang": {
+			"vn": "Ốc Bưu",
+			"en": "Apple Snail"
+		},
+		"description": {
+			"vn": "Thường được tìm thấy trong các ao hồ, sông suối.",
+			"en": ""
+		}
+	},
+	{
+		"key": "PearlMussel",
+		"lang": {
+			"vn": "Con Trai Ngọc",
+			"en": "Pearl Mussel"
+		},
+		"description": {
+			"vn": "Có thể nuôi để thu hoạch ngọc trai.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Scallop",
+		"lang": {
+			"vn": "Sò Điệp",
+			"en": "Scallop"
+		},
+		"description": {
+			"vn": "Được tìm thấy ở biển. Có thể chế biến thành các món ăn ngon.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Oyster",
+		"lang": {
+			"vn": "Con Hàu",
+			"en": "Oyster"
+		},
+		"description": {
+			"vn": "Chúng có vị khác nhau tùy vào nơi sinh sống.",
+			"en": ""
+		}
+	},
+	{
 		"key": "AlligatorGar",
 		"lang": {
 			"vn": "Cá Sấu Mõm Dài",
@@ -2019,6 +2152,28 @@
 		},
 		"description": {
 			"vn": "Một con quái thú vùng sông nước thực thụ.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Sturgeon",
+		"lang": {
+			"vn": "Cá Tầm",
+			"en": "Sturgeon"
+		},
+		"description": {
+			"vn": "Nó đã sống được hơn 100 năm rồi.",
+			"en": ""
+		}
+	},
+	{
+		"key": "KingCrab",
+		"lang": {
+			"vn": "Cua Hoàng Đế",
+			"en": "King Crab"
+		},
+		"description": {
+			"vn": "Một con cua hoàng đế khổng lồ, chắc hẳn nó đã tồn tại từ rất lâu rồi.",
 			"en": ""
 		}
 	}

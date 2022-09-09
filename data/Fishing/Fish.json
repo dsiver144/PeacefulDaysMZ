@@ -268,6 +268,75 @@
         "legendary": false
     },
     {
+        "itemID": "Loach",
+        "seasons": {
+            "0": [
+                "River"
+            ],
+            "2": [
+                "River"
+            ]
+        },
+        "size": "2,12",
+        "difficulty": 4,
+        "time": "noon",
+        "weathers": [],
+        "rate": 20,
+        "legendary": false
+    }, 
+    {
+        "itemID": "Octopus",
+        "seasons": {
+            "0": [
+                "Beach"
+            ],
+            "2": [
+                "Beach"
+            ]
+        },
+        "size": "2,200",
+        "difficulty": 6,
+        "time": "night",
+        "weathers": [],
+        "rate": 10,
+        "legendary": false
+    }, 
+    {
+        "itemID": "Squid",
+        "seasons": {
+            "1": [
+                "Beach"
+            ],
+            "3": [
+                "Beach"
+            ]
+        },
+        "size": "5,20",
+        "difficulty": 3,
+        "time": "night",
+        "weathers": [],
+        "rate": 20,
+        "legendary": false
+    }, 
+    {
+        "itemID": "Sturgeon",
+        "comment": "Là một con cá Legendary, sẽ có nhiệm vụ ẩn để truy tìm con cá này. Nó sẽ không xuất hiện khi kích hoạt flag đặc biệt.",
+        "flag": "HuntSturgeon",
+        "seasons": {
+            "0": [
+                "Lake"
+            ],
+            "2": [
+                "Lake"
+            ]
+        },
+        "size": "84,120",
+        "difficulty": 10,
+        "time": "",
+        "rate": 5,
+        "legendary": true
+    },
+    {
         "itemID": "AlligatorGar",
         "comment": "Là một con cá Legendary, sẽ có nhiệm vụ ẩn để truy tìm con cá này. Nó sẽ không xuất hiện khi kích hoạt flag đặc biệt.",
         "flag": "HuntAlligatorGar",
@@ -276,13 +345,13 @@
                 "River"
             ],
             "1": [
-                "Lake"
+                "River"
             ],
             "2": [
                 "River"
             ],
             "3": [
-                "Lake"
+                "River"
             ]
         },
         "size": "96,96",
@@ -290,5 +359,199 @@
         "time": "night",
         "rate": 5,
         "legendary": true
+    },
+    {
+        "itemID": "KingCrab",
+        "comment": "Là một con cua Legendary, sẽ có nhiệm vụ ẩn để truy tìm con con cua này.",
+        "flag": "CatchAKingCrab",
+        "seasons": {
+            "3": [
+                "Beach"
+            ]
+        },
+        "size": "100,100",
+        "difficulty": 10,
+        "time": "",
+        "rate": 5,
+        "legendary": true
+    },
+    {
+        "itemID": "Lobster",
+        "seasons": {
+            "0": [
+                "Beach"
+            ],
+            "3": [
+                "Beach"
+            ]
+        },
+        "size": "1,10",
+        "difficulty": 0,
+        "time": "",
+        "weathers": [],
+        "rate": 10,
+        "fishTrap": true,
+        "legendary": false
+    },
+    {
+        "itemID": "BlueCrab",
+        "seasons": {
+            "1": [
+                "Beach"
+            ],
+            "2": [
+                "Beach"
+            ]
+        },
+        "size": "1,10",
+        "difficulty": 0,
+        "time": "",
+        "weathers": [],
+        "rate": 25,
+        "fishTrap": true,
+        "legendary": false
+    },
+    {
+        "itemID": "StoneCrab",
+        "seasons": {
+            "0": [
+                "River"
+            ]
+        },
+        "size": "3,15",
+        "difficulty": 0,
+        "time": "",
+        "weathers": [],
+        "rate": 15,
+        "fishTrap": true,
+        "legendary": false
+    },
+    {
+        "itemID": "GreenCrab",
+        "seasons": {
+            "2": [
+                "Beach"
+            ]
+        },
+        "size": "2,10",
+        "difficulty": 0,
+        "time": "",
+        "weathers": [],
+        "rate": 30,
+        "fishTrap": true,
+        "legendary": false
+    },
+    {
+        "itemID": "Crawfish",
+        "seasons": {
+            "0": [
+                "River",
+                "Lake"
+            ],
+            "1": [
+                "River",
+                "Lake"
+            ]
+        },
+        "size": "1,5",
+        "difficulty": 0,
+        "time": "",
+        "weathers": [],
+        "rate": 30,
+        "fishTrap": true,
+        "legendary": false
+    },
+    {
+        "itemID": "Crawfish",
+        "seasons": {
+            "0": [
+                "River",
+                "Lake"
+            ],
+            "1": [
+                "River",
+                "Lake"
+            ]
+        },
+        "size": "1,5",
+        "difficulty": 0,
+        "time": "",
+        "weathers": [],
+        "rate": 30,
+        "fishTrap": true,
+        "legendary": false
+    },
+    {
+        "itemID": "AppleSnail",
+        "seasons": {
+            "0": [
+                "River",
+                "Lake"
+            ],
+            "2": [
+                "River",
+                "Lake"
+            ]
+        },
+        "size": "1,2",
+        "difficulty": 0,
+        "time": "",
+        "weathers": [],
+        "rate": 30,
+        "fishTrap": true,
+        "legendary": false
+    },
+    {
+        "itemID": "PearlMussel",
+        "seasons": {
+            "0": [
+                "River"
+            ],
+            "1": [
+                "Beach"
+            ]
+        },
+        "size": "1,2",
+        "difficulty": 0,
+        "time": "",
+        "weathers": [],
+        "rate": 20,
+        "fishTrap": true,
+        "legendary": false
+    },
+    {
+        "itemID": "Scallop",
+        "seasons": {
+            "2": [
+                "Beach"
+            ]
+        },
+        "size": "1,2",
+        "difficulty": 0,
+        "time": "",
+        "weathers": [],
+        "rate": 10,
+        "fishTrap": true,
+        "legendary": false
+    },
+    {
+        "itemID": "Oyster",
+        "seasons": {
+            "0": [
+                "River",
+                "Lake"
+            ],
+            "2": [
+                "River",
+                "Lake"
+            ]
+        },
+        "size": "1,2",
+        "difficulty": 0,
+        "time": "",
+        "weathers": [],
+        "rate": 15,
+        "fishTrap": true,
+        "legendary": false
     }
 ]
