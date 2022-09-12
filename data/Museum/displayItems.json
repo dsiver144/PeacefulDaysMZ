@@ -6,7 +6,13 @@
             "Strawberry",
             "Carrot"
         ],
-        "number": 5
+        "number": 5,
+        "rewards": [
+            {
+                "itemID": "",
+                "number": 1
+            }
+        ]
     },
     {
         "id": "SummerCrops",
@@ -153,11 +159,28 @@
         "number": 5
     },
     {
+        "id": "FishCollection",
+        "items": [
+            "Tuna",
+            "Salmon",
+            "Smelt",
+            "Carp",
+            "BlueTilapia",
+            "Bluegill",
+            "Lobster",
+            "BlueCrab",
+            "Scallop"
+        ],
+        "number": 1
+    },
+    {
         "id": "SpecialCollection",
         "items": [
             "GoldenEgg",
             "OstrichEgg",
-            "AncientRelic"
+            "Paradoxides",
+            "AncientRelic",
+            "ShipInABottle"
         ],
         "number": 1
     }

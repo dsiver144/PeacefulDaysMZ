@@ -97,6 +97,13 @@
         "rate": 25
     },
     {
+        "itemID": "Paradoxides",
+        "ore": true,
+        "floor": "50, 100",
+        "rate": 5,
+        "number": 1
+    },
+    {
         "itemID": "Turquoise",
         "ore": true,
         "floor": "50,79",

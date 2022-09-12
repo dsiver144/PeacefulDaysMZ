@@ -283,7 +283,7 @@
         "weathers": [],
         "rate": 20,
         "legendary": false
-    }, 
+    },
     {
         "itemID": "Octopus",
         "seasons": {
@@ -300,7 +300,7 @@
         "weathers": [],
         "rate": 10,
         "legendary": false
-    }, 
+    },
     {
         "itemID": "Squid",
         "seasons": {
@@ -317,7 +317,7 @@
         "weathers": [],
         "rate": 20,
         "legendary": false
-    }, 
+    },
     {
         "itemID": "Sturgeon",
         "comment": "Là một con cá Legendary, sẽ có nhiệm vụ ẩn để truy tìm con cá này. Nó sẽ không xuất hiện khi kích hoạt flag đặc biệt.",
@@ -462,26 +462,6 @@
         "legendary": false
     },
     {
-        "itemID": "Crawfish",
-        "seasons": {
-            "0": [
-                "River",
-                "Lake"
-            ],
-            "1": [
-                "River",
-                "Lake"
-            ]
-        },
-        "size": "1,5",
-        "difficulty": 0,
-        "time": "",
-        "weathers": [],
-        "rate": 30,
-        "fishTrap": true,
-        "legendary": false
-    },
-    {
         "itemID": "AppleSnail",
         "seasons": {
             "0": [
@@ -552,6 +532,29 @@
         "weathers": [],
         "rate": 15,
         "fishTrap": true,
+        "legendary": false
+    },
+    {
+        "itemID": "ShipInABottle",
+        "seasons": {
+            "0": [
+                "Beach"
+            ],
+            "1": [
+                "Beach"
+            ],
+            "2": [
+                "Beach"
+            ],
+            "3": [
+                "Beach"
+            ]
+        },
+        "object": true,
+        "rare": true,
+        "weathers": [],
+        "rate": 15,
+        "fishTrap": false,
         "legendary": false
     }
 ]

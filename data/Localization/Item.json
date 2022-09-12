@@ -834,7 +834,8 @@
 			"vn": "Loại đá siêu quý hiếm, tượng trưng cho sự trường thọ và sức khỏe.",
 			"en": ""
 		}
-	}, {
+	},
+	{
 		"key": "AncientRelic",
 		"lang": {
 			"vn": "Thánh Tích Cổ Đại",
@@ -842,6 +843,17 @@
 		},
 		"description": {
 			"vn": "Có vẻ như nó thuộc về một nền văn minh cổ đại từ rất xa xưa.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Paradoxides",
+		"lang": {
+			"vn": "Paradoxides",
+			"en": "Paradoxides"
+		},
+		"description": {
+			"vn": "Hóa thạch của loài động vật chân khớp xuất hiện ở kỷ Cambri.",
 			"en": ""
 		}
 	},
@@ -2415,6 +2427,17 @@
 		},
 		"description": {
 			"vn": "Một con cua hoàng đế khổng lồ, chắc hẳn nó đã tồn tại từ rất lâu rồi.",
+			"en": ""
+		}
+	},
+	{
+		"key": "ShipInABottle",
+		"lang": {
+			"vn": "Chiếc Thuyền Trong Chai",
+			"en": "Ship In A Bottle"
+		},
+		"description": {
+			"vn": "Làm sao để có thể đặt được chiếc thuyền vào trong một cái chai thế này?",
 			"en": ""
 		}
 	}
