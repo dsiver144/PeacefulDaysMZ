@@ -2,18 +2,12 @@
     {
         "itemID": "Charcoal",
         "ore": false,
-        "locations": [
-            "OldMine"
-        ],
         "floor": "1,100",
         "rate": 10
     },
     {
         "itemID": "PurpleHerb",
         "ore": false,
-        "locations": [
-            "OldMine"
-        ],
         "floor": "1,100",
         "rate": 10
     },
@@ -21,153 +15,126 @@
         "itemID": "ScrapOre",
         "comment": "Có thể làm nguyên liệu cho Recycle Machine",
         "ore": true,
-        "locations": [
-            "OldMine"
-        ],
         "floor": "1,100",
+        "rate": 30
+    },
+    {
+        "itemID": "SoftSoil",
+        "ore": true,
+        "floor": "1,100",
+        "rate": 10
+    },
+    {
+        "itemID": "Limestone",
+        "ore": true,
+        "floor": "1,100",
+        "rate": 20
+    },
+    {
+        "itemID": "Quartz",
+        "ore": false,
+        "floor": "1,19",
         "rate": 30
     },
     {
         "itemID": "Jasper",
         "ore": true,
-        "locations": [
-            "OldMine"
-        ],
         "floor": "1,19",
         "rate": 25
     },
     {
         "itemID": "Jade",
         "ore": true,
-        "locations": [
-            "OldMine"
-        ],
         "floor": "1,19",
         "rate": 20
     },
     {
         "itemID": "Amethyst",
         "ore": true,
-        "locations": [
-            "OldMine"
-        ],
         "floor": "10,100",
         "rate": 5
     },
     {
         "itemID": "CopperOre",
         "ore": true,
-        "locations": [
-            "OldMine"
-        ],
         "floor": "1,19",
         "rate": 25
     },
     {
         "itemID": "SilverOre",
         "ore": true,
-        "locations": [
-            "OldMine"
-        ],
+        "floor": "20,49",
+        "rate": 25
+    },
+    {
+        "itemID": "Topaz",
+        "ore": true,
         "floor": "20,49",
         "rate": 25
     },
     {
         "itemID": "Agate",
         "ore": true,
-        "locations": [
-            "OldMine"
-        ],
         "floor": "20,49",
         "rate": 25
     },
     {
         "itemID": "Peridot",
         "ore": true,
-        "locations": [
-            "OldMine"
-        ],
         "floor": "20,49",
         "rate": 20
     },
     {
         "itemID": "Sapphire",
         "ore": true,
-        "locations": [
-            "OldMine"
-        ],
         "floor": "20,49",
         "rate": 15
     },
     {
         "itemID": "IronOre",
         "ore": true,
-        "locations": [
-            "OldMine"
-        ],
         "floor": "50,79",
         "rate": 25
     },
     {
         "itemID": "Turquoise",
         "ore": true,
-        "locations": [
-            "OldMine"
-        ],
         "floor": "50,79",
         "rate": 25
     },
     {
         "itemID": "Aquamarine",
         "ore": true,
-        "locations": [
-            "OldMine"
-        ],
         "floor": "50,79",
         "rate": 20
     },
     {
         "itemID": "Emerald",
         "ore": true,
-        "locations": [
-            "OldMine"
-        ],
         "floor": "50,79",
         "rate": 15
     },
     {
         "itemID": "GoldOre",
         "ore": true,
-        "locations": [
-            "OldMine"
-        ],
         "floor": "80,100",
         "rate": 25
     },
     {
         "itemID": "Ruby",
         "ore": true,
-        "locations": [
-            "OldMine"
-        ],
         "floor": "80,100",
         "rate": 25
     },
     {
         "itemID": "Diamond",
         "ore": true,
-        "locations": [
-            "OldMine"
-        ],
         "floor": "90,100",
         "rate": 10
     },
     {
         "itemID": "Jadeite",
         "ore": true,
-        "locations": [
-            "OldMine"
-        ],
         "floor": "95,100",
         "rate": 2
     }

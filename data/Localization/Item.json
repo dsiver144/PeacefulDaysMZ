@@ -706,7 +706,7 @@
 	{
 		"key": "Jasper",
 		"lang": {
-			"vn": "Thạch Anh",
+			"vn": "Ngọc Bích Đỏ",
 			"en": "Jasper"
 		},
 		"description": {
@@ -722,6 +722,17 @@
 		},
 		"description": {
 			"vn": "Một loại đá quý màu xanh lục, thường dùng làm đồ trang sức.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Topaz",
+		"lang": {
+			"vn": "Hoàng Ngọc",
+			"en": "Topaz"
+		},
+		"description": {
+			"vn": "Có độ cứng cao và ánh thủy tinh tương đối mạnh.",
 			"en": ""
 		}
 	},
@@ -821,6 +832,72 @@
 		},
 		"description": {
 			"vn": "Loại đá siêu quý hiếm, tượng trưng cho sự trường thọ và sức khỏe.",
+			"en": ""
+		}
+	},
+	{
+		"key": "RedHerb",
+		"lang": {
+			"vn": "Cây thảo mộc đỏ",
+			"en": "Red Herb"
+		},
+		"description": {
+			"vn": "Là cây thảo mộc dại mọc ở trong các hang động núi lửa. Có thể ăn để hồi một tí năng lượng.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Obsidian",
+		"lang": {
+			"vn": "Hắc Diện Thạch",
+			"en": "Obsidian"
+		},
+		"description": {
+			"vn": "Được hình thành từ dung nham nguội lạnh.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Bauxite",
+		"lang": {
+			"vn": "Bô Xít",
+			"en": "Bauxite"
+		},
+		"description": {
+			"vn": "Thường được tìm thấy quanh các hang động núi lửa.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Kyanite",
+		"lang": {
+			"vn": "Kyanit",
+			"en": "Kyanite"
+		},
+		"description": {
+			"vn": "Được dùng làm chất chính trong các sản phẩm sứ.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Quartz",
+		"lang": {
+			"vn": "Thạch Anh",
+			"en": "Quartz"
+		},
+		"description": {
+			"vn": "Một trong những tinh thể trong suốt phổ biến nhất trên Trái Đất.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Limestone",
+		"lang": {
+			"vn": "Đá Vôi",
+			"en": "Limestone"
+		},
+		"description": {
+			"vn": "Vật liệu không thể thiếu trong xây dựng.",
 			"en": ""
 		}
 	},

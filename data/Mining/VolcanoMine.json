@@ -1,0 +1,57 @@
+[
+    {
+        "itemID": "Charcoal",
+        "ore": false,
+        "floor": "1,50",
+        "rate": 10
+    },
+    {
+        "itemID": "RedHerb",
+        "ore": false,
+        "floor": "1,100",
+        "rate": 10
+    },
+    {
+        "itemID": "ScrapOre",
+        "comment": "Có thể làm nguyên liệu cho Recycle Machine",
+        "ore": true,
+        "floor": "1,50",
+        "rate": 30
+    },
+    {
+        "itemID": "Quartz",
+        "ore": false,
+        "floor": "1,50",
+        "rate": 25
+    },
+    {
+        "itemID": "Obsidian",
+        "ore": true,
+        "floor": "1,9",
+        "rate": 25
+    },
+    {
+        "itemID": "Bauxite",
+        "ore": true,
+        "floor": "9,19",
+        "rate": 25
+    },
+    {
+        "itemID": "Peridot",
+        "ore": true,
+        "floor": "20,29",
+        "rate": 25
+    },
+    {
+        "itemID": "Kyanite",
+        "ore": true,
+        "floor": "30,39",
+        "rate": 25
+    },
+    {
+        "itemID": "Diamond",
+        "ore": true,
+        "floor": "40,50",
+        "rate": 10
+    }
+]
