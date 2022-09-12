@@ -2310,6 +2310,50 @@
 		}
 	},
 	{
+		"key": "SeaCucumber",
+		"lang": {
+			"vn": "Hải Sâm",
+			"en": "Sea Cucumber"
+		},
+		"description": {
+			"vn": "Trông như quả dưa chuột, có giá trị dinh dưỡng cao.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Clownfish",
+		"lang": {
+			"vn": "Cá Hề",
+			"en": "Clownfish"
+		},
+		"description": {
+			"vn": "Chúng thay đổi giới tính ở một số thời điểm trong cuộc đời.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Butterflyfish",
+		"lang": {
+			"vn": "Cá Bướm",
+			"en": "Butterflyfish"
+		},
+		"description": {
+			"vn": "Có thân hình dẹt như một chiếc đĩa.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Jellyfish",
+		"lang": {
+			"vn": "Con Sứa",
+			"en": "Jellyfish"
+		},
+		"description": {
+			"vn": "Động vật thân mềm có các súc tu để bắt mồi.",
+			"en": ""
+		}
+	},
+	{
 		"key": "BlueCrab",
 		"lang": {
 			"vn": "Ghẹ",

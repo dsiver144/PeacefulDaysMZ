@@ -319,6 +319,68 @@
         "legendary": false
     },
     {
+        "itemID": "SeaCucumber",
+        "seasons": {
+            "0": [
+                "Beach"
+            ],
+            "1": [
+                "Beach"
+            ]
+        },
+        "size": "5,10",
+        "difficulty": 3,
+        "time": "night",
+        "weathers": [],
+        "rate": 20,
+        "legendary": false
+    },
+    {
+        "itemID": "Clownfish",
+        "seasons": {
+            "1": [
+                "Beach"
+            ],
+            "3": [
+                "Beach"
+            ]
+        },
+        "size": "1,4",
+        "difficulty": 2,
+        "time": "",
+        "weathers": [],
+        "rate": 15,
+        "legendary": false
+    },
+    {
+        "itemID": "Butterflyfish",
+        "seasons": {
+            "2": [
+                "Beach"
+            ]
+        },
+        "size": "4,8",
+        "difficulty": 2,
+        "time": "",
+        "weathers": [],
+        "rate": 15,
+        "legendary": false
+    },
+    {
+        "itemID": "Jellyfish",
+        "seasons": {
+            "1": [
+                "Beach"
+            ]
+        },
+        "size": "2,12",
+        "difficulty": 2,
+        "time": "",
+        "weathers": [],
+        "rate": 15,
+        "legendary": false
+    },
+    {
         "itemID": "Sturgeon",
         "comment": "Là một con cá Legendary, sẽ có nhiệm vụ ẩn để truy tìm con cá này. Nó sẽ không xuất hiện khi kích hoạt flag đặc biệt.",
         "flag": "HuntSturgeon",
