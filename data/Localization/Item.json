@@ -1870,6 +1870,72 @@
 		}
 	},
 	{
+		"key": "SpiralShell",
+		"lang": {
+			"vn": "Vỏ Ốc Xoắn",
+			"en": "Spiral Shell"
+		},
+		"description": {
+			"vn": "Từng là nơi trú ngụ của một con ốc.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Coral",
+		"lang": {
+			"vn": "San Hô",
+			"en": "Coral"
+		},
+		"description": {
+			"vn": "Chúng bị sóng đánh vào bờ mỗi khi thủy triều lên.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Seaweed",
+		"lang": {
+			"vn": "Rong Biển",
+			"en": "Seaweed"
+		},
+		"description": {
+			"vn": "Ăn có vị mặn của biển cả.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Cockle",
+		"lang": {
+			"vn": "Sò Nứa",
+			"en": ""
+		},
+		"description": {
+			"vn": "Thường được tìm thấy ở các bãi biển.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Winkle",
+		"lang": {
+			"vn": "Ốc Mỡ",
+			"en": "Winkle"
+		},
+		"description": {
+			"vn": "Một loài ốc có vị cực kì ngon.",
+			"en": ""
+		}
+	},
+	{
+		"key": "SeaUrchin",
+		"lang": {
+			"vn": "Nhím Biển",
+			"en": "Sea Urchin"
+		},
+		"description": {
+			"vn": "Một loại hải sản ngon và có giá trị dinh dưỡng cao.",
+			"en": ""
+		}
+	},
+	{
 		"key": "Morel",
 		"lang": {
 			"vn": "Nấm Bụng Dê",

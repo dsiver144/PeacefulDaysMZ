@@ -155,5 +155,47 @@
             3
         ],
         "comment": "Mọc ở bụi dây leo ven các hàng rào gần khu rừng."
+    },
+    {
+        "itemID": "SpiralShell",
+        "seasons": [
+            0
+        ],
+        "comment": "Chỉ xuất hiện ở biển."
+    },
+    {
+        "itemID": "Coral",
+        "seasons": [
+            1
+        ],
+        "comment": "Chỉ xuất hiện ở biển."
+    },
+    {
+        "itemID": "Seeweed",
+        "seasons": [
+            0,
+            1,
+            2,
+            3
+        ],
+        "comment": "Xuất hiện trên vài cục đá to gần biển, Player tương tác với chúng để thu hoạch."
+    },
+    {
+        "itemID": "Cockle",
+        "seasons": [
+            2
+        ]
+    },
+    {
+        "itemID": "Winkle",
+        "seasons": [
+            2
+        ]
+    },
+    {
+        "itemID": "SeaUrchin",
+        "seasons": [
+            3
+        ]
     }
 ]
