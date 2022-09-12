@@ -137,5 +137,12 @@
         "ore": true,
         "floor": "95,100",
         "rate": 2
+    },
+    {
+        "itemID": "AncientRelic",
+        "ore": true,
+        "floor": "80,100",
+        "rate": 1,
+        "number": 1
     }
 ]

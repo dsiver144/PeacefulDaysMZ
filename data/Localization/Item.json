@@ -834,6 +834,16 @@
 			"vn": "Loại đá siêu quý hiếm, tượng trưng cho sự trường thọ và sức khỏe.",
 			"en": ""
 		}
+	}, {
+		"key": "AncientRelic",
+		"lang": {
+			"vn": "Thánh Tích Cổ Đại",
+			"en": "Ancient Relic"
+		},
+		"description": {
+			"vn": "Có vẻ như nó thuộc về một nền văn minh cổ đại từ rất xa xưa.",
+			"en": ""
+		}
 	},
 	{
 		"key": "RedHerb",

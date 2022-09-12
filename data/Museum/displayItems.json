@@ -1,0 +1,164 @@
+[
+    {
+        "id": "SpringCrops",
+        "items": [
+            "Sunflower",
+            "Strawberry",
+            "Carrot"
+        ],
+        "number": 5
+    },
+    {
+        "id": "SummerCrops",
+        "items": [
+            "Watermelon",
+            "Tomato",
+            "Sugarcane"
+        ],
+        "number": 5
+    },
+    {
+        "id": "FallCrops",
+        "items": [
+            "SweetPotato",
+            "Pumpkin",
+            "Corn"
+        ],
+        "number": 5
+    },
+    {
+        "id": "HighQualityFruits",
+        "items": [
+            "Apple",
+            "Mango",
+            "Orange"
+        ],
+        "level": 8,
+        "number": 5
+    },
+    {
+        "id": "WinterCrops",
+        "items": [
+            "Parnip",
+            "Spinach",
+            "Cauliflower"
+        ],
+        "number": 5
+    },
+    {
+        "id": "SpringForagings",
+        "items": [
+            "CherryBlossom",
+            "Bluebell",
+            "Breadfruit"
+        ],
+        "number": 5
+    },
+    {
+        "id": "SummerForagings",
+        "items": [
+            "Raspberry",
+            "Daisy",
+            "Lavender"
+        ],
+        "number": 5
+    },
+    {
+        "id": "FallForagings",
+        "items": [
+            "Gooseberry",
+            "Jasmine",
+            "Scabiosa"
+        ],
+        "number": 5
+    },
+    {
+        "id": "WinterForagings",
+        "items": [
+            "Snowdrop",
+            "Daffodil",
+            "WildGrape"
+        ],
+        "number": 5
+    },
+    {
+        "id": "MushroomCollection",
+        "items": [
+            "Morel",
+            "Shiitake",
+            "StrawMushroom",
+            "Shimeji",
+            "Truffle",
+            "Matsutake"
+        ],
+        "number": 1
+    },
+    {
+        "id": "MiningCollection",
+        "items": [
+            "Amethyst",
+            "Jasper",
+            "Jade",
+            "Topaz",
+            "Agate",
+            "Peridot",
+            "Sapphire",
+            "Turquoise",
+            "Aquamarine",
+            "Emerald",
+            "Ruby",
+            "Diamond",
+            "Jadeite",
+            "Quartz",
+            "Obsidian",
+            "Bauxite",
+            "Kyanite"
+        ],
+        "number": 1
+    },
+    {
+        "id": "FurnaceCollection",
+        "items": [
+            "CooperBar",
+            "SilverBar",
+            "SteelBar",
+            "GoldBar"
+        ],
+        "number": 5
+    },
+    {
+        "id": "AnimalProductCollection",
+        "items": [
+            "CowMilk",
+            "SheepMilk",
+            "GoatMilk",
+            "SheepWool",
+            "MerinoSheepWool",
+            "AngoraRabbitWool",
+            "ChickenEgg",
+            "DuckEgg",
+            "AustraEgg",
+            "LeghornEgg"
+        ],
+        "number": 5
+    },
+    {
+        "id": "HighQualityAnimalProductCollection",
+        "items": [
+            "Cheese",
+            "ChickenMayo",
+            "SheepYarnBall"
+        ],
+        "level": 8,
+        "number": 5
+    },
+    {
+        "id": "SpecialCollection",
+        "items": [
+            "GoldenEgg",
+            "OstrichEgg",
+            "AncientRelic"
+        ],
+        "number": 1
+    }
+]
