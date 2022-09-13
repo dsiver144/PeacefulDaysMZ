@@ -25,11 +25,39 @@
         "treeFlag": false
     },
     {
+        "itemID": "RoseSeeds",
+        "productID": "Rose",
+        "comment": "6 days",
+        "stages": [
+            3,
+            4
+        ],
+        "imageFile": "PD_Rose",
+        "seasons": [
+            0
+        ]
+    },
+    {
+        "itemID": "CrossandraSeeds",
+        "productID": "Crossandra",
+        "comment": "4 days",
+        "stages": [
+            2,
+            2
+        ],
+        "imageFile": "PD_Crossandra",
+        "seasons": [
+            0,
+            1,
+            2,
+            3
+        ]
+    },
+    {
         "itemID": "BluebellSeeds",
         "productID": "Bluebell",
         "comment": "3 days",
         "stages": [
-            1,
             1,
             1
         ],
@@ -44,7 +72,6 @@
         "comment": "3 days",
         "stages": [
             1,
-            1,
             1
         ],
         "imageFile": "PD_SweetPea",
@@ -57,7 +84,6 @@
         "productID": "Daisy",
         "comment": "3 days",
         "stages": [
-            1,
             1,
             1
         ],
@@ -72,7 +98,6 @@
         "comment": "3 days",
         "stages": [
             1,
-            1,
             1
         ],
         "imageFile": "PD_Lavender",
@@ -86,26 +111,11 @@
         "comment": "3 days",
         "stages": [
             1,
-            1,
             1
         ],
         "imageFile": "PD_Daisy",
         "seasons": [
             1
-        ]
-    },
-    {
-        "itemID": "JasmineSeeds",
-        "productID": "Jasmine",
-        "comment": "3 days",
-        "stages": [
-            1,
-            1,
-            1
-        ],
-        "imageFile": "PD_Daisy",
-        "seasons": [
-            2
         ]
     },
     {
@@ -113,7 +123,6 @@
         "productID": "Scabiosa",
         "comment": "3 days",
         "stages": [
-            1,
             1,
             1
         ],
@@ -125,9 +134,7 @@
     {
         "itemID": "GoldenrodSeeds",
         "productID": "Goldenrod",
-        "comment": "3 days",
         "stages": [
-            1,
             1,
             1
         ],
@@ -139,9 +146,7 @@
     {
         "itemID": "CrocusSeeds",
         "productID": "Crocus",
-        "comment": "3 days",
         "stages": [
-            1,
             1,
             1
         ],
@@ -153,15 +158,26 @@
     {
         "itemID": "DaffodilSeeds",
         "productID": "Daffodil",
-        "comment": "3 days",
         "stages": [
-            1,
             1,
             1
         ],
         "imageFile": "PD_Daffodil",
         "seasons": [
             2
+        ]
+    },
+    {
+        "itemID": "PansySeeds",
+        "productID": "Pansy",
+        "stages": [
+            2,
+            3
+        ],
+        "imageFile": "PD_Pansy",
+        "seasons": [
+            0,
+            1
         ]
     }
 ]

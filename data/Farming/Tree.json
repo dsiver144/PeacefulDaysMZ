@@ -183,5 +183,46 @@
         "resetTimes": 1000,
         "isCollidable": true,
         "treeFlag": true
+    },
+    {
+        "itemID": "CherrySapling",
+        "productID": "Cherry",
+        "stages": [
+            10,
+            10,
+            3
+        ],
+        "imageFile": "PD_CherryTree",
+        "seasons": [
+            1,
+            2
+        ],
+        "resetable": true,
+        "resetStageIndex": 2,
+        "resetTimes": 1000,
+        "isCollidable": true,
+        "treeFlag": true
+    },
+    {
+        "itemID": "MapleSapling",
+        "productID": null,
+        "stages": [
+            5,
+            5
+        ],
+        "imageFile": "PD_MapleTree",
+        "isCollidable": true,
+        "treeFlag": true
+    },
+    {
+        "itemID": "SakuraSapling",
+        "productID": null,
+        "stages": [
+            5,
+            5
+        ],
+        "imageFile": "PD_SakuraTree",
+        "isCollidable": true,
+        "treeFlag": true
     }
 ]

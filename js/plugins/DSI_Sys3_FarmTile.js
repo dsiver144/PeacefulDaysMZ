@@ -224,7 +224,11 @@ class FarmTile extends FarmObject {
      * @returns {boolean} true if can harvest
      */
     harvest(toolType = null) {
-        console.log("Harvest ", toolType, this.seedId);
+        const { productID } = this.seedData();
+        if (!productID) {
+            return false; 
+        }
+        console.log("Harvest ", productID, toolType, this.seedId);
         if (this.isTree()) {
             this.resetToTargetedStage();
         } else {

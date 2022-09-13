@@ -28,7 +28,7 @@ const FarmConfig = {
     nonWaterDayThreshold: 3,
     treeHP: 100,
     farmableRegionIDs: [111, 112],
-    filenames: ["Crop", "Tree"]
+    filenames: ["Crop", "Tree", "Flower"]
 }
 
 class SeedConfig {

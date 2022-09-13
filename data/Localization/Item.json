@@ -484,6 +484,28 @@
 		}
 	},
 	{
+		"key": "MizunaSeeds",
+		"lang": {
+			"vn": "Hạt Giống Rau Mizuna",
+			"en": "Mizuna Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng rau mizuna.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Mizuna",
+		"lang": {
+			"vn": "Rau Mizuna",
+			"en": "Mizuna"
+		},
+		"description": {
+			"vn": "Có vị hăng của mù tạt nhưng nhẹ hơn.",
+			"en": ""
+		}
+	},
+	{
 		"key": "AppleSapling",
 		"lang": {
 			"vn": "Cây Táo Nhỏ",
@@ -700,6 +722,215 @@
 		},
 		"description": {
 			"vn": "Có vị ngọt và chua kết hợp rất tuyệt vời.",
+			"en": ""
+		}
+	},
+	{
+		"key": "CherrySapling",
+		"lang": {
+			"vn": "Cây Anh Đào Nhỏ",
+			"en": "Cherry Sapling"
+		},
+		"description": {
+			"vn": "Trồng cây con xuống đất để chúng phát triển.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Cherry",
+		"lang": {
+			"vn": "Trái Anh Đào",
+			"en": ""
+		},
+		"description": {
+			"vn": "Loại quả mọng có vị chua ngọt. Giúp bạn ngủ ngon hơn.",
+			"en": ""
+		}
+	},
+	{
+		"key": "MapleSapling",
+		"lang": {
+			"vn": "Cây Phong Nhỏ",
+			"en": "Maple Sapling"
+		},
+		"description": {
+			"vn": "Trồng cây con xuống đất để chúng phát triển.",
+			"en": ""
+		}
+	},
+	{
+		"key": "SakuraSapling",
+		"lang": {
+			"vn": "Cây Hoa Anh Đào Nhỏ",
+			"en": ""
+		},
+		"description": {
+			"vn": "Trồng cây con xuống đất để chúng phát triển.",
+			"en": ""
+		}
+	},
+	{
+		"key": "RoseSeeds",
+		"lang": {
+			"vn": "Hạt Giống Hoa Hồng",
+			"en": "Rose Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng hoa hồng.",
+			"en": ""
+		}
+	},
+	{
+		"key": "CrossandraSeeds",
+		"lang": {
+			"vn": "Hạt Giống Hỏa Hoàng",
+			"en": "Crossandra Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng hoa hỏa hoàng.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Crossandra",
+		"lang": {
+			"vn": "Hoa Hỏa Hoàng",
+			"en": "Crossandra"
+		},
+		"description": {
+			"vn": "Hạt giống của loài hoa này có thể phát nổ như pháo hoa.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Rose",
+		"lang": {
+			"vn": "Hoa Hồng",
+			"en": "Rose"
+		},
+		"description": {
+			"vn": "Vẻ đẹp khó loài hoa nào sánh bằng.",
+			"en": ""
+		}
+	},
+	{
+		"key": "BluebellSeeds",
+		"lang": {
+			"vn": "Hạt Giống Hoa Chuông Xanh",
+			"en": "Bluebell Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng hoa chuông xanh.",
+			"en": ""
+		}
+	},
+	{
+		"key": "SweetPeaSeeds",
+		"lang": {
+			"vn": "Hạt Giống Hoa Đậu Ngọt",
+			"en": "Sweet Pea Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng hoa đậu ngọt.",
+			"en": ""
+		}
+	},
+	{
+		"key": "DaisySeeds",
+		"lang": {
+			"vn": "Hạt Giống Hoa Cúc",
+			"en": "Daisy Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng hoa cúc.",
+			"en": ""
+		}
+	},
+	{
+		"key": "LavenderSeeds",
+		"lang": {
+			"vn": "Hạt Giống Lavender",
+			"en": "Lavender Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng hoa Lavender.",
+			"en": ""
+		}
+	},
+	{
+		"key": "JasmineSeeds",
+		"lang": {
+			"vn": "Hạt Giống Hoa Nhài",
+			"en": "Jasmine Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng hoa nhài.",
+			"en": ""
+		}
+	},
+	{
+		"key": "ScabiosaSeeds",
+		"lang": {
+			"vn": "Hạt Giống Hoa Tai Thỏ",
+			"en": "Scabiosa Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng hoa tai thỏ.",
+			"en": ""
+		}
+	},
+	{
+		"key": "GoldenrodSeeds",
+		"lang": {
+			"vn": "Hạt Giống Cúc Hoàng Anh",
+			"en": "Goldenrod Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng hoa Cúc Hoàng Anh.",
+			"en": ""
+		}
+	},
+	{
+		"key": "CrocusSeeds",
+		"lang": {
+			"vn": "Hạt Giống Hoa Nghệ Tây",
+			"en": "Crocus Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng hoa nghệ tây.",
+			"en": ""
+		}
+	},
+	{
+		"key": "DaffodilSeeds",
+		"lang": {
+			"vn": "Hạt Giống Hoa Thủy Tiên",
+			"en": "Daffodil Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng hoa thủy tiên.",
+			"en": ""
+		}
+	},
+	{
+		"key": "PansySeeds",
+		"lang": {
+			"vn": "Hạt Giống Hoa Păng Xê",
+			"en": "Pansy Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng hoa Păng xê.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Pansy",
+		"lang": {
+			"vn": "Hoa Păng Xê",
+			"en": ""
+		},
+		"description": {
+			"vn": "Được lai tạo từ nhiều loại hoa khác nhau.",
 			"en": ""
 		}
 	},
@@ -1991,6 +2222,17 @@
 		}
 	},
 	{
+		"key": "SweetPea",
+		"lang": {
+			"vn": "Hoa Đậu Ngọt",
+			"en": "Sweet Pea"
+		},
+		"description": {
+			"vn": "Có mùi thơm ngọt ngào và thơm nhất trong họ dây leo.",
+			"en": ""
+		}
+	},
+	{
 		"key": "Groundcherry",
 		"lang": {
 			"vn": "Quả Tầm Bóp",
@@ -2053,6 +2295,17 @@
 		},
 		"description": {
 			"vn": "Được sử dụng nhiều trong y dược.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Crocus",
+		"lang": {
+			"vn": "Hoa Nghệ Tây",
+			"en": "Crocus"
+		},
+		"description": {
+			"vn": "Có thể dùng để tạo ra Saffron.",
 			"en": ""
 		}
 	},
