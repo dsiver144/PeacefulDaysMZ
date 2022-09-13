@@ -220,28 +220,6 @@
 		}
 	},
 	{
-		"key": "CocoaSapling",
-		"lang": {
-			"vn": "Cây Ca Cao Non",
-			"en": "Cocoa Sapling"
-		},
-		"description": {
-			"vn": "Trồng cây con xuống đất để chúng phát triển.",
-			"en": ""
-		}
-	},
-	{
-		"key": "CocoaPod",
-		"lang": {
-			"vn": "Trái Ca Cao",
-			"en": "Cocoa Pod"
-		},
-		"description": {
-			"vn": "Chứa nhiều hạt ca cao có thể được xay thành bột.",
-			"en": ""
-		}
-	},
-	{
 		"key": "TomatoSeeds",
 		"lang": {
 			"vn": "Hạt Giống Cà Chua",
@@ -480,6 +458,248 @@
 		},
 		"description": {
 			"vn": "Chứa lượng calo thấp và cung cấp nhiều vitamin và khoáng chất quan trọng.",
+			"en": ""
+		}
+	},
+	{
+		"key": "OnionSeeds",
+		"lang": {
+			"vn": "Hạt Giống Hành Tây",
+			"en": "Onion Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng hành tây.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Onion",
+		"lang": {
+			"vn": "Hành Tây",
+			"en": "Onion"
+		},
+		"description": {
+			"vn": "Một loại rau củ có vị đặc trưng.",
+			"en": ""
+		}
+	},
+	{
+		"key": "AppleSapling",
+		"lang": {
+			"vn": "Cây Táo Nhỏ",
+			"en": "Apple Sapling"
+		},
+		"description": {
+			"vn": "Trồng cây con xuống đất để chúng phát triển.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Apple",
+		"lang": {
+			"vn": "Quả Táo",
+			"en": "Apple"
+		},
+		"description": {
+			"vn": "Một loại quả phổ biến vào mùa xuân. Có thể dùng làm Bánh Táo cực ngon.",
+			"en": ""
+		}
+	},
+	{
+		"key": "ApricotSapling",
+		"lang": {
+			"vn": "Cây Mơ Nhỏ",
+			"en": "Apricot Sapling"
+		},
+		"description": {
+			"vn": "Trồng cây con xuống đất để chúng phát triển.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Apricot",
+		"lang": {
+			"vn": "Quả Mơ",
+			"en": "Apricot"
+		},
+		"description": {
+			"vn": "Ăn khá ngon, có thể dùng để làm mức.",
+			"en": ""
+		}
+	},
+	{
+		"key": "OrangeSapling",
+		"lang": {
+			"vn": "Cây Cam Nhỏ",
+			"en": "Orange Sapling"
+		},
+		"description": {
+			"vn": "Trồng cây con xuống đất để chúng phát triển.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Orange",
+		"lang": {
+			"vn": "Quả Cam",
+			"en": "Orange"
+		},
+		"description": {
+			"vn": "Chứa nhiều vitamic C.",
+			"en": ""
+		}
+	},
+	{
+		"key": "PeachSapling",
+		"lang": {
+			"vn": "Cây Đào Con",
+			"en": "Peach Sapling"
+		},
+		"description": {
+			"vn": "Trồng cây con xuống đất để chúng phát triển.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Peach",
+		"lang": {
+			"vn": "Quả Đào",
+			"en": "Peach"
+		},
+		"description": {
+			"vn": "Chứa nhiều vitamin E và ăn rất ngon.",
+			"en": ""
+		}
+	},
+	{
+		"key": "AvocadoSapling",
+		"lang": {
+			"vn": "Cây Bơ Nhỏ",
+			"en": "Avocado Sapling"
+		},
+		"description": {
+			"vn": "Trồng cây con xuống đất để chúng phát triển.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Avocado",
+		"lang": {
+			"vn": "Quả Bơ",
+			"en": "Avocado"
+		},
+		"description": {
+			"vn": "Chứa nhiều chất béo tốt cho cơ thể.",
+			"en": ""
+		}
+	},
+	{
+		"key": "CocoaSapling",
+		"lang": {
+			"vn": "Cây Ca Cao Nhỏ",
+			"en": "Cocoa Sapling"
+		},
+		"description": {
+			"vn": "Trồng cây con xuống đất để chúng phát triển.",
+			"en": ""
+		}
+	},
+	{
+		"key": "CocoaPod",
+		"lang": {
+			"vn": "Trái Ca Cao",
+			"en": "Cocoa Pod"
+		},
+		"description": {
+			"vn": "Chứa nhiều hạt ca cao có thể được xay thành bột.",
+			"en": ""
+		}
+	},
+	{
+		"key": "MangoSapling",
+		"lang": {
+			"vn": "Cây Xoài Nhỏ",
+			"en": "Mango Sapling"
+		},
+		"description": {
+			"vn": "Trồng cây con xuống đất để chúng phát triển.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Mango",
+		"lang": {
+			"vn": "Quả Xoài",
+			"en": "Mango"
+		},
+		"description": {
+			"vn": "Một loải quả ngọt chứa nhiều vitamin A.",
+			"en": ""
+		}
+	},
+	{
+		"key": "LemonSapling",
+		"lang": {
+			"vn": "Cây Chanh Nhỏ",
+			"en": "LemonSapling"
+		},
+		"description": {
+			"vn": "Trồng cây con xuống đất để chúng phát triển.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Lemon",
+		"lang": {
+			"vn": "Quả Chanh",
+			"en": "Lemon"
+		},
+		"description": {
+			"vn": "Có vị rất chua, dùng làm nguyên liệu trong nấu ăn là chính.",
+			"en": ""
+		}
+	},
+	{
+		"key": "BananaSapling",
+		"lang": {
+			"vn": "Cây Chuối Nhỏ",
+			"en": "Banana Sapling"
+		},
+		"description": {
+			"vn": "Trồng cây con xuống đất để chúng phát triển.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Banana",
+		"lang": {
+			"vn": "Quả Chuối",
+			"en": "Banana"
+		},
+		"description": {
+			"vn": "Loại quả phổ biến, ăn rất tốt cho sức khỏe.",
+			"en": ""
+		}
+	},
+	{
+		"key": "PlumSapling",
+		"lang": {
+			"vn": "Cây Mận Nhỏ",
+			"en": "Plum Sapling"
+		},
+		"description": {
+			"vn": "Trồng cây con xuống đất để chúng phát triển.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Plum",
+		"lang": {
+			"vn": "Quả Mận",
+			"en": "Plum"
+		},
+		"description": {
+			"vn": "Có vị ngọt và chua kết hợp rất tuyệt vời.",
 			"en": ""
 		}
 	},
@@ -809,7 +1029,7 @@
 			"en": "Ruby"
 		},
 		"description": {
-			"vn": "Đa phần giống với Sapphire nhưng có màu đỏ.",
+			"vn": "Một viên ngọc quý có màu đỏ tuyệt đẹp.",
 			"en": ""
 		}
 	},
@@ -937,7 +1157,7 @@
 	{
 		"key": "GreenEnergyBar",
 		"lang": {
-			"vn": "Thanh năng lượng xanh",
+			"vn": "Thanh Năng Lượng Xanh",
 			"en": "Green Energy Bar"
 		},
 		"description": {
@@ -959,7 +1179,7 @@
 	{
 		"key": "WoodenPath",
 		"lang": {
-			"vn": "Tấm lót đường bằng Gỗ",
+			"vn": "Tấm Lót Đường Gỗ",
 			"en": "Wooden Path"
 		},
 		"description": {
@@ -970,7 +1190,7 @@
 	{
 		"key": "StonePath",
 		"lang": {
-			"vn": "Tấm lót đường bằng Đá",
+			"vn": "Tấm Lót Đường Đá",
 			"en": "Stone Path"
 		},
 		"description": {
@@ -1014,7 +1234,7 @@
 	{
 		"key": "Tube",
 		"lang": {
-			"vn": "Ống kim loại",
+			"vn": "Ống Kim Loại",
 			"en": "Tube"
 		},
 		"description": {
@@ -1025,7 +1245,7 @@
 	{
 		"key": "Wire",
 		"lang": {
-			"vn": "Dây dẫn",
+			"vn": "Dây Dẫn",
 			"en": "Wire"
 		},
 		"description": {
@@ -1036,7 +1256,7 @@
 	{
 		"key": "Screw",
 		"lang": {
-			"vn": "Ốc vít",
+			"vn": "Ốc Vít",
 			"en": "Screw"
 		},
 		"description": {
@@ -1047,7 +1267,7 @@
 	{
 		"key": "SmallMotor",
 		"lang": {
-			"vn": "Mô-tơ nhỏ",
+			"vn": "Mô-tơ Nhỏ",
 			"en": "Small Motor"
 		},
 		"description": {
@@ -1058,7 +1278,7 @@
 	{
 		"key": "BigMotor",
 		"lang": {
-			"vn": "Mô-tơ lớn",
+			"vn": "Mô-tơ Lớn",
 			"en": "Big Motor"
 		},
 		"description": {
@@ -1826,6 +2046,17 @@
 		}
 	},
 	{
+		"key": "Goldenrod",
+		"lang": {
+			"vn": "Cúc Hoàng Anh",
+			"en": "Goldenrod"
+		},
+		"description": {
+			"vn": "Được sử dụng nhiều trong y dược.",
+			"en": ""
+		}
+	},
+	{
 		"key": "Snowdrop",
 		"lang": {
 			"vn": "Hoa Tuyết Điểm",
@@ -2185,6 +2416,17 @@
 		},
 		"description": {
 			"vn": "Một món ăn hấp dẫn, mang đậm hương vị cá.",
+			"en": ""
+		}
+	},
+	{
+		"key": "ApplePie",
+		"lang": {
+			"vn": "Bánh Táo",
+			"en": "Apple Pie"
+		},
+		"description": {
+			"vn": "Một loại bánh ngon được làm từ táo.",
 			"en": ""
 		}
 	},

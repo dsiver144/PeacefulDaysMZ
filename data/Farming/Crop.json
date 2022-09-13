@@ -1,30 +1,5 @@
 [
     {
-        "itemID": "SunflowerSeeds",
-        "productID": "Sunflower",
-        "comment": "4 days",
-        "stages": [
-            1,
-            1,
-            1,
-            1
-        ],
-        "imageFile": "PD_Sunflower",
-        "seasons": [
-            0,
-            1,
-            2,
-            3
-        ],
-        "resetable": false,
-        "resetStageIndex": 0,
-        "resetTimes": 0,
-        "sickleRequired": false,
-        "isCollidable": false,
-        "waterfieldFlag": false,
-        "treeFlag": false
-    },
-    {
         "itemID": "CarrotSeeds",
         "productID": "Carrot",
         "comment": "5 days",
@@ -223,6 +198,20 @@
         "resetTimes": 3
     },
     {
+        "itemID": "GarlicSeeds",
+        "productID": "Garlic",
+        "stages": [
+            2,
+            3,
+            3
+        ],
+        "imageFile": "PD_Garlic",
+        "seasons": [
+            1,
+            2
+        ]
+    },
+    {
         "itemID": "SweetPotatoSeeds",
         "productID": "SweetPotato",
         "comment": "6 days",
@@ -319,6 +308,21 @@
         ],
         "imageFile": "PD_Parsnip",
         "seasons": [
+            3
+        ]
+    },
+    {
+        "itemID": "OnionSeeds",
+        "productID": "Onion",
+        "stages": [
+            2,
+            2,
+            2,
+            2
+        ],
+        "imageFile": "PD_Onion",
+        "seasons": [
+            0,
             3
         ]
     }

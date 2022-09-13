@@ -1,0 +1,167 @@
+[
+    {
+        "itemID": "SunflowerSeeds",
+        "productID": "Sunflower",
+        "comment": "4 days",
+        "stages": [
+            1,
+            1,
+            1,
+            1
+        ],
+        "imageFile": "PD_Sunflower",
+        "seasons": [
+            0,
+            1,
+            2,
+            3
+        ],
+        "resetable": false,
+        "resetStageIndex": 0,
+        "resetTimes": 0,
+        "sickleRequired": false,
+        "isCollidable": false,
+        "waterfieldFlag": false,
+        "treeFlag": false
+    },
+    {
+        "itemID": "BluebellSeeds",
+        "productID": "Bluebell",
+        "comment": "3 days",
+        "stages": [
+            1,
+            1,
+            1
+        ],
+        "imageFile": "PD_Bluebell",
+        "seasons": [
+            0
+        ]
+    },
+    {
+        "itemID": "SweetPeaSeeds",
+        "productID": "SweetPea",
+        "comment": "3 days",
+        "stages": [
+            1,
+            1,
+            1
+        ],
+        "imageFile": "PD_SweetPea",
+        "seasons": [
+            0
+        ]
+    },
+    {
+        "itemID": "DaisySeeds",
+        "productID": "Daisy",
+        "comment": "3 days",
+        "stages": [
+            1,
+            1,
+            1
+        ],
+        "imageFile": "PD_Daisy",
+        "seasons": [
+            1
+        ]
+    },
+    {
+        "itemID": "LavenderSeeds",
+        "productID": "Lavender",
+        "comment": "3 days",
+        "stages": [
+            1,
+            1,
+            1
+        ],
+        "imageFile": "PD_Lavender",
+        "seasons": [
+            1
+        ]
+    },
+    {
+        "itemID": "JasmineSeeds",
+        "productID": "Jasmine",
+        "comment": "3 days",
+        "stages": [
+            1,
+            1,
+            1
+        ],
+        "imageFile": "PD_Daisy",
+        "seasons": [
+            1
+        ]
+    },
+    {
+        "itemID": "JasmineSeeds",
+        "productID": "Jasmine",
+        "comment": "3 days",
+        "stages": [
+            1,
+            1,
+            1
+        ],
+        "imageFile": "PD_Daisy",
+        "seasons": [
+            2
+        ]
+    },
+    {
+        "itemID": "ScabiosaSeeds",
+        "productID": "Scabiosa",
+        "comment": "3 days",
+        "stages": [
+            1,
+            1,
+            1
+        ],
+        "imageFile": "PD_Scabiosa",
+        "seasons": [
+            2
+        ]
+    },
+    {
+        "itemID": "GoldenrodSeeds",
+        "productID": "Goldenrod",
+        "comment": "3 days",
+        "stages": [
+            1,
+            1,
+            1
+        ],
+        "imageFile": "PD_Goldenrod",
+        "seasons": [
+            2
+        ]
+    },
+    {
+        "itemID": "CrocusSeeds",
+        "productID": "Crocus",
+        "comment": "3 days",
+        "stages": [
+            1,
+            1,
+            1
+        ],
+        "imageFile": "PD_Crocus",
+        "seasons": [
+            2
+        ]
+    },
+    {
+        "itemID": "DaffodilSeeds",
+        "productID": "Daffodil",
+        "comment": "3 days",
+        "stages": [
+            1,
+            1,
+            1
+        ],
+        "imageFile": "PD_Daffodil",
+        "seasons": [
+            2
+        ]
+    }
+]

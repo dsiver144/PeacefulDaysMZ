@@ -37,6 +37,12 @@
         "comment": "Mọc nhiều theo chùm vào mùa xuân."
     },
     {
+        "itemID": "SweetPea",
+        "seasons": [
+            0
+        ]
+    },
+    {
         "itemID": "Breadfruit",
         "seasons": [
             0
@@ -90,6 +96,13 @@
         "comment": ""
     },
     {
+        "itemID": "Goldenrod",
+        "seasons": [
+            2
+        ],
+        "comment": ""
+    },
+    {
         "itemID": "Morel",
         "seasons": [
             2
@@ -128,6 +141,12 @@
             2
         ],
         "comment": "Mọc ở vùng rừng núi cao và chỉ mọc vào ngày mưa. Tỉ lệ thấp."
+    },
+    {
+        "itemID": "Crocus",
+        "seasons": [
+            3
+        ]
     },
     {
         "itemID": "Snowdrop",

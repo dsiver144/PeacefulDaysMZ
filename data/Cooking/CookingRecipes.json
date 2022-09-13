@@ -345,6 +345,10 @@
             {
                 "tag": "fish",
                 "number": 1
+            },
+            {
+                "itemID": "Lemon",
+                "number": 1
             }
         ],
         "utensil": "FryingPan",
@@ -396,6 +400,30 @@
             }
         ],
         "utensil": "FryingPan",
+        "exp": 2,
+        "require": "Kitchen"
+    },
+    {
+        "itemID": "ApplePie",
+        "quality": true,
+        "quantity": 1,
+        "minDuration": 30,
+        "maxDuration": 60,
+        "components": [
+            {
+                "itemID": "Apple",
+                "number": 1
+            },
+            {
+                "itemID": "FlourPack",
+                "number": 1
+            },
+            {
+                "itemID": "SugarPack",
+                "number": 1
+            }
+        ],
+        "utensil": "Pot",
         "exp": 2,
         "require": "Kitchen"
     }

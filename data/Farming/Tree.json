@@ -1,1 +1,187 @@
-[]
+[
+    {
+        "itemID": "AppleSapling",
+        "productID": "Apple",
+        "stages": [
+            10,
+            10,
+            3
+        ],
+        "imageFile": "PD_AppleTree",
+        "seasons": [
+            0
+        ],
+        "resetable": true,
+        "resetStageIndex": 2,
+        "resetTimes": 1000,
+        "isCollidable": true,
+        "treeFlag": true
+    },
+    {
+        "itemID": "PeachSapling",
+        "productID": "Peach",
+        "stages": [
+            10,
+            10,
+            3
+        ],
+        "imageFile": "PD_PeachTree",
+        "seasons": [
+            0
+        ],
+        "resetable": true,
+        "resetStageIndex": 2,
+        "resetTimes": 1000,
+        "isCollidable": true,
+        "treeFlag": true
+    },
+    {
+        "itemID": "LemonSapling",
+        "productID": "Lemon",
+        "stages": [
+            10,
+            10,
+            3
+        ],
+        "imageFile": "PD_LemonTree",
+        "seasons": [
+            0,
+            1
+        ],
+        "resetable": true,
+        "resetStageIndex": 2,
+        "resetTimes": 1000,
+        "isCollidable": true,
+        "treeFlag": true
+    },
+    {
+        "itemID": "ApricotSapling",
+        "productID": "Apricot",
+        "stages": [
+            10,
+            10,
+            3
+        ],
+        "imageFile": "PD_ApricotTree",
+        "seasons": [
+            1
+        ],
+        "resetable": true,
+        "resetStageIndex": 2,
+        "resetTimes": 1000,
+        "isCollidable": true,
+        "treeFlag": true
+    },
+    {
+        "itemID": "AvocadoSapling",
+        "productID": "Avocado",
+        "stages": [
+            10,
+            10,
+            3
+        ],
+        "imageFile": "PD_AvocadoTree",
+        "seasons": [
+            1
+        ],
+        "resetable": true,
+        "resetStageIndex": 2,
+        "resetTimes": 1000,
+        "isCollidable": true,
+        "treeFlag": true
+    },
+    {
+        "itemID": "MangoSapling",
+        "productID": "Mango",
+        "stages": [
+            10,
+            10,
+            3
+        ],
+        "imageFile": "PD_MangoTree",
+        "seasons": [
+            1,
+            2
+        ],
+        "resetable": true,
+        "resetStageIndex": 2,
+        "resetTimes": 1000,
+        "isCollidable": true,
+        "treeFlag": true
+    },
+    {
+        "itemID": "OrangeSapling",
+        "productID": "Orange",
+        "stages": [
+            10,
+            10,
+            3
+        ],
+        "imageFile": "PD_OrangeTree",
+        "seasons": [
+            2
+        ],
+        "resetable": true,
+        "resetStageIndex": 2,
+        "resetTimes": 1000,
+        "isCollidable": true,
+        "treeFlag": true
+    },
+    {
+        "itemID": "CocoaSapling",
+        "productID": "CocoaPod",
+        "stages": [
+            10,
+            10,
+            3
+        ],
+        "imageFile": "PD_CocoaTree",
+        "seasons": [
+            2
+        ],
+        "resetable": true,
+        "resetStageIndex": 2,
+        "resetTimes": 1000,
+        "isCollidable": true,
+        "treeFlag": true
+    },
+    {
+        "itemID": "BananaSapling",
+        "productID": "Banana",
+        "stages": [
+            10,
+            10,
+            3
+        ],
+        "imageFile": "PD_BananaTree",
+        "seasons": [
+            0,
+            1,
+            2
+        ],
+        "resetable": true,
+        "resetStageIndex": 2,
+        "resetTimes": 1000,
+        "isCollidable": true,
+        "treeFlag": true
+    },
+    {
+        "itemID": "PlumSapling",
+        "productID": "Plum",
+        "stages": [
+            10,
+            10,
+            3
+        ],
+        "imageFile": "PD_PlumTree",
+        "seasons": [
+            1,
+            2
+        ],
+        "resetable": true,
+        "resetStageIndex": 2,
+        "resetTimes": 1000,
+        "isCollidable": true,
+        "treeFlag": true
+    }
+]
