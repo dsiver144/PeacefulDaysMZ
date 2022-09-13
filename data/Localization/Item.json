@@ -770,6 +770,17 @@
 		}
 	},
 	{
+		"key": "ArecaSapling",
+		"lang": {
+			"vn": "Cây Cau Nhỏ",
+			"en": "Areca Sapling"
+		},
+		"description": {
+			"vn": "Trồng cây con xuống đất để chúng phát triển.",
+			"en": ""
+		}
+	},
+	{
 		"key": "RoseSeeds",
 		"lang": {
 			"vn": "Hạt Giống Hoa Hồng",
