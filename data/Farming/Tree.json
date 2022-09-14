@@ -235,5 +235,16 @@
         "imageFile": "PD_ArecaTree",
         "isCollidable": true,
         "treeFlag": true
+    },
+    {
+        "itemID": "OakSapling",
+        "productID": null,
+        "stages": [
+            5,
+            5
+        ],
+        "imageFile": "PD_OakTree",
+        "isCollidable": true,
+        "treeFlag": true
     }
 ]
