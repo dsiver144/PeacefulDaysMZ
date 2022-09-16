@@ -792,6 +792,17 @@
 		}
 	},
 	{
+		"key": "CoconutSapling",
+		"lang": {
+			"vn": "Cây Dừa Nhỏ",
+			"en": "Coconut Sapling"
+		},
+		"description": {
+			"vn": "Trồng cây con xuống đất để chúng phát triển.",
+			"en": ""
+		}
+	},
+	{
 		"key": "RoseSeeds",
 		"lang": {
 			"vn": "Hạt Giống Hoa Hồng",

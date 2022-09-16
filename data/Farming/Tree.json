@@ -246,5 +246,25 @@
         "imageFile": "PD_OakTree",
         "isCollidable": true,
         "treeFlag": true
+    },
+    {
+        "itemID": "CoconutSapling",
+        "productID": "Coconut",
+        "stages": [
+            5,
+            5,
+            5
+        ],
+        "seasons": [
+            0,
+            1,
+            2
+        ],
+        "imageFile": "PD_CoconutTree",
+        "resetable": true,
+        "resetStageIndex": 2,
+        "resetTimes": 1000,
+        "isCollidable": true,
+        "treeFlag": true
     }
 ]
