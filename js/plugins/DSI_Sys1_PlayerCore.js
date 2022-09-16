@@ -11,11 +11,11 @@
  */
 
 const PlayerCoreConfig = {
-    offset: 2, // This is to prevent speed is too low at default.
-    runBonus: 0.75,
+    offset: 0, // This is to prevent speed is too low at default.
+    runBonus: 2,
     speedRatio: Math.pow(2, 10), // This should be power of 2. The bigger the slower the speed
-    animationWaitMultiplier: 5, // The bigger the slower the animation is
-    horseMoveSpeed: 7.25,
+    animationWaitMultiplier: 3, // The bigger the slower the animation is
+    horseMoveSpeed: 7,
     normalInteractionRange: 1.8,
     npcInteractionRange: 2.0,
 }
@@ -44,7 +44,7 @@ Game_Player.prototype.realMoveSpeed = function () {
 };
 
 Game_Player.prototype.distancePerFrame = function () {
-    return Math.pow(2, this.realMoveSpeed()) / PlayerCoreConfig.speedRatio;
+    return 0.025 * this.realMoveSpeed();//Math.pow(2, this.realMoveSpeed()) / PlayerCoreConfig.speedRatio;
 };
 
 Game_Player.prototype.animationWait = function () {
