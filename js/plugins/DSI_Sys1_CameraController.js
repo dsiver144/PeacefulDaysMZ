@@ -109,8 +109,8 @@ class CameraController extends SaveableObject {
 
 }
 
-Game_Map.prototype.displayX = function () { return Math.ceil(this._displayX * 32) / 32 };
-Game_Map.prototype.displayY = function () { return Math.ceil(this._displayY * 32) / 32 };
+Game_Map.prototype.displayX = function () { return (this._displayX * 32) / 32 };
+Game_Map.prototype.displayY = function () { return (this._displayY * 32) / 32 };
 
 Game_Player.prototype.update = function (sceneActive) {
     // const lastScrolledX = this.scrolledX();

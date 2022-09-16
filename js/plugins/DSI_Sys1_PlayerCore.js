@@ -11,11 +11,11 @@
  */
 
 const PlayerCoreConfig = {
-    offset: 2, // This is to prevent speed is too low at default.
-    runBonus: 0.75,
+    offset: 0, // This is to prevent speed is too low at default.
+    runBonus: 2,
     speedRatio: Math.pow(2, 10), // This should be power of 2. The bigger the slower the speed
-    animationWaitMultiplier: 5, // The bigger the slower the animation is
-    horseMoveSpeed: 7.25,
+    animationWaitMultiplier: 3, // The bigger the slower the animation is
+    horseMoveSpeed: 7,
     normalInteractionRange: 1.8,
     npcInteractionRange: 2.0,
 }
@@ -44,7 +44,7 @@ Game_Player.prototype.realMoveSpeed = function () {
 };
 
 Game_Player.prototype.distancePerFrame = function () {
-    return Math.pow(2, this.realMoveSpeed()) / PlayerCoreConfig.speedRatio;
+    return 0.025 * this.realMoveSpeed();//Math.pow(2, this.realMoveSpeed()) / PlayerCoreConfig.speedRatio;
 };
 
 Game_Player.prototype.animationWait = function () {
@@ -75,6 +75,7 @@ Game_Player.prototype.triggerButtonAction = function() {
     if (Input.isTriggered(FieldKeyAction.Check)) {
         /** @type {Vector2[]} */
         let checkPositions = [];
+        let mousePos = null;
         if (Input.getInputMode() === 'keyboard') {
             const px = Math.round(this._x);
             const py = Math.round(this._y);
@@ -84,7 +85,8 @@ Game_Player.prototype.triggerButtonAction = function() {
             if (dist > 1.5) {
                 return false;
             }
-            checkPositions.push(new Vector2(x, y));
+            mousePos = new Vector2(x, y);
+            checkPositions.push(mousePos);
         } else {
             const offsets = [[Math.floor(this._x), Math.floor(this._y)], [Math.ceil(this._x), Math.ceil(this._y)]];
             const d = this.direction();
@@ -104,9 +106,11 @@ Game_Player.prototype.triggerButtonAction = function() {
             if ($gameMap.setupStartingEvent()) {
                 return true;
             }
-            if (this.checkInteractWithFarmObjects(v.x, v.y)) {
-                return true;
-            }
+        }
+        // Check interact with farm object.
+        const checkPos = mousePos ? mousePos : this.frontPosition();
+        if (this.checkInteractWithFarmObjects(checkPos.x, checkPos.y)) {
+            return true;
         }
         if (this.checkInteractWithEventInACircle()) {
             return true;

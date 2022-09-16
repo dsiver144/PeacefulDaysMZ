@@ -211,6 +211,7 @@ class FarmTile extends FarmObject {
         if (this.isDead()) return;
         if (MyUtils.DEBUG.seasonHack) return;
         const { seasons } = this.seedData();
+        if (!seasons) return;
         if (seasons.includes(GameTime.season())) return;
         if (this.isTree()) {
             this.resetToTargetedStage();
