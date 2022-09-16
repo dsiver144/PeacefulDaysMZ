@@ -1,6 +1,6 @@
 //=======================================================================
 // * Plugin Name  : DSI_Sys4_Sprite_FarmTile.js
-// * Last Updated : 7/27/2022
+// * Last Updated : 9/13/2022
 //========================================================================
 /*:
  * @author dsiver144
@@ -36,6 +36,14 @@ class Sprite_FarmTile extends Sprite_FarmObject {
         this._soilSprite.anchor.x = 0.5;
         this._soilSprite.anchor.y = 1.0;
         MyUtils.addMapSprite(this.soilSpriteKey(), this._soilSprite);
+    }
+    /**
+     * Toggle Display
+     * @param {boolean} value 
+     */
+     toggleDisplay(value) {
+        super.toggleDisplay(value);
+        this._soilSprite.renderable = value;
     }
     /**
      * @inheritdoc
