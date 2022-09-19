@@ -139,6 +139,19 @@ MyUtils.loadFile = function (src, callback) {
     xhr.send(null);
 };
 /**
+ * Load JSON
+ * @param {string} src 
+ * @returns {Promise<any>}
+ */
+MyUtils.loadJSON = function(src) {
+    return new Promise((resolve, reject) => {
+        MyUtils.loadFile(src, (data) => {
+            if (!data) reject();
+            resolve(JSON.parse(data));
+        })
+    })
+}
+/**
  * Return an UUID
  * https://stackoverflow.com/questions/105034/how-do-i-create-a-guid-uuid
  * @returns {string}

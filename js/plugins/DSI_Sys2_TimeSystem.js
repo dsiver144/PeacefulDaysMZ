@@ -86,6 +86,19 @@ class GameTime extends SaveableObject {
         this.totalMins = 0;
     }
     /**
+     * Get time session in a day
+     * @returns {"morning" | "noon" | "night"}
+     */
+    session() {
+        if (this.hour >= 6 && this.hour < 12) {
+            return "morning";
+        }
+        if (this.hour >= 12 && this.hour < 18) {
+            return "noon";
+        }
+        return "night";
+    }
+    /**
      * Randomize Weather
      * @param {number} season 
      * @returns {string}
@@ -271,6 +284,12 @@ GameTime.totalMins = function () {
  */
 GameTime.season = function () {
     return GameTime.inst.season;
+}
+/**
+ * Get Time Session
+ */
+GameTime.session = function () {
+    return GameTime.inst.session();
 }
 /**
  * Get Month Day

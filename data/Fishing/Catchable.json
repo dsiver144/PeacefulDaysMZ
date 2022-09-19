@@ -395,7 +395,7 @@
         "size": "84,120",
         "difficulty": 10,
         "time": "",
-        "rate": 5,
+        "rate": 0.5,
         "legendary": true
     },
     {
@@ -419,7 +419,7 @@
         "size": "96,96",
         "difficulty": 10,
         "time": "night",
-        "rate": 5,
+        "rate": 0.5,
         "legendary": true
     },
     {
@@ -434,7 +434,7 @@
         "size": "100,100",
         "difficulty": 10,
         "time": "",
-        "rate": 5,
+        "rate": 0.5,
         "legendary": true
     },
     {
@@ -615,7 +615,7 @@
         "object": true,
         "rare": true,
         "weathers": [],
-        "rate": 15,
+        "rate": 1,
         "fishTrap": false,
         "legendary": false
     }

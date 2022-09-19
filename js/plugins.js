@@ -29,6 +29,7 @@ var $plugins =
 {"name":"DSI_Sys2_ToolManager","status":true,"description":"(v1.0) Peaceful Days Range Manager","parameters":{}},
 {"name":"DSI_Sys2_MainMenu","status":true,"description":"(v1.0) Peaceful Days Main Menu","parameters":{}},
 {"name":"DSI_Sys2_CraftingSystem","status":true,"description":"(v1.0) Crafting System for Peaceful Days","parameters":{}},
+{"name":"DSI_Sys2_FishingSystem","status":true,"description":"","parameters":{}},
 {"name":"DSI_Sys3_Tools","status":true,"description":"","parameters":{}},
 {"name":"DSI_Sys3_NetCoreImpl","status":true,"description":"(v1.0) Farm Tile","parameters":{}},
 {"name":"DSI_Sys3_FarmObject","status":true,"description":"","parameters":{}},
