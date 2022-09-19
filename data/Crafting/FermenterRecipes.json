@@ -156,5 +156,39 @@
             }
         ],
         "require": "Fermenter"
+    },
+    {
+        "itemID": "GooseberryWine",
+        "quality": true,
+        "quantity": 1,
+        "duration": 500,
+        "components": [
+            {
+                "itemID": "Gooseberry",
+                "number": 5
+            },
+            {
+                "itemID": "EmptyJar",
+                "number": 1
+            }
+        ],
+        "require": "Fermenter"
+    },
+    {
+        "itemID": "GrapeWine",
+        "quality": true,
+        "quantity": 1,
+        "duration": 500,
+        "components": [
+            {
+                "itemID": "WildGrape",
+                "number": 5
+            },
+            {
+                "itemID": "EmptyJar",
+                "number": 1
+            }
+        ],
+        "require": "Fermenter"
     }
 ]
