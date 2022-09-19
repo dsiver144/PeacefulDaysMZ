@@ -1936,6 +1936,28 @@
 		}
 	},
 	{
+		"key": "GooseberryWine",
+		"lang": {
+			"vn": "Rượu Lý Gai",
+			"en": "Gooseberry Wine"
+		},
+		"description": {
+			"vn": "Được lên men từ quả lý gai.",
+			"en": ""
+		}
+	},
+	{
+		"key": "GrapeWine",
+		"lang": {
+			"vn": "Rượu Nho",
+			"en": "Grape Wine"
+		},
+		"description": {
+			"vn": "Được lên men từ nho, có vị tuyệt vời.",
+			"en": ""
+		}
+	},
+	{
 		"key": "CookingOil",
 		"lang": {
 			"vn": "Dầu Ăn",
