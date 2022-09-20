@@ -17,21 +17,22 @@ class FishManager extends SaveableObject {
         const time = GameTime.session();
         const weather = GameTime.weatherType();
         const season = GameTime.season();
-        const fishTrap = false;
+        const fishTrap = true;
 
         const availableFishes = [];
         FishDB.inst.fishes.forEach(fish => {
             const validAreas = fish.seasons[season];
             if (!validAreas || !validAreas.includes(area)) return;
-            // if (fish.fishTrap && !fishTrap) return;
+            if (fish.fishTrap && !fishTrap) return;
             // if (fish.time && fish.time != time) return;
             // if (fish.weathers.length > 0 && !fish.weathers.includes(weather)) return;
             for (var count = 0; count < fish.rate * 10; count++) {
                 availableFishes.push(fish);
             }
         })
+        /** @type {Game_Fish} */
         const randomFish = MyUtils.randomArrayItem(availableFishes);
-        console.log({availableFishes, randomFish});
+        console.log({availableFishes, name: randomFish.itemID});
         
     }   
 }

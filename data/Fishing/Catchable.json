@@ -22,6 +22,9 @@
         "seasons": {
             "0": [
                 "Beach"
+            ],
+            "2": [
+                "Beach"
             ]
         },
         "size": "8,15",
@@ -117,7 +120,7 @@
     {
         "itemID": "Perch",
         "seasons": {
-            "0": [
+            "1": [
                 "Lake"
             ],
             "2": [
@@ -370,6 +373,9 @@
         "itemID": "Jellyfish",
         "seasons": {
             "1": [
+                "Beach"
+            ],
+            "3": [
                 "Beach"
             ]
         },
