@@ -133,7 +133,6 @@ class Sprite_FarmBuilding extends Sprite_FarmObject {
         this.bitmap.addLoadListener(bitmap => {
             const { x, y, width, height } = building.imageRect();
             this.setFrame(x, y, width, height);
-            this.updatePosition();
             this.anchor.x = building.displayAnchor().x;
             this.anchor.y = building.displayAnchor().y;
             this.displayOffset.y += bitmap.height * this.anchor.y;
@@ -145,6 +144,8 @@ class Sprite_FarmBuilding extends Sprite_FarmObject {
             this._hasAnim = building.animationFrames() > 0;
             this._animIndex = 0;
             this._animationCount = 0;
+
+            this.updatePosition();
         });
         this._screenZ = 3;
     }

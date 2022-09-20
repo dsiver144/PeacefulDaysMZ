@@ -103,7 +103,7 @@ class Building extends FarmObject {
      * @returns {number}
      */
     animationFrames() {
-        return 1;
+        return 0;
     }
     /**
      * Animation Interval

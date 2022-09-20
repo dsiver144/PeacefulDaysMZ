@@ -3,7 +3,7 @@
         "itemID": "WoodenChair",
         "interactable": false,
         "isCollidable": false,
-        "regionIds": [],
+        "regionIds": [111],
         "variants": [
             {
                 "imageFile": "WoodenChair",
@@ -28,7 +28,7 @@
         "itemID": "WoodenTable",
         "interactable": false,
         "isCollidable": false,
-        "regionIds": [],
+        "regionIds": [111],
         "variants": [
             {
                 "imageFile": "WoodenTable",
@@ -40,7 +40,7 @@
         "itemID": "WoodenBench",
         "interactable": true,
         "isCollidable": false,
-        "regionIds": [],
+        "regionIds": [111],
         "variants": [
             {
                 "imageFile": "WoodenBench_Down",
