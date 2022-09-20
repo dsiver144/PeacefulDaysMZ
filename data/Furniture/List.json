@@ -1,0 +1,64 @@
+[
+    {
+        "itemID": "WoodenChair",
+        "interactable": false,
+        "isCollidable": false,
+        "regionIds": [],
+        "variants": [
+            {
+                "imageFile": "WoodenChair",
+                "imageRect": [0, 0, 32, 64],
+                "bottomSize": [1, 1]
+            }, {
+                "imageFile": "WoodenChair",
+                "imageRect": [32, 0, 32, 64],
+                "bottomSize": [1, 1]
+            }, {
+                "imageFile": "WoodenChair",
+                "imageRect": [64, 0, 32, 64],
+                "bottomSize": [1, 1]
+            }, {
+                "imageFile": "WoodenChair",
+                "imageRect": [96, 0, 32, 64],
+                "bottomSize": [1, 1]
+            }
+        ]
+    }, 
+    {
+        "itemID": "WoodenTable",
+        "interactable": false,
+        "isCollidable": false,
+        "regionIds": [],
+        "variants": [
+            {
+                "imageFile": "WoodenTable",
+                "imageRect": [0, 0, 64, 64],
+                "bottomSize": [2, 2]
+            }
+        ]
+    },{
+        "itemID": "WoodenBench",
+        "interactable": true,
+        "isCollidable": false,
+        "regionIds": [],
+        "variants": [
+            {
+                "imageFile": "WoodenBench_Down",
+                "imageRect": [0, 0, 64, 40],
+                "bottomSize": [2, 1]
+            }, {
+                "imageFile": "WoodenBench_Left",
+                "imageRect": [0, 0, 32, 64],
+                "bottomSize": [1, 2]
+            }, {
+                "imageFile": "WoodenBench_Right",
+                "imageRect": [0, 0, 32, 64],
+                "bottomSize": [1, 2]
+            }, {
+                "imageFile": "WoodenBench_Up",
+                "imageRect": [0, 0, 64, 40],
+                "bottomSize": [2, 1]
+            }
+        ]
+    }
+]

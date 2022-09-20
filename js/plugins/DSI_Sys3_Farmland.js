@@ -118,7 +118,7 @@ class Farmland extends SaveableObject {
         /** @type {number} */
         this.mapId = mapId;
         /** @type {FarmLayer[]} */
-        this.layers = [new FarmLayer(0), new FarmLayer(1)];
+        this.layers = [new FarmLayer(0), new FarmLayer(1), new FarmLayer(2)];
     }
     /**
      * On New Day

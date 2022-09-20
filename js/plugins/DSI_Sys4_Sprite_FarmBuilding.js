@@ -71,6 +71,13 @@ class Sprite_FarmBuilding extends Sprite_FarmObject {
         if (this.isValidPosToPlaceObject && Input.isTriggered(FieldKeyAction.Check)) {
             building.endMove();
         }
+        this.updateCustomInput();
+    }
+    /**
+     * Update custom input
+     */
+    updateCustomInput() {
+
     }
     /**
      * Update per frame
