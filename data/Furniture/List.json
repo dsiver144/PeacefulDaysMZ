@@ -23,8 +23,7 @@
                 "bottomSize": [1, 1]
             }
         ]
-    }, 
-    {
+    }, {
         "itemID": "WoodenTable",
         "interactable": false,
         "isCollidable": false,
@@ -36,7 +35,7 @@
                 "bottomSize": [2, 2]
             }
         ]
-    },{
+    }, {
         "itemID": "WoodenBench",
         "interactable": true,
         "isCollidable": false,
@@ -56,6 +55,30 @@
                 "bottomSize": [1, 2]
             }, {
                 "imageFile": "WoodenBench_Up",
+                "imageRect": [0, 0, 64, 40],
+                "bottomSize": [2, 1]
+            }
+        ]
+    }, {
+        "itemID": "Sofa",
+        "interactable": true,
+        "isCollidable": false,
+        "regionIds": [111],
+        "variants": [
+            {
+                "imageFile": "Sofa_Down",
+                "imageRect": [0, 0, 64, 40],
+                "bottomSize": [2, 1]
+            }, {
+                "imageFile": "Sofa_Left",
+                "imageRect": [0, 0, 32, 64],
+                "bottomSize": [1, 2]
+            }, {
+                "imageFile": "Sofa_Right",
+                "imageRect": [0, 0, 32, 64],
+                "bottomSize": [1, 2]
+            }, {
+                "imageFile": "Sofa_Up",
                 "imageRect": [0, 0, 64, 40],
                 "bottomSize": [2, 1]
             }
