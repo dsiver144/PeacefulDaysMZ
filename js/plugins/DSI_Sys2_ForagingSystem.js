@@ -2,9 +2,48 @@ const ForagingConfig = {
     dbPath: "Foraging/Forageable.json"
 }
 
+class ForagingManager extends SaveableObject {
+    /**
+     * This handle foraging in Peaceful Days.
+     */
+    constructor() {
+        super();
+        ForagingManager.inst = this;
+        /** @type {Object.<string, number>} */
+        this._foragedItems = {};
+    }
+    /**
+     * Save foraging item
+     * @param {string} itemID 
+     * @param {number} value 
+     */
+    saveForagedItem(itemID, value) {
+        this._foragedItems[itemID] = this._foragedItems[itemID] || 0;
+        this._foragedItems[itemID] += value;
+    }
+    /**
+     * Get total of a specific item that has been foraged
+     * @param {string} itemID 
+     * @returns {number}
+     */
+    getTotalForagedItem(itemID) {
+        return this._foragedItems[itemID] || 0;
+    }
+    /**
+     * @inheritdoc
+     */
+    saveProperties() {
+        return [
+            ["_foragedItems", null]
+        ]
+    }
+}
+/** @type {ForagingManager} */
+ForagingManager.inst = null;
+
 class ForagingDB {
     /**
-     * This handle DB work for crafting in Peaceful Days.
+     * This handle DB work for foraging in Peaceful Days.
      */
     constructor() {
         /** @type {Map<string, Game_ForagingItem>} */
@@ -30,10 +69,16 @@ class ForagingDB {
         }
         this._isDatabaseLoaded = true;
     }
-
+    /**
+     * Get all foraging items
+     * @returns {Game_ForagingItem[]}
+     */
     allItems() {
-        
-        return 
+        const items = [];
+        for (const item of this._map.values()) {
+            items.push(item);
+        }
+        return items;
     }
     /**
      * Check if is ready 
@@ -71,3 +116,9 @@ Scene_Boot.prototype.isReady = function () {
     const result = DSI_Sys2_ForagingSystem_Scene_Boot_isReady.call(this);
     return result && ForagingDB.inst.isReady();
 };
+
+var DSI_Sys2_ForagingSystem_Game_System_createSaveableObjects = Game_System.prototype.createSaveableObjects;
+Game_System.prototype.createSaveableObjects = function () {
+    DSI_Sys2_ForagingSystem_Game_System_createSaveableObjects.call(this);
+    this._foragingManager = new ForagingManager();
+}

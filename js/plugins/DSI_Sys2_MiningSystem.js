@@ -2,9 +2,62 @@ const MiningConfig = {
     dbPaths: ["Mining/OldMine.json", "Mining/VolcanoMine.json"]
 }
 
+class MineManager extends SaveableObject {
+    /**
+     * Handle mining feature for Peaceful Days.
+     */
+    constructor() {
+        super();
+        MineManager.inst = this;
+        /** @type {Object.<string, number>} */
+        this._minedItems = {};
+    }
+    /**
+     * Save mine item
+     * @param {string} itemID 
+     * @param {number} value 
+     */
+    saveMineItem(itemID, value) {
+        this._minedItems[itemID] = this._minedItems[itemID] || 0;
+        this._minedItems[itemID] += value;
+    }
+    /**
+     * Get total of a specific item that has been mined
+     * @param {string} itemID 
+     * @returns {number}
+     */
+    getTotalMinedItem(itemID) {
+        return this._minedItems[itemID] || 0;
+    }
+    /**
+     * @inheritdoc
+     */
+    getSaveData() {
+        const data = super.getSaveData();
+
+        return data;
+    }
+    /**
+     * @inheritdoc
+     */
+    loadSaveData(data) {
+        super.loadSaveData(data);
+    }
+    /**
+     * @inheritdoc
+     */
+    saveProperties() {
+        return [
+            ['_minedItems', null]
+        ]
+    }
+}
+/** @type {MineManager} */
+MineManager.inst = null;
+
 class MineDB {
     /**
-     * This handle DB work for crafting in Peaceful Days.
+     * This handle DB work for mining in Peaceful Days.
      */
     constructor() {
         /** @type {Map<string, Map<string, Game_MineItem>>} */
@@ -41,6 +94,17 @@ class MineDB {
         this._isDatabaseLoaded = true;
     }
     /**
+     * Get all foraging items
+     * @returns {Game_ForagingItem[]}
+     */
+    allItems(mineID) {
+        const items = [];
+        for (const item of this._map.get(mineID).values()) {
+            items.push(item);
+        }
+        return items;
+    }
+    /**
      * Check if is ready 
      * @returns {boolean}
      */
@@ -62,8 +126,14 @@ class Game_MineItem {
     constructor(data) {
         /** @type {string} */
         this.itemID = data.itemID ? data.itemID : "";
-        // /** @type {number[]} */
-        // this.seasons = data.seasons ? data.seasons : [];
+        /** @type {boolean} */
+        this.ore = data.ore ? data.ore : false;
+        /** @type {number[]} */
+        this.floor = data.floor ? data.floor.split(",").map(n => Number(n)) : {};
+        /** @type {number} */
+        this.rate = data.rate ? data.rate : 0;;
+        /** @type {number} */
+        this.number = data.number ? data.number : 0;
     }
 }
 
@@ -76,3 +146,9 @@ Scene_Boot.prototype.isReady = function () {
     const result = DSI_Sys2_MiningSystem_Scene_Boot_isReady.call(this);
     return result && MineDB.inst.isReady();
 };
+
+var DSI_Sys2_MiningSystem_Game_System_createSaveableObjects = Game_System.prototype.createSaveableObjects;
+Game_System.prototype.createSaveableObjects = function () {
+    DSI_Sys2_MiningSystem_Game_System_createSaveableObjects.call(this);
+    this._mineManager = new MineManager();
+}
