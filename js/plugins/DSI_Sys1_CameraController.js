@@ -18,12 +18,10 @@ class CameraController extends SaveableObject {
     constructor() {
         super();
         CameraController.inst = this;
-        this._tileSize = 32;
-        this._width = 960 / 2;
-        this._height = 540 / 2;
-        this._speed = 200;
         this._target = null;
         this._targetType = null;
+        this._lastScrollX = null;
+        this._lastScrollY = null;
     }
     /**
      * @inheritdoc
@@ -31,7 +29,8 @@ class CameraController extends SaveableObject {
     saveProperties() {
         return [
             ['_targetType', ''],
-            ['_speed', ''],
+            ['_lastScrollX', ''],
+            ['_lastScrollY', ''],
         ]
     }
     /**
@@ -62,16 +61,21 @@ class CameraController extends SaveableObject {
      */
     setTarget(target, speed = 200) {
         this._lastTarget = this._target;
-        this._lastSpeed = this._speed;
         this._target = target;
-        this._speed = speed;
+        try {
+            this._lastScrollX = this._target.scrolledX();
+            this._lastScrollY = this._target.scrolledY();
+        } catch(err) {
+            console.warn(err);
+            this._lastScrollX = 0;
+            this._lastScrollY = 0;
+        }
     }
     /**
      * Restore
      */
     restore() {
         this._target = this._lastTarget;
-        this._speed = this._lastSpeed;
     }
     /**
      * Update per frame
@@ -85,36 +89,51 @@ class CameraController extends SaveableObject {
      */
     updateScroll() {
         if (!this._target) return;
-        const cw = this._width;
-        const ch = this._height;
-        const screenX = this._target.screenX();
-        const screenY = this._target.screenY();
-        let sx = Math.abs(screenX - cw) / this._speed;
-        let sy = Math.abs(screenY - ch) / this._speed;
-
-        if (sx < 0.01) (sx = 0);
-        if (sy < 0.01) (sy = 0);
-
-        if (screenY < ch) {
-            $gameMap.scrollUp(sy);
-        } else if (screenY > ch) {
-            $gameMap.scrollDown(sy);
-        };
-        if (screenX < cw) {
-            $gameMap.scrollLeft(sx);
-        } else if (screenX > cw) {
-            $gameMap.scrollRight(sx);
-        };
+        const x1 = this._lastScrollX;
+        const y1 = this._lastScrollY;
+        const x2 = this._target.scrolledX();
+        const y2 = this._target.scrolledY();
+        let amount = 0;
+        let ratio = 1;
+        if (y2 > y1 && y2 > this.centerY()) {
+            amount = (y2 - y1) * ratio;
+            $gameMap.scrollDown(amount);
+        }
+        if (x2 < x1 && x2 < this.centerX()) {
+            amount = (x1 - x2) * ratio;
+            $gameMap.scrollLeft(amount);
+        }
+        if (x2 > x1 && x2 > this.centerX()) {
+            amount = (x2 - x1) * ratio;
+            $gameMap.scrollRight(amount);
+        }
+        if (y2 < y1 && y2 < this.centerY()) {
+            amount = (y1 - y2) * ratio;
+            $gameMap.scrollUp(amount);
+        }
+        this._lastScrollX = this._target.scrolledX();
+        this._lastScrollY = this._target.scrolledY();
     }
+    /**
+     * Center X
+     * @returns {number}
+     */
+    centerX() {
+        return ($gameMap.screenTileX() - 1) / 2;
+    };
+    /**
+     * Center Y
+     * @returns {number}
+     */
+    centerY() {
+        return ($gameMap.screenTileY() - 1) / 2;
+    };
 
 }
 
-Game_Map.prototype.displayX = function () { return (this._displayX * 32) / 32 };
-Game_Map.prototype.displayY = function () { return (this._displayY * 32) / 32 };
-
 Game_Player.prototype.update = function (sceneActive) {
-    // const lastScrolledX = this.scrolledX();
-    // const lastScrolledY = this.scrolledY();
+    const lastScrolledX = this.scrolledX();
+    const lastScrolledY = this.scrolledY();
     const wasMoving = this.isMoving();
     this.updateDashing();
     if (sceneActive) {
@@ -122,6 +141,7 @@ Game_Player.prototype.update = function (sceneActive) {
     }
     Game_Character.prototype.update.call(this);
     // this.updateScroll(lastScrolledX, lastScrolledY);
+    // CameraController.inst?.update();
     this.updateVehicle();
     if (!this.isMoving()) {
         this.updateNonmoving(wasMoving, sceneActive);
