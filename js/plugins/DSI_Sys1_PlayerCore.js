@@ -12,10 +12,10 @@
 
 const PlayerCoreConfig = {
     offset: 0, // This is to prevent speed is too low at default.
-    runBonus: 2,
+    runBonus: 1,
     speedRatio: Math.pow(2, 10), // This should be power of 2. The bigger the slower the speed
     animationWaitMultiplier: 3, // The bigger the slower the animation is
-    horseMoveSpeed: 7,
+    horseMoveSpeed: 6,
     normalInteractionRange: 1.8,
     npcInteractionRange: 2.0,
 }
@@ -43,13 +43,13 @@ Game_Player.prototype.realMoveSpeed = function () {
     return PlayerCoreConfig.offset + this._moveSpeed + (this.isDashing() ? PlayerCoreConfig.runBonus : 0) + this.bonusSpeed();
 };
 
-Game_Player.prototype.distancePerFrame = function () {
-    return 0.025 * this.realMoveSpeed();//Math.pow(2, this.realMoveSpeed()) / PlayerCoreConfig.speedRatio;
-};
+// Game_Player.prototype.distancePerFrame = function () {
+//     return 0.0256 * this.realMoveSpeed();//Math.pow(2, this.realMoveSpeed()) / PlayerCoreConfig.speedRatio;
+// };
 
-Game_Player.prototype.animationWait = function () {
-    return (9 - this.realMoveSpeed()) * PlayerCoreConfig.animationWaitMultiplier;
-};
+// Game_Player.prototype.animationWait = function () {
+//     return (9 - this.realMoveSpeed()) * PlayerCoreConfig.animationWaitMultiplier;
+// };
 
 var DSI_Sys1_EngineOverhaul_Game_Player_canMove = Game_Player.prototype.canMove;
 Game_Player.prototype.canMove = function () {
