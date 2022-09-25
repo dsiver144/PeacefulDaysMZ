@@ -116,7 +116,7 @@ class Sprite_FarmTile extends Sprite_FarmObject {
             const frameWidth = bitmap.width / (seedConfig.stages.length + 1);
             const frameHeight = bitmap.height;
             this.setFrame(frameWidth * stageIndex, 0, frameWidth, frameHeight);
-            this.anchor.y = 0.75;
+            this.anchor.y = seedConfig.treeFlag ? 1.0 : 0.85;
             this.anchor.x = 0.5;
             this._customYOffset = -bitmap.height * (1.0 - this.anchor.y);
             this.updatePosition();
