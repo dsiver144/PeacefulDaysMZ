@@ -131,22 +131,8 @@ class CameraController extends SaveableObject {
 
 }
 
-Game_Player.prototype.update = function (sceneActive) {
-    const lastScrolledX = this.scrolledX();
-    const lastScrolledY = this.scrolledY();
-    const wasMoving = this.isMoving();
-    this.updateDashing();
-    if (sceneActive) {
-        this.moveByInput();
-    }
-    Game_Character.prototype.update.call(this);
-    // this.updateScroll(lastScrolledX, lastScrolledY);
-    // CameraController.inst?.update();
-    this.updateVehicle();
-    if (!this.isMoving()) {
-        this.updateNonmoving(wasMoving, sceneActive);
-    }
-    this._followers.update();
+Game_Player.prototype.updateScroll = function (lastScrolledX, lastScrolledY) {
+    
 };
 
 var DSI_Sys1_CameraController_Game_System_createSaveableObjects = Game_System.prototype.createSaveableObjects;
