@@ -173,8 +173,9 @@ class Sprite_FarmObject extends Sprite_Shakeable {
      * When player walk behind this object it will fade opacity
      * @param {boolean} v 
      */
-    setFade(v) {
+    setFade(v, yOffset = 0) {
         this._canBeFade = v;
+        this._fadeYOffset = yOffset;
     }
     /**
      * Update fade
@@ -186,10 +187,14 @@ class Sprite_FarmObject extends Sprite_Shakeable {
         const topLeftY = this.y + this._topLeftOffset.y;
         const pX = $gamePlayer.screenX();
         const pY = $gamePlayer.screenY();
-        if (pX >= topLeftX && pX <= topLeftX + this.width && pY >= topLeftY && pY <= topLeftY + this.height) {
-           this.opacity = 100;
+        if (pX >= topLeftX && pX <= topLeftX + this.width && pY >= topLeftY && pY <= topLeftY + this.height - this._fadeYOffset) {
+           if (this.opacity > 100) {
+                this.opacity -= 25;
+           }
         } else {
-            this.opacity = 255;
+            if (this.opacity < 255) {
+                this.opacity += 25;
+           }
         }
     }
     /**

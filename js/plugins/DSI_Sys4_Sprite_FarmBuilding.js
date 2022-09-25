@@ -146,6 +146,7 @@ class Sprite_FarmBuilding extends Sprite_FarmObject {
             this._animationCount = 0;
 
             this.updatePosition();
+            this.setFade(true, 32);
         });
         this._screenZ = 3;
     }
