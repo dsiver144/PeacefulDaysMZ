@@ -52,7 +52,7 @@ class SteamAPI {
      */
     currentGameName() {
         const name = this.getCurrentGameInstallDir();
-        return name.substring(name.lastIndexOf("\\") + 1, name.length - 1);
+        return name.substring(name.lastIndexOf("\\") + 1, name.length);
     }
     /**
      * Activate Achievement
