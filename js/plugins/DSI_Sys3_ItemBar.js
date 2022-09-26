@@ -11,6 +11,26 @@ class ItemBarManager extends SaveableObject {
         super();
         ItemBarManager.inst = this;
         this._slotIndex = 0;
+        this._selectingRowIndex = 0;
+    }
+    /**
+     * Get selecting row index
+     */
+    get selectingRowIndex() {
+        return this._selectingRowIndex;
+    }
+    /**
+     * Get all item of current rows
+     * @returns {GameItem[]}
+     */
+    currentRowItems() {
+        const items = [];
+        const startIndex = this._selectingRowIndex * ContainerConfig.maxSlotPerRow;
+        const endIndex = startIndex + ContainerConfig.maxSlotPerRow - 1;
+        for (var i = startIndex; i <= endIndex; i++) {
+            items.push(MyBag.inst.item(i));
+        }
+        return items;
     }
 }
 /** @type {ItemBarManager} */
@@ -65,14 +85,6 @@ class Sprite_GameItem extends Sprite {
         this._backgroundSprite = new Sprite();
         this._quantitySprite = new Sprite();
         this._quantitySprite.bitmap = new Bitmap(32, 32);
-    }
-
-    isSelected() {
-
-    }
-    
-    select() {
-        // this._backgroundSprite = 
     }
     /**
      * Refresh
