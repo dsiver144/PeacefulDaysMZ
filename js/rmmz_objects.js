@@ -8443,6 +8443,7 @@ Game_Player.prototype.updateScroll = function(lastScrolledX, lastScrolledY) {
     const y1 = lastScrolledY;
     const x2 = this.scrolledX();
     const y2 = this.scrolledY();
+
     if (y2 > y1 && y2 > this.centerY()) {
         $gameMap.scrollDown(y2 - y1);
     }

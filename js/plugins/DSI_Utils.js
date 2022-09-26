@@ -262,6 +262,7 @@ class Sprite_Shakeable extends Sprite {
             this.angleCounter += this.angleCounterStep;
             if (this.angleCounterMax - this.angleCounter <= 0.01) {
                 this.angleCounter = null;
+                this.rotation = 0;
             }
         }
     }

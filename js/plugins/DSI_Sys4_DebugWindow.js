@@ -236,14 +236,18 @@ Scene_Base.prototype.update = function () {
 
 Scene_Base.prototype.updateDebugInput = function () {
     if (Input.isTriggered(DebugKeyAction.DebugMenu)) {
-        if (!this._debugWindow) {
-            this._debugWindow = new Window_MyDebug();
-            this.addChild(this._debugWindow);
-        }
-        if (!this._debugWindow.isClosed()) return;
-        this._debugWindow.openess = 0;
-        this._debugWindow.refresh();
-        this._debugWindow.activate();
-        this._debugWindow.open();
+        this.openDebugWindow();
     }
+}
+
+Scene_Base.prototype.openDebugWindow = function() {
+    if (!this._debugWindow) {
+        this._debugWindow = new Window_MyDebug();
+        this.addChild(this._debugWindow);
+    }
+    if (!this._debugWindow.isClosed()) return;
+    this._debugWindow.openess = 0;
+    this._debugWindow.refresh();
+    this._debugWindow.activate();
+    this._debugWindow.open();
 }
