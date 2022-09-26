@@ -3,13 +3,10 @@
     "main": "index.html",
     "chromium-args": "--force-color-profile=srgb",
     "window": {
-        "title": "Peaceful Days",
+        "title": "PeacefulDaysMZ",
         "width": 960,
         "height": 540,
         "position": "center",
         "icon": "icon/icon.png"
-    }, 
-    "scripts": {
-        "playtest": "nw . --force-color-profile=srgb --enable-native-gpu-memory-buffers --in-process-gpu --force-gpu-rasterization --enable-gpu-memory-buffer-compositor-resources"
     }
 }

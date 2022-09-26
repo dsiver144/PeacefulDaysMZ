@@ -29,7 +29,7 @@ class SteamAPI {
             this.gameName = this.currentGameName();
             console.log(`%cSteam API initialized successfully!\nName: ${this.username} (${this.steamId})\nGame: ${this.gameName}`, "color:green; font-size:30px");
         } else {
-            console.warn(`Steam API initialized failed!`, "color:red");
+            console.log(`%cSteam API initialized failed!`, "color:red; font-size:30px");
         }
     }
     /**
@@ -61,7 +61,7 @@ class SteamAPI {
     activateAchievement(name) {
         if (!this.isInitialized) return;
         if (!name) {
-            console.log("Please specify achievement name.");
+            console.error("Please specify achievement name.");
             return;
         }
         this.greenworks.activateAchievement(name, () => {
@@ -75,7 +75,7 @@ class SteamAPI {
     clearAchievement(name) {
         if (!this.isInitialized) return;
         if (!name) {
-            console.log("Please specify achievement name.");
+            console.error("Please specify achievement name.");
             return;
         }
         this.greenworks.clearAchievement(name, () => {
