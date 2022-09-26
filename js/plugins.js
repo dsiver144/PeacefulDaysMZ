@@ -33,6 +33,7 @@ var $plugins =
 {"name":"DSI_Sys2_FishingSystem","status":true,"description":"","parameters":{}},
 {"name":"DSI_Sys2_ForagingSystem","status":true,"description":"","parameters":{}},
 {"name":"DSI_Sys2_MiningSystem","status":true,"description":"","parameters":{}},
+{"name":"DSI_Sys3_ItemBar","status":true,"description":"","parameters":{}},
 {"name":"DSI_Sys3_Tools","status":true,"description":"","parameters":{}},
 {"name":"DSI_Sys3_NetCoreImpl","status":true,"description":"(v1.0) Farm Tile","parameters":{}},
 {"name":"DSI_Sys3_FarmObject","status":true,"description":"","parameters":{}},

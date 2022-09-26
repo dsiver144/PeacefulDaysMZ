@@ -48,50 +48,7 @@ class MyBag extends ItemContainer {
 /** @type {MyBag} */
 MyBag.inst = null;
 
-class ItemBarController extends Sprite {
-    /**
-     * This class handle hot bar interaction
-     */
-    constructor() {
-        super();
-        this.bitmap = new Bitmap(32 * 12, 32);
-        this.bitmap.fillAll("#ff0000");
-        this.opacity = 100;
-        this.setPosition();
-    }
-    /**
-     * Set position
-     */
-    setPosition() {
-        this.x = (Graphics.width - this.width) / 2;
-        this.y = (Graphics.height - 48);
-    }
-    /**
-     * Update per frame
-     */
-    update() {
 
-    }
-}
-
-class Sprite_GameItem extends Sprite {
-    /**
-     * This class handle display for each GameItem
-     */
-    constructor() {
-        this._itemSprite = new Sprite();
-        this._backgroundSprite = new Sprite();
-        this._quantitySprite = new Sprite();
-        this._quantitySprite.bitmap = new Bitmap(32, 32);
-    }
-    /**
-     * Refresh
-     * @param {GameItem} gameItem 
-     */
-    refresh(gameItem) {
-        this._item = gameItem;
-    }
-}
 
 //==================================================================================
 // IMPLEMENT SYSTEM IN TO RPG MAKER SYSTEM
@@ -101,11 +58,4 @@ var DSI_Sys2_InventorySystem_Game_System_createSaveableObjects = Game_System.pro
 Game_System.prototype.createSaveableObjects = function () {
     DSI_Sys2_InventorySystem_Game_System_createSaveableObjects.call(this);
     this._myBag = new MyBag();
-}
-
-var DSI_Sys2_MyBag_Spriteset_Map_createUpperLayer = Spriteset_Map.prototype.createUpperLayer;
-Spriteset_Map.prototype.createUpperLayer = function () {
-    DSI_Sys2_MyBag_Spriteset_Map_createUpperLayer.call(this);
-    this._itemBarController = new ItemBarController();
-    this.addChild(this._itemBarController);
 }

@@ -102,4 +102,4 @@ class EmitterEvent {
 }
 
 /** @type {EventEmitter} */
-const EventManager = new EventEmitter();
+var EventManager = new EventEmitter();
