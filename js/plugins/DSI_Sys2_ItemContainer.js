@@ -49,6 +49,14 @@ class ItemContainer extends SaveableObject {
         return this._items.get(this._selectedSlotId);
     }
     /**
+     * Get Item At specific index
+     * @param {number} index 
+     * @returns {GameItem}
+     */
+    item(index) {
+        return this._items.get(index);
+    }
+    /**
      * Get container name
      * @returns {string}
      */

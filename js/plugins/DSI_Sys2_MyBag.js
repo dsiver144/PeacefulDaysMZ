@@ -17,23 +17,6 @@ class MyBag extends ItemContainer {
     constructor(unlockedRows = ContainerConfig.unlockedRows) {
         super(unlockedRows);
         MyBag.inst = this;
-        this._selectingRowIndex = 0;
-    }
-    /**
-     * Get selecting row index
-     */
-    get selectingRowIndex() {
-        return this._selectingRowIndex;
-    }
-
-    currentRowItems() {
-        const items = [];
-        const startIndex = this._selectingRowIndex * ContainerConfig.maxSlotPerRow;
-        const endIndex = startIndex + ContainerConfig.maxSlotPerRow - 1;
-        for (var i = startIndex; i <= endIndex; i++) {
-            items.push(this._items.get(i));
-        }
-        return items;
     }
     /**
      * @inheritdoc
@@ -41,7 +24,7 @@ class MyBag extends ItemContainer {
     saveProperties() {
         const data = super.saveProperties();
         return data.concat([
-            ['_selectingRowIndex', 0],
+            // ['_selectingRowIndex', 0],
         ]);
     }
 }
