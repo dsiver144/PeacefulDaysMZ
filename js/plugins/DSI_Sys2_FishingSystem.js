@@ -12,20 +12,23 @@ class FishManager extends SaveableObject {
         /** @type {Object.<string, number>} */
         this._caughtFishes = {};
     }
-
-    randomFish(area) {
+    /**
+     * Get random fish
+     * @param {string} area
+     * @returns {Game_Fish} 
+     */
+    randomFish(area, fishTrap = false) {
         const time = GameTime.session();
         const weather = GameTime.weatherType();
         const season = GameTime.season();
-        const fishTrap = true;
 
         const availableFishes = [];
         FishDB.inst.fishes.forEach(fish => {
             const validAreas = fish.seasons[season];
             if (!validAreas || !validAreas.includes(area)) return;
             if (fish.fishTrap && !fishTrap) return;
-            // if (fish.time && fish.time != time) return;
-            // if (fish.weathers.length > 0 && !fish.weathers.includes(weather)) return;
+            if (fish.time && fish.time != time) return;
+            if (fish.weathers.length > 0 && !fish.weathers.includes(weather)) return;
             for (var count = 0; count < fish.rate * 10; count++) {
                 availableFishes.push(fish);
             }
@@ -33,7 +36,7 @@ class FishManager extends SaveableObject {
         /** @type {Game_Fish} */
         const randomFish = MyUtils.randomArrayItem(availableFishes);
         console.log({availableFishes, name: randomFish.itemID});
-        
+        return randomFish;
     }   
 }
 /** @type {FishManager} */
