@@ -1,0 +1,1 @@
+nw . --force-color-profile=srgb --enable-native-gpu-memory-buffers --in-process-gpu --force-gpu-rasterization --enable-gpu-memory-buffer-compositor-resources
