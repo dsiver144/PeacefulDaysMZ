@@ -37,38 +37,34 @@ class Sprite_FarmBuilding extends Sprite_FarmObject {
     updateInput() {
         if (!this.isControlable()) return;
         const building = this.building();
-        const inputMode = Input.getInputMode();
+        // const inputMode = Input.getInputMode();
         const lastX = building.position.x;
         const lastY = building.position.y;
         this._screenZ = BuildingSpriteConfig.previewZ;
         this.opacity = BuildingSpriteConfig.previewOpacity;
         
-        if (inputMode === 'keyboard') {
-            const x = $gameMap.canvasToMapX(TouchInput.x);
-            const y = $gameMap.canvasToMapY(TouchInput.y);
-            building.position.x = x;
-            building.position.y = y;
-        } else {
-            if (Input.isRepeated(FieldKeyAction.MoveLeft)) {
-                building.position.x -= 1;
-            }
-            if (Input.isRepeated(FieldKeyAction.MoveRight)) {
-                building.position.x += 1;
-            }
-            if (Input.isRepeated(FieldKeyAction.MoveUp)) {
-                building.position.y -= 1;
-            }
-            if (Input.isRepeated(FieldKeyAction.MoveDown)) {
-                building.position.y += 1;
-            }
+        const moveTile = Input.isPressed(FieldKeyAction.Run) || Input.isPressed(FieldKeyAction.UseTool) ? 4 : 1;
+
+        if (Input.isRepeated(FieldKeyAction.MoveLeft)) {
+            building.position.x -= moveTile;
         }
+        if (Input.isRepeated(FieldKeyAction.MoveRight)) {
+            building.position.x += moveTile;
+        }
+        if (Input.isRepeated(FieldKeyAction.MoveUp)) {
+            building.position.y -= moveTile;
+        }
+        if (Input.isRepeated(FieldKeyAction.MoveDown)) {
+            building.position.y += moveTile;
+        }
+
         if (building.position.x != lastX || building.position.y != lastY) {
             const {x, y} = building.position;
             this.isValidPosToPlaceObject = building.canPlaceAt(x, y);
             const {previewValidColor, previewInvalidColor} = BuildingSpriteConfig;
             this.setBlendColor(this.isValidPosToPlaceObject ? previewValidColor: previewInvalidColor);
         }
-        if (this.isValidPosToPlaceObject && Input.isTriggered(FieldKeyAction.Check)) {
+        if (this.isValidPosToPlaceObject && Input.isTriggeredCheck()) {
             building.endMove();
         }
         this.updateCustomInput();

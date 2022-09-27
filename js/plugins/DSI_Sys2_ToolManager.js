@@ -114,7 +114,8 @@ class ToolManager extends SaveableObject {
      * Update input
      */
     updateInput() {
-        if (Input.isTriggered(FieldKeyAction.UseTool)) {
+        const toolUsingInput = Input.isTriggeredUsingTool();
+        if (toolUsingInput > 0) {
             const equippedTool = this.equippedTool();
             if (!equippedTool) return;       
             if (!equippedTool.isUsable()) return; 
@@ -122,7 +123,7 @@ class ToolManager extends SaveableObject {
             this._toolChargeTime = equippedTool.chargeTime();
             this._toolMaxChargeLevel = equippedTool.maxChargeLevel();
             this._toolChargedLevel = 0;
-            if (Input.getInputMode() === 'keyboard') {
+            if (toolUsingInput == 2) {
                 const px = Math.round($gamePlayer._x);
                 const py = Math.round($gamePlayer._y);
                 const x = $gameMap.canvasToMapX(TouchInput.x);
@@ -141,7 +142,7 @@ class ToolManager extends SaveableObject {
             }
         }
         if (this._pressingToolBtn) {
-            if (this._toolChargeAble && Input.isTriggered(FieldKeyAction.Check) || Input.isTriggered(FieldKeyAction.Cancel)) {
+            if (this._toolChargeAble && Input.isTriggeredCheck() || Input.isTriggered(FieldKeyAction.Cancel)) {
                 AudioController.playCancel();
                 this._pressingToolBtn = false;
                 return;

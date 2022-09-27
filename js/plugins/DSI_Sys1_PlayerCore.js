@@ -72,11 +72,12 @@ Game_Player.prototype.isMoveDisable = function() {
 // }
 
 Game_Player.prototype.triggerButtonAction = function() {
-    if (Input.isTriggered(FieldKeyAction.Check)) {
+    const checkInput = Input.isTriggeredCheck();
+    if (checkInput > 0) {
         /** @type {Vector2[]} */
         let checkPositions = [];
         let mousePos = null;
-        if (Input.getInputMode() === 'keyboard') {
+        if (checkInput == 2) {
             const px = Math.round(this._x);
             const py = Math.round(this._y);
             const x = $gameMap.canvasToMapX(TouchInput.x);

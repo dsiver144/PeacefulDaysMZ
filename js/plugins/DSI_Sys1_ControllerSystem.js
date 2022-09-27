@@ -16,7 +16,9 @@ const FieldKeyAction = {
     "MoveRight": "right",
     "MoveDown": "down",
     "UseTool": "tool",
+    "UseToolEx": "toolEx",
     "Check": "check",
+    "CheckEx": "checkEx",
     "Cancel": "cancel",
     "Menu": "menu",
     "Map": "map",
@@ -49,8 +51,10 @@ DefaultKeyboardConfig[FieldKeyAction.MoveUp] = 87;
 DefaultKeyboardConfig[FieldKeyAction.MoveLeft] = 65;
 DefaultKeyboardConfig[FieldKeyAction.MoveRight] = 68;
 DefaultKeyboardConfig[FieldKeyAction.MoveDown] = 83;
-DefaultKeyboardConfig[FieldKeyAction.UseTool] = 256; // Mouse 0
-DefaultKeyboardConfig[FieldKeyAction.Check] = 258; // Mouse 1
+DefaultKeyboardConfig[FieldKeyAction.UseTool] = 86;
+DefaultKeyboardConfig[FieldKeyAction.UseToolEx] = 256; // Mouse 0
+DefaultKeyboardConfig[FieldKeyAction.Check] = 67; 
+DefaultKeyboardConfig[FieldKeyAction.CheckEx] = 258; // Mouse 1
 DefaultKeyboardConfig[FieldKeyAction.Menu] = 27;
 DefaultKeyboardConfig[FieldKeyAction.Cancel] = 27;
 DefaultKeyboardConfig[FieldKeyAction.Map] = 77;
@@ -116,6 +120,28 @@ for (var keyname in DefaultKeyboardConfig) {
 
 for (var keyname in DefaultGamePadConfig) {
     Input.gamepadMapper[keyname] = DefaultGamePadConfig[keyname];
+}
+/**
+ * Check if player is triggering tool using input
+ * @returns {number} 0 = None | 1 = Normal | 2 = Mouse
+ */
+Input.isTriggeredUsingTool = function() {
+    const useToolNormal = Input.isTriggered(FieldKeyAction.UseTool);
+    const useToolExtra = Input.isTriggered(FieldKeyAction.UseToolEx);
+    if (useToolExtra) return 2;
+    if (useToolNormal) return 1;
+    return 0;
+}
+/**
+ * Check if player is triggering check input
+ * @returns {number} 0 = None | 1 = Normal | 2 = Mouse
+ */
+Input.isTriggeredCheck = function() {
+    const checkNormal = Input.isTriggered(FieldKeyAction.Check);
+    const checkExtra = Input.isTriggered(FieldKeyAction.CheckEx);
+    if (checkExtra) return 2;
+    if (checkNormal) return 1;
+    return 0;
 }
 
 var DSI_Sys1_PlayerController_Game_Player_update = Game_Player.prototype.update;
