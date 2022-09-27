@@ -226,17 +226,6 @@
         "treeFlag": true
     },
     {
-        "itemID": "ArecaSapling",
-        "productID": null,
-        "stages": [
-            5,
-            5
-        ],
-        "imageFile": "PD_ArecaTree",
-        "isCollidable": true,
-        "treeFlag": true
-    },
-    {
         "itemID": "OakSapling",
         "productID": null,
         "stages": [
