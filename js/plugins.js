@@ -59,5 +59,6 @@ var $plugins =
 {"name":"DSI_Sys5_DecoratingObjects","status":true,"description":"","parameters":{}},
 {"name":"DSI_Sys6_Sprite_Windmill","status":true,"description":"(v1.0) Sprite Windmill","parameters":{}},
 {"name":"DSI_Sys6_Sprite_Well","status":true,"description":"(v1.0) Sprite Windmill","parameters":{}},
-{"name":"DSI_Sys6_Sprite_FarmDecor","status":true,"description":"(v1.0) A custom plugin by dsiver144","parameters":{}}
+{"name":"DSI_Sys6_Sprite_FarmDecor","status":true,"description":"(v1.0) A custom plugin by dsiver144","parameters":{}},
+{"name":"DSI-MouseCursor","status":true,"description":"(v1.1) A custom menu cursor by dsiver144.","parameters":{"cursorImage":"MouseCursor","fadeDuration":"4"}}
 ];
