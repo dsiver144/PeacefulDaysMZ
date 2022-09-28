@@ -199,7 +199,14 @@ class ItemContainer extends SaveableObject {
      * @private
      */
     isSlotAvailable(slotId) {
-        return slotId <= this.maxAvailableIndex() && !this._items.get(slotId);
+        return this.isSlotUnlocked(slotId) && !this._items.get(slotId);
+    }
+    /**
+     * Check if a slot is unlocked or not
+     * @returns {boolean}
+     */
+    isSlotUnlocked(slotId) {
+        return slotId <= this.maxAvailableIndex();
     }
     /**
      * Get the max bag slot index at the moment
@@ -212,7 +219,6 @@ class ItemContainer extends SaveableObject {
     /**
      * Get the max slot of a page
      * @returns {number}
-     * @private
      */
     maxPageSlots() {
         return ContainerConfig.maxRows * ContainerConfig.maxSlotPerRow;

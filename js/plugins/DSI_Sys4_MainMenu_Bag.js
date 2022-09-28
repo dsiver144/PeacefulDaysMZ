@@ -6,7 +6,7 @@ class Window_Bag extends Window_Base {
         super(new Rectangle(0, 0, 560, 360));
         this.createAllSlots();
         this.createHelp();
-        this.refreshHelp(0);
+        this.refreshHelp(MyBag.inst._selectedSlotId);
     }
     /**
      * Create all slots
@@ -84,32 +84,42 @@ class Window_Bag extends Window_Base {
     }
     /**
      * Refresh Help
-     * @param {number} index 
+     * @param {number} slotIndex 
      */
-    refreshHelp(index) {
+    refreshHelp(slotIndex) {
         this.contents.clear();
-        const itemData = this.itemLocalizeDataAt(index);
+        const itemData = this.itemLocalizeDataAt(slotIndex);
         this.titleText.text = itemData.name;
         this.hoverText.text = itemData.description;
     }
     /**
      * Get localize item data at slot
-     * @param {number} index 
+     * @param {number} slotIndex 
      * @returns 
      */
-    itemLocalizeDataAt(index) {
-        const item = MyBag.inst.item(index);
+    itemLocalizeDataAt(slotIndex) {
+        const item = MyBag.inst.item(slotIndex);
         const itemData = item ? LocalizeManager.item(item.id) : null;
-        return itemData ? itemData : {name: "", description: LocalizeManager.t("Lbl_Empty")};
+        if (itemData) {
+            return itemData;
+        }
+        if (MyBag.inst.isSlotUnlocked(slotIndex)) {
+            return {name: LocalizeManager.t("Lbl_Empty"), description: LocalizeManager.t("Lbl_EmptySlotDesc")};
+        }
+        return {name: LocalizeManager.t("Lbl_Locked"), description: ''};
     }
     /**
      * On Item Slot Click
-     * @param {number} index 
+     * @param {number} slotIndex 
      */
-    onItemSlotClick(index) {
+    onItemSlotClick(slotIndex) {
+        if (!MyBag.inst.isSlotUnlocked(slotIndex)) {
+            SoundManager.playBuzzer();
+            return;
+        }
         SoundManager.playCursor();
-        MyBag.inst.select(index);
-        this.refreshHelp(index);
+        MyBag.inst.select(slotIndex);
+        this.refreshHelp(slotIndex);
     }
     /**
      * On Item Slot Click

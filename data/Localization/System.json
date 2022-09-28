@@ -133,6 +133,20 @@
         }
     },
     {
+        "key": "Lbl_EmptySlotDesc",
+        "lang": {
+            "vn": "Không có vật phẩm nào ở đây.",
+            "en": "There is nothing here."
+        }
+    },
+    {
+        "key": "Lbl_Locked",
+        "lang": {
+            "vn": "Bị Khoá",
+            "en": "Locked"
+        }
+    },
+    {
         "key": "Lbl_Full",
         "lang": {
             "vn": "Đầy",

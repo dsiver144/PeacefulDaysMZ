@@ -291,7 +291,9 @@ class Sprite_Icon extends Sprite {
      * @param {number} x 
      * @param {number} y 
      */
-    setIcon(iconIndex, x = 0, y = 0) {
+    setIcon(iconIndex = 0, x = 0, y = 0) {
+        this.bitmap.clear();
+        if (iconIndex < 0) return;
         const bitmap = ImageManager.loadSystem("IconSet");
         const pw = ImageManager.iconWidth;
         const ph = ImageManager.iconHeight;

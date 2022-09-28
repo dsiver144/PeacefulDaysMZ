@@ -55,6 +55,8 @@ class ItemBarSprite extends Sprite {
         const startY = 5;
         const spacing = 4;
         const slotSize = new Vector2(40, 40);
+        /** @type {Sprite_ItemBarSlot[]} */
+        this._slots = [];
         MyBag.inst.currentRowItems().forEach((item, i) => {
             const slot = new Sprite_ItemBarSlot(startIndex + i, MyBag.inst, i);
             this.addChild(slot);
@@ -63,8 +65,15 @@ class ItemBarSprite extends Sprite {
             slot.onClick = () => {
                 this.onItemSlotClick(slot.slotIndex);
             }
+            this._slots.push(slot);
         });
         this.width = maxRowItems * (slotSize.x + spacing) - spacing;
+    }
+    /**
+     * Clear All Slots
+     */
+    clearAllSlots() {
+        this._slots.forEach(slot => this.removeChild(slot));
     }
     /**
      * On Item Slot Click
@@ -107,10 +116,7 @@ class ItemBarSprite extends Sprite {
     updateInput() {
         for (var i = 1; i <= 12; i++) {
             if (Input.isTriggered(NumKeys["N" + i])) {
-                const currentRowIndex = MyBag.inst.currentRowIndex;
-                const maxRowItems = ContainerConfig.maxSlotPerRow;
-                const startIndex = currentRowIndex * maxRowItems;
-                this.onItemSlotClick(startIndex + i - 1);
+                this.quickSelect(i);
             }
         }
         if (Input.isRepeated(FieldKeyAction.SwitchItemLeft)) {
@@ -119,6 +125,22 @@ class ItemBarSprite extends Sprite {
         if (Input.isRepeated(FieldKeyAction.SwitchItemRight)) {
             this.cycleItem(1);
         }
+        if (Input.isTriggered(FieldKeyAction.SwitchItemRowUp)) {
+            this.cycleRow(-1);
+        }
+        if (Input.isTriggered(FieldKeyAction.SwitchItemRowDown)) {
+            this.cycleRow(1);
+        }
+    }
+    /**
+     * Quick select
+     * @param {number} numIndex 
+     */
+    quickSelect(numIndex) {
+        const currentRowIndex = MyBag.inst.currentRowIndex;
+        const maxRowItems = ContainerConfig.maxSlotPerRow;
+        const startIndex = currentRowIndex * maxRowItems;
+        this.onItemSlotClick(startIndex + numIndex - 1);
     }
     /**
      * Cycle Item Left Or Right
@@ -133,6 +155,29 @@ class ItemBarSprite extends Sprite {
         if (index < startIndex) index = endIndex;
         if (index > endIndex) index = startIndex;
         this.onItemSlotClick(index);
+    }
+    /**
+     * Cycle Row Up Or Down
+     * @param {number} direction 
+     */
+    cycleRow(direction = 1) {
+        if (MyBag.inst._unlockedRows < 2) return;
+        const maxSlotIndex = (MyBag.inst._unlockedRows * ContainerConfig.maxSlotPerRow) - 1;
+        let index = MyBag.inst._selectedSlotId + ContainerConfig.maxSlotPerRow * direction;
+        if (index > maxSlotIndex) {
+            index = index - maxSlotIndex - 1;
+        }
+        if (index < 0) {
+            index = maxSlotIndex + index + 1;
+        }
+        this.onItemSlotClick(Math.abs(index));
+        const currentRowIndex = MyBag.inst.currentRowIndex;
+        const maxRowItems = ContainerConfig.maxSlotPerRow;
+        const startIndex = currentRowIndex * maxRowItems;
+        this._slots.forEach((slot, i) => {
+            slot.slotIndex = startIndex + i;
+            slot.refresh();
+        });
     }
 }
 

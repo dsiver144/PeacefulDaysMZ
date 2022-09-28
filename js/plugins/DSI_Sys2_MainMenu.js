@@ -25,7 +25,7 @@ const MainMenuConfig = {
             pageClass: "new Window_Base(new Rectangle(0, 0, 400, 400))"
         }
     ],
-    hoverTextOffset: [-16, -16]
+    hoverTextOffset: [-32, -32]
 }
 
 class Scene_MainMenu extends Scene_MenuBase {

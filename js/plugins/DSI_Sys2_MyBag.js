@@ -85,7 +85,12 @@ class Sprite_ItemSlot extends Sprite_Clickable {
             this.numberSprite.bitmap.clear();
             this.numberSprite.bitmap.drawText(curItem.quantity, 0, 40 - 12 - 2, 40 - 2, 12, 'right');
         } else {
-            this.itemIcon.setIcon(0);
+            if (this.itemContainer.isSlotUnlocked(this.slotIndex)) {
+                this.itemIcon.setIcon(-1);
+            } else {
+                const slotLockIconIndex = 160;
+                this.itemIcon.setIcon(slotLockIconIndex);
+            }
             this.numberSprite.bitmap.clear();
         }
         this.bitmap = this.itemContainer._selectedSlotId == this.slotIndex ? ImageManager.loadMenu("ItemBG_selected", "bag") : ImageManager.loadMenu("ItemBG", "bag");

@@ -143,7 +143,7 @@ class Window_MyDebug extends Window_Command {
      * On Custom Command
      */
     onCustomCommand() {
-        MyBag.inst._unlockedRows = 4;
+        MyBag.inst._unlockedRows = 2;
         MyBag.inst.addItem("SunflowerSeeds", 1);
         MyBag.inst.addItem("Sunflower", 10);
         MyBag.inst.addItem("CarrotSeeds", 20);
