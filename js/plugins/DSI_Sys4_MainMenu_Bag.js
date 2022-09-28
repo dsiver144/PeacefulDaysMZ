@@ -107,6 +107,7 @@ class Window_Bag extends Window_Base {
      * @param {number} index 
      */
     onItemSlotClick(index) {
+        SoundManager.playCursor();
         MyBag.inst.select(index);
         this.refreshHelp(index);
     }

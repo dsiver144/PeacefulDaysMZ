@@ -42,6 +42,21 @@ const MenuKeyAction = {
     "PageRight": "menu_pageright",
 }
 /** @enum */
+const NumKeys = {
+    "N1": "num1",
+    "N2": "num2",
+    "N3": "num3",
+    "N4": "num4",
+    "N5": "num5",
+    "N6": "num6",
+    "N7": "num7",
+    "N8": "num8",
+    "N9": "num9",
+    "N10": "num10",
+    "N11": "num11",
+    "N12": "num12",
+}
+/** @enum */
 const DebugKeyAction = {
     "DebugMenu": "debugMenu"
 }
@@ -75,6 +90,18 @@ DefaultKeyboardConfig[MenuKeyAction.MoveRight] = 68;
 DefaultKeyboardConfig[MenuKeyAction.MoveDown] = 83;
 
 DefaultKeyboardConfig[DebugKeyAction.DebugMenu] = 192;
+DefaultKeyboardConfig[NumKeys.N1] = 49;
+DefaultKeyboardConfig[NumKeys.N2] = 50;
+DefaultKeyboardConfig[NumKeys.N3] = 51;
+DefaultKeyboardConfig[NumKeys.N4] = 52;
+DefaultKeyboardConfig[NumKeys.N5] = 53;
+DefaultKeyboardConfig[NumKeys.N6] = 54;
+DefaultKeyboardConfig[NumKeys.N7] = 55;
+DefaultKeyboardConfig[NumKeys.N8] = 56;
+DefaultKeyboardConfig[NumKeys.N9] = 57;
+DefaultKeyboardConfig[NumKeys.N10] = 48;
+DefaultKeyboardConfig[NumKeys.N11] = 189;
+DefaultKeyboardConfig[NumKeys.N12] = 187;
 
 const DefaultGamePadConfig = {}
 DefaultGamePadConfig[FieldKeyAction.UseTool] = 2;

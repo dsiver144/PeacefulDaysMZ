@@ -30,7 +30,12 @@ class ItemBarSprite extends Sprite {
         this.backgroundSprite.x = -8;
         this.backgroundSprite.y = -1;
 
-        this.iconSprite = new Sprite(ImageManager.loadMenu("BagIcon", "itemBar"));
+        this.iconSprite = new Sprite_Clickable();
+        this.iconSprite.bitmap = ImageManager.loadMenu("BagIcon", "itemBar");
+        this.iconSprite.onClick = () => {
+            SceneManager.push(Scene_MainMenu);
+            SceneManager.prepareNextScene(0);
+        }
         this.iconSprite.x = -52;
         this.iconSprite.y = -20;
         // this.iconSprite.followMouse(true);
@@ -66,6 +71,7 @@ class ItemBarSprite extends Sprite {
      * @param {number} index 
      */
     onItemSlotClick(index) {
+        SoundManager.playCursor();
         MyBag.inst.select(index);
     }
     /**
@@ -93,6 +99,40 @@ class ItemBarSprite extends Sprite {
      */
     update() {
         super.update();
+        this.updateInput();
+    }
+    /**
+     * Update input
+     */
+    updateInput() {
+        for (var i = 1; i <= 12; i++) {
+            if (Input.isTriggered(NumKeys["N" + i])) {
+                const currentRowIndex = MyBag.inst.currentRowIndex;
+                const maxRowItems = ContainerConfig.maxSlotPerRow;
+                const startIndex = currentRowIndex * maxRowItems;
+                this.onItemSlotClick(startIndex + i - 1);
+            }
+        }
+        if (Input.isRepeated(FieldKeyAction.SwitchItemLeft)) {
+            this.cycleItem(-1);
+        }
+        if (Input.isRepeated(FieldKeyAction.SwitchItemRight)) {
+            this.cycleItem(1);
+        }
+    }
+    /**
+     * Cycle Item Left Or Right
+     * @param {number} direction 
+     */
+    cycleItem(direction = 1) {
+        const currentRowIndex = MyBag.inst.currentRowIndex;
+        const maxRowItems = ContainerConfig.maxSlotPerRow;
+        const startIndex = currentRowIndex * maxRowItems;
+        const endIndex = startIndex + maxRowItems - 1;
+        let index = MyBag.inst._selectedSlotId + direction;
+        if (index < startIndex) index = endIndex;
+        if (index > endIndex) index = startIndex;
+        this.onItemSlotClick(index);
     }
 }
 

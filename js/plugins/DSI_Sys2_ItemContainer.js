@@ -40,7 +40,7 @@ class ItemContainer extends SaveableObject {
      */
     select(slotId) {
         this._selectedSlotId = slotId;
-        this.onItemChanged();
+        this.onItemChanged(slotId);
     }
     /**
      * Get selecting item

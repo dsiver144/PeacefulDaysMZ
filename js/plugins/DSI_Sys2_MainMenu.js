@@ -30,6 +30,12 @@ const MainMenuConfig = {
 
 class Scene_MainMenu extends Scene_MenuBase {
     /**
+     * Prepare
+     */
+    prepare(pageIndex = -1) {
+        this._defaultPageIndex = pageIndex;
+    }
+    /**
      * Main Menu Container
      */
     create() {
@@ -43,7 +49,7 @@ class Scene_MainMenu extends Scene_MenuBase {
     start() {
         super.start();
         this.initMembers();
-        this.selectPage(0);
+        this.selectPage(this._defaultPageIndex || 0);
     }
     /**
      * Init members
