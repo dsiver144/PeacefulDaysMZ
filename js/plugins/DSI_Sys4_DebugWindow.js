@@ -143,6 +143,7 @@ class Window_MyDebug extends Window_Command {
      * On Custom Command
      */
     onCustomCommand() {
+        MyBag.inst._unlockedRows = 4;
         MyBag.inst.addItem("SunflowerSeeds", 1);
         MyBag.inst.addItem("Sunflower", 10);
         MyBag.inst.addItem("CarrotSeeds", 20);
@@ -150,6 +151,23 @@ class Window_MyDebug extends Window_Command {
         MyBag.inst.addItem("OatSeeds", 55);
         MyBag.inst.addItem("WheatSeeds", 10);
         MyBag.inst.addItem("RiceSeeds", 5);
+        
+        MyBag.inst.addItem("SunflowerSeeds", 99);
+        MyBag.inst.addItem("Sunflower", 99);
+        MyBag.inst.addItem("CarrotSeeds", 99);
+        MyBag.inst.addItem("Carrot", 99);
+        MyBag.inst.addItem("OatSeeds", 99);
+        MyBag.inst.addItem("WheatSeeds", 99);
+        MyBag.inst.addItem("RiceSeeds", 99);
+
+        MyBag.inst.addItem("SunflowerSeeds", 99);
+        MyBag.inst.addItem("Sunflower", 99);
+        MyBag.inst.addItem("CarrotSeeds", 99);
+        MyBag.inst.addItem("Carrot", 99);
+        MyBag.inst.addItem("OatSeeds", 99);
+        MyBag.inst.addItem("WheatSeeds", 99);
+        MyBag.inst.addItem("RiceSeeds", 99);
+
         // Building.place(Coop);
 
         // var object = new Coop(new Vector2(10, 10), 1);

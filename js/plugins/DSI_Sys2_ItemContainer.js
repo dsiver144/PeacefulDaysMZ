@@ -40,6 +40,7 @@ class ItemContainer extends SaveableObject {
      */
     select(slotId) {
         this._selectedSlotId = slotId;
+        this.onItemChanged();
     }
     /**
      * Get selecting item
@@ -75,6 +76,41 @@ class ItemContainer extends SaveableObject {
         ]
     }
     /**
+     * Get current row index
+     * @returns {number}
+     */
+    get currentRowIndex() {
+        return Math.floor(this._selectedSlotId / ContainerConfig.maxSlotPerRow);
+    }
+    /**
+     * Get current row items
+     * @returns {GameItem[]}
+     */
+    currentRowItems() {
+        const selectingRowIndex = this.currentRowIndex;
+        const items = [];
+        const startIndex = selectingRowIndex * ContainerConfig.maxSlotPerRow;
+        const endIndex = startIndex + ContainerConfig.maxSlotPerRow - 1;
+        for (var i = startIndex; i <= endIndex; i++) {
+            items.push(MyBag.inst.item(i));
+        }
+        return items;
+    }
+    /**
+     * Get On Container Item Changed Event Name
+     * @returns {string}
+     */
+    onContainerItemChangedEventName() {
+        return null;
+    }
+    /**
+     * On Item Changed
+     */
+    onItemChanged(slotId) {
+        const eventName = this.onContainerItemChangedEventName();
+        eventName && EventManager.emit(eventName, slotId);
+    }
+    /**
      * Add Item
      * @param {number} id 
      * @param {number} number 
@@ -89,7 +125,9 @@ class ItemContainer extends SaveableObject {
             const bagItem = this._items.get(slotId) || new GameItem(id, 0);
             bagItem.addQuantity(number);
             this._items.set(slotId, bagItem);
+            
             console.log(`> Container: ${bagItem.id} (${number}) has been added to #${slotId}! | Quantity: ${bagItem.quantity}`);
+            this.onItemChanged(slotId);
         } else {
             console.log(`> Container: Can't not add ${id} (${number})`);
         }
@@ -109,6 +147,7 @@ class ItemContainer extends SaveableObject {
                 if (bagItem.quantity <= 0) {
                     this._items.delete(slotId);
                 }
+                this.onItemChanged(slotId);
                 if (totalNumber <= 0) {
                     break;
                 }

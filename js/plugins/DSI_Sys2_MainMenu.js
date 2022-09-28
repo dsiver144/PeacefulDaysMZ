@@ -24,7 +24,8 @@ const MainMenuConfig = {
             textKey: "MainMenu_Bag",
             pageClass: "new Window_Base(new Rectangle(0, 0, 400, 400))"
         }
-    ]
+    ],
+    hoverTextOffset: [-16, -16]
 }
 
 class Scene_MainMenu extends Scene_MenuBase {
@@ -98,8 +99,8 @@ class Scene_MainMenu extends Scene_MenuBase {
      * Update hover text
      */
     updateHoverText() {
-        this.hoverText.x = TouchInput.x - 16;
-        this.hoverText.y = TouchInput.y - 16;
+        this.hoverText.x = TouchInput.x + MainMenuConfig.hoverTextOffset[0];
+        this.hoverText.y = TouchInput.y + MainMenuConfig.hoverTextOffset[1];
     }
     /**
      * Create all pages
@@ -190,7 +191,7 @@ class Scene_MainMenu extends Scene_MenuBase {
      * @returns {boolean}
      */
     backgroundEnabled() {
-        return false;
+        return true;
     }
     /**
      * Create background

@@ -30,7 +30,7 @@ class Window_Bag extends Window_Base {
      * @param {number} index 
      */
     createItemSlot(index) {
-        const slot = new Sprite_BagItemSlot(index);
+        const slot = new Sprite_ItemSlot(index, MyBag.inst);
         // slot.bitmap.smooth = false;
         slot.onClick = () => {
             this.onItemSlotClick(index);
@@ -100,7 +100,7 @@ class Window_Bag extends Window_Base {
     itemLocalizeDataAt(index) {
         const item = MyBag.inst.item(index);
         const itemData = item ? LocalizeManager.item(item.id) : null;
-        return itemData ? itemData : {name: "", description: ""};
+        return itemData ? itemData : {name: "", description: LocalizeManager.t("Lbl_Empty")};
     }
     /**
      * On Item Slot Click
@@ -139,56 +139,3 @@ class Window_Bag extends Window_Base {
     }
 }
 
-class Sprite_BagItemSlot extends Sprite_Clickable {
-    /**
-     * Sprite Bag Item Slot
-     */
-    constructor(slotIndex) {
-        super();
-        this.slotIndex = slotIndex;
-        this.bitmap = ImageManager.loadMenu("ItemBG", "bag");
-        const iconSlot = new Sprite_Icon(0);
-        iconSlot.anchor.x = 0.5;
-        iconSlot.anchor.y = 0.5;
-        iconSlot.bitmap.smooth = false;
-        this.addChild(iconSlot);
-        this.bitmap.addLoadListener(() => {
-            iconSlot.x = this.width / 2;
-            iconSlot.y = this.height / 2;
-        });
-        this.itemIcon = iconSlot;
-        this.numberSprite = new Sprite(new Bitmap(40, 40));
-        this.numberSprite.bitmap.fontSize = 12;
-        this.addChild(this.numberSprite);
-        this.refresh();
-    }
-    /**
-     * Refresh current item slot
-     */
-    refresh() {
-        if (this.currentItem == MyBag.inst.item(this.slotIndex)) return;
-        const curItem = MyBag.inst.item(this.slotIndex);
-        this.currentItem = curItem;
-        if (curItem.id) {
-            this.itemIcon.setIcon(ItemDB.get(curItem.id).iconIndex);
-            this.numberSprite.bitmap.drawText(curItem.quantity, 0, 40 - 12 - 2, 40 - 2, 12, 'right');
-        } else {
-            this.itemIcon.setIcon(0);
-            this.numberSprite.bitmap.clear();
-        }
-    }
-    /**
-     * Update select
-     */
-    updateSelect() {
-        this.refresh();
-        this.bitmap = MyBag.inst._selectedSlotId == this.slotIndex ? ImageManager.loadMenu("ItemBG_selected", "bag") : ImageManager.loadMenu("ItemBG", "bag");
-    }
-    /**
-     * Update
-     */
-    update() {
-        super.update();
-        this.updateSelect();
-    }
-}

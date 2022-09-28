@@ -171,7 +171,7 @@ LocalizeManager.inst = new LocalizeManager();
  * @param {string} key 
  * @param {string?} prefix 
  * @param {string?} language 
- * @returns {LocalizeEntry}
+ * @returns {string}
  */
 const GT = function(key, prefix = null, language = null) {
     return LocalizeManager.inst.getText(key, prefix, language);

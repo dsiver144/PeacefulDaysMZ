@@ -1,7 +1,3 @@
-/** @enum */
-var BagEvent = {
-    REFRESH_BAG: "refreshBag"
-}
 
 class ItemBarManager extends SaveableObject {
     /**
@@ -10,27 +6,6 @@ class ItemBarManager extends SaveableObject {
     constructor() {
         super();
         ItemBarManager.inst = this;
-        this._slotIndex = 0;
-        this._selectingRowIndex = 0;
-    }
-    /**
-     * Get selecting row index
-     */
-    get selectingRowIndex() {
-        return this._selectingRowIndex;
-    }
-    /**
-     * Get all item of current rows
-     * @returns {GameItem[]}
-     */
-    currentRowItems() {
-        const items = [];
-        const startIndex = this._selectingRowIndex * ContainerConfig.maxSlotPerRow;
-        const endIndex = startIndex + ContainerConfig.maxSlotPerRow - 1;
-        for (var i = startIndex; i <= endIndex; i++) {
-            items.push(MyBag.inst.item(i));
-        }
-        return items;
     }
 }
 /** @type {ItemBarManager} */
@@ -42,14 +17,62 @@ class ItemBarSprite extends Sprite {
      */
     constructor() {
         super();
+        this.createUI();
+        this.createAllSlots();
         this.setPosition();
         EventManager.on(BagEvent.REFRESH_BAG, this.refresh, this);
     }
     /**
+     * Create UI
+     */
+    createUI() {
+        this.backgroundSprite = new Sprite(ImageManager.loadMenu("ItemBarBG", "itemBar"));
+        this.backgroundSprite.x = -8;
+        this.backgroundSprite.y = -1;
+
+        this.iconSprite = new Sprite(ImageManager.loadMenu("BagIcon", "itemBar"));
+        this.iconSprite.x = -52;
+        this.iconSprite.y = -20;
+        // this.iconSprite.followMouse(true);
+
+        this.addChild(this.backgroundSprite);
+        this.addChild(this.iconSprite);
+    }
+    /**
+     * Create All Slots
+     */
+    createAllSlots() {
+        const currentRowIndex = MyBag.inst.currentRowIndex;
+        const maxRowItems = ContainerConfig.maxSlotPerRow;
+        const startIndex = currentRowIndex * maxRowItems;
+
+        const startX = 5;
+        const startY = 5;
+        const spacing = 4;
+        const slotSize = new Vector2(40, 40);
+        MyBag.inst.currentRowItems().forEach((item, i) => {
+            const slot = new Sprite_ItemBarSlot(startIndex + i, MyBag.inst, i);
+            this.addChild(slot);
+            slot.x = startX + (i % maxRowItems) * (slotSize.x + spacing);
+            slot.y = startY + Math.floor(i / maxRowItems) * (slotSize.y + spacing);
+            slot.onClick = () => {
+                this.onItemSlotClick(slot.slotIndex);
+            }
+        });
+        this.width = maxRowItems * (slotSize.x + spacing) - spacing;
+    }
+    /**
+     * On Item Slot Click
+     * @param {number} index 
+     */
+    onItemSlotClick(index) {
+        MyBag.inst.select(index);
+    }
+    /**
      * Refresh Bag
      */
-    refresh() {
-        console.log("Refresh Bag", this);
+    refresh(slotIndex) {
+        console.log("Refresh Bag At " + slotIndex, this);
     }
     /**
      * @inheritdoc
@@ -62,8 +85,8 @@ class ItemBarSprite extends Sprite {
      * Set position
      */
     setPosition() {
-        this.x = (Graphics.width - this.width) / 2;
-        this.y = (Graphics.height - 48);
+        this.x = 64;//(Graphics.width - this.width) / 2;
+        this.y = (Graphics.height - 64);
     }
     /**
      * Update per frame
@@ -73,22 +96,20 @@ class ItemBarSprite extends Sprite {
     }
 }
 
-class Sprite_GameItem extends Sprite {
+class Sprite_ItemBarSlot extends Sprite_ItemSlot {
+    static slotNames = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '='];
     /**
-     * This class handle display for each GameItem
+     * Sprite_ItemBarSlot
+     * @param {number} slotIndex 
+     * @param {ItemContainer} itemContainer 
      */
-    constructor() {
-        this._itemSprite = new Sprite();
-        this._backgroundSprite = new Sprite();
-        this._quantitySprite = new Sprite();
-        this._quantitySprite.bitmap = new Bitmap(32, 32);
-    }
-    /**
-     * Refresh
-     * @param {GameItem} gameItem 
-     */
-    refresh(gameItem) {
-        this._item = gameItem;
+    constructor(slotIndex, itemContainer, index) {
+        super(slotIndex, itemContainer);
+        this.slotNumberSprite = new Sprite(new Bitmap(40, 40));
+        this.slotNumberSprite.bitmap.fontSize = 12;
+        this.slotNumberSprite.bitmap.textColor = '#ffd747';
+        this.slotNumberSprite.bitmap.drawText(Sprite_ItemBarSlot.slotNames[index], 3, 3, 40, 12);
+        this.addChild(this.slotNumberSprite);
     }
 }
 
