@@ -275,6 +275,32 @@ class Sprite_Shakeable extends Sprite {
     }
 }
 
+class Sprite_Icon extends Sprite {
+    /**
+     * Sprite Icon
+     * @param {number} index 
+     */
+    constructor(iconIndex) {
+        super();
+        this.bitmap = new Bitmap(32, 32);
+        this.setIcon(iconIndex);
+    }
+    /**
+     * Set Icon
+     * @param {number} iconIndex 
+     * @param {number} x 
+     * @param {number} y 
+     */
+    setIcon(iconIndex, x = 0, y = 0) {
+        const bitmap = ImageManager.loadSystem("IconSet");
+        const pw = ImageManager.iconWidth;
+        const ph = ImageManager.iconHeight;
+        const sx = (iconIndex % 16) * pw;
+        const sy = Math.floor(iconIndex / 16) * ph;
+        this.bitmap.blt(bitmap, sx, sy, pw, ph, x, y);
+    }
+}
+
 //========================================================================
 // END OF PLUGIN
 //========================================================================

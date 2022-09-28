@@ -42,9 +42,6 @@ class ItemBarSprite extends Sprite {
      */
     constructor() {
         super();
-        this.bitmap = new Bitmap(32 * 12, 32);
-        this.bitmap.fillAll("#ff0000");
-        this.opacity = 100;
         this.setPosition();
         EventManager.on(BagEvent.REFRESH_BAG, this.refresh, this);
     }

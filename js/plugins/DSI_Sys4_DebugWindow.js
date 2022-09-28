@@ -41,7 +41,6 @@ class Window_MyDebug extends Window_Command {
         this.addOption('Ignore Crop Season', 'seasonHack', this.onSeasonHack.bind(this));
         this.addOption('Spawn Farm Objects', 'spawnFarmObject', this.onSpawnFarmObjects.bind(this));
         this.addOption('New Day', 'newDay', this.onNewDay.bind(this));
-        this.addOption('Test Tree Swing', 'testTreeSwing', this.onTestTreeSwing.bind(this));
         this.addOption('Set Ambient', 'setAmbient', this.onSetAmbientLight.bind(this));
         this.addOption('Custom', 'custom', this.onCustomCommand.bind(this));
         this.addOption('Exit', 'cancel', this.onCancelCommand.bind(this));
@@ -144,13 +143,13 @@ class Window_MyDebug extends Window_Command {
      * On Custom Command
      */
     onCustomCommand() {
-        setInterval(() => {
-            if (Input.isTriggered(FieldKeyAction.Map)) {
-                const { x, y } = $gamePlayer.frontPosition();
-                const object = new WoodenFence(new Vector2(x, y), $gameMap.mapId());
-                FarmManager.inst.currentFarmland().addObject(object, false);
-            }
-        }, 60 / 1000);
+        MyBag.inst.addItem("SunflowerSeeds", 1);
+        MyBag.inst.addItem("Sunflower", 10);
+        MyBag.inst.addItem("CarrotSeeds", 20);
+        MyBag.inst.addItem("Carrot", 99);
+        MyBag.inst.addItem("OatSeeds", 55);
+        MyBag.inst.addItem("WheatSeeds", 10);
+        MyBag.inst.addItem("RiceSeeds", 5);
         // Building.place(Coop);
 
         // var object = new Coop(new Vector2(10, 10), 1);

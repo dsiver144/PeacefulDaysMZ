@@ -48,6 +48,22 @@ class LocalizeManager {
         return entry ? entry.lang[language] : `[${key}]`;
     }
     /**
+     * Get Item Text
+     * @param {string} key 
+     * @returns {{name: string, description: string}}
+     */
+    getItemText(key, language = null) {
+        language = language || this._language;
+        const entry = this._texts.get(key);
+        return entry ? {
+            name: entry.lang[language],
+            description: entry.description[language]
+        } : {
+            name: `[${key}]`,
+            description: `[${key}'s Description]`
+        }
+    }
+    /**
      * Init variables
      */
     init() {
@@ -171,6 +187,13 @@ LocalizeManager.t = GT;
  */
 LocalizeManager.NPC = function(npcKey) {
     return this.inst._npcEntries.get(npcKey);
+}
+/**
+ * Get item
+ * @param {string} itemKey 
+ */
+LocalizeManager.item = function(itemKey) {
+    return this.inst.getItemText(itemKey);
 }
 
 class LocalizeEntry {

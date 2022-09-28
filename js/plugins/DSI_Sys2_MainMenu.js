@@ -9,6 +9,24 @@
  * Empty Help
  * 
  */
+const MainMenuConfig = {
+    iconSpacing: 12,
+    iconSize: [64, 64],
+    iconDisplayY: 27,
+    pageDisplayY: 120,
+    pages: [
+        {
+            icon: "bag/BagIcon",
+            textKey: "MainMenu_Bag",
+            pageClass: "new Window_Bag()"
+        }, {
+            icon: "bag/BagIcon",
+            textKey: "MainMenu_Bag",
+            pageClass: "new Window_Base(new Rectangle(0, 0, 400, 400))"
+        }
+    ]
+}
+
 class Scene_MainMenu extends Scene_MenuBase {
     /**
      * Main Menu Container
@@ -19,27 +37,160 @@ class Scene_MainMenu extends Scene_MenuBase {
         this.createAllObjects();
     }
     /**
+     * Start
+     */
+    start() {
+        super.start();
+        this.initMembers();
+        this.selectPage(0);
+    }
+    /**
+     * Init members
+     */
+    initMembers() {
+        this._currentPageIndex = -1;
+    }
+    /**
      * Create all neccessary objects
      */
     createAllObjects() {
-        const button1 = new Sprite_KeyHint(MenuKeyAction.Confirm);
-        button1.setImage(null, 0);
-        const button2 = new Sprite_KeyHint(MenuKeyAction.Cancel);
-        button2.setImage(null, 0);
+        // const button1 = new Sprite_KeyHint(MenuKeyAction.Confirm);
+        // button1.setImage(null, 0);
+        // const button2 = new Sprite_KeyHint(MenuKeyAction.Cancel);
+        // button2.setImage(null, 0);
 
-        this.addChild(button1);
-        this.addChild(button2);
-        button1.x = 100;
-        button1.y = 100;
-        button2.x = 400;
-        button2.y = 100;
+        // this.addChild(button1);
+        // this.addChild(button2);
+        // button1.x = 100;
+        // button1.y = 100;
+        // button2.x = 400;
+        // button2.y = 100;
+
+        this.createAllPages();
+        this.createHoverText();
+    }
+    /**
+     * Create hover text
+     */
+    createHoverText() {
+        const hoverStyle = new PIXI.TextStyle({
+            fill: "#fff7d1",
+            fontFamily: "Verdana",
+            fontSize: 12,
+            lineJoin: "round",
+            stroke: "#6f4949",
+            strokeThickness: 5,
+            wordWrap: true,
+            wordWrapWidth: 510
+        });
+        const hover = new PIXI.Text("", hoverStyle);
+        this.addChild(hover);
+        this.hoverText = hover;
+    }
+    /**
+     * Set Hover Text
+     * @param {string} str 
+     */
+    setHoverText(str) {
+        this.hoverText.text = str;
+    }
+    /**
+     * Update hover text
+     */
+    updateHoverText() {
+        this.hoverText.x = TouchInput.x - 16;
+        this.hoverText.y = TouchInput.y - 16;
+    }
+    /**
+     * Create all pages
+     */
+    createAllPages() {
+        const { iconSize, iconSpacing } = MainMenuConfig;
+        this._maxPages = MainMenuConfig.pages.length;
+        this._pages = [];
+        this._pageIconStartX = (Graphics.width - (this._maxPages * (iconSize[0] + iconSpacing) - iconSpacing)) / 2;
+        MainMenuConfig.pages.forEach((pageData, index) => {
+            this.setupPage(pageData, index);
+        })
+    }
+    /**
+     * Setup Page
+     * @param {any} pageData 
+     */
+    setupPage(pageData, index) {
+        const { iconSize, iconSpacing, pageDisplayY } = MainMenuConfig;
+        const { icon, textKey, pageClass } = pageData;
+
+        const iconSprite = new Sprite_Clickable();
+        iconSprite.bitmap = ImageManager.loadMenu(icon);
+        iconSprite.onClick = () => {
+            this.onMenuIconButtonClick(index);
+        }
+
+        iconSprite.x = this._pageIconStartX + (iconSize[0] + iconSpacing) * index;
+        iconSprite.y = MainMenuConfig.iconDisplayY;
+        this.addChild(iconSprite);
+        /** @type {Window_Base} */
+        const window = eval(pageClass);
+        window.opacity = 0;
+        window.backOpacity = 0;
+
+        const menuBGPlane = new PIXI.NineSlicePlane(PIXI.Texture.from("img/menus/MenuBG.png"), 8, 8, 8, 8);
+        menuBGPlane.width = window.innerWidth;
+        menuBGPlane.height = window.innerHeight;
+        window.addChildToBack(menuBGPlane);
+
+        window.x = (Graphics.width - window.width) / 2;
+        window.y = pageDisplayY;
+
+        this._pages.push({
+            icon: iconSprite,
+            window: window
+        })
+
+        window.visible = false;
+        iconSprite.opacity = 100;
+
+        this.addChild(window);
+    }
+    /**
+     * This will be call when player click icon button
+     * @param {number} index 
+     */
+    onMenuIconButtonClick(index) {
+        if (this._currentPageIndex == index) return;
+        this.selectPage(index);
+    }
+    /**
+     * Select page
+     * @param {number} index 
+     */
+    selectPage(index) {
+        if (index < 0) return;
+        this.unselectPage(this._currentPageIndex);
+        const { icon, window } = this._pages[index];
+        icon.startTween({ opacity: 255, offsetY: 10 }, 30).ease(Easing.easeOutExpo);
+        window.visible = true;
+        window.alpha = 0;
+        window.startTween({ offsetY: Graphics.height, alpha: 1.0 }, 30).ease(Easing.easeOutExpo);
+        this._currentPageIndex = index;
+    }
+    /**
+     * Unselect page
+     * @param {number} index 
+     */
+    unselectPage(index) {
+        if (index < 0) return;
+        const { icon, window } = this._pages[index];
+        icon.startTween({ opacity: 100 }, 10);
+        window.visible = false;
     }
     /**
      * Check if background scolling is enabled
      * @returns {boolean}
      */
     backgroundEnabled() {
-        return true;
+        return false;
     }
     /**
      * Create background
@@ -102,6 +253,7 @@ class Scene_MainMenu extends Scene_MenuBase {
         super.update();
         this.updateControl();
         this.updateSprites();
+        this.updateHoverText();
     }
 }
 
@@ -109,7 +261,7 @@ class Scene_MainMenu extends Scene_MenuBase {
 // IMPLEMENT SYSTEM IN TO RPG MAKER SYSTEM
 //==================================================================================
 
-Scene_Map.prototype.callMenu = function() {
+Scene_Map.prototype.callMenu = function () {
     AudioController.playOk();
     SceneManager.push(Scene_MainMenu);
     $gameTemp.clearDestination();

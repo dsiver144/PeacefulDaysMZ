@@ -1,16 +1,16 @@
 name,localizeKey,iconIndex,price,shipPrice,tag,stamina,levelPriceBonus,nonDiscardable
-SunflowerSeeds,SunflowerSeeds,227,0,0,seed,,,
-Sunflower,Sunflower,287,0,0,crop; flower,,,
-CarrotSeeds,CarrotSeeds,0,0,0,seed,,,
-Carrot,Carrot,0,0,0,crop; vege,5;25,,
-Hoe,Hoe,234,0,0,tool,,,true
-WateringCan,WateringCan,233,0,0,tool,,,true
-Sickle,Sickle,235,0,0,tool,,,true
-Hammer,Hammer,232,0,0,tool,,,true
-Axe,Axe,231,0,0,tool,,,true
+SunflowerSeeds,SunflowerSeeds,2,0,0,seed,,,
+Sunflower,Sunflower,18,0,0,crop; flower,,,
+CarrotSeeds,CarrotSeeds,3,0,0,seed,,,
+Carrot,Carrot,19,0,0,crop; vege,5;25,,
+Hoe,Hoe,0,0,0,tool,,,true
+WateringCan,WateringCan,0,0,0,tool,,,true
+Sickle,Sickle,0,0,0,tool,,,true
+Hammer,Hammer,0,0,0,tool,,,true
+Axe,Axe,0,0,0,tool,,,true
 Corn,Corn,,0,0,crop; grain,10;25,,
-CornSeeds,CornSeeds,,0,0,seed,,,
-OatSeeds,OatSeeds,,0,0,seed,,,
+CornSeeds,CornSeeds,4,0,0,seed,,,
+OatSeeds,OatSeeds,5,0,0,seed,,,
 OatGrain,OatGrain,,0,0,crop; grain,,,
 StrawberrySeeds,StrawberrySeeds,,0,0,seed,,,
 Strawberry,Strawberry,,0,0,crop; fruit,"7, 20",,
@@ -86,3 +86,7 @@ ArecaSapling,ArecaSapling,,0,0,sapling,,,
 OakSapling,OakSapling,,0,0,sapling,,,
 CoconutSapling,CoconutSapling,,0,0,sapling,,,
 Coconut,Coconut,,0,0,fruit,,,
+WheatSeeds,WheatSeeds,6,0,0,seed,,,
+Wheat,Wheat,22,0,0,crop; grain,,,
+RiceSeeds,RiceSeeds,7,0,0,seed,,,
+Rice,Rice,23,0,0,crop; grain,,,
