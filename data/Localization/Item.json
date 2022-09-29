@@ -1023,6 +1023,72 @@
 		}
 	},
 	{
+		"key": "FishingRod",
+		"lang": {
+			"vn": "Cần Câu Cá",
+			"en": "Fishing Rod"
+		},
+		"description": {
+			"vn": "Thả xuống các vùng nước để câu cá.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Milker",
+		"lang": {
+			"vn": "Dụng Cụ Vắt Sữa",
+			"en": "Milker"
+		},
+		"description": {
+			"vn": "Dùng để vắt sữa động vật.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Brush",
+		"lang": {
+			"vn": "Bàn Chải",
+			"en": "Brush"
+		},
+		"description": {
+			"vn": "Dùng để làm sạch cho thú nuôi.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Shears",
+		"lang": {
+			"vn": "Kéo Cắt Lông Thú",
+			"en": "Shears"
+		},
+		"description": {
+			"vn": "Dùng để thu hoạch lông thú.",
+			"en": ""
+		}
+	},
+	{
+		"key": "AnimalMed",
+		"lang": {
+			"vn": "Thuốc Cho Động Vật",
+			"en": "Animal Medicine"
+		},
+		"description": {
+			"vn": "Có thể dùng để chữa bệnh cho thú nuôi.",
+			"en": ""
+		}
+	},
+	{
+		"key": "HarvestGloves",
+		"lang": {
+			"vn": "Găng Tay Thu Hoạch",
+			"en": "Harvest Gloves"
+		},
+		"description": {
+			"vn": "Có thể dùng để thu hoạch nhiều cây trồng trên cùng 1 hàng.",
+			"en": ""
+		}
+	},
+	{
 		"key": "Lumber",
 		"lang": {
 			"vn": "Gỗ",

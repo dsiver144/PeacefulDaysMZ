@@ -3,12 +3,12 @@ SunflowerSeeds,SunflowerSeeds,2,0,0,seed,,,
 Sunflower,Sunflower,18,0,0,crop; flower,,,
 CarrotSeeds,CarrotSeeds,3,0,0,seed,,,
 Carrot,Carrot,19,0,0,crop; vege,5;25,,
-Hoe,Hoe,0,0,0,tool,,,true
-WateringCan,WateringCan,0,0,0,tool,,,true
-Sickle,Sickle,0,0,0,tool,,,true
-Hammer,Hammer,0,0,0,tool,,,true
-Axe,Axe,0,0,0,tool,,,true
-Corn,Corn,,0,0,crop; grain,10;25,,
+Hoe,Hoe,80,0,0,tool,,,true
+WateringCan,WateringCan,81,0,0,tool,,,true
+Sickle,Sickle,84,0,0,tool,,,true
+Hammer,Hammer,82,0,0,tool,,,true
+Axe,Axe,83,0,0,tool,,,true
+Corn,Corn,20,0,0,crop; grain,10;25,,
 CornSeeds,CornSeeds,4,0,0,seed,,,
 OatSeeds,OatSeeds,5,0,0,seed,,,
 OatGrain,OatGrain,,0,0,crop; grain,,,
@@ -90,3 +90,9 @@ WheatSeeds,WheatSeeds,6,0,0,seed,,,
 Wheat,Wheat,22,0,0,crop; grain,,,
 RiceSeeds,RiceSeeds,7,0,0,seed,,,
 Rice,Rice,23,0,0,crop; grain,,,
+FishingRod,FishingRod,85,0,0,tool,,,
+Milker,Milker,86,0,0,tool,,,
+Brush,Brush,87,0,0,tool,,,
+Shears,Shears,88,0,0,tool,,,
+AnimalMed,AnimalMed,89,0,0,,,,
+HarvestGloves,HarvestGloves,90,0,0,tool,,,

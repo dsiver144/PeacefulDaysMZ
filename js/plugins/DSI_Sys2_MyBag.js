@@ -83,7 +83,9 @@ class Sprite_ItemSlot extends Sprite_Clickable {
         if (curItem && curItem.id) {
             this.itemIcon.setIcon(ItemDB.get(curItem.id).iconIndex);
             this.numberSprite.bitmap.clear();
-            this.numberSprite.bitmap.drawText(curItem.quantity, 0, 40 - 12 - 2, 40 - 2, 12, 'right');
+            if (curItem.quantity > 1) {
+                this.numberSprite.bitmap.drawText(curItem.quantity, 0, 40 - 12 - 2, 40 - 2, 12, 'right');
+            }
         } else {
             if (this.itemContainer.isSlotUnlocked(this.slotIndex)) {
                 this.itemIcon.setIcon(-1);

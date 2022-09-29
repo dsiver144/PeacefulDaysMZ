@@ -87,7 +87,7 @@ class ItemBarSprite extends Sprite {
      * Refresh Bag
      */
     refresh(slotIndex) {
-        console.log("Refresh Bag At " + slotIndex, this);
+        // console.log("Refresh Bag At " + slotIndex, this);
     }
     /**
      * @inheritdoc

@@ -92,6 +92,29 @@ class ItemContainer extends SaveableObject {
         }
     }
     /**
+     * Sort the container
+     */
+    sort() {
+        let items = Array.from(this._items.values());
+        console.log([...items]);
+        items = items.sort((a, b) => {
+            const dataA = ItemDB.get(a.id);
+            const dataB = ItemDB.get(b.id);
+            if (dataA.tags[0] == 'tool' && dataB.tags[0] != 'tool') return -1;
+            if (dataA.tags[0] != 'tool' && dataB.tags[0] == 'tool') return 1;
+            if (dataA.tags[0] == 'seed' && dataB.tags[0] != 'seed') return -1;
+            if (dataA.tags[0] != 'seed' && dataB.tags[0] == 'seed') return 1;
+            if (dataA.tags[0] < dataB.tags[0]) return -1;
+            if (dataA.tags[0] > dataB.tags[0]) return 1;
+            return 0;
+        });
+        console.log([...items]);
+        items.forEach((item, index) => {
+            this._items.set(index, item);
+            this.onItemChanged(index);
+        })
+    }
+    /**
      * Get Item At specific index
      * @param {number} index 
      * @returns {GameItem}

@@ -145,6 +145,7 @@ class Window_Bag extends Window_Base {
      * Update input
      */
     updateInput() {
+        if (!this.visible) return;
         if (Input.isTriggered(MenuKeyAction.MoveDown)) {
             this.cycleRow(1);
         }
@@ -165,7 +166,7 @@ class Window_Bag extends Window_Base {
     cycleItem(direction = 1) {
         MyBag.inst.cycleItem(direction, (slotIndex) => {
             if (slotIndex >= 0) {
-                SoundManager.playOk();
+                SoundManager.playCursor();
                 this.refreshHelp(slotIndex);
             } else {
                 SoundManager.playBuzzer();
@@ -179,7 +180,7 @@ class Window_Bag extends Window_Base {
     cycleRow(direction = 1) {
         MyBag.inst.cycleRow(direction, (slotIndex) => {
             if (slotIndex >= 0) {
-                SoundManager.playOk();
+                SoundManager.playCursor();
                 this.refreshHelp(slotIndex);
             } else {
                 SoundManager.playBuzzer();

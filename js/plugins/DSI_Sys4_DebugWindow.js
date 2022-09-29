@@ -152,21 +152,16 @@ class Window_MyDebug extends Window_Command {
         MyBag.inst.addItem("WheatSeeds", 10);
         MyBag.inst.addItem("RiceSeeds", 5);
         
-        MyBag.inst.addItem("SunflowerSeeds", 99);
-        MyBag.inst.addItem("Sunflower", 99);
-        MyBag.inst.addItem("CarrotSeeds", 99);
-        MyBag.inst.addItem("Carrot", 99);
-        MyBag.inst.addItem("OatSeeds", 99);
-        MyBag.inst.addItem("WheatSeeds", 99);
-        MyBag.inst.addItem("RiceSeeds", 99);
-
-        MyBag.inst.addItem("SunflowerSeeds", 99);
-        MyBag.inst.addItem("Sunflower", 99);
-        MyBag.inst.addItem("CarrotSeeds", 99);
-        MyBag.inst.addItem("Carrot", 99);
-        MyBag.inst.addItem("OatSeeds", 99);
-        MyBag.inst.addItem("WheatSeeds", 99);
-        MyBag.inst.addItem("RiceSeeds", 99);
+        MyBag.inst.addItem("Hoe", 1);
+        MyBag.inst.addItem("WateringCan", 1);
+        MyBag.inst.addItem("Sickle", 1);
+        MyBag.inst.addItem("Hammer", 1);
+        MyBag.inst.addItem("Axe", 1);
+        MyBag.inst.addItem("FishingRod", 1);
+        MyBag.inst.addItem("Brush", 1);
+        MyBag.inst.addItem("Milker", 1);
+        MyBag.inst.addItem("Shears", 1);
+        MyBag.inst.addItem("HarvestGloves", 1);
 
         // Building.place(Coop);
 
