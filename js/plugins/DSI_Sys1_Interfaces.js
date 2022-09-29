@@ -18,6 +18,11 @@ const ToolType = {
     "hammer": "hammer",
     "axe": "axe",
     "sickle": "sickle",
+    "fishingRod": "fishingRod",
+    "milker": "milker",
+    "brush": "brush",
+    "shears": "shears",
+    "harvestGloves": "harvestGloves",
     "none": "none",
 }
 

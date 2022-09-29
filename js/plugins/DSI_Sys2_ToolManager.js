@@ -12,6 +12,17 @@
 const ToolConfig = {
     timeToCharge: 40,
     chargeTimeReduction: 20,
+    mapping: {
+        "Hoe": ToolType.hoe,
+        "WateringCan": ToolType.wateringCan,
+        "Sickle": ToolType.sickle,
+        "Hammer": ToolType.hammer,
+        "Axe": ToolType.axe,
+        "FishingRod": ToolType.fishingRod,
+        "Milker": ToolType.milker,
+        "Shears": ToolType.shears,
+        "HarvestGloves": ToolType.harvestGloves,
+    }
 }
 
 class ToolManager extends SaveableObject {
@@ -37,7 +48,15 @@ class ToolManager extends SaveableObject {
      * @returns {PD_Tool}
      */
     equippedTool() {
-        return this._tools.get(window.curTool || "hoe");
+        const item = MyBag.inst.selectingItem();
+        if (!item) return;
+        const dbItem = ItemDB.get(item.id);
+        const isSeed = dbItem.tags.includes("seed");
+        const isSapling = dbItem.tags.includes("sapling");
+        if (isSeed) return this._tools.get(ToolType.seedPack);
+        if (isSapling) return this._tools.get(ToolType.sapling);
+        const toolType = ToolConfig.mapping[item.id];
+        return this._tools.get(toolType);
     }
     /**
      * Add basic tools
@@ -116,12 +135,12 @@ class ToolManager extends SaveableObject {
     updateInput() {
         const toolUsingInput = Input.isTriggeredUsingTool();
         if (toolUsingInput > 0) {
-            const equippedTool = this.equippedTool();
-            if (!equippedTool) return;       
-            if (!equippedTool.isUsable()) return; 
-            this._toolChargeAble = equippedTool.isChargeAble();
-            this._toolChargeTime = equippedTool.chargeTime();
-            this._toolMaxChargeLevel = equippedTool.maxChargeLevel();
+            this._equippedTool = this.equippedTool();
+            if (!this._equippedTool) return;
+            if (!this._equippedTool.isUsable()) return;
+            this._toolChargeAble = this._equippedTool.isChargeAble();
+            this._toolChargeTime = this._equippedTool.chargeTime();
+            this._toolMaxChargeLevel = this._equippedTool.maxChargeLevel();
             this._toolChargedLevel = 0;
             if (toolUsingInput == 2) {
                 const px = Math.round($gamePlayer._x);
@@ -164,7 +183,7 @@ class ToolManager extends SaveableObject {
                 }
                 // console.log("Hold tool btn: ", this._pressingToolCounter);
             } else {
-                const toolType = window.curTool || "hoe";
+                const toolType = this._equippedTool.getType();
                 const pos = this._targetToolPos;
                 const power = this._toolChargedLevel;
                 console.log("POWER LEVEL: ", this._toolChargedLevel);
@@ -258,7 +277,7 @@ class PD_Tool extends SaveableObject {
         ]
     }
     /**
-     * Get I
+     * Get Item ID
      * @returns {string}
      */
     itemId() {
@@ -288,9 +307,25 @@ class PD_Tool extends SaveableObject {
      * @param {number} x X position when level 0
      * @param {number} y Y position when level 0
      * @param {number} powerCharged the power has been charged by user
+     * @param {any} toolEx extra data for the tool
      */
-    onUse(user, x, y, powerCharged) {
-        
+    onUse(user, x, y, powerCharged, toolEx) {
+
+    }
+    /**
+     * This will be called for each affected tiles.
+     * @returns {boolean}
+     */
+    checkBeforeUse() {
+        return true;
+    }
+    /**
+     * On After Using Tool
+     * Note: This will be called for each affected tiles.
+     * @param {boolean} result 
+     */
+    onAfterUse(result) {
+
     }
 }
 
@@ -300,6 +335,6 @@ class PD_Tool extends SaveableObject {
 
 var DSI_Sys2_ToolManager_Game_System_createSaveableObjects = Game_System.prototype.createSaveableObjects;
 Game_System.prototype.createSaveableObjects = function () {
-	DSI_Sys2_ToolManager_Game_System_createSaveableObjects.call(this);
+    DSI_Sys2_ToolManager_Game_System_createSaveableObjects.call(this);
     this._toolManager = new ToolManager();
 }

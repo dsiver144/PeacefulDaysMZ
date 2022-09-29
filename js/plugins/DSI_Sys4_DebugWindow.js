@@ -150,7 +150,8 @@ class Window_MyDebug extends Window_Command {
         MyBag.inst.addItem("Carrot", 99);
         MyBag.inst.addItem("OatSeeds", 55);
         MyBag.inst.addItem("WheatSeeds", 10);
-        MyBag.inst.addItem("RiceSeeds", 5);
+        MyBag.inst.addItem("AppleSapling", 2);
+        MyBag.inst.addItem("SakuraSapling", 1);
         
         MyBag.inst.addItem("Hoe", 1);
         MyBag.inst.addItem("WateringCan", 1);

@@ -47,7 +47,8 @@ class ItemContainer extends SaveableObject {
      * @returns {GameItem}
      */
     selectingItem() {
-        return this._items.get(this._selectedSlotId);
+        const item = this._items.get(this._selectedSlotId);
+        return item && item.id ? item : null;
     }
     /**
      * Cycle Item
@@ -190,7 +191,6 @@ class ItemContainer extends SaveableObject {
             const bagItem = this._items.get(slotId) || new GameItem(id, 0);
             bagItem.addQuantity(number);
             this._items.set(slotId, bagItem);
-            
             console.log(`> Container: ${bagItem.id} (${number}) has been added to #${slotId}! | Quantity: ${bagItem.quantity}`);
             this.onItemChanged(slotId);
         } else {
@@ -218,6 +218,21 @@ class ItemContainer extends SaveableObject {
                 }
             }
         };
+    }
+    /**
+     * Update item at slot id
+     * @param {string} slotId 
+     * @param {number} number 
+     */
+    updateItemWithSlotID(slotId, number) {
+        if (slotId < 0) slotId = this._selectedSlotId;
+        const item = this._items.get(slotId);
+        if (!item) return;
+        item.quantity += number;
+        if (item.quantity <= 0) {
+            this._items.delete(slotId);
+        }
+        this.onItemChanged(slotId);
     }
     /**
      * Check if this container has item with a specific amount.
@@ -316,7 +331,7 @@ class ItemContainer extends SaveableObject {
         /** @type {Map<number, GameItem>} */
         const items = new Map();
         const savedItems = data['items'];
-        for (let slotId in savedItems)  {
+        for (let slotId in savedItems) {
             let bagItem = new GameItem();
             bagItem.loadSaveData(savedItems[slotId]);
             items.set(+slotId, bagItem);

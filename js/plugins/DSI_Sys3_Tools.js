@@ -21,12 +21,15 @@ class LineTool extends PD_Tool {
      * @param {number} x X position when level 0
      * @param {number} y Y position when level 0
      * @param {number} powerCharged the power has been charged by user
+     * @param {any} toolEx extra data for the tool
      */
-    onUse(user, x, y, powerCharged) {
+    onUse(user, x, y, powerCharged, toolEx = null) {
         /** @type {Vector2[]} */
         let targetPos = this.targetPositions(user, x, y, powerCharged);
         targetPos.forEach(tile => {
-            FarmManager.inst.useTool(this.getType(), tile.x, tile.y, window.toolEx);
+            if (!this.checkBeforeUse()) return;
+            const result = FarmManager.inst.useTool(this.getType(), tile.x, tile.y, toolEx);
+            this.onAfterUse(result);
         })
     }
     /**
@@ -56,12 +59,15 @@ class AoeTool extends PD_Tool {
      * @param {number} x X position when level 0
      * @param {number} y Y position when level 0
      * @param {number} powerCharged the power has been charged by user
+     * @param {any} toolEx extra data for the tool
      */
-    onUse(user, x, y, powerCharged) {
+    onUse(user, x, y, powerCharged, toolEx) {
         /** @type {Vector2[]} */
         let targetPos = this.targetPositions(user, x, y, powerCharged);
         targetPos.forEach(tile => {
-            FarmManager.inst.useTool(this.getType(), tile.x, tile.y, window.toolEx);
+            if (!this.checkBeforeUse()) return;
+            const result = FarmManager.inst.useTool(this.getType(), tile.x, tile.y, toolEx);
+            this.onAfterUse(result);
         })
     }
     /**
@@ -108,6 +114,33 @@ class Hoe extends LineTool {
 
 class SeedPack extends LineTool {
     /**
+     * Use Tool
+     * @param {Game_CharacterBase} user
+     * @param {number} x X position when level 0
+     * @param {number} y Y position when level 0
+     * @param {number} powerCharged the power has been charged by user
+     * @param {any} toolEx extra data for the tool
+     */
+    onUse(user, x, y, powerCharged, toolEx) {
+        const item = MyBag.inst.selectingItem();
+        super.onUse(user, x, y, powerCharged, item.id);
+    }
+    /**
+     * @inheritdoc
+     */
+    checkBeforeUse() {
+        const item = MyBag.inst.selectingItem();
+        return !!item;
+    }
+    /**
+     * @inheritdoc
+     */
+    onAfterUse(result) {
+        if (result) {
+            MyBag.inst.updateItemWithSlotID(-1, -1);
+        }
+    }
+    /**
      * @inheritdoc
      */
     getType() {
@@ -117,9 +150,36 @@ class SeedPack extends LineTool {
 
 class TreeSapling extends LineTool {
     /**
+     * Use Tool
+     * @param {Game_CharacterBase} user
+     * @param {number} x X position when level 0
+     * @param {number} y Y position when level 0
+     * @param {number} powerCharged the power has been charged by user
+     * @param {any} toolEx extra data for the tool
+     */
+    onUse(user, x, y, powerCharged, toolEx) {
+        const item = MyBag.inst.selectingItem();
+        super.onUse(user, x, y, powerCharged, item.id);
+    }
+    /**
      * @inheritdoc
      */
-     getType() {
+    checkBeforeUse() {
+        const item = MyBag.inst.selectingItem();
+        return !!item;
+    }
+    /**
+     * @inheritdoc
+     */
+    onAfterUse(result) {
+        if (result) {
+            MyBag.inst.updateItemWithSlotID(-1, -1);
+        }
+    }
+    /**
+     * @inheritdoc
+     */
+    getType() {
         return ToolType.sapling;
     }
 }
