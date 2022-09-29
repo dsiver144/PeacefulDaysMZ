@@ -146,16 +146,16 @@ class Window_Bag extends Window_Base {
      */
     updateInput() {
         if (!this.visible) return;
-        if (Input.isTriggered(MenuKeyAction.MoveDown)) {
+        if (Input.isRepeated(MenuKeyAction.MoveDown)) {
             this.cycleRow(1);
         }
-        if (Input.isTriggered(MenuKeyAction.MoveUp)) {
+        if (Input.isRepeated(MenuKeyAction.MoveUp)) {
             this.cycleRow(-1);
         }
-        if (Input.isTriggered(MenuKeyAction.MoveLeft)) {
+        if (Input.isRepeated(MenuKeyAction.MoveLeft)) {
             this.cycleItem(-1);
         }
-        if (Input.isTriggered(MenuKeyAction.MoveRight)) {
+        if (Input.isRepeated(MenuKeyAction.MoveRight)) {
             this.cycleItem(1);
         }
     }
