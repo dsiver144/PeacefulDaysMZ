@@ -142,11 +142,57 @@ class Window_Bag extends Window_Base {
         }
     }
     /**
+     * Update input
+     */
+    updateInput() {
+        if (Input.isTriggered(MenuKeyAction.MoveDown)) {
+            this.cycleRow(1);
+        }
+        if (Input.isTriggered(MenuKeyAction.MoveUp)) {
+            this.cycleRow(-1);
+        }
+        if (Input.isTriggered(MenuKeyAction.MoveLeft)) {
+            this.cycleItem(-1);
+        }
+        if (Input.isTriggered(MenuKeyAction.MoveRight)) {
+            this.cycleItem(1);
+        }
+    }
+    /**
+     * Cycle Item Left Or Right
+     * @param {number} direction 
+     */
+    cycleItem(direction = 1) {
+        MyBag.inst.cycleItem(direction, (slotIndex) => {
+            if (slotIndex >= 0) {
+                SoundManager.playOk();
+                this.refreshHelp(slotIndex);
+            } else {
+                SoundManager.playBuzzer();
+            }
+        })
+    }
+    /**
+     * Cycle Row Up Or Down
+     * @param {number} direction 
+     */
+    cycleRow(direction = 1) {
+        MyBag.inst.cycleRow(direction, (slotIndex) => {
+            if (slotIndex >= 0) {
+                SoundManager.playOk();
+                this.refreshHelp(slotIndex);
+            } else {
+                SoundManager.playBuzzer();
+            }
+        })
+    }
+    /**
      * @inheritdoc
      */
     update() {
         super.update();
         this.updateHoverText();
+        this.updateInput();
     }
 }
 

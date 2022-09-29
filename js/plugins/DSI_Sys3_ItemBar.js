@@ -147,36 +147,32 @@ class ItemBarSprite extends Sprite {
      * @param {number} direction 
      */
     cycleItem(direction = 1) {
-        const currentRowIndex = MyBag.inst.currentRowIndex;
-        const maxRowItems = ContainerConfig.maxSlotPerRow;
-        const startIndex = currentRowIndex * maxRowItems;
-        const endIndex = startIndex + maxRowItems - 1;
-        let index = MyBag.inst._selectedSlotId + direction;
-        if (index < startIndex) index = endIndex;
-        if (index > endIndex) index = startIndex;
-        this.onItemSlotClick(index);
+        MyBag.inst.cycleItem(direction, (slotIndex) => {
+            if (slotIndex >= 0) {
+                SoundManager.playCursor();
+            } else {
+                SoundManager.playBuzzer();
+            }
+        })
     }
     /**
      * Cycle Row Up Or Down
      * @param {number} direction 
      */
     cycleRow(direction = 1) {
-        if (MyBag.inst._unlockedRows < 2) return;
-        const maxSlotIndex = (MyBag.inst._unlockedRows * ContainerConfig.maxSlotPerRow) - 1;
-        let index = MyBag.inst._selectedSlotId + ContainerConfig.maxSlotPerRow * direction;
-        if (index > maxSlotIndex) {
-            index = index - maxSlotIndex - 1;
-        }
-        if (index < 0) {
-            index = maxSlotIndex + index + 1;
-        }
-        this.onItemSlotClick(Math.abs(index));
-        const currentRowIndex = MyBag.inst.currentRowIndex;
-        const maxRowItems = ContainerConfig.maxSlotPerRow;
-        const startIndex = currentRowIndex * maxRowItems;
-        this._slots.forEach((slot, i) => {
-            slot.slotIndex = startIndex + i;
-            slot.refresh();
+        MyBag.inst.cycleRow(direction, (slotIndex) => {
+            if (slotIndex >= 0) {
+                SoundManager.playCursor();
+                const currentRowIndex = MyBag.inst.currentRowIndex;
+                const maxRowItems = ContainerConfig.maxSlotPerRow;
+                const startIndex = currentRowIndex * maxRowItems;
+                this._slots.forEach((slot, i) => {
+                    slot.slotIndex = startIndex + i;
+                    slot.refresh();
+                });
+            } else {
+                SoundManager.playBuzzer();
+            }
         });
     }
 }

@@ -50,6 +50,48 @@ class ItemContainer extends SaveableObject {
         return this._items.get(this._selectedSlotId);
     }
     /**
+     * Cycle Item
+     * @param {number} direction 
+     * @param {(slotIndex: number) => void} callback 
+     */
+    cycleItem(direction = 1, callback) {
+        const currentRowIndex = this.currentRowIndex;
+        const maxRowItems = ContainerConfig.maxSlotPerRow;
+        const startIndex = currentRowIndex * maxRowItems;
+        const endIndex = startIndex + maxRowItems - 1;
+        let index = this._selectedSlotId + direction;
+        if (index < startIndex) index = endIndex;
+        if (index > endIndex) index = startIndex;
+        if (this.isSlotUnlocked(index)) {
+            this.select(index);
+            callback(index);
+        } else {
+            callback(-1);
+        }
+    }
+    /**
+     * Cycle Row Up Or Down
+     * @param {number} direction 
+     * @param {(slotIndex: number) => void} callback 
+     */
+    cycleRow(direction = 1, callback) {
+        if (this._unlockedRows < 2) return;
+        const maxSlotIndex = (this._unlockedRows * ContainerConfig.maxSlotPerRow) - 1;
+        let index = this._selectedSlotId + ContainerConfig.maxSlotPerRow * direction;
+        if (index > maxSlotIndex) {
+            index = index - maxSlotIndex - 1;
+        }
+        if (index < 0) {
+            index = maxSlotIndex + index + 1;
+        }
+        if (this.isSlotUnlocked(index)) {
+            this.select(index);
+            callback(index);
+        } else {
+            callback(-1);
+        }
+    }
+    /**
      * Get Item At specific index
      * @param {number} index 
      * @returns {GameItem}
