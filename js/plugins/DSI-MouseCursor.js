@@ -31,7 +31,6 @@
     emptyStyle.innerHTML = 'body { cursor: none; }';
     // Hide default cursor.
     styleParent.appendChild(emptyStyle);
-
     class Sprite_Mouse extends Sprite {
         /**
          * Sprite Mouse
@@ -76,10 +75,12 @@
         DSI_MouseCursor_Graphics__createPixiApp.call(this, stage);
         this._app.render = function () {
             this.stage.addChild(customMouseSprite);
-            customMouseSprite.update();
             this.renderer.render(this.stage);
             this.stage.removeChild(customMouseSprite);
         }
+        this._app.ticker.add(() => {
+            customMouseSprite.update();
+        })
     }
 
 })();
