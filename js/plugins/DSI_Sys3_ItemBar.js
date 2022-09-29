@@ -160,6 +160,7 @@ class ItemBarSprite extends Sprite {
      * @param {number} direction 
      */
     cycleRow(direction = 1) {
+        if (this.hasTween()) return;
         MyBag.inst.cycleRow(direction, (slotIndex) => {
             if (slotIndex >= 0) {
                 SoundManager.playCursor();
@@ -170,6 +171,7 @@ class ItemBarSprite extends Sprite {
                     slot.slotIndex = startIndex + i;
                     slot.refresh();
                 });
+                this.startTween({offsetY: 5}, 5).ease(Easing.easeInOutBack);
             } else {
                 SoundManager.playBuzzer();
             }
