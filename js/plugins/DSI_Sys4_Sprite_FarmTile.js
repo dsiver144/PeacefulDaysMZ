@@ -70,16 +70,25 @@ class Sprite_FarmTile extends Sprite_FarmObject {
     /**
      * @inheritdoc
      */
-    refreshBitmap() {
+    refreshBitmap(type = "") {
+        this.refreshSoil();
+        if (type == "soil") {
+            return;
+        }
+        // Refresh crop sprite
+        if (this.refreshDead()) return;
+        if (this.refreshNormal()) return;
+        this.bitmap = null;
+    }
+    /**
+     * Refresh soil
+     */
+    refreshSoil() {
         /** @type {FarmTile} */
         const farmTile = this.farmTile();
         // Refresh water image for soil sprite
         const waterRectX = farmTile.isWatered ? 32 : 0;
         this._soilSprite.setFrame(waterRectX, 0, 32, 32);
-        // Refresh crop sprite
-        if (this.refreshDead()) return;
-        if (this.refreshNormal()) return;
-        this.bitmap = null;
     }
     /**
      * Refresh on dead state

@@ -39,7 +39,7 @@ class Sprite_FarmObstacle extends Sprite_FarmObject {
     /**
      * @inheritdoc
      */
-    refreshBitmap() {
+    refreshBitmap(type = "") {
         const obstacle = this.obstacle();
         this.displayOffset = obstacle.displayOffset();
         this.bitmap = ImageManager.loadFarm(obstacle.imageFile());

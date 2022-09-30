@@ -91,7 +91,7 @@ class FarmTile extends FarmObject {
     applyWater() {
         this.isWatered = true;
         this.nonWaterDays = 0;
-        this.refreshSprite();
+        this.refreshSprite('soil');
     }
     /**
      * Apply Seed

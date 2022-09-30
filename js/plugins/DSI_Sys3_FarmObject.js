@@ -200,10 +200,11 @@ class FarmObject extends SaveableObject {
     }
     /**
      * Refresh object sprite
+     * @param {string} type
      */
-    refreshSprite() {
+    refreshSprite(type = "") {
         const sprite = this.objectSprite();
-        sprite && sprite.refreshBitmap();
+        sprite && sprite.refreshBitmap(type);
     }
     /**
      * Remove sprite

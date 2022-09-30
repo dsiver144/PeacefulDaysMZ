@@ -43,8 +43,9 @@ class Sprite_FarmObject extends Sprite_Shakeable {
     }
     /**
      * Refresh bitmap
+     * @param {string} type
      */
-    refreshBitmap() {
+    refreshBitmap(type = "") {
         this.bitmap = ImageManager.loadFarm("StonePath", "decorators");
         this.setFrame(0, 0, 32, 32);
     }
