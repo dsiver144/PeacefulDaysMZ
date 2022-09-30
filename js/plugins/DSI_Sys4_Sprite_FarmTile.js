@@ -132,6 +132,7 @@ class Sprite_FarmTile extends Sprite_FarmObject {
                 this.setFade(true);
             }
         } else {
+            this._soilSprite.opacity = 255;
             this._customScreenZ = farmTile.currentStage > 0 ? 3 : 1;
             this.setOffscreenLimit(1, 2);
         }

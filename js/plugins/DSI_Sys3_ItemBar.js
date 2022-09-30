@@ -109,6 +109,7 @@ class ItemBarSprite extends Sprite {
     update() {
         super.update();
         this.updateInput();
+        this.updateMouseWheel();
     }
     /**
      * Update input
@@ -130,6 +131,19 @@ class ItemBarSprite extends Sprite {
         }
         if (Input.isTriggered(FieldKeyAction.SwitchItemRowDown)) {
             this.cycleRow(1);
+        }
+    }
+    /**
+     * Update Mouse Wheel
+     */
+    updateMouseWheel() {
+        const threshold = 20;
+        const holdingAlt = Input.checkKeyState(18);
+        if (TouchInput.wheelY >= threshold) {
+            !holdingAlt ? this.cycleItem(1) : this.cycleRow(1);
+        }
+        if (TouchInput.wheelY <= -threshold) {
+            !holdingAlt ? this.cycleItem(-1) : this.cycleRow(-1);
         }
     }
     /**
@@ -180,7 +194,7 @@ class ItemBarSprite extends Sprite {
 }
 
 class Sprite_ItemBarSlot extends Sprite_ItemSlot {
-    static slotNames = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '='];
+    static slotNames = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
     /**
      * Sprite_ItemBarSlot
      * @param {number} slotIndex 

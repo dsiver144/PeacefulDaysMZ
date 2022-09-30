@@ -83,6 +83,12 @@ class FarmObject extends SaveableObject {
         this.onSpawned();
     }
     /**
+     * Call this to remove this object from its farmland
+     */
+    removeSelf() {
+        FarmManager.inst.getFarmlandById(this.mapId).removeObject(this);
+    }
+    /**
      * Remove
      */
     remove() {

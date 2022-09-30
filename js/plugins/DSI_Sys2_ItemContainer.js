@@ -184,7 +184,7 @@ class ItemContainer extends SaveableObject {
     addItem(id, number) {
         if (ItemDB.get(id) == null) {
             console.log('There is no ' + id + ' in Item Database!');
-            return;
+            return false;
         }
         const slotId = this.findAvailableSlotId(id, number);
         if (slotId >= 0) {
@@ -193,9 +193,11 @@ class ItemContainer extends SaveableObject {
             this._items.set(slotId, bagItem);
             console.log(`> Container: ${bagItem.id} (${number}) has been added to #${slotId}! | Quantity: ${bagItem.quantity}`);
             this.onItemChanged(slotId);
+            return true;
         } else {
             console.log(`> Container: Can't not add ${id} (${number})`);
         }
+        return false;
     }
     /**
      * Remove Item

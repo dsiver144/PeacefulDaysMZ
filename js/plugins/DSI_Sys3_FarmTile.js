@@ -54,7 +54,7 @@ class FarmTile extends FarmObject {
                 break;
             case ToolType.hammer:
                 if (this.hasSeed()) return false;
-                FarmManager.inst.getFarmlandById(this.mapId).removeObject(this);
+                this.removeSelf();
                 break;
             case ToolType.axe:
                 if (!this.isTree()) return false;
@@ -73,6 +73,7 @@ class FarmTile extends FarmObject {
         if (this.hp <= 0) {
             this.reset();
             this.refreshSprite();
+            this.removeSelf();
         } else {
             this.shakeSprite(0.05);
         }
@@ -184,6 +185,7 @@ class FarmTile extends FarmObject {
      */
     isFullyGrownUp() {
         if (!this.hasSeed()) return false;
+        if (this.isDead()) return false;
         const { stages } = this.seedData();
         return this.currentStage == stages.length;
     }
@@ -230,6 +232,11 @@ class FarmTile extends FarmObject {
             return false; 
         }
         console.log("Harvest ", productID, toolType, this.seedId);
+        const number = 1;
+        const addResult = MyBag.inst.addItem(productID, number);
+        if (!addResult) {
+            return false;
+        }
         if (this.isTree()) {
             this.resetToTargetedStage();
         } else {
