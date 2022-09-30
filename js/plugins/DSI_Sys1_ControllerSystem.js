@@ -61,6 +61,13 @@ const DebugKeyAction = {
     "DebugMenu": "debugMenu"
 }
 
+const BlockKeyCodes = [
+    18, // Alt
+    48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 189, 187, // Num Keys
+    256, 258, // Mouse Buttons
+
+]
+
 const DefaultKeyboardConfig = {}
 DefaultKeyboardConfig[FieldKeyAction.MoveUp] = 87;
 DefaultKeyboardConfig[FieldKeyAction.MoveLeft] = 65;

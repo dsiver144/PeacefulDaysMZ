@@ -5739,9 +5739,10 @@ Input.update = function() {
 Input.isPressed = function(keyName) {
     const code = Input.keyMapper[keyName];
     const code2 = Input.gamepadMapper[keyName];
+    const inputMode = this.getInputMode();
     const keyboard = code != null && !!this._currentState[code.toString()];
     const gamepad = code2 != null && !!this._currentState[code2.toString()];
-    return keyboard || gamepad;
+    return inputMode == "keyboard" && keyboard || inputMode == "gamepad" && gamepad;
 };
 
 /**
@@ -5753,9 +5754,10 @@ Input.isPressed = function(keyName) {
 Input.isTriggered = function(keyName) {
     const code = Input.keyMapper[keyName];
     const code2 = Input.gamepadMapper[keyName];
+    const inputMode = this.getInputMode();
     const keyboard = code != null && this._latestButton === code.toString() && this._pressedTime === 0;
     const gamepad = code2 != null && this._latestButton === code2.toString() && this._pressedTime === 0;
-    return keyboard || gamepad;
+    return inputMode == "keyboard" && keyboard || inputMode == "gamepad" && gamepad;
 };
 
 /**
@@ -5767,6 +5769,7 @@ Input.isTriggered = function(keyName) {
 Input.isRepeated = function(keyName) {
     const code = Input.keyMapper[keyName];
     const code2 = Input.gamepadMapper[keyName];
+    const inputMode = this.getInputMode();
     const keyboard = code != null && this._latestButton === code.toString() &&
                 (this._pressedTime === 0 ||
                     (this._pressedTime >= this.keyRepeatWait &&
@@ -5775,7 +5778,7 @@ Input.isRepeated = function(keyName) {
                 (this._pressedTime === 0 ||
                     (this._pressedTime >= this.keyRepeatWait &&
                         this._pressedTime % this.keyRepeatInterval === 0))
-    return keyboard || gamepad;
+    return inputMode == "keyboard" && keyboard || inputMode == "gamepad" && gamepad;
 };
 
 /**
@@ -5787,11 +5790,12 @@ Input.isRepeated = function(keyName) {
 Input.isLongPressed = function(keyName) {
     const code = Input.keyMapper[keyName];
     const code2 = Input.gamepadMapper[keyName];
+    const inputMode = this.getInputMode();
     const keyboard = code != null && this._latestButton === code.toString() &&
                         this._pressedTime >= this.keyRepeatWait;
     const gamepad = code2 != null && this._latestButton === code2.toString() &&
                         this._pressedTime >= this.keyRepeatWait;
-    return keyboard || gamepad;
+    return inputMode == "keyboard" && keyboard || inputMode == "gamepad" && gamepad;
 };
 
 /**
@@ -5845,6 +5849,10 @@ Input._setupEventHandlers = function() {
     document.addEventListener("keyup", this._onKeyUp.bind(this));
     window.addEventListener("blur", this._onLostFocus.bind(this));
 };
+
+Input.checkKeyState = function(keyCode) {
+    return this._currentState[keyCode];
+}
 
 Input._onKeyDown = function(event) {
     if (this._shouldPreventDefault(event.keyCode)) {
