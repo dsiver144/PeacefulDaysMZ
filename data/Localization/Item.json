@@ -2,7 +2,7 @@
 	{
 		"key": "SunflowerSeeds",
 		"lang": {
-			"vn": "Hạt giống H.H.Dương",
+			"vn": "Hạt Giống H.H.Dương",
 			"en": "Sunflower Seeds"
 		},
 		"description": {
@@ -24,7 +24,7 @@
 	{
 		"key": "CarrotSeeds",
 		"lang": {
-			"vn": "Hạt giống Cà Rốt",
+			"vn": "Hạt Giống Cà Rốt",
 			"en": "Carrot Seeds"
 		},
 		"description": {
@@ -90,7 +90,7 @@
 	{
 		"key": "CornSeeds",
 		"lang": {
-			"vn": "Hạt giống Bắp",
+			"vn": "Hạt Giống Bắp",
 			"en": "Corn Seeds"
 		},
 		"description": {
@@ -1212,7 +1212,7 @@
 	{
 		"key": "GoldBar",
 		"lang": {
-			"vn": "Thanh Vàng Nguyên Chất",
+			"vn": "Thanh Vàng",
 			"en": "Gold Bar"
 		},
 		"description": {
