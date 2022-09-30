@@ -3,8 +3,9 @@ class Window_ItemContainer extends Window_Base {
      * This class handle bag menu display for Peaceful Days
      * @param {ItemContainer} container
      */
-    constructor(container) {
-        super(new Rectangle(0, 0, 560, 360));
+    constructor(container, rect = new Rectangle(0, 0, 560, 360)) {
+        super(rect);
+        /** @type {ItemContainer} */
         this.itemContainer = container;
         this.create();
     }
@@ -14,7 +15,7 @@ class Window_ItemContainer extends Window_Base {
     create() {
         this.createAllSlots();
         this.createHelp();
-        this.refreshHelp(MyBag.inst._selectedSlotId);
+        this.refreshHelp(this.itemContainer._selectedSlotId);
     }
     /**
      * Create all slots
@@ -95,6 +96,7 @@ class Window_ItemContainer extends Window_Base {
      * @param {number} slotIndex 
      */
     refreshHelp(slotIndex) {
+        if (!this.titleText) return;
         this.contents.clear();
         const itemData = this.itemLocalizeDataAt(slotIndex);
         this.titleText.text = itemData.name;
@@ -126,8 +128,15 @@ class Window_ItemContainer extends Window_Base {
             return;
         }
         SoundManager.playCursor();
+        this.onSlotClickSuccess(this.itemContainer._selectedSlotId, slotIndex);
         this.itemContainer.select(slotIndex);
         this.refreshHelp(slotIndex);
+    }
+    /**
+     * Will be called after successfully select a slot
+     */
+    onSlotClickSuccess(lastSlotIndex, slotIndex) {
+
     }
     /**
      * On Item Slot Click

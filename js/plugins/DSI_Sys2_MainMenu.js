@@ -206,8 +206,8 @@ class Scene_MainMenu extends Scene_MenuBase {
      * Update control
      */
     updateControl() {
+        if (this._returningToMap) return;
         if (Input.isTriggered(FieldKeyAction.Menu) || Input.isTriggered(FieldKeyAction.Cancel)) {
-            if (this._returningToMap) return;
             if (this.canReturnToMap()) {
                 this.returnToMap();
             } else {

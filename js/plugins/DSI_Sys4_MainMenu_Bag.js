@@ -6,4 +6,3 @@ class Window_Bag extends Window_ItemContainer {
         super(MyBag.inst);
     }
 }
-

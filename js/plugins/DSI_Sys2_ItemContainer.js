@@ -33,6 +33,10 @@ class ItemContainer extends SaveableObject {
         this._name = '';
         /** @type {number} */
         this._selectedSlotId = 0;
+        /** @type {number} */
+        this._previewSlotId = 0;
+        /** @type {string} */
+        this._containerId = MyUtils.uuid();
     }
     /**
      * Select a slot
@@ -43,11 +47,27 @@ class ItemContainer extends SaveableObject {
         this.onItemChanged(slotId);
     }
     /**
+     * Preview a slot
+     * @param {number} slotId 
+     */
+    preview(slotId) {
+        this._previewSlotId = slotId;
+        this.onItemChanged(slotId);
+    }
+    /**
      * Get selecting item
      * @returns {GameItem}
      */
     selectingItem() {
         const item = this._items.get(this._selectedSlotId);
+        return item && item.id ? item : null;
+    }
+    /**
+     * Get previewing item
+     * @returns {GameItem}
+     */
+    previewingItem() {
+        const item = this._items.get(this._previewSlotId);
         return item && item.id ? item : null;
     }
     /**
@@ -139,6 +159,7 @@ class ItemContainer extends SaveableObject {
             ["_pageIndex", 0],
             ["_name", ''],
             ["_selectedIndex", 0],
+            ["_containerId", ''],
         ]
     }
     /**
@@ -167,7 +188,7 @@ class ItemContainer extends SaveableObject {
      * @returns {string}
      */
     onContainerItemChangedEventName() {
-        return null;
+        return `onContainer_${this._containerId}_itemChanged`;
     }
     /**
      * On Item Changed

@@ -36,6 +36,11 @@ class Window_MyDebug extends Window_Command {
     makeCommandList() {
         // if (!this._options) return;
         this.addOption('Save', 'save', this.onSaveCommand.bind(this));
+        this.addOption('Chest', 'chest', () => {
+            window['chest'] ||= new ItemContainer(1);
+            SceneManager.push(Scene_Chest);
+            SceneManager.prepareNextScene(window['chest'], MyBag.inst);
+        });
         this.addOption('Wallhack', 'wallHack', this.onWallHack.bind(this));
         this.addOption('Always Water', 'water', this.onWaterHack.bind(this));
         this.addOption('Ignore Crop Season', 'seasonHack', this.onSeasonHack.bind(this));
