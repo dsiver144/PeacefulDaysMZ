@@ -117,7 +117,6 @@ class ItemContainer extends SaveableObject {
      */
     sort() {
         let items = Array.from(this._items.values());
-        console.log([...items]);
         items = items.sort((a, b) => {
             const dataA = ItemDB.get(a.id);
             const dataB = ItemDB.get(b.id);
@@ -129,7 +128,7 @@ class ItemContainer extends SaveableObject {
             if (dataA.tags[0] > dataB.tags[0]) return 1;
             return 0;
         });
-        console.log([...items]);
+        this._items.clear();
         items.forEach((item, index) => {
             this._items.set(index, item);
             this.onItemChanged(index);

@@ -60,18 +60,6 @@ class Scene_MainMenu extends Scene_MenuBase {
      * Create all neccessary objects
      */
     createAllObjects() {
-        // const button1 = new Sprite_KeyHint(MenuKeyAction.Confirm);
-        // button1.setImage(null, 0);
-        // const button2 = new Sprite_KeyHint(MenuKeyAction.Cancel);
-        // button2.setImage(null, 0);
-
-        // this.addChild(button1);
-        // this.addChild(button2);
-        // button1.x = 100;
-        // button1.y = 100;
-        // button2.x = 400;
-        // button2.y = 100;
-
         this.createAllPages();
     }
     /**

@@ -42,6 +42,12 @@ const MenuKeyAction = {
     "PageRight": "menu_pageright",
 }
 /** @enum */
+const ContainerMenuKeyAction = {
+    "Switch": "container_menu_switch",
+    "Sort": "container_menu_sort",
+    "ToggleMode": "container_menu_toggle_mode",
+}
+/** @enum */
 const NumKeys = {
     "N1": "num1",
     "N2": "num2",
@@ -96,6 +102,10 @@ DefaultKeyboardConfig[MenuKeyAction.MoveLeft] = 65;
 DefaultKeyboardConfig[MenuKeyAction.MoveRight] = 68;
 DefaultKeyboardConfig[MenuKeyAction.MoveDown] = 83;
 
+DefaultKeyboardConfig[ContainerMenuKeyAction.Switch] = 9;
+DefaultKeyboardConfig[ContainerMenuKeyAction.Sort] = 82;
+DefaultKeyboardConfig[ContainerMenuKeyAction.ToggleMode] = 84;
+
 DefaultKeyboardConfig[DebugKeyAction.DebugMenu] = 192;
 DefaultKeyboardConfig[NumKeys.N1] = 49;
 DefaultKeyboardConfig[NumKeys.N2] = 50;
@@ -134,6 +144,10 @@ DefaultGamePadConfig[MenuKeyAction.MoveUp] = 12;
 DefaultGamePadConfig[MenuKeyAction.MoveDown] = 13;
 DefaultGamePadConfig[MenuKeyAction.MoveLeft] = 14;
 DefaultGamePadConfig[MenuKeyAction.MoveRight] = 15;
+
+DefaultGamePadConfig[ContainerMenuKeyAction.Switch] = 3;
+DefaultGamePadConfig[ContainerMenuKeyAction.Sort] = 8;
+DefaultGamePadConfig[ContainerMenuKeyAction.ToggleMode] = 2;
 
 for (var i in DefaultKeyboardConfig) {
     // console.log(i, KeyCodeToNameConverter[DefaultKeyboardConfig[i]]);

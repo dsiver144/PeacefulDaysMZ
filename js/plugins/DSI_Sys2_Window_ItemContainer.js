@@ -96,11 +96,21 @@ class Window_ItemContainer extends Window_Base {
      * @param {number} slotIndex 
      */
     refreshHelp(slotIndex) {
-        if (!this.titleText) return;
-        this.contents.clear();
         const itemData = this.itemLocalizeDataAt(slotIndex);
-        this.titleText.text = itemData.name;
-        this.hoverText.text = itemData.description;
+        if (this.titleText) {
+            this.titleText.text = itemData.name;
+        }
+        if (this.hoverText) {
+            this.hoverText.text = itemData.description;
+        }
+        this.onRefreshHelp(itemData);
+    }
+    /**
+     * On Refresh Help
+     * @param {{name: string, description: string}} itemData 
+     */
+    onRefreshHelp(itemData) {
+
     }
     /**
      * Get localize item data at slot
@@ -124,10 +134,10 @@ class Window_ItemContainer extends Window_Base {
      */
     onItemSlotClick(slotIndex) {
         if (!this.itemContainer.isSlotUnlocked(slotIndex)) {
-            SoundManager.playBuzzer();
+            AudioController.playBuzzer();
             return;
         }
-        SoundManager.playCursor();
+        AudioController.playCursor();
         this.onSlotClickSuccess(this.itemContainer._selectedSlotId, slotIndex);
         this.itemContainer.select(slotIndex);
         this.refreshHelp(slotIndex);
@@ -146,7 +156,15 @@ class Window_ItemContainer extends Window_Base {
         if (index >= 0) {
             const itemData = this.itemLocalizeDataAt(index);
             MouseCursor.setHoverText(itemData.name);
+            this.onSlotHoverSuccess(itemData);
         }
+    }
+    /**
+     * On Slot Hover Success
+     * @param {{name: string, description: string}} itemData 
+     */
+    onSlotHoverSuccess(itemData) {
+
     }
     /**
      * Update hover text
@@ -163,6 +181,7 @@ class Window_ItemContainer extends Window_Base {
      */
     updateInput() {
         if (!this.visible) return;
+        if (!this.canInput()) return;
         if (Input.isRepeated(MenuKeyAction.MoveDown)) {
             this.cycleRow(1);
         }
@@ -175,6 +194,20 @@ class Window_ItemContainer extends Window_Base {
         if (Input.isRepeated(MenuKeyAction.MoveRight)) {
             this.cycleItem(1);
         }
+        if (Input.isTriggered(ContainerMenuKeyAction.Sort)) {
+            AudioController.playSelect();
+            this.itemContainer.sort();
+        }
+        if (Input.isTriggered(MenuKeyAction.Confirm)) {
+            this.onItemSlotClick(this.itemContainer._selectedSlotId);
+        }
+    }
+    /**
+     * Can Input
+     * @returns {boolean}
+     */
+    canInput() {
+        return true;
     }
     /**
      * Cycle Item Left Or Right
@@ -183,10 +216,10 @@ class Window_ItemContainer extends Window_Base {
     cycleItem(direction = 1) {
         this.itemContainer.cycleItem(direction, (slotIndex) => {
             if (slotIndex >= 0) {
-                SoundManager.playCursor();
+                AudioController.playCursor();
                 this.refreshHelp(slotIndex);
             } else {
-                SoundManager.playBuzzer();
+                AudioController.playBuzzer();
             }
         })
     }
@@ -197,10 +230,10 @@ class Window_ItemContainer extends Window_Base {
     cycleRow(direction = 1) {
         this.itemContainer.cycleRow(direction, (slotIndex) => {
             if (slotIndex >= 0) {
-                SoundManager.playCursor();
+                AudioController.playCursor();
                 this.refreshHelp(slotIndex);
             } else {
-                SoundManager.playBuzzer();
+                AudioController.playBuzzer();
             }
         })
     }
