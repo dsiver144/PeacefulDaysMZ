@@ -128,7 +128,7 @@ class Window_Bag extends Window_Base {
     onItemSlotHover(index) {
         if (index >= 0) {
             const itemData = this.itemLocalizeDataAt(index);
-            SceneManager._scene.setHoverText(itemData.name);
+            MouseCursor.setHoverText(itemData.name);
         }
     }
     /**
@@ -138,7 +138,7 @@ class Window_Bag extends Window_Base {
         const {x, y} = TouchInput;
         if (x <= this.x || x >= this.x + this.width - this.padding * 2 ||
             y <= this.y || y >= this.y + 180) {
-            SceneManager._scene.setHoverText("");
+            MouseCursor.clearHoverText();
         }
     }
     /**
@@ -194,6 +194,13 @@ class Window_Bag extends Window_Base {
         super.update();
         this.updateHoverText();
         this.updateInput();
+    }
+    /**
+     * @inheritdoc
+     */
+    deactivate() {
+        super.deactivate();
+        MouseCursor.clearHoverText();
     }
 }
 

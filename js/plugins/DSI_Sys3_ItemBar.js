@@ -60,6 +60,12 @@ class ItemBarSprite extends Sprite {
         MyBag.inst.currentRowItems().forEach((item, i) => {
             const slot = new Sprite_ItemBarSlot(startIndex + i, MyBag.inst, i);
             this.addChild(slot);
+            slot.onMouseEnter = () => {
+                this.onItemSlotHover(slot.slotIndex);
+            }
+            slot.onMouseExit = () => {
+                this.onItemSlotHover(-1);
+            }
             slot.x = startX + (i % maxRowItems) * (slotSize.x + spacing);
             slot.y = startY + Math.floor(i / maxRowItems) * (slotSize.y + spacing);
             slot.onClick = () => {
@@ -68,6 +74,43 @@ class ItemBarSprite extends Sprite {
             this._slots.push(slot);
         });
         this.width = maxRowItems * (slotSize.x + spacing) - spacing;
+        this.height = 48;
+    }
+    /**
+     * On Item Slot Click
+     * @param {number} index 
+     */
+     onItemSlotHover(index) {
+        if (index >= 0) {
+            const itemData = this.itemLocalizeDataAt(index);
+            MouseCursor.setHoverText(itemData.name);
+        }
+    }
+    /**
+     * Get localize item data at slot
+     * @param {number} slotIndex 
+     * @returns 
+     */
+     itemLocalizeDataAt(slotIndex) {
+        const item = MyBag.inst.item(slotIndex);
+        const itemData = item ? LocalizeManager.item(item.id) : null;
+        if (itemData) {
+            return itemData;
+        }
+        if (MyBag.inst.isSlotUnlocked(slotIndex)) {
+            return {name: LocalizeManager.t("Lbl_Empty"), description: LocalizeManager.t("Lbl_EmptySlotDesc")};
+        }
+        return {name: LocalizeManager.t("Lbl_Locked"), description: ''};
+    }
+    /**
+     * Update hover text
+     */
+    updateHoverText() {
+        const {x, y} = TouchInput;
+        if (x <= this.x || x >= this.x + this.width ||
+            y <= this.y || y >= this.y + this.height) {
+            MouseCursor.clearHoverText();
+        }
     }
     /**
      * Clear All Slots
@@ -110,6 +153,7 @@ class ItemBarSprite extends Sprite {
         super.update();
         this.updateInput();
         this.updateMouseWheel();
+        this.updateHoverText();
     }
     /**
      * Update input

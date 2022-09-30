@@ -1137,7 +1137,7 @@ Scene_MenuBase.prototype.updateActor = function() {
 };
 
 Scene_MenuBase.prototype.createBackground = function() {
-    this._backgroundFilter = new PIXI.filters.BlurFilter(1);
+    this._backgroundFilter = new PIXI.filters.BlurFilter(2);
     this._backgroundSprite = new Sprite();
     this._backgroundSprite.bitmap = SceneManager.backgroundBitmap();
     this._backgroundSprite.filters = [this._backgroundFilter];
