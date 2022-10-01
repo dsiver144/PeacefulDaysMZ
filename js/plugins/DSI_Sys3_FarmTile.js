@@ -233,8 +233,8 @@ class FarmTile extends FarmObject {
         }
         console.log("Harvest ", productID, toolType, this.seedId);
         const number = 1;
-        const addResult = MyBag.inst.addItem(productID, number);
-        if (!addResult) {
+        const leftover = MyBag.inst.addItem(productID, number, false);
+        if (leftover) {
             return false;
         }
         if (this.isTree()) {

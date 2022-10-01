@@ -8,6 +8,7 @@ class Scene_Chest extends Scene_MenuBase {
         this._topContainer = topContainer;
         /** @type {ItemContainer} */
         this._bottomContainer = bottomContainer;
+        this._lastSlotIndex = this._bottomContainer._selectedSlotId;
     }
     /**
      * Create
@@ -46,9 +47,8 @@ class Scene_Chest extends Scene_MenuBase {
                 if (item) {
                     const holdingAlt = Input.checkKeyState(18);
                     const number = holdingAlt || !this._selectionMode ? 1 : item.quantity;
-                    if (this._bottomContainer.addItem(item.id, number)) {
-                        this._topContainer.updateItemWithSlotID(slotIndex, -number);
-                    }
+                    const leftover = this._bottomContainer.addItem(item.id, number);
+                    this._topContainer.updateItemWithSlotID(slotIndex, -number + leftover);
                 }
             }
         }
@@ -63,9 +63,8 @@ class Scene_Chest extends Scene_MenuBase {
                 if (item) {
                     const holdingAlt = Input.checkKeyState(18);
                     const number = holdingAlt || !this._selectionMode ? 1 : item.quantity;
-                    if (this._topContainer.addItem(item.id, number)) {
-                        this._bottomContainer.updateItemWithSlotID(slotIndex, -number);
-                    }
+                    const leftover = this._topContainer.addItem(item.id, number);
+                    this._bottomContainer.updateItemWithSlotID(slotIndex, -number + leftover);
                 }
             }
         }
@@ -87,6 +86,17 @@ class Scene_Chest extends Scene_MenuBase {
         }
 
         this._topWindow.refreshHelp(0);
+
+        this._topWindow.alpha = 0.0;
+        this._bottomWindow.alpha = 0.0;
+        // this._descriptionText.alpha = 0.0;
+        
+        this._bottomWindow.addChild(this._descriptionText);
+        this._descriptionText.x = this._bottomWindow.width / 2;
+        this._descriptionText.y = 210;
+
+        this._topWindow.startTween({offsetY: -50, alpha: 1.0}, 30).ease(Easing.easeOutExpo);
+        this._bottomWindow.startTween({offsetY: 50, alpha: 1.0}, 30).ease(Easing.easeOutExpo);
     }
     /**
      * Create item description text
@@ -104,17 +114,16 @@ class Scene_Chest extends Scene_MenuBase {
         });
         const description = new PIXI.Text("", descriptionStyle);
         description.anchor.x = 0.5;
-        description.x = Graphics.width / 2;
-        description.y = Graphics.height - 80;
-        this.descriptionText = description;
-        this.addChild(description);
+        // description.x = Graphics.width / 2;
+        // description.y = Graphics.height - 80;
+        this._descriptionText = description;
     }
     /**
      * Set description
      * @param {string} text 
      */
     setDescription(text) {
-        this.descriptionText.text = text;
+        this._descriptionText.text = text;
     }
     /**
      * @inheritdoc
@@ -127,13 +136,14 @@ class Scene_Chest extends Scene_MenuBase {
      */
     update() {
         super.update();
-        this.updateInput();
+        this.updateControl();
         this.updateHoverText();
     }
     /**
-     * Update input
+     * Update control
      */
-    updateInput() {
+    updateControl() {
+        if (this._returningToMap) return;
         if (Input.isTriggered(ContainerMenuKeyAction.Switch)) {
             AudioController.playOk();
             if (this._topContainer._selectedSlotId != null) {
@@ -150,6 +160,39 @@ class Scene_Chest extends Scene_MenuBase {
             AudioController.playOk();
             this._selectionMode = !this._selectionMode;
         }
+        if (Input.isTriggered(FieldKeyAction.Menu) || Input.isTriggered(FieldKeyAction.Cancel)) {
+            if (this.canReturnToMap()) {
+                this.returnToMap();
+            } else {
+                AudioController.playBuzzer();
+            }
+        }
+    }
+    /**
+     * Check if player can return to map scene
+     * @returns {boolean}
+     */
+    canReturnToMap() {
+        return true;
+    }
+    /**
+     * Return to map function
+     */
+    returnToMap() {
+        AudioController.playOk();
+        this.popScene();
+    }
+    /**
+     * Pop Scene
+     */
+     popScene() {
+        this._returningToMap = true;
+        this._topWindow.startTween({alpha: 0.0}, 30).ease(Easing.easeOutExpo);
+        this._bottomWindow.startTween({alpha: 0.0}, 30).ease(Easing.easeOutExpo);
+        setTimeout(() => {
+            this._bottomContainer.select(this._lastSlotIndex);
+            super.popScene();
+        }, 250);
     }
     /**
      * Update hover text
@@ -158,11 +201,11 @@ class Scene_Chest extends Scene_MenuBase {
         const { x, y } = TouchInput;
         let failCount = 0;
         if (x <= this._topWindow.x || x >= this._topWindow.x + this._topWindow.width - this._topWindow.padding * 2 ||
-            y <= this._topWindow.y || y >= this._topWindow.y + this._topWindow.height) {
+            y <= this._topWindow.y || y >= this._topWindow.y + this._topWindow.height - 20) {
             failCount += 1;
         }
         if (x <= this._bottomWindow.x || x >= this._bottomWindow.x + this._bottomWindow.width - this._bottomWindow.padding * 2 ||
-            y <= this._bottomWindow.y || y >= this._bottomWindow.y + this._bottomWindow.height) {
+            y <= this._bottomWindow.y || y >= this._bottomWindow.y + this._bottomWindow.height - 20) {
             failCount += 1;
         }
         failCount >= 2 && MouseCursor.clearHoverText();
@@ -175,7 +218,7 @@ class Window_ChestContainer extends Window_ItemContainer {
      * Window Chest Container
      * @param {ItemContainer} itemContainer 
      */
-    constructor(itemContainer, rect = new Rectangle(0, 0, 560, 210)) {
+    constructor(itemContainer, rect = new Rectangle(0, 0, 560, 205)) {
         super(itemContainer, rect);
         this.opacity = 0;
         this.backOpacity = 0;
@@ -189,6 +232,26 @@ class Window_ChestContainer extends Window_ItemContainer {
      */
     create() {
         this.createAllSlots();
+        this.createContainerNameText();
+    }
+    /**
+     * Create container name text
+     */
+    createContainerNameText() {
+        const nameStyle = new PIXI.TextStyle({
+            fill: "#f5b642",
+            fontFamily: "Verdana",
+            fontSize: 20,
+            lineJoin: "round",
+            stroke: "#6f4949",
+            strokeThickness: 5,
+            wordWrap: true,
+            wordWrapWidth: Graphics.width - 30
+        });
+        const containerNameTxt = new PIXI.Text(this.itemContainer.name(), nameStyle);
+        containerNameTxt.x = 0
+        containerNameTxt.y = -containerNameTxt.height - 3;
+        this.addChild(containerNameTxt);
     }
     /**
      * @inheritdoc

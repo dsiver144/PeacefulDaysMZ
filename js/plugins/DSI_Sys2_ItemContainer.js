@@ -30,7 +30,7 @@ class ItemContainer extends SaveableObject {
         /** @type {number} */
         this._pageIndex = 0;
         /** @type {string} */
-        this._name = '';
+        this._name = 'Lb_Chest';
         /** @type {number} */
         this._selectedSlotId = 0;
         /** @type {number} */
@@ -147,7 +147,14 @@ class ItemContainer extends SaveableObject {
      * @returns {string}
      */
     name() {
-        return this._name;
+        return LocalizeManager.t(this._name);
+    }
+    /**
+     * Set container name
+     * @param {string} name 
+     */
+    setName(name) {
+        this._name = name;
     }
     /**
      * @inheritdoc
@@ -200,24 +207,29 @@ class ItemContainer extends SaveableObject {
      * Add Item
      * @param {number} id 
      * @param {number} number 
+     * @returns {number} remaining item that can't be added to the container
      */
-    addItem(id, number) {
+    addItem(id, number, leftover = true) {
         if (ItemDB.get(id) == null) {
             console.log('There is no ' + id + ' in Item Database!');
             return false;
         }
-        const slotId = this.findAvailableSlotId(id, number);
+        const slotId = this.findAvailableSlotId(id, number, leftover);
         if (slotId >= 0) {
             const bagItem = this._items.get(slotId) || new GameItem(id, 0);
-            bagItem.addQuantity(number);
+            const remaining = bagItem.addQuantity(number);
             this._items.set(slotId, bagItem);
             console.log(`> Container: ${bagItem.id} (${number}) has been added to #${slotId}! | Quantity: ${bagItem.quantity}`);
             this.onItemChanged(slotId);
-            return true;
+            console.log(remaining);
+            if (remaining > 0) {
+                return this.addItem(id, remaining);
+            }
+            return 0;
         } else {
             console.log(`> Container: Can't not add ${id} (${number})`);
         }
-        return false;
+        return number;
     }
     /**
      * Remove Item
@@ -278,14 +290,16 @@ class ItemContainer extends SaveableObject {
      * @private
      * @param {number} id 
      * @param {number} number 
+     * @param {boolean} leftover 
      * @returns {number}
      */
-    findAvailableSlotId(id, number) {
+    findAvailableSlotId(id, number, leftover = true) {
         let emptySlots = [];
         for (let slotId = 0; slotId <= this.maxAvailableIndex(); slotId++) {
             const bagItem = this._items.get(slotId);
             if (bagItem) {
-                if (bagItem.id == id && bagItem.quantity + number <= ContainerConfig.maxItemPerStacks) {
+                const addNumber = leftover ? 0 : number;
+                if (bagItem.id == id && bagItem.quantity + addNumber < ContainerConfig.maxItemPerStacks) {
                     return slotId;
                 }
             } else {
@@ -386,9 +400,13 @@ class GameItem extends SaveableObject {
     /**
      * Add quantity
      * @param {number} value 
+     * @returns {number} remain number of items that has been added to this item instance.
      */
     addQuantity(value) {
         this.quantity += value;
+        const remain = this.quantity - ContainerConfig.maxItemPerStacks;
+        this.quantity = Math.min(this.quantity, ContainerConfig.maxItemPerStacks);
+        return remain;
     }
     /**
      * Remove quantity

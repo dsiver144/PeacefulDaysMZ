@@ -20,7 +20,7 @@ class ItemBarSprite extends Sprite {
         this.createUI();
         this.createAllSlots();
         this.setPosition();
-        EventManager.on(BagEvent.REFRESH_BAG, this.refresh, this);
+        EventManager.on(MyBag.inst.onContainerItemChangedEventName(), this.refresh, this);
     }
     /**
      * Create UI
@@ -136,14 +136,14 @@ class ItemBarSprite extends Sprite {
      * @inheritdoc
      */
     destroy() {
-        EventManager.off(BagEvent.REFRESH_BAG, this.refresh);
+        EventManager.off(MyBag.inst.onContainerItemChangedEventName(), this.refresh);
         super.destroy();
     }
     /**
      * Set position
      */
     setPosition() {
-        this.x = 64;//(Graphics.width - this.width) / 2;
+        this.x = 64;
         this.y = (Graphics.height - 64);
     }
     /**

@@ -77,6 +77,13 @@
         }
     },
     {
+        "key": "Lb_Chest",
+        "lang": {
+            "vn": "Rương",
+            "en": "Chest"
+        }
+    },
+    {
         "key": "Lb_NewGame",
         "lang": {
             "vn": "Khởi đầu mới",
