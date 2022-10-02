@@ -40,12 +40,15 @@ class Sprite_KeyHint extends Sprite {
             fill: "#ffd985",
             fontFamily: "Verdana",
             fontSize: 16,
+            align: "center"
         });
         const keyText = new PIXI.Text("", style);
-        keyText.x += 4;
-        keyText.y += 4;
         this._keyText = keyText;
+        this._keyText.style.fontFamily = "Verdana";
         this.addChild(keyText);
+
+        this._keySprite = new Sprite();
+        this.addChild(this._keySprite);
         
         const actionStyle = new PIXI.TextStyle({
             fill: "#fff5de",
@@ -53,7 +56,6 @@ class Sprite_KeyHint extends Sprite {
             fontSize: 16,
         });
         const actionText = new PIXI.Text("", actionStyle);
-        actionText.y += 4;
         this._actionText = actionText;
         this.addChild(actionText);
     }
@@ -65,17 +67,33 @@ class Sprite_KeyHint extends Sprite {
         const inputMode = mode || Input.getInputMode();
         const data = inputMode === 'keyboard' ? KeyCodeToNameConverter[DefaultKeyboardConfig[this._keyAction]] : ButtonConverter[DefaultGamePadConfig[this._keyAction]];
         let buttonName = data;
-        let buttonColor = '#ddcebf';
-        if (Array.isArray(data)) {
-            buttonName = data[0];
-            buttonColor = data[1];
+        if (inputMode === 'gamepad') {
+            const button = DefaultGamePadConfig[this._keyAction];
+            this._keySprite.bitmap = ImageManager.loadMenu('Gamepad_' + button, 'keys');
+            buttonName = "";
+        } else {
+            this._keySprite.bitmap = null;
         }
+
         const actionName = this._textKey ? LocalizeManager.t(this._textKey) : "";
-        this._keyText.text = `${buttonName} `;
-        this._actionText.text = `${actionName}`;
-        this._actionText.x = this._keyText.x + this._keyText.width;
-        this._background.width = this._keyText.width + this._actionText.width + (actionName ? 8 : -4);
-        this._background.height = 26;
+        this._keyText.text = `${buttonName}`;
+        this._actionText.text = ` ${actionName}`;
+
+        const keyWidth = buttonName ? this._keyText.width : 20; 
+        const actionWidth = actionName ? this._actionText.width : 0;
+
+        this._background.width = keyWidth + actionWidth + 8;
+        this._background.height = 27;
+
+        this._keyText.x = 4;
+        this._keyText.y = 4;
+
+        this._keySprite.x = this._keyText.x;
+        this._keySprite.y = this._keyText.y;
+        
+        this._actionText.x = this._keyText.x + keyWidth;
+        this._actionText.y = this._keyText.y;
+
         this.width = this._background.width;
         this.height = this._background.height;
     }

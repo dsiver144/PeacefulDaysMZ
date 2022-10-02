@@ -240,6 +240,40 @@ MyUtils.getMapSprite = function (key) {
 MyUtils.randomArrayItem = function (array) {
     return array[Math.floor(Math.random() * array.length)];
 }
+/**
+ * Show Button Hints
+ */
+MyUtils.showButtonHints = function (...args) {
+    const scene = SceneManager._scene;
+    if (!scene) return;
+    this.clearAllHints();
+    const offset = new Vector2(-5, -5);
+    const spacing = 10;
+    let nextX = Graphics.width + offset.x;
+    for (var i = args.length - 1; i >= 0; i--) {
+        const [keyAction, textKey] = args[i];
+        const hintSprite = new Sprite_KeyHint(keyAction, textKey);
+        hintSprite.x = nextX - hintSprite.width - spacing;
+        hintSprite.y = Graphics.height - hintSprite.height + offset.y;
+        hintSprite.opacity = 0;
+        hintSprite.startTween({opacity: 255}, 15);
+        nextX = hintSprite.x;
+        SceneManager._scene.addChild(hintSprite);
+        scene._keyHints.push(hintSprite);
+    }
+}
+/**
+ * Clear All Hints
+ */
+MyUtils.clearAllHints = function () {
+    const scene = SceneManager._scene;
+    if (!scene) return;
+    scene._keyHints ||= [];
+    scene._keyHints.forEach(hintSprite => {
+        scene.removeChild(hintSprite);
+    })
+    scene._keyHints.splice(0);
+}
 
 class Sprite_Shakeable extends Sprite {
     /**

@@ -63,10 +63,10 @@
         }
     },
     {
-        "key": "Lb_TransferItem",
+        "key": "Lb_Select",
         "lang": {
-            "vn": "Chuyển",
-            "en": "Transfer"
+            "vn": "Chọn",
+            "en": "Select"
         }
     },
     {

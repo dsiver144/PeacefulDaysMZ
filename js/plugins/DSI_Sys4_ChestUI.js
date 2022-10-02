@@ -17,6 +17,17 @@ class Scene_Chest extends Scene_MenuBase {
         super.create();
         this.createItemDescription();
         this.createChestWindow();
+        this.showHints();
+    }
+    /**
+     * Show hints
+     */
+    showHints() {
+        const keys = [
+            [MenuKeyAction.Confirm, "Lb_Select"],
+            [MenuKeyAction.Cancel, "Lb_Exit"]
+        ]
+        MyUtils.showButtonHints(...keys);
     }
     /**
      * Create Chest Window
@@ -90,13 +101,13 @@ class Scene_Chest extends Scene_MenuBase {
         this._topWindow.alpha = 0.0;
         this._bottomWindow.alpha = 0.0;
         // this._descriptionText.alpha = 0.0;
-        
+
         this._bottomWindow.addChild(this._descriptionText);
         this._descriptionText.x = this._bottomWindow.width / 2;
         this._descriptionText.y = 200;
 
-        this._topWindow.startTween({offsetY: -50, alpha: 1.0}, 30).ease(Easing.easeOutExpo);
-        this._bottomWindow.startTween({offsetY: 50, alpha: 1.0}, 30).ease(Easing.easeOutExpo);
+        this._topWindow.startTween({ offsetY: -50, alpha: 1.0 }, 30).ease(Easing.easeOutExpo);
+        this._bottomWindow.startTween({ offsetY: 50, alpha: 1.0 }, 30).ease(Easing.easeOutExpo);
     }
     /**
      * Create item description text
@@ -184,10 +195,10 @@ class Scene_Chest extends Scene_MenuBase {
     /**
      * Pop Scene
      */
-     popScene() {
+    popScene() {
         this._returningToMap = true;
-        this._topWindow.startTween({alpha: 0.0}, 30).ease(Easing.easeOutExpo);
-        this._bottomWindow.startTween({alpha: 0.0}, 30).ease(Easing.easeOutExpo);
+        this._topWindow.startTween({ alpha: 0.0 }, 30).ease(Easing.easeOutExpo);
+        this._bottomWindow.startTween({ alpha: 0.0 }, 30).ease(Easing.easeOutExpo);
         setTimeout(() => {
             this._bottomContainer.select(this._lastSlotIndex);
             super.popScene();
