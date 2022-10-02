@@ -35,6 +35,13 @@
         }
     },
     {
+        "key": "Lb_Decline",
+        "lang": {
+            "vn": "Từ Chối",
+            "en": "Decline"
+        }
+    },
+    {
         "key": "Lb_Yes",
         "lang": {
             "vn": "Có",

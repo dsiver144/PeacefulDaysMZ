@@ -108,18 +108,85 @@ class Sprite_Mouse extends Sprite {
     }
 }
 
+class Sprite_ScreenOverlay extends Sprite {
+    /**
+     * Sprite Screen Overlay
+     */
+    constructor() {
+        super();
+        this.x = 0;
+        this.y = 0;
+        /** @type {Sprite_KeyHint[]} */
+        this._keyHints = [];
+        EventManager.on(GameEvent.InputModeChanged, this.onInputModeChanged, this);
+    }
+    /**
+     * Show button hints
+     * @param  {...any} args 
+     * @returns 
+     */
+    showButtonHints(...args) {
+        const offset = new Vector2(-5, -5);
+        const spacing = 10;
+        let nextX = Graphics.width + offset.x;
+        for (var i = args.length - 1; i >= 0; i--) {
+            const [keyAction, textKey] = args[i];
+            const hintSprite = new Sprite_KeyHint(keyAction, textKey, false);
+            hintSprite.x = nextX - hintSprite.width - spacing;
+            hintSprite.y = Graphics.height - hintSprite.height + offset.y;
+            hintSprite.opacity = 0;
+            hintSprite.startTween({opacity: 255}, 15);
+            nextX = hintSprite.x;
+            this.addChild(hintSprite);
+            this._keyHints.push(hintSprite);
+        }
+        this._currentHints = args;
+    }
+    /**
+     * Refresh Hints
+     */
+    refreshHints() {
+        if (!this._currentHints) return;
+        const hints = this._currentHints;
+        this.clearAllHints();
+        this.showButtonHints(...hints);
+    }
+    /**
+     * Clear all hints
+     */
+    clearAllHints() {
+        this._keyHints.forEach(hintSprite => {
+            hintSprite.startTween({opacity: 0}, 15).onFinish(() => {
+                this.removeChild(hintSprite);
+            });
+        })
+        this._keyHints.splice(0);
+        this._currentHints = null;
+    }
+    /**
+     * On Input Mode Changed
+     */
+    onInputModeChanged() {
+        this.refreshHints();
+    }
+}
+
 var MouseCursor = new Sprite_Mouse();
+var ScreenOverlay = new Sprite_ScreenOverlay();
 
 var DSI_MouseCursor_Graphics__createPixiApp = Graphics._createPixiApp;
 Graphics._createPixiApp = function (stage) {
     DSI_MouseCursor_Graphics__createPixiApp.call(this, stage);
     this._app.render = function () {
+        this.stage.addChild(ScreenOverlay);
         this.stage.addChild(MouseCursor);
         this.renderer.render(this.stage);
+        this.stage.removeChild(ScreenOverlay);
         this.stage.removeChild(MouseCursor);
     }
     this._app.ticker.add(() => {
         MouseCursor.update();
+        ScreenOverlay.update();
     })
 }
 

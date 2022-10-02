@@ -5928,18 +5928,19 @@ Input._updateGamepadState = function(gamepad) {
         if (newState[j] !== lastState[j]) {
             this._currentState[j.toString()] = newState[j];
             if (newState[j]) {
-                this.setInputMode('gamepad');
+                this.setInputMode('gamepad', gamepad.id);
             }
         }
     }
     this._gamepadStates[gamepad.index] = newState;
 };
 
-Input.setInputMode = function(mode) {
+Input.setInputMode = function(mode, gamepadID) {
     if (this.inputMode == mode) return;
     this.inputMode = mode;
+    this.gamepadId = gamepadID;
     EventManager.emit(GameEvent.InputModeChanged, mode);
-    console.log("@ Input mode switched to : " + mode);
+    console.log("@ Input mode switched to : " + mode, " | Gamepad ID: " + gamepadID);
 }
 /**
  * Get Input Mode
@@ -5947,6 +5948,13 @@ Input.setInputMode = function(mode) {
  */
 Input.getInputMode = function() {
     return this.inputMode;
+}
+/**
+ * Get Gamepad ID
+ * @returns {string}
+ */
+ Input.getGamepadID = function() {
+    return this.gamepadId;
 }
 
 Input._updateDirection = function() {

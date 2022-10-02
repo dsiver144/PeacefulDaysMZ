@@ -1,0 +1,191 @@
+[
+    {
+        "key": "field_up",
+        "lang": {
+            "vn": "Di Chuyển Lên",
+            "en": "Move Up"
+        }
+    },
+    {
+        "key": "field_left",
+        "lang": {
+            "vn": "Di Chuyển Trái",
+            "en": "Move Left"
+        }
+    },
+    {
+        "key": "field_right",
+        "lang": {
+            "vn": "Di Chuyển Phải",
+            "en": "Move Right"
+        }
+    },
+    {
+        "key": "field_down",
+        "lang": {
+            "vn": "Di Chuyển Xuống",
+            "en": "Move Down"
+        }
+    },
+    {
+        "key": "field_tool",
+        "lang": {
+            "vn": "Dùng Công Cụ",
+            "en": "Use Tool"
+        }
+    },
+    {
+        "key": "field_check",
+        "lang": {
+            "vn": "Tương Tác",
+            "en": "Interact"
+        }
+    },
+    {
+        "key": "field_cancel",
+        "lang": {
+            "vn": "Huỷ",
+            "en": "Cancel"
+        }
+    },
+    {
+        "key": "field_menu",
+        "lang": {
+            "vn": "Menu",
+            "en": "Menu"
+        }
+    },
+    {
+        "key": "field_map",
+        "lang": {
+            "vn": "Mở Bản Đồ",
+            "en": "Open Map"
+        }
+    },
+    {
+        "key": "field_run",
+        "lang": {
+            "vn": "Chạy",
+            "en": "Run"
+        }
+    },
+    {
+        "key": "field_switchleft",
+        "lang": {
+            "vn": "Đổi Vật Phẩm Bên Trái",
+            "en": "Item Bar Left Shift"
+        }
+    },
+    {
+        "key": "field_switchright",
+        "lang": {
+            "vn": "Đổi Vật Phẩm Bên Phải",
+            "en": "Item Bar Right Shift"
+        }
+    },
+    {
+        "key": "field_switch_item_row_up",
+        "lang": {
+            "vn": "Đổi Hàng Thanh Vật Phẩm Lên Trên",
+            "en": "Item Bar Row Up"
+        }
+    },
+    {
+        "key": "field_switch_item_row_down",
+        "lang": {
+            "vn": "Đổi Hàng Thanh Vật Phẩm Xuống Dưới",
+            "en": "Item Bar Row Down"
+        }
+    },
+    {
+        "key": "field_mission",
+        "lang": {
+            "vn": "Nhiệm Vụ",
+            "en": "Requests"
+        }
+    },
+    {
+        "key": "menu_up",
+        "lang": {
+            "vn": "Di Chuyển Lên",
+            "en": "Move Up"
+        }
+    },
+    {
+        "key": "menu_left",
+        "lang": {
+            "vn": "Di Chuyển Trái",
+            "en": "Move Left"
+        }
+    },
+    {
+        "key": "menu_right",
+        "lang": {
+            "vn": "Di Chuyển Phải",
+            "en": "Move Right"
+        }
+    },
+    {
+        "key": "menu_down",
+        "lang": {
+            "vn": "Di Chuyển Xuống",
+            "en": "Move Down"
+        }
+    },
+    {
+        "key": "menu_confirm",
+        "lang": {
+            "vn": "Chọn",
+            "en": "Confirm"
+        }
+    },
+    {
+        "key": "menu_cancel",
+        "lang": {
+            "vn": "Huỷ",
+            "en": "Cancel"
+        }
+    },
+    {
+        "key": "menu_pageleft",
+        "lang": {
+            "vn": "Đổi Trang (Trái)",
+            "en": "Switch Page (Left)"
+        }
+    },
+    {
+        "key": "menu_pageright",
+        "lang": {
+            "vn": "Đổi Trang (Phải)",
+            "en": "Switch Page (Right)"
+        }
+    },
+    {
+        "key": "container_menu_switch",
+        "lang": {
+            "vn": "Chuyển Vùng",
+            "en": "Switch Panel"
+        }
+    },
+    {
+        "key": "container_menu_sort",
+        "lang": {
+            "vn": "Sắp Xếp",
+            "en": "Sort"
+        }
+    },
+    {
+        "key": "container_menu_toggle_mode",
+        "lang": {
+            "vn": "Chế Độ Chọn",
+            "en": "Selection Mode"
+        }
+    },
+    {
+        "key": "cotainer_menu_discard",
+        "lang": {
+            "vn": "Tiêu Huỷ",
+            "en": "Discard"
+        }
+    }
+]

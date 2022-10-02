@@ -20,12 +20,15 @@ class Sprite_KeyHint extends Sprite {
      * @param {string} keyAction 
      * @param {string} textKey 
      */
-    constructor(keyAction, textKey) {
+    constructor(keyAction, textKey, autoRefresh = true) {
         super();
         this._keyAction = keyAction;
         this._textKey = textKey;
         this.create();
-        EventManager.on(GameEvent.InputModeChanged, this.onInputModeChanged, this);
+        this._autoRefresh = autoRefresh;
+        if (autoRefresh) {
+            EventManager.on(GameEvent.InputModeChanged, this.onInputModeChanged, this);
+        }
         this.refresh();
     }
     /**
@@ -65,17 +68,24 @@ class Sprite_KeyHint extends Sprite {
      */
     refresh(mode) {
         const inputMode = mode || Input.getInputMode();
-        const data = inputMode === 'keyboard' ? KeyCodeToNameConverter[DefaultKeyboardConfig[this._keyAction]] : ButtonConverter[DefaultGamePadConfig[this._keyAction]];
+        const isKeyboard = inputMode === 'keyboard';
+        const isGamepad = inputMode === 'gamepad';
+        const data = isKeyboard ? KeyCodeToNameConverter[DefaultKeyboardConfig[this._keyAction]] : ButtonConverter[DefaultGamePadConfig[this._keyAction]];
         let buttonName = data;
-        if (inputMode === 'gamepad') {
+        if (isGamepad) {
             const button = DefaultGamePadConfig[this._keyAction];
             this._keySprite.bitmap = ImageManager.loadMenu('Gamepad_' + button, 'keys');
             buttonName = "";
+            this._keySprite.visible = true;
         } else {
-            this._keySprite.bitmap = null;
+            this._keySprite.visible = false;
         }
 
         const actionName = this._textKey ? LocalizeManager.t(this._textKey) : "";
+        if (actionName.length == 0 && isKeyboard) {
+            // Add padding when there is only key name is presented
+            buttonName = " " + buttonName + " ";
+        }
         this._keyText.text = `${buttonName}`;
         this._actionText.text = ` ${actionName}`;
 
@@ -108,7 +118,9 @@ class Sprite_KeyHint extends Sprite {
      * Destroy Sprite
      */
     destroy() {
-        EventManager.off(GameEvent.InputModeChanged, this.onInputModeChanged, this);
+        if (this._autoRefresh) {
+            EventManager.off(GameEvent.InputModeChanged, this.onInputModeChanged, this);
+        }
         super.destroy();
     }
 

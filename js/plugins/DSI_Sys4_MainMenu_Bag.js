@@ -5,4 +5,28 @@ class Window_Bag extends Window_ItemContainer {
     constructor() {
         super(MyBag.inst);
     }
+    /**
+     * Show hints
+     */
+    showHints() {
+        const keys = [
+            [MenuKeyAction.Confirm, "Lb_Select"],
+            [MenuKeyAction.Cancel, "Lb_Exit"],
+        ]
+        ScreenOverlay.showButtonHints(...keys);
+    }
+    /**
+     * @inheritdoc
+     */
+    activate() {
+        super.activate();
+        this.showHints();
+    }
+    /**
+     * @inheritdoc
+     */
+    deactivate() {
+        super.deactivate();
+        ScreenOverlay.clearAllHints();
+    }
 }

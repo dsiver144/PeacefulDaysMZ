@@ -25,9 +25,11 @@ class Scene_Chest extends Scene_MenuBase {
     showHints() {
         const keys = [
             [MenuKeyAction.Confirm, "Lb_Select"],
-            [MenuKeyAction.Cancel, "Lb_Exit"]
+            [MenuKeyAction.Cancel, "Lb_Exit"],
+            [ContainerMenuKeyAction.Switch, "container_menu_switch"],
+            [ContainerMenuKeyAction.ToggleMode, "container_menu_toggle_mode"],
         ]
-        MyUtils.showButtonHints(...keys);
+        ScreenOverlay.showButtonHints(...keys);
     }
     /**
      * Create Chest Window
@@ -104,7 +106,7 @@ class Scene_Chest extends Scene_MenuBase {
 
         this._bottomWindow.addChild(this._descriptionText);
         this._descriptionText.x = this._bottomWindow.width / 2;
-        this._descriptionText.y = 200;
+        this._descriptionText.y = 185;
 
         this._topWindow.startTween({ offsetY: -50, alpha: 1.0 }, 30).ease(Easing.easeOutExpo);
         this._bottomWindow.startTween({ offsetY: 50, alpha: 1.0 }, 30).ease(Easing.easeOutExpo);
@@ -197,6 +199,7 @@ class Scene_Chest extends Scene_MenuBase {
      */
     popScene() {
         this._returningToMap = true;
+        ScreenOverlay.clearAllHints();
         this._topWindow.startTween({ alpha: 0.0 }, 30).ease(Easing.easeOutExpo);
         this._bottomWindow.startTween({ alpha: 0.0 }, 30).ease(Easing.easeOutExpo);
         setTimeout(() => {

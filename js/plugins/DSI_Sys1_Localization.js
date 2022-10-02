@@ -12,13 +12,13 @@
 
 const LocalizeConfig = {
     path: "Localization",
-    systemFile: "System.json",
+    systemFiles: ["System.json", "Controller.json"],
     itemFile: "Item.json",
     npcPath: "NPC",
     NPCList: [
         "Robert.json",
         "Azalea.json",
-    ]    
+    ]
 }
 
 class LocalizeManager {
@@ -104,16 +104,21 @@ class LocalizeManager {
      * Load system entries
      */
     async loadSystem() {
-        const path = LocalizeConfig.systemFile;
-        const data = await this.loadJson(path);
-        /** @type any[] */
-        const array = JSON.parse(data);
-        array.forEach(data => {
-            const newEntry = new SystemLocalizeEntry();
-            for (let key in data) {
-                newEntry[key] = data[key];
-            }
-            this._texts.set(data.key, newEntry);
+        const promises = [];
+        LocalizeConfig.systemFiles.forEach(filename => {
+            promises.push(this.loadJson(filename));
+        });
+        const arrayData = await Promise.all(promises);
+        arrayData.forEach(data => {
+            /** @type any[] */
+            const array = JSON.parse(data);
+            array.forEach(data => {
+                const newEntry = new SystemLocalizeEntry();
+                for (let key in data) {
+                    newEntry[key] = data[key];
+                }
+                this._texts.set(data.key, newEntry);
+            })
         })
         this._isSystemLoaded = true;
     }
@@ -173,7 +178,7 @@ LocalizeManager.inst = new LocalizeManager();
  * @param {string?} language 
  * @returns {string}
  */
-const GT = function(key, prefix = null, language = null) {
+const GT = function (key, prefix = null, language = null) {
     return LocalizeManager.inst.getText(key, prefix, language);
 }
 /**
@@ -185,14 +190,14 @@ LocalizeManager.t = GT;
  * @param {string} npcKey the key of the NPC
  * @returns {NpcLocalizeEntry[]}
  */
-LocalizeManager.NPC = function(npcKey) {
+LocalizeManager.NPC = function (npcKey) {
     return this.inst._npcEntries.get(npcKey);
 }
 /**
  * Get item
  * @param {string} itemKey 
  */
-LocalizeManager.item = function(itemKey) {
+LocalizeManager.item = function (itemKey) {
     return this.inst.getItemText(itemKey);
 }
 
@@ -215,7 +220,7 @@ class ItemLocalizeEntry extends LocalizeEntry {
     /**
      * ItemLocalizeEntry
      */
-     constructor() {
+    constructor() {
         super();
         /** @type {Object.<string, string>} */
         this.description = null;
@@ -226,7 +231,7 @@ class NpcLocalizeEntry extends LocalizeEntry {
     /**
      * NpcLocalizeEntry
      */
-     constructor() {
+    constructor() {
         super();
         /** @type {string} */
         this.npc = null;
@@ -240,7 +245,7 @@ class NpcLocalizeEntry extends LocalizeEntry {
 //========================================================================
 
 var DSI_Sys1_Localization_Scene_Boot_isReady = Scene_Boot.prototype.isReady;
-Scene_Boot.prototype.isReady = function() {
-	const result = DSI_Sys1_Localization_Scene_Boot_isReady.call(this);
+Scene_Boot.prototype.isReady = function () {
+    const result = DSI_Sys1_Localization_Scene_Boot_isReady.call(this);
     return result && LocalizeManager.inst.isReady();
 };

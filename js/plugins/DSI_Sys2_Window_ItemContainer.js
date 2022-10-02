@@ -95,17 +95,13 @@ class Window_ItemContainer extends Window_Base {
     /**
      * Create interactive buttons
      */
-     createInteractiveButtons() {
+    createInteractiveButtons() {
         const sortButton = new Sprite_Clickable();
         sortButton.bitmap = ImageManager.loadMenu("SortBtn", "bag");
         sortButton.x = this.width;
         sortButton.y = 35;
         sortButton.opacity = 0;
-        sortButton.onClick = () => {
-            sortButton.startTween({ offsetY: 5 }, 30).ease(Easing.easeOutExpo);
-            AudioController.playOk();
-            this.itemContainer.sort();
-        }
+        sortButton.onClick = this.onSortButtonOK.bind(this);
         this.addChild(sortButton);
         const sortHint = new Sprite_KeyHint(ContainerMenuKeyAction.Sort, "");
         sortHint.x = 30;
@@ -118,18 +114,31 @@ class Window_ItemContainer extends Window_Base {
         discardButton.x = this.width;
         discardButton.y = sortButton.y + 64;
         discardButton.opacity = 0;
-        discardButton.onClick = () => {
-            discardButton.startTween({ offsetY: 5 }, 30).ease(Easing.easeOutExpo);
-            // AudioController.playOk();
-            // this.itemContainer.sort();
-        }
+        discardButton.onClick = this.onDiscardButtonOK.bind(this);
         this.addChild(discardButton);
         const discardHint = new Sprite_KeyHint(ContainerMenuKeyAction.DiscardItem, "");
         discardHint.x = 30;
         discardHint.y = 30;
         discardButton.addChild(discardHint);
         this._discardButton = discardButton;
-        
+
+    }
+    /**
+     * On Sort Button OK
+     */
+    onSortButtonOK() {
+        if (this._sortButton.hasTween()) return;
+        this._sortButton.startTween({ offsetY: 5 }, 30).ease(Easing.easeOutExpo);
+        AudioController.playOk();
+        this.itemContainer.sort();
+    }
+    /**
+     * On Discard Button OK
+     */
+    onDiscardButtonOK() {
+        if (this._discardButton.hasTween()) return;
+        this._discardButton.startTween({ offsetY: 5 }, 30).ease(Easing.easeOutExpo);
+        AudioController.playOk();
     }
     /**
      * Update interactive buttons
@@ -183,9 +192,9 @@ class Window_ItemContainer extends Window_Base {
             return itemData;
         }
         if (this.itemContainer.isSlotUnlocked(slotIndex)) {
-            return {name: LocalizeManager.t("Lbl_Empty"), description: LocalizeManager.t("Lbl_EmptySlotDesc")};
+            return { name: LocalizeManager.t("Lbl_Empty"), description: LocalizeManager.t("Lbl_EmptySlotDesc") };
         }
-        return {name: LocalizeManager.t("Lbl_Locked"), description: ''};
+        return { name: LocalizeManager.t("Lbl_Locked"), description: '' };
     }
     /**
      * On Item Slot Click
@@ -229,7 +238,7 @@ class Window_ItemContainer extends Window_Base {
      * Update hover text
      */
     updateHoverText() {
-        const {x, y} = TouchInput;
+        const { x, y } = TouchInput;
         if (x <= this.x || x >= this.x + this.width - this.padding * 2 ||
             y <= this.y || y >= this.y + 180) {
             MouseCursor.clearHoverText();
@@ -254,8 +263,10 @@ class Window_ItemContainer extends Window_Base {
             this.cycleItem(1);
         }
         if (Input.isTriggered(ContainerMenuKeyAction.Sort)) {
-            AudioController.playSelect();
-            this.itemContainer.sort();
+            this.onSortButtonOK();
+        }
+        if (Input.isTriggered(ContainerMenuKeyAction.DiscardItem)) {
+            this.onDiscardButtonOK();
         }
         if (Input.isTriggered(MenuKeyAction.Confirm)) {
             this.onItemSlotClick(this.itemContainer._selectedSlotId);
