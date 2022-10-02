@@ -15,6 +15,7 @@ class Window_ItemContainer extends Window_Base {
     create() {
         this.createAllSlots();
         this.createHelp();
+        this.createInteractiveButtons();
         this.refreshHelp(this.itemContainer._selectedSlotId);
     }
     /**
@@ -90,6 +91,57 @@ class Window_ItemContainer extends Window_Base {
         description.y = helpPos.y + 40;
 
         this.hoverText = description;
+    }
+    /**
+     * Create interactive buttons
+     */
+     createInteractiveButtons() {
+        const sortButton = new Sprite_Clickable();
+        sortButton.bitmap = ImageManager.loadMenu("SortBtn", "bag");
+        sortButton.x = this.width;
+        sortButton.y = 35;
+        sortButton.opacity = 0;
+        sortButton.onClick = () => {
+            sortButton.startTween({ offsetY: 5 }, 30).ease(Easing.easeOutExpo);
+            AudioController.playOk();
+            this.itemContainer.sort();
+        }
+        this.addChild(sortButton);
+        const sortHint = new Sprite_KeyHint(ContainerMenuKeyAction.Sort, "");
+        sortHint.x = 30;
+        sortHint.y = 30;
+        sortButton.addChild(sortHint);
+        this._sortButton = sortButton;
+
+        const discardButton = new Sprite_Clickable();
+        discardButton.bitmap = ImageManager.loadMenu("DiscardBtn", "bag");
+        discardButton.x = this.width;
+        discardButton.y = sortButton.y + 64;
+        discardButton.opacity = 0;
+        discardButton.onClick = () => {
+            discardButton.startTween({ offsetY: 5 }, 30).ease(Easing.easeOutExpo);
+            // AudioController.playOk();
+            // this.itemContainer.sort();
+        }
+        this.addChild(discardButton);
+        const discardHint = new Sprite_KeyHint(ContainerMenuKeyAction.DiscardItem, "");
+        discardHint.x = 30;
+        discardHint.y = 30;
+        discardButton.addChild(discardHint);
+        this._discardButton = discardButton;
+        
+    }
+    /**
+     * Update interactive buttons
+     */
+    updateInteractiveButtons() {
+        if (this.canInput()) {
+            this._sortButton.opacity += 25;
+            this._discardButton.opacity += 25;
+        } else {
+            this._sortButton.opacity -= 25;
+            this._discardButton.opacity -= 25;
+        }
     }
     /**
      * Refresh Help
@@ -250,6 +302,7 @@ class Window_ItemContainer extends Window_Base {
     update() {
         super.update();
         this.updateHoverText();
+        this.updateInteractiveButtons();
         this.updateInput();
     }
     /**

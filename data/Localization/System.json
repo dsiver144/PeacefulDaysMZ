@@ -1,69 +1,76 @@
 [
     {
-        "key": "Lbl_OK",
+        "key": "Lb_OK",
         "lang": {
             "vn": "OK",
             "en": "OK"
         }
     },
     {
-        "key": "Lbl_Exit",
+        "key": "Lb_Exit",
         "lang": {
             "vn": "Thoát",
             "en": "Exit"
         }
     },
     {
-        "key": "Lbl_Cancel",
+        "key": "Lb_Cancel",
         "lang": {
             "vn": "Hủy",
             "en": "Cancel"
         }
     },
     {
-        "key": "Lbl_Back",
+        "key": "Lb_Back",
         "lang": {
             "vn": "Trở về",
             "en": "Back"
         }
     },
     {
-        "key": "Lbl_Accept",
+        "key": "Lb_Accept",
         "lang": {
             "vn": "Đồng ý",
             "en": "Accept"
         }
     },
     {
-        "key": "Lbl_Yes",
+        "key": "Lb_Yes",
         "lang": {
             "vn": "Có",
             "en": "Yes"
         }
     },
     {
-        "key": "Lbl_No",
+        "key": "Lb_No",
         "lang": {
             "vn": "Không",
             "en": "No"
         }
     },
     {
-        "key": "Lbl_On",
+        "key": "Lb_On",
         "lang": {
             "vn": "Mở",
             "en": "On"
         }
     },
     {
-        "key": "Lbl_Off",
+        "key": "Lb_Off",
         "lang": {
             "vn": "Tắt",
             "en": "Off"
         }
     },
     {
-        "key": "Lbl_SortBag",
+        "key": "Lb_TransferItem",
+        "lang": {
+            "vn": "Chuyển",
+            "en": "Transfer"
+        }
+    },
+    {
+        "key": "Lb_SortBag",
         "lang": {
             "vn": "Sắp xếp",
             "en": "Sort"

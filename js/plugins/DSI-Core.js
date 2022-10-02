@@ -376,6 +376,7 @@ Easing.classes.forEach(className => {
     };
 
     className.prototype.startTween = function(settings, duration, onFinishCallBack, easingFunction, repeat) {
+        if (this.hasTween()) return this._tweenObject;
         if (!easingFunction) {
             easingFunction = Easing.easeLinear;
         }

@@ -93,7 +93,7 @@ class Scene_Chest extends Scene_MenuBase {
         
         this._bottomWindow.addChild(this._descriptionText);
         this._descriptionText.x = this._bottomWindow.width / 2;
-        this._descriptionText.y = 210;
+        this._descriptionText.y = 200;
 
         this._topWindow.startTween({offsetY: -50, alpha: 1.0}, 30).ease(Easing.easeOutExpo);
         this._bottomWindow.startTween({offsetY: 50, alpha: 1.0}, 30).ease(Easing.easeOutExpo);
@@ -105,6 +105,7 @@ class Scene_Chest extends Scene_MenuBase {
         const descriptionStyle = new PIXI.TextStyle({
             fill: "#fff7d1",
             fontFamily: "Verdana",
+            align: "center",
             fontSize: 20,
             lineJoin: "round",
             stroke: "#6f4949",
@@ -114,8 +115,6 @@ class Scene_Chest extends Scene_MenuBase {
         });
         const description = new PIXI.Text("", descriptionStyle);
         description.anchor.x = 0.5;
-        // description.x = Graphics.width / 2;
-        // description.y = Graphics.height - 80;
         this._descriptionText = description;
     }
     /**
@@ -233,6 +232,7 @@ class Window_ChestContainer extends Window_ItemContainer {
     create() {
         this.createAllSlots();
         this.createContainerNameText();
+        this.createInteractiveButtons();
     }
     /**
      * Create container name text

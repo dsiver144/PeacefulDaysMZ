@@ -58,7 +58,7 @@ Sprite_Clickable.prototype.isPressed = function() {
 };
 
 Sprite_Clickable.prototype.isClickEnabled = function() {
-    return this.worldVisible;
+    return this.worldVisible && this.opacity > 0;
 };
 
 Sprite_Clickable.prototype.isBeingTouched = function() {

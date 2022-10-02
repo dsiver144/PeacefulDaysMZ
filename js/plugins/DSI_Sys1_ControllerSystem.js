@@ -46,6 +46,7 @@ const ContainerMenuKeyAction = {
     "Switch": "container_menu_switch",
     "Sort": "container_menu_sort",
     "ToggleMode": "container_menu_toggle_mode",
+    "DiscardItem": "cotainer_menu_discard"
 }
 /** @enum */
 const NumKeys = {
@@ -93,7 +94,7 @@ DefaultKeyboardConfig[FieldKeyAction.SwitchItemRight] = 88;
 DefaultKeyboardConfig[FieldKeyAction.SwitchItemRowUp] = 81;
 DefaultKeyboardConfig[FieldKeyAction.SwitchItemRowDown] = 69;
 
-DefaultKeyboardConfig[MenuKeyAction.Confirm] = 32;
+DefaultKeyboardConfig[MenuKeyAction.Confirm] = 67;
 DefaultKeyboardConfig[MenuKeyAction.Cancel] = 27;
 DefaultKeyboardConfig[MenuKeyAction.PageLeft] = 81;
 DefaultKeyboardConfig[MenuKeyAction.PageRight] = 69;
@@ -105,6 +106,7 @@ DefaultKeyboardConfig[MenuKeyAction.MoveDown] = 83;
 DefaultKeyboardConfig[ContainerMenuKeyAction.Switch] = 9;
 DefaultKeyboardConfig[ContainerMenuKeyAction.Sort] = 82;
 DefaultKeyboardConfig[ContainerMenuKeyAction.ToggleMode] = 84;
+DefaultKeyboardConfig[ContainerMenuKeyAction.DiscardItem] = 71;
 
 DefaultKeyboardConfig[DebugKeyAction.DebugMenu] = 192;
 DefaultKeyboardConfig[NumKeys.N1] = 49;
@@ -146,8 +148,9 @@ DefaultGamePadConfig[MenuKeyAction.MoveLeft] = 14;
 DefaultGamePadConfig[MenuKeyAction.MoveRight] = 15;
 
 DefaultGamePadConfig[ContainerMenuKeyAction.Switch] = 3;
-DefaultGamePadConfig[ContainerMenuKeyAction.Sort] = 8;
+DefaultGamePadConfig[ContainerMenuKeyAction.Sort] = 10;
 DefaultGamePadConfig[ContainerMenuKeyAction.ToggleMode] = 2;
+DefaultGamePadConfig[ContainerMenuKeyAction.DiscardItem] = 8;
 
 for (var i in DefaultKeyboardConfig) {
     // console.log(i, KeyCodeToNameConverter[DefaultKeyboardConfig[i]]);

@@ -40,7 +40,7 @@ const KeyCodeToNameConverter = {
     18: 'ALT',
     19: 'PSE',
     27: 'ESC',
-    32: '@32',
+    32: '[_]',
     33: 'PGUP',
     34: 'PGDN',
     35: 'END',
@@ -122,9 +122,9 @@ const KeyCodeToNameConverter = {
     191: '/',
     220: '\\',
     222: '\'',
-    256: '@256',
-    257: '@257',
-    258: '@258',
+    256: 'M0',
+    257: 'M1',
+    258: 'M2',
 }
 
 const ButtonConverter = {
