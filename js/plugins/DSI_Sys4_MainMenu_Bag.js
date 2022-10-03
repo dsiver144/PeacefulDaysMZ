@@ -10,7 +10,6 @@ class Window_Bag extends Window_ItemContainer {
      */
     showHints() {
         const keys = [
-            [MenuKeyAction.Confirm, "Lb_Select"],
             [MenuKeyAction.Cancel, "Lb_Exit"],
         ]
         ScreenOverlay.showButtonHints(...keys);
