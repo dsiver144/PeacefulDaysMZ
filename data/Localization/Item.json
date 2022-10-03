@@ -264,6 +264,28 @@
 		}
 	},
 	{
+		"key": "GarlicSeeds",
+		"lang": {
+			"vn": "Hạt Giống Tỏi",
+			"en": "Garlic Seeds"
+		},
+		"description": {
+			"vn": "Hạt giống để trồng tỏi.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Garlic",
+		"lang": {
+			"vn": "Tỏi",
+			"en": "Garlic"
+		},
+		"description": {
+			"vn": "Dùng để làm gia vị nấu ăn phổ biến.",
+			"en": ""
+		}
+	},
+	{
 		"key": "SweetPotatoSeeds",
 		"lang": {
 			"vn": "Hạt Giống Khoai Lang",
