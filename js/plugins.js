@@ -54,6 +54,7 @@ var $plugins =
 {"name":"DSI_Sys4_Sprite_Key","status":true,"description":"(v1.0) Sprite Key","parameters":{}},
 {"name":"DSI_Sys4_DebugWindow","status":true,"description":"","parameters":{}},
 {"name":"DSI_Sys4_MainMenu_Bag","status":true,"description":"","parameters":{}},
+{"name":"DSI_Sys4_MainMenu_Settings","status":true,"description":"","parameters":{}},
 {"name":"DSI_Sys4_ChestUI","status":true,"description":"","parameters":{}},
 {"name":"DSI_Sys5_Coop","status":true,"description":"(v1.0) Coop","parameters":{}},
 {"name":"DSI_Sys5_Windmill","status":true,"description":"(v1.0) Windmill","parameters":{}},
