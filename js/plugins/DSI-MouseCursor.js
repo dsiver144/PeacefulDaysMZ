@@ -171,8 +171,8 @@ class Sprite_ScreenOverlay extends Sprite {
     }
 }
 
-var MouseCursor = new Sprite_Mouse();
-var ScreenOverlay = new Sprite_ScreenOverlay();
+var MouseCursor = MouseCursor || new Sprite_Mouse();
+var ScreenOverlay = ScreenOverlay || new Sprite_ScreenOverlay();
 
 var DSI_MouseCursor_Graphics__createPixiApp = Graphics._createPixiApp;
 Graphics._createPixiApp = function (stage) {

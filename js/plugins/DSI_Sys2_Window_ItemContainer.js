@@ -128,7 +128,7 @@ class Window_ItemContainer extends Window_Base {
      */
     onSortButtonOK() {
         if (this._sortButton.hasTween()) return;
-        this._sortButton.startTween({ offsetY: 5 }, 30).ease(Easing.easeOutExpo);
+        this._sortButton.startTween({ offsetY: 5 }, 10).ease(Easing.easeOutExpo);
         AudioController.playOk();
         this.itemContainer.sort();
     }
@@ -137,7 +137,7 @@ class Window_ItemContainer extends Window_Base {
      */
     onDiscardButtonOK() {
         if (this._discardButton.hasTween()) return;
-        this._discardButton.startTween({ offsetY: 5 }, 30).ease(Easing.easeOutExpo);
+        this._discardButton.startTween({ offsetY: 5 }, 10).ease(Easing.easeOutExpo);
         AudioController.playOk();
     }
     /**

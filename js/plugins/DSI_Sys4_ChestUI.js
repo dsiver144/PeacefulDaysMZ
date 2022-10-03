@@ -17,6 +17,7 @@ class Scene_Chest extends Scene_MenuBase {
         super.create();
         this.createItemDescription();
         this.createChestWindow();
+        this.createInteractiveButtons();
         this.showHints();
     }
     /**
@@ -27,7 +28,6 @@ class Scene_Chest extends Scene_MenuBase {
             [MenuKeyAction.Confirm, "Lb_Select"],
             [MenuKeyAction.Cancel, "Lb_Exit"],
             [ContainerMenuKeyAction.Switch, "container_menu_switch"],
-            [ContainerMenuKeyAction.ToggleMode, "container_menu_toggle_mode"],
         ]
         ScreenOverlay.showButtonHints(...keys);
     }
@@ -138,6 +138,40 @@ class Scene_Chest extends Scene_MenuBase {
         this._descriptionText.text = text;
     }
     /**
+     * Create interactive buttons
+     */
+    createInteractiveButtons() {
+        this._buttons = [];
+
+        const selectionModeButton = new Sprite_Clickable();
+        selectionModeButton.bitmap = ImageManager.loadMenu("SelectModeBtn", "bag");
+        selectionModeButton.x = Graphics.width - 70;
+        selectionModeButton.y = Graphics.height - 140;
+        selectionModeButton.alpha = 0;
+        selectionModeButton.setFrame(40, 0, 40, 40);
+        selectionModeButton.startTween({ offsetY: -50, alpha: 1.0 }, 30).ease(Easing.easeOutExpo);
+        selectionModeButton.onClick = this.onSlectionModeButtonOK.bind(this);
+        this.addChild(selectionModeButton);
+        const selectionModeHint = new Sprite_KeyHint(ContainerMenuKeyAction.ToggleMode, "");
+        selectionModeHint.x = 30;
+        selectionModeHint.y = 30;
+        selectionModeButton.addChild(selectionModeHint);
+        this._selectModeButton = selectionModeButton;
+
+        this._buttons.push(this._selectModeButton);
+    }
+    /**
+     * On selection mode button OK
+     */
+    onSlectionModeButtonOK() {
+        if (this._selectModeButton.hasTween()) return;
+        this._selectModeButton.startTween({ offsetY: 5 }, 10).ease(Easing.easeOutExpo);
+        AudioController.playOk();
+        this._selectionMode = !this._selectionMode;
+        const rectX = this._selectionMode ? 40 : 0;
+        this._selectModeButton.setFrame(rectX, 0, 40, 40);
+    }
+    /**
      * @inheritdoc
      */
     start() {
@@ -169,8 +203,7 @@ class Scene_Chest extends Scene_MenuBase {
             }
         }
         if (Input.isTriggered(ContainerMenuKeyAction.ToggleMode)) {
-            AudioController.playOk();
-            this._selectionMode = !this._selectionMode;
+            this.onSlectionModeButtonOK();
         }
         if (Input.isTriggered(FieldKeyAction.Menu) || Input.isTriggered(FieldKeyAction.Cancel)) {
             if (this.canReturnToMap()) {
@@ -202,10 +235,13 @@ class Scene_Chest extends Scene_MenuBase {
         ScreenOverlay.clearAllHints();
         this._topWindow.startTween({ alpha: 0.0 }, 30).ease(Easing.easeOutExpo);
         this._bottomWindow.startTween({ alpha: 0.0 }, 30).ease(Easing.easeOutExpo);
+        this._buttons.forEach((button) => {
+            button.startTween({alpha: 0.0}, 15);
+        });
         setTimeout(() => {
             this._bottomContainer.select(this._lastSlotIndex);
             super.popScene();
-        }, 250);
+        }, 300);
     }
     /**
      * Update hover text
