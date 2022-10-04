@@ -381,7 +381,7 @@ class Sprite_ItemSlot extends Sprite_Clickable {
         }
         let bgImageFilename = ""
         if (this.itemContainer._selectedSlotId == this.slotIndex) {
-            bgImageFilename = "ItemBG_selected";
+            bgImageFilename = "ItemBG_Selected";
         } else {
             bgImageFilename = isLocked ? "ItemBG_Locked" : "ItemBG";
         }
