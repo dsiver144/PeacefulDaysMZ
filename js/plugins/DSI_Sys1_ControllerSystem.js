@@ -146,11 +146,11 @@ DefaultGamePadConfig[MenuKeyAction.MoveUp] = 12;
 DefaultGamePadConfig[MenuKeyAction.MoveDown] = 13;
 DefaultGamePadConfig[MenuKeyAction.MoveLeft] = 14;
 DefaultGamePadConfig[MenuKeyAction.MoveRight] = 15;
-
+aadaw
 DefaultGamePadConfig[ContainerMenuKeyAction.Switch] = 3;
-DefaultGamePadConfig[ContainerMenuKeyAction.Sort] = 10;
+DefaultGamePadConfig[ContainerMenuKeyAction.Sort] = 8;
 DefaultGamePadConfig[ContainerMenuKeyAction.ToggleMode] = 2;
-DefaultGamePadConfig[ContainerMenuKeyAction.DiscardItem] = 8;
+DefaultGamePadConfig[ContainerMenuKeyAction.DiscardItem] = 11;
 
 for (var i in DefaultKeyboardConfig) {
     // console.log(i, KeyCodeToNameConverter[DefaultKeyboardConfig[i]]);

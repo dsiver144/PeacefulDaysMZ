@@ -24,6 +24,10 @@ Scene_Map.prototype.displayMapHints = function () {
     // ScreenOverlay.showButtonHints(...keys);
 }
 
+Scene_Map.prototype.createButtons = function() {
+    
+}
+
 var DSI_Sys2_SceneMap_Scene_Map_stop = Scene_Map.prototype.stop;
 Scene_Map.prototype.stop = function () {
     DSI_Sys2_SceneMap_Scene_Map_stop.call(this);
