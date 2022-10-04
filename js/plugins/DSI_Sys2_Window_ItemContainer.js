@@ -62,7 +62,7 @@ class Window_ItemContainer extends Window_Base {
         const helpPos = new Vector2(0, 165);
 
         const titleStyle = new PIXI.TextStyle({
-            fill: "#ffcd94",
+            fill: "#f5b642",
             fontFamily: "Verdana",
             fontSize: 26,
             lineJoin: "round",

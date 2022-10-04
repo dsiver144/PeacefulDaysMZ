@@ -12,7 +12,7 @@
 
 const LocalizeConfig = {
     path: "Localization",
-    systemFiles: ["System.json", "Controller.json"],
+    systemFiles: ["System.json", "Controller.json", "Settings.json"],
     itemFile: "Item.json",
     npcPath: "NPC",
     NPCList: [

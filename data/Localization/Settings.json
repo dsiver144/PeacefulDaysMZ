@@ -1,0 +1,16 @@
+[
+    {
+        "key": "Lb_Option_Audio",
+        "lang": {
+            "vn": "Âm Thanh",
+            "en": "Audio"
+        }
+    },
+    {
+        "key": "Lb_Option_BGMVolume",
+        "lang": {
+            "vn": "Nhạc Nền",
+            "en": "BGM"
+        }
+    }
+]

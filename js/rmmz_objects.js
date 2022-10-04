@@ -394,7 +394,7 @@ Game_System.prototype.saveWalkingBgm2 = function() {
 };
 
 Game_System.prototype.mainFontFace = function() {
-    return "rmmz-mainfont, " + $dataSystem.advanced.fallbackFonts;
+    return "Verdana";//"rmmz-mainfont, " + $dataSystem.advanced.fallbackFonts;
 };
 
 Game_System.prototype.numberFontFace = function() {

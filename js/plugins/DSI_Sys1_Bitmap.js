@@ -27,6 +27,7 @@ var DSI = DSI || {};
         initialize(width, height) {
             super.initialize(width, height);
             this.smooth = Utils.isNwjs();
+            this.fontFace = 'Verdana';
         }
     }
 
