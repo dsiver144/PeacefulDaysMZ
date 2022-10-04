@@ -4,6 +4,7 @@ var $plugins =
 [
 {"name":"DSI-Core","status":true,"description":"v2.00 A helper plugin for DSI plugins.","parameters":{"showDevTool:bool":"true"}},
 {"name":"DSI_ShaderCore","status":true,"description":"","parameters":{}},
+{"name":"DSI_GaugeUtils","status":true,"description":"","parameters":{}},
 {"name":"rmmz_movement","status":true,"description":"(v1.0.4) 8 direction movement and pixel movement for RPG Maker MZ.","parameters":{}},
 {"name":"DSI_PeerJS","status":false,"description":"","parameters":{}},
 {"name":"DSI_Sys1_Steam","status":true,"description":"","parameters":{}},
@@ -22,6 +23,7 @@ var $plugins =
 {"name":"DSI_Sys1_Bitmap","status":true,"description":"v1.0 Bitmap System for Peaceful Days.","parameters":{}},
 {"name":"DSI_Sys1_ItemDatabase","status":true,"description":"","parameters":{}},
 {"name":"DSI_Sys1_ControllerSystem","status":true,"description":"(v1.0) Player Controller","parameters":{}},
+{"name":"DSI_Sys1_ConfigManager","status":true,"description":"(v1.0) Config Manager","parameters":{}},
 {"name":"DSI_Sys2_RangeManager","status":true,"description":"(v1.0) Peaceful Days Range Manager","parameters":{}},
 {"name":"DSI_Sys2_TimeSystem","status":true,"description":"(v1.0) Time System","parameters":{"testParam:number":"144"}},
 {"name":"DSI_Sys2_ItemContainer","status":true,"description":"(v1.0) Peaceful Days Inventory System","parameters":{}},

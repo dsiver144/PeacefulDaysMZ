@@ -128,14 +128,16 @@ class Scene_MainMenu extends Scene_MenuBase {
      */
     selectPage(index) {
         if (index < 0) return;
+        if (!this.canSwitchPage()) return;
         this.unselectPage(this._currentPageIndex);
         const { icon, window } = this._pages[index];
-        icon.startTween({ opacity: 255, offsetY: 10 }, 30).ease(Easing.easeOutExpo);
+        icon.startTween({ opacity: 255, offsetY: 10 }, 15).ease(Easing.easeOutExpo);
         window.visible = true;
         window.activate();
         window.alpha = 0;
-        window.startTween({ offsetY: Graphics.height, alpha: 1.0 }, 30).ease(Easing.easeOutExpo);
+        window.startTween({ offsetY: Graphics.height, alpha: 1.0 }, 15).ease(Easing.easeOutExpo);
         this._currentPageIndex = index;
+        this.setPageSwitchDelay(15);
     }
     /**
      * Unselect page
@@ -154,6 +156,20 @@ class Scene_MainMenu extends Scene_MenuBase {
      */
     currentPage() {
         return this._pages[this._currentPageIndex];
+    }
+    /**
+     * Switch Page
+     */
+    switchPage(direction) {
+        let pageIndex = this._currentPageIndex;
+        pageIndex += direction;
+        if (pageIndex < 0) {
+            pageIndex = this._maxPages - 1;
+        }
+        if (pageIndex > this._maxPages - 1) {
+            pageIndex = 0;
+        }
+        this.selectPage(pageIndex);
     }
     /**
      * Pop Scene
@@ -195,13 +211,40 @@ class Scene_MainMenu extends Scene_MenuBase {
      */
     updateControl() {
         if (this._returningToMap) return;
-        if (Input.isTriggered(FieldKeyAction.Menu) || Input.isTriggered(FieldKeyAction.Cancel)) {
+        if (Input.isTriggered(FieldKeyAction.Menu) || Input.isTriggered(MenuKeyAction.Cancel)) {
             if (this.canReturnToMap()) {
                 this.returnToMap();
             } else {
                 AudioController.playBuzzer();
             }
         }
+        if (Input.isTriggered(MenuKeyAction.PageLeft)) {
+            this.switchPage(-1);
+        }   
+        if (Input.isTriggered(MenuKeyAction.PageRight)) {
+            this.switchPage(1);
+        } 
+        this.updateSwitchPageDelay();
+    }
+    /**
+     * Update switch page delay
+     */
+    updateSwitchPageDelay() {
+        if (!this._switchPageDelayDuration) return;
+        this._switchPageDelayDuration -= 1;
+    }
+    /**
+     * Set page switch delay
+     * @param {number} duration 
+     */
+    setPageSwitchDelay(duration) {
+        this._switchPageDelayDuration = duration;
+    }
+    /**
+     * Check if player can switch page
+     */
+    canSwitchPage() {
+        return !this._switchPageDelayDuration;
     }
     /**
      * Check if player can return to map scene

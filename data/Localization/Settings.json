@@ -1,5 +1,19 @@
 [
     {
+        "key": "Lb_Option_Graphics",
+        "lang": {
+            "vn": "Đồ Hoạ",
+            "en": "Graphics"
+        }
+    },
+    {
+        "key": "Lb_Option_Fullscreen",
+        "lang": {
+            "vn": "Toàn Màn Hình",
+            "en": "Fullscreen Mode"
+        }
+    },
+    {
         "key": "Lb_Option_Audio",
         "lang": {
             "vn": "Âm Lượng",
@@ -18,6 +32,48 @@
         "lang": {
             "vn": "Hiệu Ứng Âm Thanh",
             "en": "SE"
+        }
+    },
+    {
+        "key": "Lb_Option_Gameplay",
+        "lang": {
+            "vn": "Gameplay",
+            "en": "Gameplay"
+        }
+    },
+    {
+        "key": "Lb_Option_Gameplay",
+        "lang": {
+            "vn": "Gameplay",
+            "en": "Gameplay"
+        }
+    },
+    {
+        "key": "Lb_Option_AutoDash",
+        "lang": {
+            "vn": "Luôn Chạy",
+            "en": "Auto Dash"
+        }
+    },
+    {
+        "key": "Lb_Option_ClockMode",
+        "lang": {
+            "vn": "Kiểu Hiển Thị Đồng Hồ",
+            "en": "Clock Display Mode"
+        }
+    },
+    {
+        "key": "Lb_Option_ClockMode_12",
+        "lang": {
+            "vn": "12 Giờ",
+            "en": "12-Hour"
+        }
+    },
+    {
+        "key": "Lb_Option_ClockMode_24",
+        "lang": {
+            "vn": "24 Giờ",
+            "en": "24-Hour"
         }
     }
 ]

@@ -10,7 +10,7 @@ class Window_Settings extends Window_Command {
      * This class handle bag menu display for Peaceful Days
      * @param {ItemContainer} container
      */
-    constructor(rect = new Rectangle(0, 0, 640, 360)) {
+    constructor(rect = new Rectangle(0, 0, 640, 370)) {
         super(rect);
     }
     /**
@@ -24,28 +24,121 @@ class Window_Settings extends Window_Command {
      * Make Options
      */
     makeOptions() {
-        this.addHeader('Lb_Option_Audio', 2);
-        this.addOption('Lb_Option_BGMVolume', { type: "slider", iconIndex: 2, min: 0, max: 100, step: 1, fastStep: 10, method: this.onBGMVolumeControl });
-        this.addOption('Lb_Option_SEVolume', { type: "slider", iconIndex: 2, min: 0, max: 100, step: 1, fastStep: 10, method: this.onSEVolumeControl });
+        this.addHeader('Lb_Option_Graphics');
+        this.addOption('Lb_Option_Fullscreen', {
+            type: "selection",
+            object: Graphics,
+            property: "isFullscreen",
+            displayKeys: ['Lb_No', 'Lb_Yes'],
+            method: this.onFullScreenControl
+        });
+        this.addHeader('Lb_Option_Audio');
+        this.addOption('Lb_Option_BGMVolume', {
+            type: "slider",
+            object: ConfigManager,
+            currentProperty: 'bgmVolume',
+            maxProperty: 100,
+            scrollable: true,
+            method: this.onBGMVolumeControl
+        });
+        this.addOption('Lb_Option_SEVolume', {
+            type: "slider",
+            object: ConfigManager,
+            currentProperty: 'seVolume',
+            maxProperty: 100,
+            scrollable: true,
+            method: this.onSEVolumeControl
+        });
+        this.addHeader('Lb_Option_Gameplay');
+        this.addOption('Lb_Option_AutoDash', {
+            type: "selection",
+            object: ConfigManager,
+            property: "alwaysDashEx",
+            displayKeys: ['Lb_No', 'Lb_Yes'],
+            method: this.onFullScreenControl
+        });
+        this.addOption('Lb_Option_ClockMode', {
+            type: "selection",
+            object: ConfigManager,
+            property: "clockMode",
+            displayKeys: ['Lb_Option_ClockMode_12', 'Lb_Option_ClockMode_24'],
+            method: this.onFullScreenControl
+        });
     }
     /**
      * On Option OK
      */
     onOptionOK() {
-        this.currentOptionData().method?.call(this, OptionControl.OK);
+        const { method, type, object, property, displayKeys } = this.currentOptionData();
+        method && method.call(this, OptionControl.OK);
+        switch (type) {
+            case 'selection':
+                let value = object[property] + 1;
+                if (value > displayKeys.length - 1) value = 0;
+                object[property] = value;
+                const selectionTexts = this.getSelectionTexts(this.index());
+                selectionTexts.forEach(text => text.alpha = 0.5);
+                selectionTexts[value].alpha = 1.0;
+                break;
+        }
         this.activate();
     }
     /**
      * @inheritdoc
      */
     cursorLeft() {
-        this.currentOptionData().method?.call(this, OptionControl.Left);
+        const { method, type, object, property, displayKeys } = this.currentOptionData();
+        method && method.call(this, OptionControl.Left);
+        switch (type) {
+            case 'selection':
+                let value = object[property] - 1;
+                if (value < 0) value = displayKeys.length - 1;
+                object[property] = value;
+                const selectionTexts = this.getSelectionTexts(this.index());
+                selectionTexts.forEach(text => text.alpha = 0.5);
+                selectionTexts[value].alpha = 1.0;
+                break;
+        }
     }
     /**
      * @inheritdoc
      */
     cursorRight() {
-        this.currentOptionData().method?.call(this, OptionControl.Right);
+        const { method, type, object, property, displayKeys } = this.currentOptionData();
+        method && method.call(this, OptionControl.Right);
+        switch (type) {
+            case 'selection':
+                let value = object[property] + 1;
+                if (value > displayKeys.length - 1) value = 0;
+                object[property] = value;
+                const selectionTexts = this.getSelectionTexts(this.index());
+                selectionTexts.forEach(text => text.alpha = 0.5);
+                selectionTexts[value].alpha = 1.0;
+                break;
+        }
+    }
+    /**
+     * @inheritdoc
+     */
+    smoothScrollDown() {
+        const scrollable = this.currentOptionData().scrollable;
+        if (!scrollable) return;
+        this.cursorLeft();
+    }
+    /**
+     * @inheritdoc
+     */
+    smoothScrollUp() {
+        const scrollable = this.currentOptionData().scrollable;
+        if (!scrollable) return;
+        this.cursorRight();
+    }
+    /**
+     * On Full Screen Control
+     * @param {OptionControl} type 
+     */
+    onFullScreenControl(type) {
+        this.select(this.index());
     }
     /**
      * On BGM Volume Control
@@ -72,7 +165,7 @@ class Window_Settings extends Window_Command {
      * On SE Volume Control
      * @param {OptionControl} type 
      */
-     onSEVolumeControl(type) {
+    onSEVolumeControl(type) {
         const value = 10;
         if (type === OptionControl.Left) {
             if (ConfigManager.seVolume > 0) {
@@ -89,17 +182,15 @@ class Window_Settings extends Window_Command {
     }
     /**
      * Add Header
-     * @param {string} textKey 
-     * @param {string} textKey 
+     * @param {string} textKey  
      */
-    addHeader(textKey, iconIndex) {
-        this.addCommand(textKey, 'header', true, { type: 'header', iconIndex: iconIndex });
+    addHeader(textKey) {
+        this.addCommand(textKey, 'header', true, { type: 'header' });
     }
     /**
-     * 
-     * @param {*} textKey 
-     * @param {*} type 
-     * @param {*} method 
+     * Add option
+     * @param {string} textKey 
+     * @param {any} data
      */
     addOption(textKey, data) {
         this.addCommand(textKey, 'ok', true, data);
@@ -134,6 +225,27 @@ class Window_Settings extends Window_Command {
                 backgroundRect = true;
                 break;
             case 'slider':
+                const gauge = this.getGauge(index, {
+                    ...optionData,
+                    gaugeBG: "GaugeBG",
+                    gaugeFill: "GaugeFill",
+                });
+                gauge.x = rect.x + 350;
+                gauge.y = rect.y + 4;
+                break;
+            case 'selection':
+                const selectionTexts = this.getSelectionTexts(index, optionData);
+                const spacing = 12;
+                let nextX = rect.width;
+                for (var i = selectionTexts.length - 1; i >= 0; i--) {
+                    const text = selectionTexts[i];
+                    text.x = nextX - text.width;
+                    text.y = rect.y + 4;
+                    nextX = text.x - spacing;
+                    text.alpha = 0.5;
+                }
+                const value = optionData.object[optionData.property];
+                selectionTexts[value].alpha = 1.0;
                 break;
         }
         this.resetTextColor();
@@ -159,18 +271,56 @@ class Window_Settings extends Window_Command {
         const style = new PIXI.TextStyle({
             fill: "#fff7d1",
             fontFamily: "Verdana",
-            align: "center",
             fontSize: 23,
             lineJoin: "round",
             stroke: "#6f4949",
             strokeThickness: 5,
-            wordWrap: true,
-            wordWrapWidth: Graphics.width - 30
         });
         const text = new PIXI.Text("", style);
         this._optionTexts[index] = text;
         this.addInnerChild(text);
         return text;
+    }
+    /**
+     * Get Gauge
+     * @param {number} index 
+     * @param {GagueTrackOptions} trackOptions 
+     * @returns {Sprite_MyGauge}
+     */
+    getGauge(index, trackOptions) {
+        this._optionGauges ||= {};
+        if (this._optionGauges[index]) return this._optionGauges[index];
+        const gauge = new Sprite_MyGauge(trackOptions);
+        this._optionGauges[index] = gauge;
+        this.addInnerChild(gauge);
+        return gauge;
+    }
+    /**
+     * Get Selection Texts
+     * @param {number} index 
+     * @param {any} optionData 
+     * @returns {PIXI.Text[]} 
+     */
+    getSelectionTexts(index, optionData) {
+        this._selectionTexts ||= {};
+        if (this._selectionTexts[index]) return this._selectionTexts[index];
+        const { displayKeys } = optionData;
+        const allTexts = [];
+        displayKeys.forEach((textKey) => {
+            const style = new PIXI.TextStyle({
+                fill: "#f5b642",
+                fontFamily: "Verdana",
+                fontSize: 18,
+                lineJoin: "round",
+                stroke: "#6f4949",
+                strokeThickness: 5,
+            });
+            const text = new PIXI.Text(LocalizeManager.t(textKey), style);
+            this.addInnerChild(text);
+            allTexts.push(text);
+        })
+        this._selectionTexts[index] = allTexts;
+        return allTexts;
     }
     /**
      * @inheritdoc
@@ -197,4 +347,37 @@ class Window_Settings extends Window_Command {
         super.deactivate();
         ConfigManager.save();
     }
+    /**
+     * @inheritdoc
+     */
+    cursorDown(wrap) {
+        wrap = true;
+        const index = this.index();
+        const maxItems = this.maxItems();
+        const maxCols = this.maxCols();
+        if (index < maxItems - maxCols || (wrap && maxCols === 1)) {
+            this.smoothSelect((index + maxCols) % maxItems);
+        }
+        const { type } = this.currentOptionData();
+        if (type === 'header') {
+            this.cursorDown();
+        }
+    };
+    /**
+     * @inheritdoc
+     */
+    cursorUp(wrap) {
+        wrap = true;
+        const index = Math.max(0, this.index());
+        const maxItems = this.maxItems();
+        const maxCols = this.maxCols();
+        if (index >= maxCols || (wrap && maxCols === 1)) {
+            this.smoothSelect((index - maxCols + maxItems) % maxItems);
+        }
+        console.log(this.index());
+        const { type } = this.currentOptionData();
+        if (type === 'header') {
+            this.cursorUp();
+        }
+    };
 }
