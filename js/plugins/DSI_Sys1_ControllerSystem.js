@@ -146,7 +146,7 @@ DefaultGamePadConfig[MenuKeyAction.MoveUp] = 12;
 DefaultGamePadConfig[MenuKeyAction.MoveDown] = 13;
 DefaultGamePadConfig[MenuKeyAction.MoveLeft] = 14;
 DefaultGamePadConfig[MenuKeyAction.MoveRight] = 15;
-aadaw
+
 DefaultGamePadConfig[ContainerMenuKeyAction.Switch] = 3;
 DefaultGamePadConfig[ContainerMenuKeyAction.Sort] = 8;
 DefaultGamePadConfig[ContainerMenuKeyAction.ToggleMode] = 2;
