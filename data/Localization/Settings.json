@@ -2,8 +2,8 @@
     {
         "key": "Lb_Option_Audio",
         "lang": {
-            "vn": "Âm Thanh",
-            "en": "Audio"
+            "vn": "Âm Lượng",
+            "en": "Audio Volume"
         }
     },
     {
@@ -11,6 +11,13 @@
         "lang": {
             "vn": "Nhạc Nền",
             "en": "BGM"
+        }
+    },
+    {
+        "key": "Lb_Option_SEVolume",
+        "lang": {
+            "vn": "Hiệu Ứng Âm Thanh",
+            "en": "SE"
         }
     }
 ]

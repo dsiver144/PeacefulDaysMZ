@@ -17,13 +17,16 @@ class Window_Settings extends Window_Command {
      * Make Command List
      */
     makeCommandList() {
-        // for (var i = 0; i < 10; i++) {
-        //     this.addCommand('Command #' + i, 'item', true);
-        // }
+        this.makeOptions();
+        this.setHandler('ok', this.onOptionOK.bind(this));
+    }
+    /**
+     * Make Options
+     */
+    makeOptions() {
         this.addHeader('Lb_Option_Audio', 2);
         this.addOption('Lb_Option_BGMVolume', { type: "slider", iconIndex: 2, min: 0, max: 100, step: 1, fastStep: 10, method: this.onBGMVolumeControl });
-        
-        this.setHandler('ok', this.onOptionOK.bind(this));
+        this.addOption('Lb_Option_SEVolume', { type: "slider", iconIndex: 2, min: 0, max: 100, step: 1, fastStep: 10, method: this.onSEVolumeControl });
     }
     /**
      * On Option OK
@@ -45,11 +48,44 @@ class Window_Settings extends Window_Command {
         this.currentOptionData().method?.call(this, OptionControl.Right);
     }
     /**
-     * 
+     * On BGM Volume Control
      * @param {OptionControl} type 
      */
     onBGMVolumeControl(type) {
-        console.log(type);
+        const value = 10;
+        if (type === OptionControl.Left) {
+            if (ConfigManager.bgmVolume > 0) {
+                ConfigManager.bgmVolume -= value;
+                ConfigManager.bgsVolume -= value;
+                AudioController.playCursor();
+            }
+        }
+        if (type === OptionControl.Right) {
+            if (ConfigManager.bgmVolume < 100) {
+                ConfigManager.bgmVolume += value;
+                ConfigManager.bgsVolume += value;
+                AudioController.playCursor();
+            }
+        }
+    }
+    /**
+     * On SE Volume Control
+     * @param {OptionControl} type 
+     */
+     onSEVolumeControl(type) {
+        const value = 10;
+        if (type === OptionControl.Left) {
+            if (ConfigManager.seVolume > 0) {
+                ConfigManager.seVolume -= value;
+                AudioController.playCursor();
+            }
+        }
+        if (type === OptionControl.Right) {
+            if (ConfigManager.seVolume < 100) {
+                ConfigManager.seVolume += value;
+                AudioController.playCursor();
+            }
+        }
     }
     /**
      * Add Header
@@ -153,5 +189,12 @@ class Window_Settings extends Window_Command {
      */
     playBuzzerSound() {
 
+    }
+    /**
+     * @inheritdoc
+     */
+    deactivate() {
+        super.deactivate();
+        ConfigManager.save();
     }
 }
