@@ -34,6 +34,25 @@
  * 
  */
 class AudioController {
+    /** Init */
+    static init() {
+        this.fadeAudioOnHide();
+    }
+    /**
+     * Fade Audio On Hide
+     */
+    static fadeAudioOnHide() {
+        if (Utils.isNwjs()) {
+            WebAudio._shouldMuteOnHide = function () { return false };
+            const win = nw.Window.get();
+            win.on('focus', function () { WebAudio._fadeIn(0.3) });
+            win.on('blur', function () { WebAudio._fadeOut(0.3) });
+        } else {
+            WebAudio._shouldMuteOnHide = function () { return true };
+            WebAudio._onHide = function () { this._fadeOut(0.3) };
+            WebAudio._onShow = function () { this._fadeIn(0.3) };
+        }
+    }
     /**
      * Play cursor
      */
@@ -51,7 +70,7 @@ class AudioController {
      */
     static playOk() {
         SoundManager.playOk();
-    }   
+    }
     /**
      * Play command Cancel
      */
@@ -65,3 +84,6 @@ class AudioController {
         SoundManager.playBuzzer();
     }
 }
+
+AudioController.init();
+
