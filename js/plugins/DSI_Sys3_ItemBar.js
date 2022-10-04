@@ -7,6 +7,13 @@ class ItemBarManager extends SaveableObject {
         super();
         ItemBarManager.inst = this;
     }
+    /**wD
+     * Set item bar sprite
+     * @param {ItemBarSprite} sprite 
+     */
+    setSprite(sprite) {
+        this._sprite = sprite;
+    }
 }
 /** @type {ItemBarManager} */
 ItemBarManager.inst = null;
@@ -263,6 +270,7 @@ Spriteset_Map.prototype.createUpperLayer = function () {
     DSI_Sys2_MyBag_Spriteset_Map_createUpperLayer.call(this);
     this._itemBarController = new ItemBarSprite();
     this.addChild(this._itemBarController);
+    ItemBarManager.inst.setSprite(this._itemBarController);
 }
 
 var DSI_Sys3_ItemBar_Game_System_createSaveableObjects = Game_System.prototype.createSaveableObjects;

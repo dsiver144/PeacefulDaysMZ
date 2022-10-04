@@ -3,7 +3,7 @@ class Window_ItemContainer extends Window_Base {
      * This class handle bag menu display for Peaceful Days
      * @param {ItemContainer} container
      */
-    constructor(container, rect = new Rectangle(0, 0, 560, 360)) {
+    constructor(container, rect = new Rectangle(0, 0, 538, 360)) {
         super(rect);
         /** @type {ItemContainer} */
         this.itemContainer = container;
@@ -98,7 +98,7 @@ class Window_ItemContainer extends Window_Base {
     createInteractiveButtons() {
         const sortButton = new Sprite_Clickable();
         sortButton.bitmap = ImageManager.loadMenu("SortBtn", "bag");
-        sortButton.x = this.width;
+        sortButton.x = this.width + 12;
         sortButton.y = 35;
         sortButton.opacity = 0;
         sortButton.onClick = this.onSortButtonOK.bind(this);
@@ -111,7 +111,7 @@ class Window_ItemContainer extends Window_Base {
 
         const discardButton = new Sprite_Clickable();
         discardButton.bitmap = ImageManager.loadMenu("DiscardBtn", "bag");
-        discardButton.x = this.width;
+        discardButton.x = this.width + 12;
         discardButton.y = sortButton.y + 64;
         discardButton.opacity = 0;
         discardButton.onClick = this.onDiscardButtonOK.bind(this);

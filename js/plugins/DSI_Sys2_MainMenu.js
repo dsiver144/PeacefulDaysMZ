@@ -22,7 +22,7 @@ const MainMenuConfig = {
         }, {
             icon: "bag/BagIcon",
             textKey: "MainMenu_Bag",
-            pageClass: "new Window_Base(new Rectangle(0, 0, 400, 400))"
+            pageClass: "new Window_Settings()"
         }
     ]
 }
@@ -97,8 +97,8 @@ class Scene_MainMenu extends Scene_MenuBase {
         window.backOpacity = 0;
 
         const menuBGPlane = new PIXI.NineSlicePlane(PIXI.Texture.from("img/menus/MenuBG.png"), 8, 8, 8, 8);
-        menuBGPlane.width = window.innerWidth;
-        menuBGPlane.height = window.innerHeight;
+        menuBGPlane.width = window.width;
+        menuBGPlane.height = window.height;
         window.addChildToBack(menuBGPlane);
 
         window.x = (Graphics.width - window.width) / 2;
