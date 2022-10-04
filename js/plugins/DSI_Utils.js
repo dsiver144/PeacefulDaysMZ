@@ -80,7 +80,7 @@ MyUtils.parseCSV = function (filename, callback) {
         if (!data) {
             throw new Error("Can't load " + filename);
         }
-        const lines = data.split("\r\n");
+        const lines = data.split(/[\r\n]+/i);
         const keys = lines[0].split(",").map(s => s.trim());
         const allObjects = [];
         for (let i = 1; i < lines.length; i++) {
