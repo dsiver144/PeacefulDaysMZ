@@ -126,7 +126,7 @@ class Sprite_ScreenOverlay extends Sprite {
      * @returns 
      */
     showButtonHints(...args) {
-        const offset = new Vector2(-5, -5);
+        const offset = new Vector2(-5, -10);
         const spacing = 10;
         let nextX = Graphics.width + offset.x;
         for (var i = args.length - 1; i >= 0; i--) {
@@ -139,6 +139,7 @@ class Sprite_ScreenOverlay extends Sprite {
             nextX = hintSprite.x;
             this.addChild(hintSprite);
             this._keyHints.push(hintSprite);
+            // PIXI.filters.
         }
         this._currentHints = args;
     }

@@ -20,7 +20,7 @@ const MainMenuConfig = {
             textKey: "MainMenu_Bag",
             pageClass: "new Window_Bag()"
         }, {
-            icon: "bag/BagIcon",
+            icon: "mainMenu/SettingsIcon",
             textKey: "MainMenu_Bag",
             pageClass: "new Window_Settings()"
         }
@@ -60,7 +60,18 @@ class Scene_MainMenu extends Scene_MenuBase {
      * Create all neccessary objects
      */
     createAllObjects() {
+        this.createPageBar();
         this.createAllPages();
+    }
+    /**
+     * Create Page Bar
+     */
+    createPageBar() {
+        this._barBG = new Sprite(ImageManager.loadMenu('IconBarBGHorz', 'mainMenu'));
+        this.addChild(this._barBG);
+        this._barBG.y -= 100;
+        this._barBG.alpha = 0;
+        this._barBG.startTween({y: 0, alpha: 1.0}, 15).ease(Easing.easeInOutExpo);
     }
     /**
      * Create all pages
@@ -72,7 +83,7 @@ class Scene_MainMenu extends Scene_MenuBase {
         this._pageIconStartX = (Graphics.width - (this._maxPages * (iconSize[0] + iconSpacing) - iconSpacing)) / 2;
         MainMenuConfig.pages.forEach((pageData, index) => {
             this.setupPage(pageData, index);
-        })
+        });
     }
     /**
      * Setup Page
@@ -138,6 +149,7 @@ class Scene_MainMenu extends Scene_MenuBase {
         window.startTween({ offsetY: Graphics.height, alpha: 1.0 }, 15).ease(Easing.easeOutExpo);
         this._currentPageIndex = index;
         this.setPageSwitchDelay(15);
+        window.showHints();
     }
     /**
      * Unselect page
@@ -149,6 +161,7 @@ class Scene_MainMenu extends Scene_MenuBase {
         icon.startTween({ opacity: 100 }, 10);
         window.visible = false;
         window.deactivate();
+        ScreenOverlay.clearAllHints();
     }
     /**
      * Get current page

@@ -23,8 +23,36 @@ var DSI_Sys1_ConfigManager_ConfigManager_applyData = ConfigManager.applyData;
 ConfigManager.applyData = function(config) {
 	DSI_Sys1_ConfigManager_ConfigManager_applyData.call(this, config);
     this.clockMode = this.readNumber(config, "clockMode");
-    this.clockPosition = this.readNumber(config, "clockPosition");
+    this.clockPosition = this.readNumber(config, "clockPosition", 1);
 };
+
+Object.defineProperty(Graphics, "isFullscreen", {
+    get: function() {
+        return Graphics._isFullScreen() ? 1 : 0;
+    },
+    set: function(value) {
+        if (value == 1) {
+            Graphics._requestFullScreen();
+        } else {
+            Graphics._cancelFullScreen();
+        }
+    },
+    configurable: true
+});
+
+Object.defineProperty(ConfigManager, "alwaysDashEx", {
+    get: function() {
+        return ConfigManager.alwaysDash ? 1 : 0;
+    },
+    set: function(value) {
+        if (value == 1) {
+            ConfigManager.alwaysDash = true;
+        } else {
+            ConfigManager.alwaysDash = false;
+        }
+    },
+    configurable: true
+});
 
 ConfigManager.readNumber = function(config, name, defaultValue = 0) {
     if (name in config) {
@@ -63,47 +91,4 @@ Graphics._cancelFullScreen = function () {
         DSI_Sys1_Bitmap_Graphics__cancelFullScreen.call(this);
     }
 };
-
-Object.defineProperty(Graphics, "isFullscreen", {
-    get: function() {
-        return Graphics._isFullScreen() ? 1 : 0;
-    },
-    set: function(value) {
-        if (value == 1) {
-            Graphics._requestFullScreen();
-        } else {
-            Graphics._cancelFullScreen();
-        }
-    },
-    configurable: true
-});
-
-Object.defineProperty(ConfigManager, "alwaysDashEx", {
-    get: function() {
-        return ConfigManager.alwaysDash ? 1 : 0;
-    },
-    set: function(value) {
-        if (value == 1) {
-            ConfigManager.alwaysDash = true;
-        } else {
-            ConfigManager.alwaysDash = false;
-        }
-    },
-    configurable: true
-});
-
-
-// Object.defineProperty(ConfigManager, "clockMode", {
-//     get: function() {
-//         return ConfigManager.alwaysDash ? 1 : 0;
-//     },
-//     set: function(value) {
-//         if (value == 1) {
-//             ConfigManager.alwaysDash = true;
-//         } else {
-//             ConfigManager.alwaysDash = false;
-//         }
-//     },
-//     configurable: true
-// });
 
