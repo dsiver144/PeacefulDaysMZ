@@ -83,6 +83,7 @@ class Scene_MainMenu extends Scene_MenuBase {
         MainMenuConfig.pages.forEach((pageData, index) => {
             this.setupPage(pageData, index);
         });
+        // Relocate icons
         let iconNextX = Graphics.width - 60 - iconSize[0];
         for (var i = this._pages.length - 1; i >= 0; i--) {
             const {icon} = this._pages[i];
@@ -146,7 +147,7 @@ class Scene_MainMenu extends Scene_MenuBase {
         if (!this.canSwitchPage()) return;
         this.unselectPage(this._currentPageIndex);
         const { icon, window } = this._pages[index];
-        icon.startTween({ opacity: 255, offsetY: 10 }, 15).ease(Easing.easeOutExpo);
+        icon.startTween({ opacity: 255 }, 15).ease(Easing.easeOutExpo);
         window.visible = true;
         window.activate();
         window.alpha = 0;
@@ -197,6 +198,7 @@ class Scene_MainMenu extends Scene_MenuBase {
         const {window} = this.currentPage();
         window.deactivate();
         window.startTween({offsetY2: Graphics.height, alpha: 0.0}, 30).ease(Easing.easeOutExpo);
+        this._barBG.startTween({y: -200, alpha: 0}, 30).ease(Easing.easeInOutExpo);
         this._pages.forEach((page) => {
             page.icon.startTween({y: 0, alpha: 0}, 30).ease(Easing.easeOutExpo);
         });
