@@ -117,6 +117,10 @@ class Sprite_TimeUI extends Sprite {
         const timeStr = `${hour}:${min}`;
         this._timeText.text = timeStr;
         const session = GameTime.session();
+        const weekDay = LocalizeManager.t('Lb_Weekday_' + GameTime.inst.weekDay);
+        const monthDay = LocalizeManager.t('Lb_MonthDay_Prefix') + ' ' + GameTime.inst.monthDay;
+        const season = LocalizeManager.t('Lb_Season_' + GameTime.inst.season);
+        this._dateText.text = `${weekDay} ${monthDay} | ${season}`;
         this._timeBG.bitmap = ImageManager.loadMenu('TimeBG_' + session, 'timeHud');
     }
     /**

@@ -208,5 +208,89 @@
             "vn": "Có sẵn",
             "en": "Available"
         }
+    },
+    {
+        "key": "Lb_Season_0",
+        "lang": {
+            "vn": "Xuân",
+            "en": "Spr"
+        }
+    },
+    {
+        "key": "Lb_Season_1",
+        "lang": {
+            "vn": "Hạ",
+            "en": "Sum"
+        }
+    },
+    {
+        "key": "Lb_Season_2",
+        "lang": {
+            "vn": "Thu",
+            "en": "Fall"
+        }
+    },
+    {
+        "key": "Lb_Season_3",
+        "lang": {
+            "vn": "Đông",
+            "en": "Win"
+        }
+    },
+    {
+        "key": "Lb_Weekday_1",
+        "lang": {
+            "vn": "CN",
+            "en": "Sun"
+        }
+    },
+    {
+        "key": "Lb_Weekday_2",
+        "lang": {
+            "vn": "T2",
+            "en": "Mon"
+        }
+    },
+    {
+        "key": "Lb_Weekday_3",
+        "lang": {
+            "vn": "T3",
+            "en": "Tue"
+        }
+    },
+    {
+        "key": "Lb_Weekday_4",
+        "lang": {
+            "vn": "T4",
+            "en": "Wed"
+        }
+    },
+    {
+        "key": "Lb_Weekday_5",
+        "lang": {
+            "vn": "T5",
+            "en": "Thu"
+        }
+    },
+    {
+        "key": "Lb_Weekday_6",
+        "lang": {
+            "vn": "T6",
+            "en": "Fri"
+        }
+    },
+    {
+        "key": "Lb_Weekday_7",
+        "lang": {
+            "vn": "T7",
+            "en": "Sat"
+        }
+    },
+    {
+        "key": "Lb_MonthDay_Prefix",
+        "lang": {
+            "vn": "Ngày",
+            "en": "Day"
+        }
     }
 ]

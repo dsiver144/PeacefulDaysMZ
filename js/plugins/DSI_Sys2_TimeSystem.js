@@ -103,6 +103,14 @@ class GameTime extends SaveableObject {
         return "night";
     }
     /**
+     * Get weekday
+     * 1: Sun, 2: Mon, 3: Tue, ... , 7: Sat
+     * @returns {number}
+     */
+    get weekDay() {
+        return this.monthDay % 7 + 1;
+    }
+    /**
      * Randomize Weather
      * @param {number} season 
      * @returns {string}
@@ -150,7 +158,7 @@ class GameTime extends SaveableObject {
         this.hour = TimeConfig.morningHour;
         this.min = 0;
         this.weatherType = this.randomizeWeather(this.season);
-        console.log(this.totalMins, this.weatherType, { totalHoursToMorning, minLeft });
+        console.log(this.weekDay, this.totalMins, this.weatherType, { totalHoursToMorning, minLeft });
     }
     /**
      * Pause Time
@@ -316,6 +324,13 @@ GameTime.year = function () {
  */
 GameTime.weatherType = function () {
     return GameTime.inst.weatherType;
+}
+/**
+ * Get weekDay
+ * @returns {number}
+ */
+ GameTime.weekDay = function () {
+    return GameTime.inst.weekDay;
 }
 /**
  * Pause Time
