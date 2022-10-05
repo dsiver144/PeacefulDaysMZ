@@ -8,6 +8,11 @@
  * @help 
  * Empty Help
  * 
+ * @param switchPageSE:struct
+ * @text Switch Page SE
+ * @desc SFX when switch page
+ * @type struct<SoundEffect>
+ * @default {"name:str":"PD_ChangePage0","volume:num":"70","pitch:num":"100","pan:num":"0"}
  * 
  */
 /*~struct~SoundEffect:
@@ -33,6 +38,8 @@
  * @desc Choose the pan value of the se
  * 
  */
+const AudioParams = PluginManager.processParameters(PluginManager.parameters('DSI_Sys1_AudioController'));
+
 class AudioController {
     /** Init */
     static init() {
@@ -70,6 +77,12 @@ class AudioController {
      */
     static playOk() {
         SoundManager.playOk();
+    }
+    /**
+     * Play page
+     */
+     static playPage() {
+        AudioManager.playSe(AudioParams.switchPageSE);
     }
     /**
      * Play command Cancel

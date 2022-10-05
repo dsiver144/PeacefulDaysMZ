@@ -8,7 +8,7 @@ var $plugins =
 {"name":"rmmz_movement","status":true,"description":"(v1.0.4) 8 direction movement and pixel movement for RPG Maker MZ.","parameters":{}},
 {"name":"DSI_PeerJS","status":false,"description":"","parameters":{}},
 {"name":"DSI_Sys1_Steam","status":true,"description":"","parameters":{}},
-{"name":"DSI_Sys1_AudioController","status":true,"description":"(v1.0) A custom plugin by dsiver144","parameters":{}},
+{"name":"DSI_Sys1_AudioController","status":true,"description":"(v1.0) A custom plugin by dsiver144","parameters":{"switchPageSE:struct":"{\"name:str\":\"PD_ChangePage0\",\"volume:num\":\"70\",\"pitch:num\":\"100\",\"pan:num\":\"0\"}"}},
 {"name":"DSI_Sys1_EventSystem","status":true,"description":"(v1.0) Peaceful Days Event System","parameters":{}},
 {"name":"DSI_Sys1_Interfaces","status":true,"description":"(v1.0) Peaceful Days Interfaces","parameters":{}},
 {"name":"DSI_Sys1_SaveSystem","status":true,"description":"(v1.0) Save System","parameters":{}},

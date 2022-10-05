@@ -105,6 +105,13 @@
         }
     },
     {
+        "key": "Lb_Settings",
+        "lang": {
+            "vn": "Cài Đặt",
+            "en": "Settings"
+        }
+    },
+    {
         "key": "Lb_Chest",
         "lang": {
             "vn": "Rương",

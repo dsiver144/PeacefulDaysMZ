@@ -10,18 +10,34 @@
  * 
  */
 const MainMenuConfig = {
-    iconSpacing: 12,
-    iconSize: [50, 50],
-    iconDisplayY: 8,
+    pageButtonOffset: 100,
+    pageButtonSpacing: 10,
+    pageButtonY: 8,
+    pageButtonSelectY: 4,
     pageDisplayY: 120,
     pages: [
         {
             icon: "bag/BagIcon",
-            textKey: "MainMenu_Bag",
+
+            textKey: "Lb_Backpack",
             pageClass: "new Window_Bag()"
-        }, {
-            icon: "mainMenu/SettingsIcon",
-            textKey: "MainMenu_Bag",
+        }, 
+        {
+            icon: "bag/BagIcon",
+
+            textKey: "Lb_Backpack",
+            pageClass: "new Window_Bag()"
+        }, 
+        {
+            icon: "bag/BagIcon",
+
+            textKey: "Lb_Backpack",
+            pageClass: "new Window_Bag()"
+        }, 
+        {
+            icon: "mainMenu/SettingsIcon2",
+            textColor: "#e1e1e1",
+            textKey: "Lb_Settings",
             pageClass: "new Window_Settings()"
         }
     ]
@@ -62,6 +78,8 @@ class Scene_MainMenu extends Scene_MenuBase {
     createAllObjects() {
         this.createPageBar();
         this.createAllPages();
+        this.createPageButtonCursor();
+        this.createPageArrows();
     }
     /**
      * Create Page Bar
@@ -71,41 +89,99 @@ class Scene_MainMenu extends Scene_MenuBase {
         this.addChild(this._barBG);
         this._barBG.y -= 100;
         this._barBG.alpha = 0;
-        this._barBG.startTween({y: 0, alpha: 1.0}, 15).ease(Easing.easeInOutExpo);
+        this._barBG.startTween({ y: 0, alpha: 1.0 }, 15).ease(Easing.easeInOutExpo);
     }
     /**
      * Create all pages
      */
     createAllPages() {
-        const { iconSize, iconSpacing } = MainMenuConfig;
+        const { pageButtonSpacing, pageButtonY, pageButtonOffset } = MainMenuConfig;
         this._maxPages = MainMenuConfig.pages.length;
         this._pages = [];
         MainMenuConfig.pages.forEach((pageData, index) => {
             this.setupPage(pageData, index);
         });
         // Relocate icons
-        let iconNextX = Graphics.width - 60 - iconSize[0];
-        for (var i = this._pages.length - 1; i >= 0; i--) {
-            const {icon} = this._pages[i];
+        let iconNextX = pageButtonOffset;
+        for (var i = 0; i < this._pages.length; i++) {
+            const { icon } = this._pages[i];
             icon.x = iconNextX;
-            icon.y = MainMenuConfig.iconDisplayY;
-            iconNextX -= iconSpacing + iconSize[0];
+            icon.y = pageButtonY;
+            iconNextX += pageButtonSpacing + icon.width;
         }
+    }
+    /**
+     * Create page button cursor
+     */
+    createPageButtonCursor() {
+        const cursor = new Sprite(ImageManager.loadMenu('PageButtonCursor', 'mainMenu'));
+        this.addChild(cursor);
+        this._pageButtonCursor = cursor;
+        this._pageButtonCursor.anchor.x = 0.5;
+        this._pageButtonCursor.x = -100;
+        this._pageButtonCursor.y = MainMenuConfig.pageButtonY + 32;
+
+    }
+    /**
+     * Create page arrows
+     */
+    createPageArrows() {
+        this.createLeftPageArrow();
+        this.createRightPageArrow();
+    }
+    /**
+     * Create left page arrow
+     */
+    createLeftPageArrow() {
+        const pageArrowLeft = new Sprite_Clickable();
+        pageArrowLeft.bitmap = ImageManager.loadMenu("PageArrow", "mainMenu");
+        pageArrowLeft.anchor.x = 0.5;
+        pageArrowLeft.anchor.y = 0.5;
+        pageArrowLeft.x = 25;
+        pageArrowLeft.y = 25;
+        pageArrowLeft.originalX = pageArrowLeft.x;
+        pageArrowLeft.onClick = () => {
+            this.switchPage(-1);
+        }
+        this._barBG.addChild(pageArrowLeft);
+        const pageArrowLeftHint = new Sprite_KeyHint(MenuKeyAction.PageLeft, "");
+        pageArrowLeftHint.x = pageArrowLeft.x + 15;
+        pageArrowLeftHint.y = pageArrowLeft.y - 13;
+        this._barBG.addChild(pageArrowLeftHint);
+        this._leftPageArrow = pageArrowLeft;
+    }
+    /**
+     * Create right page arrow
+     */
+    createRightPageArrow() {
+        const pageArrowRight = new Sprite_Clickable();
+        pageArrowRight.bitmap = ImageManager.loadMenu("PageArrow", "mainMenu");
+        pageArrowRight.anchor.x = 0.5;
+        pageArrowRight.anchor.y = 0.5;
+        pageArrowRight.scale.x = -1;
+        pageArrowRight.x = Graphics.width - 25;
+        pageArrowRight.y = 25;
+        pageArrowRight.originalX = pageArrowRight.x;
+        pageArrowRight.onClick = () => {
+            this.switchPage(1);
+        }
+        this._barBG.addChild(pageArrowRight);
+        const pageArrowRightHint = new Sprite_KeyHint(MenuKeyAction.PageRight, "");
+        pageArrowRightHint.x = pageArrowRight.x - 45;
+        pageArrowRightHint.y = pageArrowRight.y - 13;
+        this._barBG.addChild(pageArrowRightHint);
+        this._rightPageArrow = pageArrowRight;
     }
     /**
      * Setup Page
      * @param {any} pageData 
+     * @param {number} pageindexData 
      */
     setupPage(pageData, index) {
-        const { iconSize, iconSpacing, pageDisplayY } = MainMenuConfig;
-        const { icon, textKey, pageClass } = pageData;
+        const { pageDisplayY } = MainMenuConfig;
+        const { pageClass } = pageData;
 
-        const iconSprite = new Sprite_Clickable();
-        iconSprite.bitmap = ImageManager.loadMenu(icon);
-        iconSprite.onClick = () => {
-            this.onMenuIconButtonClick(index);
-        }
-        this.addChild(iconSprite);
+        const pageButton = this.createPageButton(pageData, index);
 
         /** @type {Window_Base} */
         const window = eval(pageClass);
@@ -121,14 +197,50 @@ class Scene_MainMenu extends Scene_MenuBase {
         window.y = pageDisplayY;
 
         this._pages.push({
-            icon: iconSprite,
+            icon: pageButton,
             window: window
         })
 
         window.visible = false;
-        iconSprite.opacity = 100;
+        pageButton.opacity = 100;
 
         this.addChild(window);
+    }
+    /**
+     * Create page button
+     * @param {any} pageData 
+     * @param {number} index
+     * @returns {Sprite_Clickable}
+     */
+    createPageButton(pageData, index) {
+        const button = new Sprite_Clickable();
+        button.onClick = () => {
+            this.onMenuIconButtonClick(index);
+        }
+
+        const iconSprite = new Sprite(ImageManager.loadMenu(pageData.icon));
+        button.addChild(iconSprite);
+
+        const style = new PIXI.TextStyle({
+            fill: pageData.textColor || "#f5b642",
+            fontFamily: "Verdana",
+            fontWeight: "bold",
+            fontSize: 20,
+            lineJoin: "round",
+            stroke: "#6f4949",
+            strokeThickness: 5
+        });
+        const str = LocalizeManager.t(pageData.textKey).toUpperCase();
+        const pageText = new PIXI.Text(str, style);
+        pageText.x = 32 + 4;
+
+        button.addChild(pageText);
+
+        button.width = pageText.x + pageText.width;
+        button.height = pageText.height;
+
+        this.addChild(button);
+        return button;
     }
     /**
      * This will be call when player click icon button
@@ -145,15 +257,21 @@ class Scene_MainMenu extends Scene_MenuBase {
     selectPage(index) {
         if (index < 0) return;
         if (!this.canSwitchPage()) return;
+        AudioController.playPage();
         this.unselectPage(this._currentPageIndex);
         const { icon, window } = this._pages[index];
-        icon.startTween({ opacity: 255 }, 15).ease(Easing.easeOutExpo);
+        icon.startTween({ opacity: 255, y: MainMenuConfig.pageButtonSelectY }, 15).ease(Easing.easeOutExpo);
+
+        const cursorTargetX = icon.x + icon.width / 2;
+        this._pageButtonCursor.removeTween();
+        this._pageButtonCursor.startTween({ x: cursorTargetX }, 30).ease(Easing.easeOutExpo);
+
         window.visible = true;
         window.activate();
         window.alpha = 0;
-        window.startTween({ offsetY: Graphics.height, alpha: 1.0 }, 15).ease(Easing.easeOutExpo);
+        window.y = Graphics.height;
+        window.startTween({ y: MainMenuConfig.pageDisplayY, alpha: 1.0 }, 15).ease(Easing.easeOutExpo);
         this._currentPageIndex = index;
-        this.setPageSwitchDelay(15);
         window.showHints();
     }
     /**
@@ -163,7 +281,7 @@ class Scene_MainMenu extends Scene_MenuBase {
     unselectPage(index) {
         if (index < 0) return;
         const { icon, window } = this._pages[index];
-        icon.startTween({ opacity: 100 }, 10);
+        icon.startTween({ opacity: 100, y: MainMenuConfig.pageButtonY }, 10);
         window.visible = false;
         window.deactivate();
         ScreenOverlay.clearAllHints();
@@ -179,6 +297,13 @@ class Scene_MainMenu extends Scene_MenuBase {
      * Switch Page
      */
     switchPage(direction) {
+        if (direction == 1) {
+            this._rightPageArrow.x = this._rightPageArrow.originalX;
+            this._rightPageArrow.startTween({ offsetX: 5 }, 15).ease(Easing.easeInCubic);
+        } else {
+            this._leftPageArrow.x = this._leftPageArrow.originalX;
+            this._leftPageArrow.startTween({ offsetX: -5 }, 15).ease(Easing.easeInCubic);
+        }
         let pageIndex = this._currentPageIndex;
         pageIndex += direction;
         if (pageIndex < 0) {
@@ -195,13 +320,14 @@ class Scene_MainMenu extends Scene_MenuBase {
     popScene() {
         this._returningToMap = true;
         // Play close animation for main menu before back to map.
-        const {window} = this.currentPage();
+        const { window } = this.currentPage();
         window.deactivate();
-        window.startTween({offsetY2: Graphics.height, alpha: 0.0}, 30).ease(Easing.easeOutExpo);
-        this._barBG.startTween({y: -200, alpha: 0}, 30).ease(Easing.easeInOutExpo);
+        window.startTween({ offsetY2: Graphics.height, alpha: 0.0 }, 30).ease(Easing.easeOutExpo);
+        this._barBG.startTween({ y: -200, alpha: 0 }, 30).ease(Easing.easeInOutExpo);
         this._pages.forEach((page) => {
-            page.icon.startTween({y: 0, alpha: 0}, 30).ease(Easing.easeOutExpo);
+            page.icon.startTween({ y: 0, alpha: 0 }, 30).ease(Easing.easeOutExpo);
         });
+        this._pageButtonCursor.startTween({ alpha: 0 }, 30).ease(Easing.easeOutExpo);
         setTimeout(() => {
             super.popScene();
         }, 250);
@@ -239,10 +365,10 @@ class Scene_MainMenu extends Scene_MenuBase {
         }
         if (Input.isTriggered(MenuKeyAction.PageLeft)) {
             this.switchPage(-1);
-        }   
+        }
         if (Input.isTriggered(MenuKeyAction.PageRight)) {
             this.switchPage(1);
-        } 
+        }
         this.updateSwitchPageDelay();
     }
     /**
