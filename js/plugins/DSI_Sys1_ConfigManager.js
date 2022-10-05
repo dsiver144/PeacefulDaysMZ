@@ -10,10 +10,12 @@
  */
 
 ConfigManager.clockMode = 0;
+ConfigManager.clockPosition = 1;
 var DSI_Sys1_ConfigManager_ConfigManager_makeData = ConfigManager.makeData;
 ConfigManager.makeData = function() {
 	const config = DSI_Sys1_ConfigManager_ConfigManager_makeData.call(this);
     config['clockMode'] = this.clockMode;
+    config['clockPosition'] = this.clockPosition;
     return config;
 };
 
@@ -21,6 +23,7 @@ var DSI_Sys1_ConfigManager_ConfigManager_applyData = ConfigManager.applyData;
 ConfigManager.applyData = function(config) {
 	DSI_Sys1_ConfigManager_ConfigManager_applyData.call(this, config);
     this.clockMode = this.readNumber(config, "clockMode");
+    this.clockPosition = this.readNumber(config, "clockPosition");
 };
 
 ConfigManager.readNumber = function(config, name, defaultValue = 0) {

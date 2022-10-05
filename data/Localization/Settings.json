@@ -75,5 +75,12 @@
             "vn": "24 Giờ",
             "en": "24-Hour"
         }
+    },
+    {
+        "key": "Lb_Option_ClockPosition",
+        "lang": {
+            "vn": "Vị Trí Đồng Hồ",
+            "en": "Clock Position"
+        }
     }
 ]

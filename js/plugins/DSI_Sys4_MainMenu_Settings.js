@@ -57,6 +57,13 @@ class Window_Settings extends Window_Command {
             displayKeys: ['Lb_No', 'Lb_Yes'],
             method: this.onFullScreenControl
         });
+        this.addOption('Lb_Option_ClockPosition', {
+            type: "selection",
+            object: ConfigManager,
+            property: "clockPosition",
+            displayKeys: ['Lb_Left', 'Lb_Right'],
+            method: this.onFullScreenControl
+        });
         this.addOption('Lb_Option_ClockMode', {
             type: "selection",
             object: ConfigManager,
@@ -120,17 +127,17 @@ class Window_Settings extends Window_Command {
     /**
      * @inheritdoc
      */
-    smoothScrollDown() {
+    smoothScrollDown(n) {
         const scrollable = this.currentOptionData().scrollable;
-        if (!scrollable) return;
+        if (!scrollable) return super.smoothScrollDown(n);
         this.cursorLeft();
     }
     /**
      * @inheritdoc
      */
-    smoothScrollUp() {
+    smoothScrollUp(n) {
         const scrollable = this.currentOptionData().scrollable;
-        if (!scrollable) return;
+        if (!scrollable) return super.smoothScrollUp(n);
         this.cursorRight();
     }
     /**

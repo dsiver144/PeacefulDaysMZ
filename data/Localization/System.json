@@ -77,6 +77,20 @@
         }
     },
     {
+        "key": "Lb_Left",
+        "lang": {
+            "vn": "Trái",
+            "en": "Left"
+        }
+    },
+    {
+        "key": "Lb_Right",
+        "lang": {
+            "vn": "Phải",
+            "en": "Right"
+        }
+    },
+    {
         "key": "Lb_SortBag",
         "lang": {
             "vn": "Sắp xếp",
