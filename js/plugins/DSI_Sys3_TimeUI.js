@@ -118,7 +118,29 @@ class Sprite_TimeUI extends Sprite {
         this._timeText.text = timeStr;
         const session = GameTime.session();
         const weekDay = LocalizeManager.t('Lb_Weekday_' + GameTime.inst.weekDay);
-        const monthDay = LocalizeManager.t('Lb_MonthDay_Prefix') + ' ' + GameTime.inst.monthDay;
+        let monthDay = LocalizeManager.t('Lb_MonthDay_Prefix') + GameTime.inst.monthDay;
+        if (LocalizeManager.inst.language == 'en') {
+            const day = GameTime.inst.monthDay;
+            if (day >= 11 && day <= 20) {
+                monthDay += "th";
+            } else {
+                const lastDigit = day.toString().at(-1);
+                switch (lastDigit) {
+                    case '1':
+                        monthDay += "st";
+                        break;
+                    case '2':
+                        monthDay += "nd";
+                        break;
+                    case '3':
+                        monthDay += "rd";
+                        break;
+                    default:
+                        monthDay += "th";
+                        break;
+                }
+            }
+        }
         const season = LocalizeManager.t('Lb_Season_' + GameTime.inst.season);
         this._dateText.text = `${weekDay} ${monthDay} | ${season}`;
         this._timeBG.bitmap = ImageManager.loadMenu('TimeBG_' + session, 'timeHud');
@@ -134,7 +156,7 @@ class Sprite_TimeUI extends Sprite {
      * Set Position
      */
     setPosition() {
-        const {bgSize, offset} = TimeUIConfig;
+        const { bgSize, offset } = TimeUIConfig;
         const pos = new Vector2(0, 0);
         const type = ConfigManager.clockPosition == 1 ? 'right' : 'left';
         pos.x = type === 'right' ? (Graphics.width - bgSize[0] - offset[0]) : offset[0];

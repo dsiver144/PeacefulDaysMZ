@@ -10,7 +10,7 @@
  * 
  */
 const MainMenuConfig = {
-    pageButtonOffset: 100,
+    pageButtonOffset: 90,
     pageButtonSpacing: 10,
     pageButtonY: 8,
     pageButtonSelectY: 4,
@@ -18,25 +18,26 @@ const MainMenuConfig = {
     pages: [
         {
             icon: "bag/BagIcon",
-
             textKey: "Lb_Backpack",
             pageClass: "new Window_Bag()"
         }, 
         {
-            icon: "bag/BagIcon",
-
-            textKey: "Lb_Backpack",
-            pageClass: "new Window_Bag()"
+            icon: "mainMenu/RequestIcon",
+            textKey: "Lb_MainMenu_Requests",
+            pageClass: "new Window_Base(new Rectangle(0, 0, 560, 350))"
         }, 
         {
-            icon: "bag/BagIcon",
-
-            textKey: "Lb_Backpack",
-            pageClass: "new Window_Bag()"
+            icon: "mainMenu/NpcIcon",
+            textKey: "Lb_MainMenu_NPC",
+            pageClass: "new Window_Base(new Rectangle(0, 0, 560, 350))"
         }, 
+        {
+            icon: "mainMenu/InfoIcon",
+            textKey: "Lb_MainMenu_Info",
+            pageClass: "new Window_Base(new Rectangle(0, 0, 560, 350))"
+        },
         {
             icon: "mainMenu/SettingsIcon2",
-            textColor: "#e1e1e1",
             textKey: "Lb_Settings",
             pageClass: "new Window_Settings()"
         }
@@ -102,12 +103,18 @@ class Scene_MainMenu extends Scene_MenuBase {
             this.setupPage(pageData, index);
         });
         // Relocate icons
-        let iconNextX = pageButtonOffset;
+        let totalWidth = 0;
         for (var i = 0; i < this._pages.length; i++) {
             const { icon } = this._pages[i];
-            icon.x = iconNextX;
+            totalWidth += icon.width + pageButtonSpacing;
+        }
+        totalWidth -= pageButtonSpacing;
+        let startX = (Graphics.width - (totalWidth)) / 2;
+        for (var i = 0; i < this._pages.length; i++) {
+            const { icon } = this._pages[i];
+            icon.x = startX;
             icon.y = pageButtonY;
-            iconNextX += pageButtonSpacing + icon.width;
+            startX += icon.width + pageButtonSpacing;
         }
     }
     /**
@@ -222,10 +229,10 @@ class Scene_MainMenu extends Scene_MenuBase {
         button.addChild(iconSprite);
 
         const style = new PIXI.TextStyle({
-            fill: pageData.textColor || "#f5b642",
+            fill: '#e1e1e1',
             fontFamily: "Verdana",
             fontWeight: "bold",
-            fontSize: 20,
+            fontSize: 18,
             lineJoin: "round",
             stroke: "#6f4949",
             strokeThickness: 5
@@ -233,11 +240,13 @@ class Scene_MainMenu extends Scene_MenuBase {
         const str = LocalizeManager.t(pageData.textKey).toUpperCase();
         const pageText = new PIXI.Text(str, style);
         pageText.x = 32 + 4;
+        pageText.y = 4;
 
         button.addChild(pageText);
 
         button.width = pageText.x + pageText.width;
         button.height = pageText.height;
+        button.pageText = pageText;
 
         this.addChild(button);
         return button;
@@ -261,6 +270,7 @@ class Scene_MainMenu extends Scene_MenuBase {
         this.unselectPage(this._currentPageIndex);
         const { icon, window } = this._pages[index];
         icon.startTween({ opacity: 255, y: MainMenuConfig.pageButtonSelectY }, 15).ease(Easing.easeOutExpo);
+        icon.pageText.style.fill = "#f5b642";
 
         const cursorTargetX = icon.x + icon.width / 2;
         this._pageButtonCursor.removeTween();
@@ -272,7 +282,7 @@ class Scene_MainMenu extends Scene_MenuBase {
         window.y = Graphics.height;
         window.startTween({ y: MainMenuConfig.pageDisplayY, alpha: 1.0 }, 15).ease(Easing.easeOutExpo);
         this._currentPageIndex = index;
-        window.showHints();
+        window.showHints?.();
     }
     /**
      * Unselect page
@@ -282,6 +292,7 @@ class Scene_MainMenu extends Scene_MenuBase {
         if (index < 0) return;
         const { icon, window } = this._pages[index];
         icon.startTween({ opacity: 100, y: MainMenuConfig.pageButtonY }, 10);
+        icon.pageText.style.fill = "#e1e1e1";
         window.visible = false;
         window.deactivate();
         ScreenOverlay.clearAllHints();

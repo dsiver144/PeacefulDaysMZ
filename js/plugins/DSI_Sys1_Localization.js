@@ -35,6 +35,12 @@ class LocalizeManager {
         this.loadFiles();
     }
     /**
+     * Get current language
+     */
+    get language() {
+        return this._language;
+    }
+    /**
      * Get text by key
      * @param {string} key 
      * @param {string} prefix 
@@ -57,7 +63,7 @@ class LocalizeManager {
         const entry = this._texts.get(key);
         return entry ? {
             name: entry.lang[language],
-            description: entry.description[language]
+            description: entry.description[language] || `[${key}'s Description]`
         } : {
             name: `[${key}]`,
             description: `[${key}'s Description]`
