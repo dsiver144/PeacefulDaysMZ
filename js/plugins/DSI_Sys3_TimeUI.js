@@ -33,6 +33,8 @@ class Sprite_TimeUI extends Sprite {
         this.createClockText();
         this.createDateText();
         this.createWeatherBanner();
+        this.refreshDateAndTime();
+        EventManager.on(TimeEvent.UpdateTime, this.onTimeChanged, this);
     }
     /**
      * Create Background
@@ -60,6 +62,7 @@ class Sprite_TimeUI extends Sprite {
         timeText.anchor.x = 0.5;
         timeText.x = 150 / 2;
         timeText.y = 5;
+        this._timeText = timeText;
         this.addChild(timeText);
     }
     /**
@@ -79,6 +82,7 @@ class Sprite_TimeUI extends Sprite {
         dateText.anchor.x = 0.5;
         dateText.x = 150 / 2;
         dateText.y = 45;
+        this._dateText = dateText;
         this.addChild(dateText);
     }
     /**
@@ -88,7 +92,25 @@ class Sprite_TimeUI extends Sprite {
         const weatherBanner = new Sprite();
         this.addChild(weatherBanner);
         this._weatherBanner = weatherBanner;
+        this._weatherBanner.x = 7;
+        this._weatherBanner.y = 72;
         this.refreshWeatherBanner();
+    }
+    /**
+     * On Time Changed
+     */
+    onTimeChanged() {
+        this.refreshDateAndTime();
+        this.refreshWeatherBanner();
+    }
+    /**
+     * Refresh Date and Time
+     */
+    refreshDateAndTime() {
+        const hour = GameTime.hour().toString().padStart(2, "0");
+        const min = GameTime.min().toString().padStart(2, "0");
+        const timeStr = `${hour}:${min}`;
+        this._timeText.text = timeStr;
     }
     /**
      * Refresh Weather Banner
@@ -96,8 +118,6 @@ class Sprite_TimeUI extends Sprite {
     refreshWeatherBanner() {
         const currentWeather = GameTime.weatherType();
         this._weatherBanner.bitmap = ImageManager.loadMenu('Weather_' + currentWeather, 'timeHud');
-        this._weatherBanner.x = 7;
-        this._weatherBanner.y = 72;
     }
     /**
      * Set Position

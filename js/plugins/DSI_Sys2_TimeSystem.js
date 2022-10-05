@@ -30,6 +30,10 @@ const WeatherType = {
     "snowy": "snowy",
     "snowStorm": "snowStorm",
 }
+/** @enum */
+const TimeEvent = {
+    UpdateTime: "updateTime"
+}
 
 const WeatherConfig = {
     0: {
@@ -210,6 +214,7 @@ class GameTime extends SaveableObject {
             this.min = this.min - TimeConfig.maxMin;
             this.updateHour(1);
         }
+        EventManager.emit(TimeEvent.UpdateTime);
     }
     /**
      * Update hour
