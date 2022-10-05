@@ -42,6 +42,11 @@ class Sprite_TimeUI extends Sprite {
     createBackground() {
         const background = new Sprite(ImageManager.loadMenu('MainBG', 'timeHud'));
         this.addChild(background);
+        const timeBG = new Sprite();
+        timeBG.x = 7;
+        timeBG.y = 7;
+        this.addChild(timeBG);
+        this._timeBG = timeBG;
     }
     /**
      * Create Time Text
@@ -111,6 +116,8 @@ class Sprite_TimeUI extends Sprite {
         const min = GameTime.min().toString().padStart(2, "0");
         const timeStr = `${hour}:${min}`;
         this._timeText.text = timeStr;
+        const session = GameTime.session();
+        this._timeBG.bitmap = ImageManager.loadMenu('TimeBG_' + session, 'timeHud');
     }
     /**
      * Refresh Weather Banner

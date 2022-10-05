@@ -85,7 +85,7 @@ class GameTime extends SaveableObject {
         this.year = 1;
         this.frameCount = 0;
         this.season = 0;
-        this.weatherType = WeatherType.sunny;
+        this.weatherType = WeatherType.windy;
         this.paused = true;
         this.totalMins = 0;
     }
