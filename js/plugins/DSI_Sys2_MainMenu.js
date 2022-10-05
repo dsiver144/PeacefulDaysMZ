@@ -11,8 +11,8 @@
  */
 const MainMenuConfig = {
     iconSpacing: 12,
-    iconSize: [64, 64],
-    iconDisplayY: 27,
+    iconSize: [50, 50],
+    iconDisplayY: 8,
     pageDisplayY: 120,
     pages: [
         {
@@ -20,7 +20,7 @@ const MainMenuConfig = {
             textKey: "MainMenu_Bag",
             pageClass: "new Window_Bag()"
         }, {
-            icon: "bag/BagIcon",
+            icon: "mainMenu/SettingsIcon",
             textKey: "MainMenu_Bag",
             pageClass: "new Window_Settings()"
         }
@@ -60,7 +60,18 @@ class Scene_MainMenu extends Scene_MenuBase {
      * Create all neccessary objects
      */
     createAllObjects() {
+        this.createPageBar();
         this.createAllPages();
+    }
+    /**
+     * Create Page Bar
+     */
+    createPageBar() {
+        this._barBG = new Sprite(ImageManager.loadMenu('IconBarBGHorz', 'mainMenu'));
+        this.addChild(this._barBG);
+        this._barBG.y -= 100;
+        this._barBG.alpha = 0;
+        this._barBG.startTween({y: 0, alpha: 1.0}, 15).ease(Easing.easeInOutExpo);
     }
     /**
      * Create all pages
@@ -69,10 +80,17 @@ class Scene_MainMenu extends Scene_MenuBase {
         const { iconSize, iconSpacing } = MainMenuConfig;
         this._maxPages = MainMenuConfig.pages.length;
         this._pages = [];
-        this._pageIconStartX = (Graphics.width - (this._maxPages * (iconSize[0] + iconSpacing) - iconSpacing)) / 2;
         MainMenuConfig.pages.forEach((pageData, index) => {
             this.setupPage(pageData, index);
-        })
+        });
+        // Relocate icons
+        let iconNextX = Graphics.width - 60 - iconSize[0];
+        for (var i = this._pages.length - 1; i >= 0; i--) {
+            const {icon} = this._pages[i];
+            icon.x = iconNextX;
+            icon.y = MainMenuConfig.iconDisplayY;
+            iconNextX -= iconSpacing + iconSize[0];
+        }
     }
     /**
      * Setup Page
@@ -87,8 +105,6 @@ class Scene_MainMenu extends Scene_MenuBase {
         iconSprite.onClick = () => {
             this.onMenuIconButtonClick(index);
         }
-        iconSprite.x = this._pageIconStartX + (iconSize[0] + iconSpacing) * index;
-        iconSprite.y = MainMenuConfig.iconDisplayY;
         this.addChild(iconSprite);
 
         /** @type {Window_Base} */
@@ -131,13 +147,14 @@ class Scene_MainMenu extends Scene_MenuBase {
         if (!this.canSwitchPage()) return;
         this.unselectPage(this._currentPageIndex);
         const { icon, window } = this._pages[index];
-        icon.startTween({ opacity: 255, offsetY: 10 }, 15).ease(Easing.easeOutExpo);
+        icon.startTween({ opacity: 255 }, 15).ease(Easing.easeOutExpo);
         window.visible = true;
         window.activate();
         window.alpha = 0;
         window.startTween({ offsetY: Graphics.height, alpha: 1.0 }, 15).ease(Easing.easeOutExpo);
         this._currentPageIndex = index;
         this.setPageSwitchDelay(15);
+        window.showHints();
     }
     /**
      * Unselect page
@@ -149,6 +166,7 @@ class Scene_MainMenu extends Scene_MenuBase {
         icon.startTween({ opacity: 100 }, 10);
         window.visible = false;
         window.deactivate();
+        ScreenOverlay.clearAllHints();
     }
     /**
      * Get current page
@@ -180,6 +198,7 @@ class Scene_MainMenu extends Scene_MenuBase {
         const {window} = this.currentPage();
         window.deactivate();
         window.startTween({offsetY2: Graphics.height, alpha: 0.0}, 30).ease(Easing.easeOutExpo);
+        this._barBG.startTween({y: -200, alpha: 0}, 30).ease(Easing.easeInOutExpo);
         this._pages.forEach((page) => {
             page.icon.startTween({y: 0, alpha: 0}, 30).ease(Easing.easeOutExpo);
         });

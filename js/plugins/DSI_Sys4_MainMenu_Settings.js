@@ -14,6 +14,22 @@ class Window_Settings extends Window_Command {
         super(rect);
     }
     /**
+     * Show hints
+     */
+    showHints() {
+        const keys = [
+            [MenuKeyAction.Cancel, "Lb_Exit"],
+        ]
+        ScreenOverlay.showButtonHints(...keys);
+    }
+    /**
+     * @inheritdoc
+     */
+    deactivate() {
+        super.deactivate();
+        ConfigManager.save();
+    }
+    /**
      * Make Command List
      */
     makeCommandList() {
@@ -350,13 +366,6 @@ class Window_Settings extends Window_Command {
     /**
      * @inheritdoc
      */
-    deactivate() {
-        super.deactivate();
-        ConfigManager.save();
-    }
-    /**
-     * @inheritdoc
-     */
     cursorDown(wrap) {
         wrap = true;
         const index = this.index();
@@ -387,4 +396,16 @@ class Window_Settings extends Window_Command {
             this.cursorUp();
         }
     };
+    /**
+     * @inheritdoc
+     */
+    cursorPagedown() {
+        // Do nothing here
+    }
+    /**
+     * @inheritdoc
+     */
+    cursorPageup() {
+        // Do nothing here
+    }
 }

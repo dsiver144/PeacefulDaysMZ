@@ -17,11 +17,10 @@ Scene_Map.prototype.createDisplayObjects = function () {
 }
 
 Scene_Map.prototype.displayMapHints = function () {
-    // const keys = [
-    //     [FieldKeyAction.UseTool, "field_tool"],
-    //     [FieldKeyAction.Check, "field_check"]
-    // ]
-    // ScreenOverlay.showButtonHints(...keys);
+    const keys = [
+        [FieldKeyAction.Menu, "field_menu"],
+    ]
+    ScreenOverlay.showButtonHints(...keys);
 }
 
 Scene_Map.prototype.createButtons = function() {

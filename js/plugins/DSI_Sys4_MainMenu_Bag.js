@@ -26,6 +26,5 @@ class Window_Bag extends Window_ItemContainer {
      */
     deactivate() {
         super.deactivate();
-        ScreenOverlay.clearAllHints();
     }
 }
