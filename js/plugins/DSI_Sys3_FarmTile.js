@@ -77,6 +77,7 @@ class FarmTile extends FarmObject {
         } else {
             this.shakeSprite(0.05);
         }
+        Input.rumble();
     }
     /**
      * Get current seed data

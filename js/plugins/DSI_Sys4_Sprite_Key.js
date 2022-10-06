@@ -20,7 +20,7 @@ class Sprite_KeyHint extends Sprite {
      * @param {string} keyAction 
      * @param {string} textKey 
      */
-    constructor(keyAction, textKey, autoRefresh = true) {
+    constructor(keyAction, textKey, autoRefresh = true, mode = null) {
         super();
         this._keyAction = keyAction;
         this._textKey = textKey;
@@ -28,6 +28,8 @@ class Sprite_KeyHint extends Sprite {
         this._autoRefresh = autoRefresh;
         if (autoRefresh) {
             EventManager.on(GameEvent.InputModeChanged, this.onInputModeChanged, this);
+        } else {
+            this.mode = mode;
         }
         this.refresh();
     }
@@ -63,18 +65,24 @@ class Sprite_KeyHint extends Sprite {
         this.addChild(actionText);
     }
     /**
+     * Get Input Mode
+     * @returns {string}
+     */
+    getInputMode() {
+        return this.mode || Input.getInputMode();
+    }
+    /**
      * Refresh sprite
      * @param {string} mode 
      */
     refresh(mode) {
-        const inputMode = mode || Input.getInputMode();
+        const inputMode = this.getInputMode();
         const isKeyboard = inputMode === 'keyboard';
         const isGamepad = inputMode === 'gamepad';
         const currentMappedKey = Input.getCurrentMapping(this._keyAction, inputMode);
         const data = isKeyboard ? KeyCodeToNameConverter[currentMappedKey] : ButtonConverter[currentMappedKey];
         let buttonName = data;
         if (isGamepad) {
-            console.log(this._keyAction, currentMappedKey);
             const button = currentMappedKey;
             this._keySprite.bitmap = ImageManager.loadMenu('Gamepad_' + button, 'keys');
             buttonName = "";

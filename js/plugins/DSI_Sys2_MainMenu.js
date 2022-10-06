@@ -24,7 +24,7 @@ const MainMenuConfig = {
         {
             icon: "mainMenu/RequestIcon",
             textKey: "Lb_MainMenu_Requests",
-            pageClass: "new Window_Base(new Rectangle(0, 0, 560, 350))"
+            pageClass: "new Window_KeyMapping()"
         }, 
         {
             icon: "mainMenu/NpcIcon",

@@ -5968,7 +5968,7 @@ Input.getGamepadID = function() {
  * @param {string} type A string representing the desired effect. This can vary depending on the hardware type. Possible values are "dual-rumble" or "vibration".
  * @returns {Promise<boolean>}
  */
-Input.rumble = function(duration = 100, weakMagniture = 0.5, strongMagnitude = 0.5, type = 'dual-rumble') {
+Input.rumble = function(duration = 200, weakMagniture = 0.5, strongMagnitude = 0.5, type = 'dual-rumble') {
     if (!this.activeGamepad) return null;
     return this.activeGamepad.vibrationActuator.playEffect(type, {
         startDelay: 0,

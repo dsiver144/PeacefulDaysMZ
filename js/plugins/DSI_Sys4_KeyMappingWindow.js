@@ -37,11 +37,22 @@ class Window_KeyMapping extends Window_Command {
             [MenuKeyAction.Cancel, "Lb_Exit"],
         ]
         ScreenOverlay.showButtonHints(...keys);
+        this.setMode(Input.getInputMode());
+        this.select(1);
+    }
+    /**
+     * Set input mode
+     * @param {string} mode 
+     */
+    setMode(mode) {
+        this._inputMode = mode;
+        this.refresh();
     }
     /**
      * @inheritdoc
      */
     makeCommandList() {
+        if (!this._inputMode) return;
         KeyMappingGroups.forEach((group) => {
             this.addHeader(group.name);
             group.types.forEach(type => {
@@ -91,7 +102,7 @@ class Window_KeyMapping extends Window_Command {
                 backgroundRect = true;
                 break;
             case 'keybind':
-                const keySprite = new Sprite_KeyHint(commandData.textKey, '', false);
+                const keySprite = new Sprite_KeyHint(commandData.textKey, '', false, this._inputMode);
                 this.addInnerChild(keySprite);
                 keySprite.x = rect.x + rect.width - keySprite.width;
                 keySprite.y = rect.y + offset.y;
