@@ -295,8 +295,6 @@ Input.assignKey = function (keyname, keyId, inputMode, checkedKeys = []) {
     if (alterKey) {
         ConfigManager[prop][alterKey] = keyId;
     }
-    Input.applyKeybindings();
-    ConfigManager.save();
     return true;
 }
 

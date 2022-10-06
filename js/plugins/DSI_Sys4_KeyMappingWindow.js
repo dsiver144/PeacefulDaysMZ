@@ -95,6 +95,7 @@ class Window_KeyMapping extends Window_Command {
         this.listenForKeyPress((pressedKey) => {
             const isValid = Input.assignKey(textKey, pressedKey, this._inputMode);
             if (isValid) {
+                Input.applyKeybindings();
                 AudioController.playOk();
                 this.refresh();
                 EventManager.emit(GameEvent.InputModeChanged, this._inputMode);

@@ -18,6 +18,7 @@ class Window_Settings extends Window_Command {
      */
     showHints() {
         const keys = [
+            [MenuKeyAction.Confirm, "Lb_Select"],
             [MenuKeyAction.Cancel, "Lb_Exit"],
         ]
         ScreenOverlay.showButtonHints(...keys);
