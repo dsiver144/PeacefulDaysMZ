@@ -131,6 +131,7 @@ class Window_ItemContainer extends Window_Base {
         this._sortButton.startTween({ offsetY: 5 }, 10).ease(Easing.easeOutExpo);
         AudioController.playOk();
         this.itemContainer.sort();
+        Input.rumble();
     }
     /**
      * On Discard Button OK

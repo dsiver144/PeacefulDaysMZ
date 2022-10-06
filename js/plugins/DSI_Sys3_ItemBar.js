@@ -237,6 +237,7 @@ class ItemBarSprite extends Sprite {
                     slot.refresh();
                 });
                 this.startTween({offsetY: 5}, 5).ease(Easing.easeInOutBack);
+                Input.rumble();
             } else {
                 SoundManager.playBuzzer();
             }
