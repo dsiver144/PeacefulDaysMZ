@@ -1,5 +1,26 @@
 [
     {
+        "key": "Lb_MapGroup_Field",
+        "lang": {
+            "vn": "Gameplay",
+            "en": "Gameplay"
+        }
+    },
+    {
+        "key": "Lb_MapGroup_Menu",
+        "lang": {
+            "vn": "Menu",
+            "en": "Menu"
+        }
+    },
+    {
+        "key": "Lb_MapGroup_Container",
+        "lang": {
+            "vn": "Túi Đồ / Rương",
+            "en": "Item Container Menu"
+        }
+    },
+    {
         "key": "field_up",
         "lang": {
             "vn": "Di Chuyển Lên",
@@ -184,7 +205,7 @@
     {
         "key": "cotainer_menu_discard",
         "lang": {
-            "vn": "Tiêu Huỷ",
+            "vn": "Tiêu Huỷ Vật Phẩm",
             "en": "Discard"
         }
     }

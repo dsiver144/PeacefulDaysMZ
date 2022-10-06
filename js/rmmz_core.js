@@ -5928,19 +5928,23 @@ Input._updateGamepadState = function(gamepad) {
         if (newState[j] !== lastState[j]) {
             this._currentState[j.toString()] = newState[j];
             if (newState[j]) {
-                this.setInputMode('gamepad', gamepad.id);
+                this.setInputMode('gamepad', gamepad);
             }
         }
     }
     this._gamepadStates[gamepad.index] = newState;
 };
-
-Input.setInputMode = function(mode, gamepadID) {
+/**
+ * Set input mode
+ * @param {string} mode 
+ * @param {Gamepad} gamepad 
+ */
+Input.setInputMode = function(mode, gamepad) {
     if (this.inputMode == mode) return;
     this.inputMode = mode;
-    this.gamepadId = gamepadID;
+    this.activeGamepad = gamepad;
     EventManager.emit(GameEvent.InputModeChanged, mode);
-    console.log("@ Input mode switched to : " + mode, " | Gamepad ID: " + gamepadID);
+    console.log("@ Input mode switched to : " + mode + (gamepad ? " | Gamepad ID: " + gamepad.id : ""));
 }
 /**
  * Get Input Mode
@@ -5953,8 +5957,25 @@ Input.getInputMode = function() {
  * Get Gamepad ID
  * @returns {string}
  */
- Input.getGamepadID = function() {
-    return this.gamepadId;
+Input.getGamepadID = function() {
+    return this.activeGamepad.id;
+}
+/**
+ * Controller Rumble
+ * @param {number} duration The duration of the effect in milliseconds.
+ * @param {number} weakMagniture Rumble intensity of the high-frequency (weak) rumble motors, normalized to the range between 0.0 and 1.0.
+ * @param {number} strongMagnitude Rumble intensity of the low-frequency (strong) rumble motors, normalized to the range between 0.0 and 1.0.
+ * @param {string} type A string representing the desired effect. This can vary depending on the hardware type. Possible values are "dual-rumble" or "vibration".
+ * @returns {Promise<boolean>}
+ */
+Input.rumble = function(duration = 100, weakMagniture = 0.5, strongMagnitude = 0.5, type = 'dual-rumble') {
+    if (!this.activeGamepad) return null;
+    return this.activeGamepad.vibrationActuator.playEffect(type, {
+        startDelay: 0,
+        duration: duration,
+        weakMagnitude: weakMagniture,
+        strongMagnitude: strongMagnitude,
+    });
 }
 
 Input._updateDirection = function() {

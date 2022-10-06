@@ -70,10 +70,12 @@ class Sprite_KeyHint extends Sprite {
         const inputMode = mode || Input.getInputMode();
         const isKeyboard = inputMode === 'keyboard';
         const isGamepad = inputMode === 'gamepad';
-        const data = isKeyboard ? KeyCodeToNameConverter[DefaultKeyboardConfig[this._keyAction]] : ButtonConverter[DefaultGamePadConfig[this._keyAction]];
+        const currentMappedKey = Input.getCurrentMapping(this._keyAction, inputMode);
+        const data = isKeyboard ? KeyCodeToNameConverter[currentMappedKey] : ButtonConverter[currentMappedKey];
         let buttonName = data;
         if (isGamepad) {
-            const button = DefaultGamePadConfig[this._keyAction];
+            console.log(this._keyAction, currentMappedKey);
+            const button = currentMappedKey;
             this._keySprite.bitmap = ImageManager.loadMenu('Gamepad_' + button, 'keys');
             buttonName = "";
             this._keySprite.visible = true;
