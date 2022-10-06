@@ -10,20 +10,27 @@
  */
 
 ConfigManager.clockMode = 0;
-ConfigManager.clockPosition = 1;
+ConfigManager.clockPosition = 0;
+ConfigManager.keyMapper = {};
+ConfigManager.gamepadMapper = {};
 var DSI_Sys1_ConfigManager_ConfigManager_makeData = ConfigManager.makeData;
 ConfigManager.makeData = function() {
 	const config = DSI_Sys1_ConfigManager_ConfigManager_makeData.call(this);
     config['clockMode'] = this.clockMode;
     config['clockPosition'] = this.clockPosition;
+    config['keyMapper'] = this.keyMapper;
+    config['gamepadMapper'] = this.gamepadMapper;
     return config;
 };
 
 var DSI_Sys1_ConfigManager_ConfigManager_applyData = ConfigManager.applyData;
 ConfigManager.applyData = function(config) {
 	DSI_Sys1_ConfigManager_ConfigManager_applyData.call(this, config);
-    this.clockMode = this.readNumber(config, "clockMode");
-    this.clockPosition = this.readNumber(config, "clockPosition", 1);
+    this.clockMode = this.readData(config, "clockMode", 0);
+    this.clockPosition = this.readData(config, "clockPosition", 0);
+    this.keyMapper = this.readData(config, "keyMapper", {});
+    this.gamepadMapper = this.readData(config, "gamepadMapper", {});
+    Input.applyKeybindings();
 };
 
 Object.defineProperty(Graphics, "isFullscreen", {
@@ -54,7 +61,7 @@ Object.defineProperty(ConfigManager, "alwaysDashEx", {
     configurable: true
 });
 
-ConfigManager.readNumber = function(config, name, defaultValue = 0) {
+ConfigManager.readData = function(config, name, defaultValue = 0) {
     if (name in config) {
         return config[name];
     } else {

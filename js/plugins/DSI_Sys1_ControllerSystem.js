@@ -82,7 +82,7 @@ DefaultKeyboardConfig[FieldKeyAction.MoveRight] = 68;
 DefaultKeyboardConfig[FieldKeyAction.MoveDown] = 83;
 DefaultKeyboardConfig[FieldKeyAction.UseTool] = 75;
 DefaultKeyboardConfig[FieldKeyAction.UseToolEx] = 256; // Mouse 0
-DefaultKeyboardConfig[FieldKeyAction.Check] = 76; 
+DefaultKeyboardConfig[FieldKeyAction.Check] = 32; 
 DefaultKeyboardConfig[FieldKeyAction.CheckEx] = 258; // Mouse 1
 DefaultKeyboardConfig[FieldKeyAction.Menu] = 27;
 DefaultKeyboardConfig[FieldKeyAction.Cancel] = 27;
@@ -163,15 +163,40 @@ for (var i in DefaultGamePadConfig) {
 // IMPLEMENT SYSTEM IN TO RPG MAKER SYSTEM
 //==================================================================================
 
-Input.keyMapper = {};
-Input.gamepadMapper = {};
-for (var keyname in DefaultKeyboardConfig) {
-    Input.keyMapper[keyname] = DefaultKeyboardConfig[keyname];
+Input.applyKeybindings = function() {
+    Input.keyMapper = {};
+    Input.gamepadMapper = {};
+    for (var keyname in DefaultKeyboardConfig) {
+        Input.keyMapper[keyname] = DefaultKeyboardConfig[keyname];
+    }
+    for (var keyname in DefaultGamePadConfig) {
+        Input.gamepadMapper[keyname] = DefaultGamePadConfig[keyname];
+    }
+    for (var keyname in ConfigManager.keyMapper ) {
+        Input.keyMapper[keyname] = ConfigManager.keyMapper[keyname];
+    }
+    for (var keyname in ConfigManager.gamepadMapper ) {
+        Input.gamepadMapper[keyname] = ConfigManager.gamepadMapper[keyname];
+    }
+}
+Input.applyKeybindings();
+
+Input.getCurrentMapping = function(keyname, inputMode) {
+    let currentKey = null;
+    if (inputMode === 'keyboard') {
+        if (keyname === FieldKeyAction.Cancel) {
+            keyname = FieldKeyAction.Menu;
+        }
+        currentKey = ConfigManager.keyMapper[keyname] || DefaultKeyboardConfig[keyname];
+    } else {
+        if (keyname === FieldKeyAction.Run) {
+            keyname = FieldKeyAction.Cancel;
+        }
+        currentKey = ConfigManager.gamepadMapper[keyname] || DefaultGamePadConfig[keyname];
+    }
+    return currentKey;
 }
 
-for (var keyname in DefaultGamePadConfig) {
-    Input.gamepadMapper[keyname] = DefaultGamePadConfig[keyname];
-}
 /**
  * Check if player is triggering tool using input
  * @returns {number} 0 = None | 1 = Normal | 2 = Mouse
