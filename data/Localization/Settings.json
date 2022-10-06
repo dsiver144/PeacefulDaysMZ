@@ -82,5 +82,12 @@
             "vn": "Vị Trí Đồng Hồ",
             "en": "Clock Position"
         }
+    },
+    {
+        "key": "Lb_Option_Keybinds",
+        "lang": {
+            "vn": "Cài Đặt Phím",
+            "en": "Key Bindings"
+        }
     }
 ]

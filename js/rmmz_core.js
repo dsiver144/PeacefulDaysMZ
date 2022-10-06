@@ -5729,6 +5729,26 @@ Input.update = function() {
     }
     this._updateDirection();
 };
+/**
+ * Get lastest pressed button
+ * @returns {number}
+ */
+Input.lastestButton = function() {
+    return this._latestButton;
+}
+/**
+ * Disable input system
+ */
+Input.disableSystem = function() {
+    this._disabled = true;
+    this._latestButton = null;
+}
+/**
+ * Enable input system
+ */
+Input.enableSystem = function() {
+    this._disabled = false;
+}
 
 /**
  * Checks whether a key is currently pressed down.
@@ -5737,6 +5757,7 @@ Input.update = function() {
  * @returns {boolean} True if the key is pressed.
  */
 Input.isPressed = function(keyName) {
+    if (this._disabled) return false;
     const code = Input.keyMapper[keyName];
     const code2 = Input.gamepadMapper[keyName];
     const inputMode = this.getInputMode();
@@ -5752,6 +5773,7 @@ Input.isPressed = function(keyName) {
  * @returns {boolean} True if the key is triggered.
  */
 Input.isTriggered = function(keyName) {
+    if (this._disabled) return false;
     const code = Input.keyMapper[keyName];
     const code2 = Input.gamepadMapper[keyName];
     const inputMode = this.getInputMode();
@@ -5767,6 +5789,7 @@ Input.isTriggered = function(keyName) {
  * @returns {boolean} True if the key is repeated.
  */
 Input.isRepeated = function(keyName) {
+    if (this._disabled) return false;
     const code = Input.keyMapper[keyName];
     const code2 = Input.gamepadMapper[keyName];
     const inputMode = this.getInputMode();
@@ -5788,6 +5811,7 @@ Input.isRepeated = function(keyName) {
  * @returns {boolean} True if the key is long-pressed.
  */
 Input.isLongPressed = function(keyName) {
+    if (this._disabled) return false;
     const code = Input.keyMapper[keyName];
     const code2 = Input.gamepadMapper[keyName];
     const inputMode = this.getInputMode();
@@ -5807,6 +5831,7 @@ Input.isLongPressed = function(keyName) {
  */
 Object.defineProperty(Input, "dir4", {
     get: function() {
+        if (this._disabled) return 0;
         return this._dir4;
     },
     configurable: true
@@ -5821,6 +5846,7 @@ Object.defineProperty(Input, "dir4", {
  */
 Object.defineProperty(Input, "dir8", {
     get: function() {
+        if (this._disabled) return 0;
         return this._dir8;
     },
     configurable: true

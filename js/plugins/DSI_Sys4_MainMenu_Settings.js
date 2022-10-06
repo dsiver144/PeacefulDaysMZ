@@ -23,13 +23,6 @@ class Window_Settings extends Window_Command {
         ScreenOverlay.showButtonHints(...keys);
     }
     /**
-     * @inheritdoc
-     */
-    deactivate() {
-        super.deactivate();
-        ConfigManager.save();
-    }
-    /**
      * Make Command List
      */
     makeCommandList() {
@@ -66,6 +59,10 @@ class Window_Settings extends Window_Command {
             method: this.onSEVolumeControl
         });
         this.addHeader('Lb_Option_Gameplay');
+        this.addOption('Lb_Option_Keybinds', {
+            type: "action",
+            method: this.onKeybindOptionOK
+        });
         this.addOption('Lb_Option_AutoDash', {
             type: "selection",
             object: ConfigManager,
@@ -102,7 +99,11 @@ class Window_Settings extends Window_Command {
                 const selectionTexts = this.getSelectionTexts(this.index());
                 selectionTexts.forEach(text => text.alpha = 0.5);
                 selectionTexts[value].alpha = 1.0;
+                AudioController.playCursor();
                 break;
+        }
+        if (type == 'action') {
+            return;
         }
         this.activate();
     }
@@ -120,6 +121,7 @@ class Window_Settings extends Window_Command {
                 const selectionTexts = this.getSelectionTexts(this.index());
                 selectionTexts.forEach(text => text.alpha = 0.5);
                 selectionTexts[value].alpha = 1.0;
+                AudioController.playCursor();
                 break;
         }
     }
@@ -137,6 +139,7 @@ class Window_Settings extends Window_Command {
                 const selectionTexts = this.getSelectionTexts(this.index());
                 selectionTexts.forEach(text => text.alpha = 0.5);
                 selectionTexts[value].alpha = 1.0;
+                AudioController.playCursor();
                 break;
         }
     }
@@ -201,6 +204,36 @@ class Window_Settings extends Window_Command {
                 ConfigManager.seVolume += value;
                 AudioController.playCursor();
             }
+        }
+    }
+    /**
+     * On Keybind Option OK
+     * @param {OptionControl} type
+     */
+    onKeybindOptionOK(type) {
+        if (type !== OptionControl.OK) return;
+        this.showKeybindWindow();
+    }
+    /**
+     * Show keybind window
+     */
+    showKeybindWindow() {
+        SceneManager._scene.disableControl();
+        this._keybindWindow = this._keybindWindow || new Window_KeyMapping();
+        this._keybindWindow.setMode(Input.getInputMode());
+        this._keybindWindow.alpha = 0;
+        ScreenOverlay.clearAllHints();
+        this._keybindWindow.showHints();
+        this._keybindWindow.startTween({offsetX: 200, alpha: 1.0}, 15).ease(Easing.easeInOutExpo);
+        this.removeChild(this._keybindWindow);
+        this.addChild(this._keybindWindow);
+        this._keybindWindow.onHide = () => {
+            ConfigManager.save();
+            SceneManager._scene.enableControl();
+            this._keybindWindow.startTween({alpha: 0}, 15).ease(Easing.easeInOutExpo);
+            this.activate();
+            ScreenOverlay.clearAllHints();
+            this.showHints();
         }
     }
     /**

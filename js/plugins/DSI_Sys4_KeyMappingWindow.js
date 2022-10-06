@@ -13,6 +13,11 @@ const KeyMappingGroups = [
         "name": "Lb_MapGroup_Container",
         "types": [ContainerMenuKeyAction],
         "groupIndex": 1,
+    },
+    {
+        "name": "Lb_MapGroup_Keybind",
+        "types": [KeyBindMenuKeyAction],
+        "groupIndex": 1,
     }
 ]
 const ExcludeKeys = [
@@ -21,6 +26,14 @@ const ExcludeKeys = [
     FieldKeyAction.None,
 ]
 
+KeyMappingGroups.forEach((group) => {
+    group.types.forEach(type => {
+        Object.entries(type).forEach(([key, textKey]) => {
+            Input.addToMappingGroup(textKey, group.groupIndex);
+        })
+    })
+})
+
 class Window_KeyMapping extends Window_Command {
     /**
      * This class handle bag menu display for Peaceful Days
@@ -28,13 +41,21 @@ class Window_KeyMapping extends Window_Command {
      */
     constructor(rect = new Rectangle(0, 0, 700, 370)) {
         super(rect);
+
+        this.opacity = 0;
+        this.backOpacity = 0;
+        const menuBGPlane = new PIXI.NineSlicePlane(PIXI.Texture.from("img/menus/MenuBG.png"), 8, 8, 8, 8);
+        menuBGPlane.width = this.width;
+        menuBGPlane.height = this.height;
+        this.addChildToBack(menuBGPlane);
     }
     /**
      * Show hints
      */
     showHints() {
         const keys = [
-            [MenuKeyAction.Cancel, "Lb_Exit"],
+            [KeyBindMenuKeyAction.RestoreDefault, KeyBindMenuKeyAction.RestoreDefault],
+            [MenuKeyAction.Cancel, "Lb_Back"],
         ]
         ScreenOverlay.showButtonHints(...keys);
         this.setMode(Input.getInputMode());
@@ -45,8 +66,9 @@ class Window_KeyMapping extends Window_Command {
      * @param {string} mode 
      */
     setMode(mode) {
-        this._inputMode = mode;
+        this._inputMode = mode;+
         this.refresh();
+        this.activate();
     }
     /**
      * @inheritdoc
@@ -62,6 +84,69 @@ class Window_KeyMapping extends Window_Command {
                 })
             })
         })
+        this.setHandler('keybind', this.onKeybindOK.bind(this));
+    }
+    /**
+     * On Key bind OK
+     */
+    onKeybindOK() {
+        const textKey = this.currentExt().textKey;
+        Input.disableSystem();
+        this.listenForKeyPress((pressedKey) => {
+            const isValid = Input.assignKey(textKey, pressedKey, this._inputMode);
+            if (isValid) {
+                AudioController.playOk();
+                this.refresh();
+                EventManager.emit(GameEvent.InputModeChanged, this._inputMode);
+            } else {
+                AudioController.playBuzzer();
+                Input.rumble();
+            }
+            Input.enableSystem();
+            Input.update();
+            this.activate();
+        });
+    }
+    /**
+     * Listen for key press
+     */
+    listenForKeyPress(callback) {
+        this._listeningForKeyPress = true;
+        this._keyPressCallback = callback;
+    }
+    /**
+     * Update listen key press
+     */
+    updateListenKeyPress() {
+        if (!this._listeningForKeyPress) return;
+        const key = Input.lastestButton();
+        if (key == undefined) return;
+        this._keyPressCallback(+key);
+        this._listeningForKeyPress = false;
+    }
+    /**
+     * Update control
+     */
+    updateControl() {
+        if (Input.isTriggered(KeyBindMenuKeyAction.RestoreDefault)) {
+            AudioController.playCancel();
+            Input.restoreDefaultKeybinds();
+            this.refresh();
+            EventManager.emit(GameEvent.InputModeChanged, this._inputMode);
+        }
+        if (Input.isTriggered(FieldKeyAction.Menu) || Input.isTriggered(MenuKeyAction.Cancel)) {
+            this.deactivate();
+            this.onHide();
+            Input.update();
+        }
+    }
+    /**
+     * @inheritdoc
+     */
+    update() {
+        super.update();
+        this.updateControl();
+        this.updateListenKeyPress();
     }
     /**
      * Add header
@@ -102,8 +187,9 @@ class Window_KeyMapping extends Window_Command {
                 backgroundRect = true;
                 break;
             case 'keybind':
-                const keySprite = new Sprite_KeyHint(commandData.textKey, '', false, this._inputMode);
-                this.addInnerChild(keySprite);
+                const keySprite = this.getKeybindSprite(index, commandData.textKey);
+                keySprite.mode = this._inputMode;
+                keySprite.refresh();
                 keySprite.x = rect.x + rect.width - keySprite.width;
                 keySprite.y = rect.y + offset.y;
                 break;
@@ -140,5 +226,19 @@ class Window_KeyMapping extends Window_Command {
         this._commandTexts[index] = text;
         this.addInnerChild(text);
         return text;
+    }
+    /**
+     * Get option text
+     * @param {number} index 
+     * @param {string} keyAction 
+     * @returns {Sprite_KeyHint} 
+     */
+    getKeybindSprite(index, keyAction) {
+        this._keySprites ||= {};
+        if (this._keySprites[index]) return this._keySprites[index];
+        const keySprite = new Sprite_KeyHint(keyAction, '', false, this._inputMode);
+        this.addInnerChild(keySprite);
+        this._keySprites[index] = keySprite;
+        return keySprite;
     }
 }

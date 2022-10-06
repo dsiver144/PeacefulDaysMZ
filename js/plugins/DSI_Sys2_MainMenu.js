@@ -20,17 +20,17 @@ const MainMenuConfig = {
             icon: "bag/BagIcon",
             textKey: "Lb_Backpack",
             pageClass: "new Window_Bag()"
-        }, 
+        },
         {
             icon: "mainMenu/RequestIcon",
             textKey: "Lb_MainMenu_Requests",
-            pageClass: "new Window_KeyMapping()"
-        }, 
+            pageClass: "new Window_Base(new Rectangle(0, 0, 560, 350))"
+        },
         {
             icon: "mainMenu/NpcIcon",
             textKey: "Lb_MainMenu_NPC",
             pageClass: "new Window_Base(new Rectangle(0, 0, 560, 350))"
-        }, 
+        },
         {
             icon: "mainMenu/InfoIcon",
             textKey: "Lb_MainMenu_Info",
@@ -295,6 +295,7 @@ class Scene_MainMenu extends Scene_MenuBase {
         icon.pageText.style.fill = "#e1e1e1";
         window.visible = false;
         window.deactivate();
+        window.leavePage?.();
         ScreenOverlay.clearAllHints();
     }
     /**
@@ -332,6 +333,7 @@ class Scene_MainMenu extends Scene_MenuBase {
         this._returningToMap = true;
         // Play close animation for main menu before back to map.
         const { window } = this.currentPage();
+        window.leavePage?.();
         window.deactivate();
         window.startTween({ offsetY2: Graphics.height, alpha: 0.0 }, 30).ease(Easing.easeOutExpo);
         this._barBG.startTween({ y: -200, alpha: 0 }, 30).ease(Easing.easeInOutExpo);
@@ -340,6 +342,7 @@ class Scene_MainMenu extends Scene_MenuBase {
         });
         this._pageButtonCursor.startTween({ alpha: 0 }, 30).ease(Easing.easeOutExpo);
         setTimeout(() => {
+            ScreenOverlay.clearAllHints();
             super.popScene();
         }, 250);
     }
@@ -367,6 +370,7 @@ class Scene_MainMenu extends Scene_MenuBase {
      */
     updateControl() {
         if (this._returningToMap) return;
+        if (this._controlDisabled) return;
         if (Input.isTriggered(FieldKeyAction.Menu) || Input.isTriggered(MenuKeyAction.Cancel)) {
             if (this.canReturnToMap()) {
                 this.returnToMap();
@@ -400,7 +404,19 @@ class Scene_MainMenu extends Scene_MenuBase {
      * Check if player can switch page
      */
     canSwitchPage() {
-        return !this._switchPageDelayDuration;
+        return !this._switchPageDelayDuration && !this._controlDisabled;
+    }
+    /**
+     * Disable Control
+     */
+    disableControl() {
+        this._controlDisabled = true;
+    }
+    /**
+     * Enable Control
+     */
+    enableControl() {
+        this._controlDisabled = false;
     }
     /**
      * Check if player can return to map scene

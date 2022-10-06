@@ -75,7 +75,7 @@ class Sprite_KeyHint extends Sprite {
      * Refresh sprite
      * @param {string} mode 
      */
-    refresh(mode) {
+    refresh() {
         const inputMode = this.getInputMode();
         const isKeyboard = inputMode === 'keyboard';
         const isGamepad = inputMode === 'gamepad';

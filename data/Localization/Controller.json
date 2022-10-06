@@ -21,6 +21,13 @@
         }
     },
     {
+        "key": "Lb_MapGroup_Keybind",
+        "lang": {
+            "vn": "Cài Đặt Phím",
+            "en": "Keybinding Menu"
+        }
+    },
+    {
         "key": "field_up",
         "lang": {
             "vn": "Di Chuyển Lên",
@@ -207,6 +214,13 @@
         "lang": {
             "vn": "Tiêu Huỷ Vật Phẩm",
             "en": "Discard"
+        }
+    },
+    {
+        "key": "keybind_menu_restore_default",
+        "lang": {
+            "vn": "Phục Hồi Mặc Định",
+            "en": "Restore Default"
         }
     }
 ]
