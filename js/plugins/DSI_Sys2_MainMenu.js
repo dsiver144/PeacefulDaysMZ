@@ -28,7 +28,7 @@ const MainMenuConfig = {
         },
         {
             icon: "mainMenu/NpcIcon",
-            textKey: "Lb_MainMenu_NPC",
+            textKey: "Lb_MainMenu_Social",
             pageClass: "new Window_Base(new Rectangle(0, 0, 560, 350))"
         },
         {
@@ -378,10 +378,10 @@ class Scene_MainMenu extends Scene_MenuBase {
                 AudioController.playBuzzer();
             }
         }
-        if (Input.isTriggered(MenuKeyAction.PageLeft)) {
+        if (Input.isRepeated(MenuKeyAction.PageLeft)) {
             this.switchPage(-1);
         }
-        if (Input.isTriggered(MenuKeyAction.PageRight)) {
+        if (Input.isRepeated(MenuKeyAction.PageRight)) {
             this.switchPage(1);
         }
         this.updateSwitchPageDelay();

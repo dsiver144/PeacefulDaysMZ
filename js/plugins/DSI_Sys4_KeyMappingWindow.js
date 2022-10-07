@@ -48,6 +48,7 @@ class Window_KeyMapping extends Window_Command {
         menuBGPlane.width = this.width;
         menuBGPlane.height = this.height;
         this.addChildToBack(menuBGPlane);
+        EventManager.on(GameEvent.InputModeChanged, this.setMode, this);
     }
     /**
      * Show hints
@@ -60,6 +61,13 @@ class Window_KeyMapping extends Window_Command {
         ScreenOverlay.showButtonHints(...keys);
         this.setMode(Input.getInputMode());
         this.select(1);
+    }
+    /**
+     * @inheritdoc
+     */
+    destroy() {
+        EventManager.off(GameEvent.InputModeChanged, this.setMode, this);
+        super.destroy();
     }
     /**
      * Set input mode

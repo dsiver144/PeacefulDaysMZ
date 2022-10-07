@@ -13,6 +13,7 @@ ConfigManager.clockMode = 0;
 ConfigManager.clockPosition = 0;
 ConfigManager.keyMapper = {};
 ConfigManager.gamepadMapper = {};
+ConfigManager.dashMode = 2;
 
 var DSI_Sys1_ConfigManager_ConfigManager_makeData = ConfigManager.makeData;
 ConfigManager.makeData = function() {
@@ -21,6 +22,7 @@ ConfigManager.makeData = function() {
     config['clockPosition'] = this.clockPosition;
     config['keyMapper'] = this.keyMapper;
     config['gamepadMapper'] = this.gamepadMapper;
+    config['dashMode'] = this.dashMode;
     return config;
 };
 
@@ -31,6 +33,7 @@ ConfigManager.applyData = function(config) {
     this.clockPosition = this.readData(config, "clockPosition", 0);
     this.keyMapper = this.readData(config, "keyMapper", {});
     this.gamepadMapper = this.readData(config, "gamepadMapper", {});
+    this.dashMode = this.readData(config, "dashMode", 2);
     Input.applyKeybindings();
 };
 

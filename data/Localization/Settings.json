@@ -49,10 +49,31 @@
         }
     },
     {
-        "key": "Lb_Option_AutoDash",
+        "key": "Lb_Option_DashMode",
+        "lang": {
+            "vn": "Chế Độ Chạy",
+            "en": "Running Mode"
+        }
+    },
+    {
+        "key": "Lb_Option_Manual",
+        "lang": {
+            "vn": "Thủ Công",
+            "en": "Manual"
+        }
+    },
+    {
+        "key": "Lb_Option_DashMode_AutoDash",
         "lang": {
             "vn": "Luôn Chạy",
-            "en": "Auto Dash"
+            "en": "Always Run"
+        }
+    },
+    {
+        "key": "Lb_Option_DashMode_Toggle",
+        "lang": {
+            "vn": "Bật/Tắt",
+            "en": "Toggle"
         }
     },
     {

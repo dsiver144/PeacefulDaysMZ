@@ -24,6 +24,12 @@ class Window_Settings extends Window_Command {
         ScreenOverlay.showButtonHints(...keys);
     }
     /**
+     * Leave Page
+     */
+    leavePage() {
+        ConfigManager.save();
+    }
+    /**
      * Make Command List
      */
     makeCommandList() {
@@ -64,26 +70,23 @@ class Window_Settings extends Window_Command {
             type: "action",
             method: this.onKeybindOptionOK
         });
-        this.addOption('Lb_Option_AutoDash', {
+        this.addOption('Lb_Option_DashMode', {
             type: "selection",
             object: ConfigManager,
-            property: "alwaysDashEx",
-            displayKeys: ['Lb_No', 'Lb_Yes'],
-            method: this.onFullScreenControl
+            property: "dashMode",
+            displayKeys: ['Lb_Option_Manual', 'Lb_Option_DashMode_AutoDash', 'Lb_Option_DashMode_Toggle'],
         });
         this.addOption('Lb_Option_ClockPosition', {
             type: "selection",
             object: ConfigManager,
             property: "clockPosition",
             displayKeys: ['Lb_Left', 'Lb_Right'],
-            method: this.onFullScreenControl
         });
         this.addOption('Lb_Option_ClockMode', {
             type: "selection",
             object: ConfigManager,
             property: "clockMode",
             displayKeys: ['Lb_Option_ClockMode_12', 'Lb_Option_ClockMode_24'],
-            method: this.onFullScreenControl
         });
     }
     /**

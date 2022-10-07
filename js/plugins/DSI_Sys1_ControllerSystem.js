@@ -83,9 +83,9 @@ DefaultKeyboardConfig[FieldKeyAction.MoveUp] = 87;
 DefaultKeyboardConfig[FieldKeyAction.MoveLeft] = 65;
 DefaultKeyboardConfig[FieldKeyAction.MoveRight] = 68;
 DefaultKeyboardConfig[FieldKeyAction.MoveDown] = 83;
-DefaultKeyboardConfig[FieldKeyAction.UseTool] = 75;
+DefaultKeyboardConfig[FieldKeyAction.UseTool] = 76;
 DefaultKeyboardConfig[FieldKeyAction.UseToolEx] = 256; // Mouse 0
-DefaultKeyboardConfig[FieldKeyAction.Check] = 32;
+DefaultKeyboardConfig[FieldKeyAction.Check] = 75;
 DefaultKeyboardConfig[FieldKeyAction.CheckEx] = 258; // Mouse 1
 DefaultKeyboardConfig[FieldKeyAction.Menu] = 27;
 DefaultKeyboardConfig[FieldKeyAction.Cancel] = 27;
@@ -97,7 +97,7 @@ DefaultKeyboardConfig[FieldKeyAction.SwitchItemRight] = 190;
 DefaultKeyboardConfig[FieldKeyAction.SwitchItemRowUp] = 81;
 DefaultKeyboardConfig[FieldKeyAction.SwitchItemRowDown] = 69;
 
-DefaultKeyboardConfig[MenuKeyAction.Confirm] = 67;
+DefaultKeyboardConfig[MenuKeyAction.Confirm] = 75;
 DefaultKeyboardConfig[MenuKeyAction.Cancel] = 27;
 DefaultKeyboardConfig[MenuKeyAction.PageLeft] = 81;
 DefaultKeyboardConfig[MenuKeyAction.PageRight] = 69;
@@ -338,10 +338,21 @@ Game_Player.prototype.updateCustomInput = function () {
 //==================================================================================
 Game_Player.prototype.isDashButtonPressed = function () {
     const shift = Input.isPressed(FieldKeyAction.Run) || Input.isPressed(FieldKeyAction.Cancel);
-    if (ConfigManager.alwaysDash) {
-        return !shift;
-    } else {
-        return shift;
+    const dashMode = ConfigManager.dashMode;
+    switch(dashMode) {
+        case 0:
+            return shift;
+        case 1:
+            return !shift;
+        case 2:
+            if (this._toggleDelay) {
+                this._toggleDelay -= 1;
+            }
+            if (shift && !this._toggleDelay) {
+                this._dashToggle = !this._dashToggle;
+                this._toggleDelay = 15;
+            }
+            return this._dashToggle;
     }
 };
 

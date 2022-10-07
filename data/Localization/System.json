@@ -303,15 +303,15 @@
     {
         "key": "Lb_MainMenu_Requests",
         "lang": {
-            "vn": "Yêu Cầu",
+            "vn": "Nhiệm Vụ",
             "en": "Requests"
         }
     },
     {
-        "key": "Lb_MainMenu_NPC",
+        "key": "Lb_MainMenu_Social",
         "lang": {
-            "vn": "Người Dân",
-            "en": "NPC"
+            "vn": "Giao Lưu",
+            "en": "Social"
         }
     },
     {
