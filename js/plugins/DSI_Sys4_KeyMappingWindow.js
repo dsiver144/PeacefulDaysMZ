@@ -129,6 +129,7 @@ class Window_KeyMapping extends Window_Command {
      * Update control
      */
     updateControl() {
+        if (!this.active) return;
         if (Input.isTriggered(KeyBindMenuKeyAction.RestoreDefault)) {
             AudioController.playCancel();
             Input.restoreDefaultKeybinds();

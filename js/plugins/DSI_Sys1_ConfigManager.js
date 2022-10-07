@@ -13,6 +13,7 @@ ConfigManager.clockMode = 0;
 ConfigManager.clockPosition = 0;
 ConfigManager.keyMapper = {};
 ConfigManager.gamepadMapper = {};
+
 var DSI_Sys1_ConfigManager_ConfigManager_makeData = ConfigManager.makeData;
 ConfigManager.makeData = function() {
 	const config = DSI_Sys1_ConfigManager_ConfigManager_makeData.call(this);
