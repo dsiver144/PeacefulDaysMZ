@@ -48,6 +48,12 @@ class Window_Settings extends Window_Command {
             displayKeys: ['Lb_No', 'Lb_Yes'],
             method: this.onFullScreenControl
         });
+        this.addOption('Lb_Option_ColorMode', {
+            type: "selection",
+            object: ConfigManager,
+            property: "colorMode",
+            displayKeys: ['Lb_Option_ColorMode_0', 'Lb_Option_ColorMode_1', 'Lb_Option_ColorMode_2'],
+        });
         this.addHeader('Lb_Option_Audio');
         this.addOption('Lb_Option_BGMVolume', {
             type: "slider",
@@ -222,6 +228,7 @@ class Window_Settings extends Window_Command {
      * Show keybind window
      */
     showKeybindWindow() {
+        AudioController.playOk();
         SceneManager._scene.disableControl();
         this._keybindWindow = this._keybindWindow || new Window_KeyMapping();
         this._keybindWindow.setMode(Input.getInputMode());
@@ -232,6 +239,7 @@ class Window_Settings extends Window_Command {
         this.removeChild(this._keybindWindow);
         this.addChild(this._keybindWindow);
         this._keybindWindow.onHide = () => {
+            AudioController.playCancel();
             ConfigManager.save();
             SceneManager._scene.enableControl();
             this._keybindWindow.startTween({alpha: 0}, 15).ease(Easing.easeInOutExpo);

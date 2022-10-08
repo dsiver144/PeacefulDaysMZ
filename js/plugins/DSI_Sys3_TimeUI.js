@@ -119,30 +119,30 @@ class Sprite_TimeUI extends Sprite {
         const session = GameTime.session();
         const weekDay = LocalizeManager.t('Lb_Weekday_' + GameTime.inst.weekDay);
         let monthDay = LocalizeManager.t('Lb_MonthDay_Prefix') + GameTime.inst.monthDay;
-        if (LocalizeManager.inst.language == 'en') {
-            const day = GameTime.inst.monthDay;
-            if (day >= 11 && day <= 20) {
-                monthDay += "th";
-            } else {
-                const lastDigit = day.toString().at(-1);
-                switch (lastDigit) {
-                    case '1':
-                        monthDay += "st";
-                        break;
-                    case '2':
-                        monthDay += "nd";
-                        break;
-                    case '3':
-                        monthDay += "rd";
-                        break;
-                    default:
-                        monthDay += "th";
-                        break;
-                }
-            }
-        }
+        // if (LocalizeManager.inst.language == 'en') {
+        //     const day = GameTime.inst.monthDay;
+        //     if (day >= 11 && day <= 20) {
+        //         monthDay += "th";
+        //     } else {
+        //         const lastDigit = day.toString().at(-1);
+        //         switch (lastDigit) {
+        //             case '1':
+        //                 monthDay += "st";
+        //                 break;
+        //             case '2':
+        //                 monthDay += "nd";
+        //                 break;
+        //             case '3':
+        //                 monthDay += "rd";
+        //                 break;
+        //             default:
+        //                 monthDay += "th";
+        //                 break;
+        //         }
+        //     }
+        // }
         const season = LocalizeManager.t('Lb_Season_' + GameTime.inst.season);
-        this._dateText.text = `${weekDay} ${monthDay} | ${season}`;
+        this._dateText.text = `${season} | ${weekDay} ${monthDay}`;
         this._timeBG.bitmap = ImageManager.loadMenu('TimeBG_' + session, 'timeHud');
     }
     /**

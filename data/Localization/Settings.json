@@ -14,6 +14,34 @@
         }
     },
     {
+        "key": "Lb_Option_ColorMode",
+        "lang": {
+            "vn": "Chế Độ Màu",
+            "en": "Color Mode"
+        }
+    },
+    {
+        "key": "Lb_Option_ColorMode_0",
+        "lang": {
+            "vn": "Dịu Nhẹ",
+            "en": "Desaturated"
+        }
+    },
+    {
+        "key": "Lb_Option_ColorMode_1",
+        "lang": {
+            "vn": "Mặc Định",
+            "en": "Default"
+        }
+    },
+    {
+        "key": "Lb_Option_ColorMode_2",
+        "lang": {
+            "vn": "Nổi Trội",
+            "en": "Vibrant"
+        }
+    },
+    {
         "key": "Lb_Option_Audio",
         "lang": {
             "vn": "Âm Lượng",

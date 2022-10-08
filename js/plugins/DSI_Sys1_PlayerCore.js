@@ -1,6 +1,6 @@
 //=======================================================================
 // * Plugin Name  : DSI_Sys1_PlayerCore.js
-// * Last Updated : 8/22/2022
+// * Last Updated : 10/8/2022
 //========================================================================
 /*:
  * @author dsiver144
@@ -57,11 +57,11 @@ Game_Player.prototype.canMove = function () {
     return DSI_Sys1_EngineOverhaul_Game_Player_canMove.call(this);
 };
 
-Game_Player.prototype.setMoveStatus = function(v) {
+Game_Player.prototype.setMoveStatus = function (v) {
     this._disableMove = !v;
 }
 
-Game_Player.prototype.isMoveDisable = function() {
+Game_Player.prototype.isMoveDisable = function () {
     return !!this._disableMove;
 }
 
@@ -71,7 +71,7 @@ Game_Player.prototype.isMoveDisable = function() {
 //     return result || true;
 // }
 
-Game_Player.prototype.triggerButtonAction = function() {
+Game_Player.prototype.triggerButtonAction = function () {
     const checkInput = Input.isTriggeredCheck();
     if (checkInput > 0) {
         /** @type {Vector2[]} */
@@ -120,13 +120,14 @@ Game_Player.prototype.triggerButtonAction = function() {
     return false;
 };
 
-Game_Player.prototype.checkInteractWithEventInACircle = function() {
+Game_Player.prototype.checkInteractWithEventInACircle = function () {
+    const frontPos = this.frontPosition();
     let events = $gameMap.events().filter((event) => {
-        const dx = event.x - this.x;
-        const dy = event.y - this.y;
+        const dx = event.x - frontPos.x;
+        const dy = event.y - frontPos.y;
         const dist = Math.sqrt(dx ** 2 + dy ** 2);
         event._tempDist = dist;
-        const maxDist = event.isMoving() ? event.isNPC() ? PlayerCoreConfig.npcInteractionRange : PlayerCoreConfig.normalInteractionRange : 0.1;
+        const maxDist = event.isMoving() ? (event.isNPC() ? PlayerCoreConfig.npcInteractionRange : PlayerCoreConfig.normalInteractionRange) : 0.75;
         return dist <= maxDist;
     });
     events = events.sort((a, b) => a._tempDist - b._tempDist);
@@ -139,6 +140,6 @@ Game_Player.prototype.checkInteractWithEventInACircle = function() {
     return false;
 };
 
-Game_Player.prototype.checkInteractWithFarmObjects = function() {
+Game_Player.prototype.checkInteractWithFarmObjects = function () {
     return false;
 };
