@@ -11,7 +11,7 @@
  * 
  */
 const ConstructionConfig = {
-    regionIds: [111, 112],
+    regionIds: [111, 112, 130],
     defaultAnimationInterval: 60 // Animation will changes after 60 frames.
 }
 

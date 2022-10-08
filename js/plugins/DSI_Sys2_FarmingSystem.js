@@ -108,6 +108,12 @@ class FarmManager extends SaveableObject {
         this.farmlands = {};
     }
     /**
+     * At Player House At The beginning.
+     */
+    addPlayerHouse() {
+        this.getFarmlandById(1).addObject(new FarmHouse(new Vector2(6, 7), 1));
+    }
+    /**
      * Test function
      */
     test() {
