@@ -77,6 +77,41 @@
         }
     },
     {
+        "key": "Lb_Interact",
+        "lang": {
+            "vn": "Tương Tác",
+            "en": "Interact"
+        }
+    },
+    {
+        "key": "Lb_Harvest",
+        "lang": {
+            "vn": "Thu hoạch",
+            "en": "Harvest"
+        }
+    },
+    {
+        "key": "Lb_RefillWater",
+        "lang": {
+            "vn": "Lấy Nước",
+            "en": "Refill Water"
+        }
+    },
+    {
+        "key": "Lb_ClearCrop",
+        "lang": {
+            "vn": "Cắt Bỏ",
+            "en": "Clear"
+        }
+    },
+    {
+        "key": "Lb_Open",
+        "lang": {
+            "vn": "Mở cửa",
+            "en": "Open"
+        }
+    },
+    {
         "key": "Lb_Left",
         "lang": {
             "vn": "Trái",

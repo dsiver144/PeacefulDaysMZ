@@ -1,11 +1,11 @@
 //=======================================================================
-// * Plugin Name  : DSI_Sys4_Sprite_Key.js
+// * Plugin Name  : DSI_Sprite_KeyHint.js
 // * Last Updated : 8/5/2022
 //========================================================================
 /*:
  * @author dsiver144
  * @target MZ
- * @plugindesc (v1.0) Sprite Key
+ * @plugindesc (v1.0) Sprite Key Hint
  * @help 
  * Empty Help
  */
@@ -34,10 +34,17 @@ class Sprite_KeyHint extends Sprite {
         this.refresh();
     }
     /**
+     * Get hint bg path
+     * @returns {string}
+     */
+    hintBGPath() {
+        return "img/menus/KeyHintBG.png";
+    }
+    /**
      * Create all sprites
      */
     create() {
-        const bg = new PIXI.NineSlicePlane(PIXI.Texture.from("img/menus/KeyHintBG.png"), 6, 7, 6, 7);
+        const bg = new PIXI.NineSlicePlane(PIXI.Texture.from(this.hintBGPath()), 6, 7, 6, 7);
         this.addChild(bg);
         this._background = bg;
 

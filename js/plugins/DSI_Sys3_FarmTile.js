@@ -47,7 +47,11 @@ class FarmTile extends FarmObject {
                 break;
             case ToolType.sickle:
                 if (this.isTree()) return false;
-                if (!this.isFullyGrownUp()) return false;
+                if (!this.isFullyGrownUp()) {
+                    this.reset();
+                    this.refreshSprite();
+                    return true;
+                }
                 const {sickleRequired} = this.seedData();
                 if (!sickleRequired) return false;
                 return this.harvest(ToolType.sickle);
@@ -228,7 +232,13 @@ class FarmTile extends FarmObject {
      * @returns {boolean} true if can harvest
      */
     harvest(toolType = null) {
-        const { productID } = this.seedData();
+        const { productID, sickleRequired } = this.seedData();
+        if (this.isDead()) {
+            return false;
+        }
+        if (sickleRequired && toolType != ToolType.sickle) {
+            return false;
+        }
         if (!productID) {
             return false; 
         }
@@ -262,9 +272,25 @@ class FarmTile extends FarmObject {
      * @inheritdoc
      */
     interactable() {
+        if (this.isDead() && ToolManager.inst.isEquipped(ToolType.sickle)) return true;
         if (!this.isFullyGrownUp()) return false;
         const { sickleRequired } = this.seedData();
-        return !sickleRequired;
+        if (sickleRequired) {
+            return ToolManager.inst.isEquipped(ToolType.sickle)
+        }
+        return true;
+    }
+    /**
+     * @inheritdoc
+     */
+    onEnterInteractRange() {
+        if (this.isDead()) {
+            Sprite_InteractionHint.inst.setTarget("Lb_ClearCrop", FieldKeyAction.UseTool);
+            return;
+        }
+        const { sickleRequired} = this.seedData();
+        const keyAction = sickleRequired ? FieldKeyAction.UseTool : FieldKeyAction.Check;
+        Sprite_InteractionHint.inst.setTarget("Lb_Harvest", keyAction);
     }
     /**
      * On Interact

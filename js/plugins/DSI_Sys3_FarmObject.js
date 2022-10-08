@@ -98,8 +98,8 @@ class FarmObject extends SaveableObject {
     /**
      * Interact
      */
-    interact(object) {
-        this.onInteract(object || this);
+    interact(object, force = false) {
+        this.onInteract(object || this, force);
     }
     /**
      * Will be called when being spawned.
@@ -122,8 +122,9 @@ class FarmObject extends SaveableObject {
     /**
      * On Interact
      * @param {FarmObject} object
+     * @param {boolean} force
      */
-    onInteract(object) {
+    onInteract(object, force = false) {
         console.log("> A ", this.type, " has been interacted at " + this.position.toString(), this);
     }
     /**
@@ -233,6 +234,39 @@ class FarmObject extends SaveableObject {
     spriteClass() {
         return Sprite_FarmObject;
     }
+    /**
+     * Interact Position For `InteractionManager`
+     * @returns {Vector2}
+     */
+    interactionRange() {
+        return new Rectangle(this.position.x, this.position.y, 1, 1);
+    }
+    /**
+     * Start Interact For `InteractionManager`
+     * @returns {boolean}
+     */
+    startInteract() {
+        return this.interact(this, true);
+    }
+    /**
+     * Interact Object Name For `InteractionManager`
+     * @returns {string}
+     */
+    interactObjectName() {
+        return this.type;
+    }
+    /**
+     * onEnterInteractRange For `InteractionManager`
+     */
+    onEnterInteractRange() {
+        console.log("Enter interact range", this.interactObjectName(), this);
+    }
+    /**
+     * onLeaveInteractRange For `InteractionManager`
+     */
+    onLeaveInteractRange() {
+        console.log("Leave interact range", this.interactObjectName());
+    }
 }
 
 class FarmChildObject extends FarmObject {
@@ -323,8 +357,9 @@ class FarmChildObject extends FarmObject {
     /**
      * On Interact
      * @param {FarmObject} object
+     * @param {boolean} false
      */
-    onInteract(object) {
+    onInteract(object, force = false) {
         console.log("> A ", this.type, " has been interacted at " + this.position.toString(), this);
     }
     /**
@@ -357,7 +392,7 @@ class FarmChildObject extends FarmObject {
      * @returns {boolean}
      */
     interactable() {
-        return this.parentObject().interactable();
+        return false;
     }
     /**
      * Check if RPG Character can collide with farm objects.
@@ -408,6 +443,4 @@ class FarmChildObject extends FarmObject {
     spriteClass() {
         return this.parentObject().spriteClass();
     }
-
-    
 }

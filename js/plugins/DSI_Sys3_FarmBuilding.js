@@ -42,23 +42,42 @@ class Building extends FarmObject {
         this._moving = false;
     }
     /**
-     * On Interact
-     * @param {FarmObject} object
+     * @inheritdoc
      */
-    onInteract(object) {
+    onInteract(object, force = false) {
         const offsetX = object.position.x - this.position.x;
         const offsetY = object.position.y - this.position.y;
         const { x, y, width, height } = this.interactionRange();
-        if (offsetX >= x && offsetX <= x + width - 1 && offsetY >= y && offsetY <= y + height - 1) {
+        if (force || (offsetX >= x && offsetX <= x + width - 1 && offsetY >= y && offsetY <= y + height - 1)) {
             console.log('You interact with', { offsetX, offsetY }, object);
+            this.onSuccessfullyInteract();
         }
     }
     /**
+     * onSuccessfullyInteract
+     */
+    onSuccessfullyInteract() {
+        console.log(this.type);
+    }
+    /**
      * Get interaction range
-     * @returns {{x: number, y: number, width: number, height: number}}
+     * @returns {Rectangle}
      */
     interactionRange() {
         return { x: 0, y: 0, width: 0, height: 0 };
+    }
+    /**
+     * Interact text key
+     * @returns {boolean}
+     */
+    interactTextKey() {
+        return 'Lb_Interact';
+    }
+    /**
+     * @inheritdoc
+     */
+    onEnterInteractRange() {
+        Sprite_InteractionHint.inst.setTarget(this.interactTextKey());
     }
     /**
      * @inheritdoc

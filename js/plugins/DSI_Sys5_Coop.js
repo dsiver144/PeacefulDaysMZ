@@ -35,6 +35,12 @@ class Coop extends Building {
     /**
      * @inheritdoc
      */
+    interactTextKey() {
+        return 'Lb_Open';
+    }
+    /**
+     * @inheritdoc
+     */
     displayAnchor() {
         return {x: 0.0, y: 0.65};
     }
@@ -46,10 +52,11 @@ class Coop extends Building {
     }
     /**
      * Get interaction range
-     * @returns {{x: number, y: number, width: number, height: number}}
+     * @returns {Rectangle}
      */
     interactionRange() {
-        return { x: 1, y: 0, width: 1, height: 1 };
+        const {x, y} = this.position;
+        return { x: x + 1, y: y, width: 1, height: 1 };
     }
     /**
      * @inheritdoc

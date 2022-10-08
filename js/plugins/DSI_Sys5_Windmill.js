@@ -37,7 +37,14 @@ class Windmill extends Building {
      * @returns {{x: number, y: number, width: number, height: number}}
      */
     interactionRange() {
-        return { x: 1, y: 1, width: 1, height: 1 };
+        const { x, y } = this.position;
+        return { x: x + 1, y: y + 1, width: 1, height: 1 };
+    }
+    /**
+     * @inheritdoc
+     */
+    interactTextKey() {
+        return 'Lb_Open';
     }
     /**
      * @inheritdoc

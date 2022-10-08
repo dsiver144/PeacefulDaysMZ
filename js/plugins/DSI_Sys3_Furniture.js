@@ -105,7 +105,11 @@ class MyFurniture extends Building {
      * @inheritdoc
      */
     interactionRange() {
-        return this.furnitureVariant().interactionRange;
+        const {x, y} = this.position;
+        const rect = this.furnitureVariant().interactionRange;
+        rect.x += x;
+        rect.y += y;
+        return rect;
     }
     /**
      * Check if this furniture can be rotate.

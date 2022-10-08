@@ -44,12 +44,20 @@ class ToolManager extends SaveableObject {
         this._tools.set(tool.getType(), tool);
     }
     /**
+     * Check if player has equipped a specific tool
+     * @param {ToolType} type 
+     * @returns {boolean}
+     */
+    isEquipped(type) {
+        return this.equippedTool()?.getType() === type;
+    }
+    /**
      * Get Equipped Tool
      * @returns {PD_Tool}
      */
     equippedTool() {
         const item = MyBag.inst.selectingItem();
-        if (!item) return;
+        if (!item) return null;
         const dbItem = ItemDB.get(item.id);
         const isSeed = dbItem.tags.includes("seed");
         const isSapling = dbItem.tags.includes("sapling");

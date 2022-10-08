@@ -52,11 +52,24 @@ class TheWell extends Building {
         return result;
     }
     /**
+     * @inheritdoc
+     */
+    onEnterInteractRange() {
+        Sprite_InteractionHint.inst.setTarget('Lb_RefillWater', FieldKeyAction.UseTool);
+    }
+    /**
+     * @inheritdoc
+     */
+    interactable() {
+        return ToolManager.inst.isEquipped(ToolType.wateringCan);
+    }
+    /**
      * Get interaction range
      * @returns {{x: number, y: number, width: number, height: number}}
      */
     interactionRange() {
-        return { x: 0, y: 0, width: 2, height: 1 };
+        const {x, y} = this.position;
+        return { x: x, y: y, width: 2, height: 1 };
     }
     /**
      * @inheritdoc
