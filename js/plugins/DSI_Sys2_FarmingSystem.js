@@ -5,7 +5,7 @@
 /*:
  * @author dsiver144
  * @target MZ
- * @plugindesc (v1.0) A custom plugin by dsiver144
+ * @plugindesc (v1.0) Farming System By dsiver144
  * @help 
  * Empty Help
  * 

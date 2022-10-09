@@ -6,7 +6,7 @@
 //========================================================================
 /*:
  * @author dsiver144
- * @plugindesc (v1.0) A custom plugin by dsiver144
+ * @plugindesc (v1.0) New Game Stuff Go Here
  * @help 
  * Empty Help
  * 

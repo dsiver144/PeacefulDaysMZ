@@ -10,6 +10,7 @@
  * 
  */
 
+
 class MyBag extends ItemContainer {
     /**
      * This class handle Inventory system for Peaceful Days
@@ -19,6 +20,13 @@ class MyBag extends ItemContainer {
         MyBag.inst = this;
         this.select(0);
         this.setName('Lb_Backpack');
+    }
+    /**
+     * @inheritdoc
+     */
+    onItemChanged(slotId) {
+        super.onItemChanged(slotId);
+        GameInteractionManager.inst.reset();
     }
     /**
      * @inheritdoc

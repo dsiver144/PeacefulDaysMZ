@@ -26,7 +26,7 @@ class FarmTile extends FarmObject {
     onHitByTool(toolType, extraData) {
         let result = false;
         switch (toolType) {
-            case ToolType.seedPack: 
+            case ToolType.seedPack:
             case ToolType.sapling:
                 if (this.hasSeed()) {
                     return false;
@@ -47,12 +47,12 @@ class FarmTile extends FarmObject {
                 break;
             case ToolType.sickle:
                 if (this.isTree()) return false;
-                if (!this.isFullyGrownUp()) {
+                if (!this.isFullyGrownUp() && !this.isSeedStage()) {
                     this.reset();
                     this.refreshSprite();
                     return true;
                 }
-                const {sickleRequired} = this.seedData();
+                const { sickleRequired } = this.seedData();
                 if (!sickleRequired) return false;
                 return this.harvest(ToolType.sickle);
                 break;
@@ -172,7 +172,7 @@ class FarmTile extends FarmObject {
         this.isWatered = false;
         if (!this.hasSeed()) return;
         if (this.isDead()) return;
-        const {waterfieldFlag, treeFlag} = this.seedData();
+        const { waterfieldFlag, treeFlag } = this.seedData();
         const isGrownable = isWatered || waterfieldFlag || treeFlag;
         if (isGrownable) {
             this.growUp();
@@ -227,11 +227,11 @@ class FarmTile extends FarmObject {
         }
     }
     /**
-     * Harvest crop / fruit from this object
-     * @param {ToolType} toolType
-     * @returns {boolean} true if can harvest
+     * Check if this can be harvested
+     * @returns {boolean}
      */
-    harvest(toolType = null) {
+    harvestable(toolType) {
+        if (!this.hasSeed()) return false;
         const { productID, sickleRequired } = this.seedData();
         if (this.isDead()) {
             return false;
@@ -240,8 +240,20 @@ class FarmTile extends FarmObject {
             return false;
         }
         if (!productID) {
-            return false; 
+            return false;
         }
+        return this.isFullyGrownUp();
+    }
+    /**
+     * Harvest crop / fruit from this object
+     * @param {ToolType} toolType
+     * @returns {boolean} true if can harvest
+     */
+    harvest(toolType = null) {
+        if (!this.harvestable(toolType)) {
+            return false;
+        }
+        const { productID } = this.seedData();
         console.log("Harvest ", productID, toolType, this.seedId);
         const number = 1;
         const leftover = MyBag.inst.addItem(productID, number, false);
@@ -272,25 +284,89 @@ class FarmTile extends FarmObject {
      * @inheritdoc
      */
     interactable() {
-        if (this.isDead() && ToolManager.inst.isEquipped(ToolType.sickle)) return true;
-        if (!this.isFullyGrownUp()) return false;
-        const { sickleRequired } = this.seedData();
-        if (sickleRequired) {
-            return ToolManager.inst.isEquipped(ToolType.sickle)
+        this._interactionType = null;
+        if (this.harvestable(ToolManager.inst.equippedTool()?.getType())) {
+            this._interactionType = 'Harvest';
+            return true;
         }
-        return true;
+        if (this.hasSeed()) {
+            if (this.isTree()) {
+                if (ToolManager.inst.isEquipped(ToolType.axe)) {
+                    this._interactionType = 'ChopTree';
+                    return true;
+                }
+            } else {
+                const isSeedStage = this.isSeedStage();
+                if (isSeedStage) {
+                    if (ToolManager.inst.isEquipped(ToolType.hoe)) {
+                        this._interactionType = 'ClearSeed';
+                        return true;
+                    }
+                } else {
+                    if (ToolManager.inst.isEquipped(ToolType.sickle)) {
+                        this._interactionType = 'ClearCrop';
+                        return true;
+                    }
+                }
+            }
+        } else {
+            if (ToolManager.inst.isEquipped(ToolType.seedPack)) {
+                this._interactionType = 'Seed';
+                return true;
+            }
+            if (ToolManager.inst.isEquipped(ToolType.sapling)) {
+                this._interactionType = 'Sapling';
+                return true;
+            }
+            if (ToolManager.inst.isEquipped(ToolType.hammer)) {
+                this._interactionType = 'Hammer';
+                return true;
+            }
+        }
+        if (!this.isTree() && !this.isWatered && ToolManager.inst.isEquipped(ToolType.wateringCan)) {
+            this._interactionType = 'Watering';
+            return true;
+        }
+        // if (this.isDead() && ToolManager.inst.isEquipped(ToolType.sickle)) return true;
+        // if (!this.isFullyGrownUp()) return false;
+        // const { sickleRequired } = this.seedData();
+        // if (sickleRequired) {
+        //     return ToolManager.inst.isEquipped(ToolType.sickle)
+        // }
+        return false;
     }
     /**
      * @inheritdoc
      */
     onEnterInteractRange() {
-        if (this.isDead()) {
-            Sprite_InteractionHint.inst.setTarget("Lb_ClearCrop", FieldKeyAction.UseTool);
-            return;
+        switch (this._interactionType) {
+            case 'Watering':
+                Sprite_InteractionHint.inst.setTarget("Lb_WateringPlant", FieldKeyAction.UseTool);
+                break;
+            case 'Hammer':
+                Sprite_InteractionHint.inst.setTarget("Lb_RemoveDirt", FieldKeyAction.UseTool);
+                break;
+            case 'Seed':
+                Sprite_InteractionHint.inst.setTarget("Lb_SowSeed", FieldKeyAction.UseTool);
+                break;
+            case 'Sapling':
+                Sprite_InteractionHint.inst.setTarget("Lb_PlantSapling", FieldKeyAction.UseTool);
+                break;
+            case 'ChopTree':
+                Sprite_InteractionHint.inst.setTarget("Lb_ChopTree", FieldKeyAction.UseTool);
+                break;
+            case 'ClearSeed':
+                Sprite_InteractionHint.inst.setTarget("Lb_ClearSeed", FieldKeyAction.UseTool);
+                break;
+            case 'ClearCrop':
+                Sprite_InteractionHint.inst.setTarget("Lb_ClearCrop", FieldKeyAction.UseTool);
+                break;
+            case 'Harvest':
+                const { sickleRequired } = this.seedData();
+                const keyAction = sickleRequired ? FieldKeyAction.UseTool : FieldKeyAction.Check;
+                Sprite_InteractionHint.inst.setTarget("Lb_Harvest", keyAction);
+                break;
         }
-        const { sickleRequired} = this.seedData();
-        const keyAction = sickleRequired ? FieldKeyAction.UseTool : FieldKeyAction.Check;
-        Sprite_InteractionHint.inst.setTarget("Lb_Harvest", keyAction);
     }
     /**
      * On Interact

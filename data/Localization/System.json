@@ -105,6 +105,48 @@
         }
     },
     {
+        "key": "Lb_ClearSeed",
+        "lang": {
+            "vn": "Loại Bỏ Hạt Giống",
+            "en": "Remove Seeds"
+        }
+    },
+    {
+        "key": "Lb_ChopTree",
+        "lang": {
+            "vn": "Chặt Cây",
+            "en": "Chop"
+        }
+    },
+    {
+        "key": "Lb_SowSeed",
+        "lang": {
+            "vn": "Gieo Hạt",
+            "en": "Sow"
+        }
+    },
+    {
+        "key": "Lb_PlantSapling",
+        "lang": {
+            "vn": "Trồng Cây",
+            "en": "Plant"
+        }
+    },
+    {
+        "key": "Lb_WateringPlant",
+        "lang": {
+            "vn": "Tưới Nước",
+            "en": "Water"
+        }
+    },
+    {
+        "key": "Lb_RemoveDirt",
+        "lang": {
+            "vn": "Dập Đất",
+            "en": "Flatten"
+        }
+    },
+    {
         "key": "Lb_Open",
         "lang": {
             "vn": "Mở cửa",

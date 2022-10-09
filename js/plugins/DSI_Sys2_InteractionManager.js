@@ -1,8 +1,8 @@
-class InteractionManager {
-    /** @type {InteractionManager} */
+class GameInteractionManager {
+    /** @type {GameInteractionManager} */
     static inst = null;
     constructor() {
-        InteractionManager.inst = this;
+        GameInteractionManager.inst = this;
         /** @type {InteractableObject} */
         this._lastObject = null;
     }
@@ -11,6 +11,7 @@ class InteractionManager {
      */
     reset() {
         this._lastObject = null;
+        this._delayCounter = 15;
     }
     /**
      * Get all interactable objects
@@ -27,8 +28,22 @@ class InteractionManager {
      * Update interaction manager
      */
     update() {
+        this.updateDelay();
         this.updateCheck();
         this.updateControl();
+    }
+    /**
+     * Update Delay
+     */
+    updateDelay() {
+        if (this._delayCounter > 0) this._delayCounter -= 1;
+    }
+    /**
+     * Check if system is enabled 
+     * @returns {boolean}
+     */
+    isEnabled() {
+        return $gamePlayer.canMove() && !this._delayCounter;
     }
     /**
      * Get Nearest Object At A Specific Position
@@ -36,7 +51,7 @@ class InteractionManager {
      * @returns {InteractableObject}
      */
     getNearestObjectAtPosition(pos) {
-        if (!$gamePlayer.canMove()) return null;
+        if (!this.isEnabled()) return null;
         const checkPos = pos;
         checkPos.x += 0.5;
         checkPos.y += 0.5;
@@ -97,7 +112,6 @@ class InteractionManager {
                 /** @type {InteractableObject} */
                 let targetObject = this.getNearestObjectAtPosition(mousePos);
                 if (targetObject) {
-                    $gamePlayer.turnTowardPoint(mousePos.x, mousePos.y);
                     targetObject.startInteract();
                 }
             } else {
@@ -107,7 +121,7 @@ class InteractionManager {
     }
 }
 
-new InteractionManager();
+new GameInteractionManager();
 
 class InteractableObject {
 
@@ -139,7 +153,7 @@ class InteractableObject {
 var DSI_Sys1_InteractionManager_Game_Map_update = Game_Map.prototype.update;
 Game_Map.prototype.update = function (sceneActive) {
     DSI_Sys1_InteractionManager_Game_Map_update.call(this, sceneActive);
-    InteractionManager.inst.update();
+    GameInteractionManager.inst.update();
 }
 
 //===================================================================
@@ -167,6 +181,7 @@ Game_Event.prototype.onLeaveInteractRange = function () {
 }
 
 Game_Event.prototype.startInteract = function () {
+    $gamePlayer.turnTowardCharacter(this);
     this.start();
     $gameMap.setupStartingEvent();
 }
@@ -179,12 +194,12 @@ var DSI_Sys2_InteractionManager_Spriteset_Map_createUpperLayer = Spriteset_Map.p
 Spriteset_Map.prototype.createUpperLayer = function () {
     DSI_Sys2_InteractionManager_Spriteset_Map_createUpperLayer.call(this);
     this._interactionHintSprite = new Sprite_InteractionHint(FieldKeyAction.Check, 'Lb_Ok');
-    this._interactionHintSprite.anchor.x = 0.5;
-    this._interactionHintSprite.anchor.y = 0.5;
+    // this._interactionHintSprite.anchor.x = 0.5;
+    // this._interactionHintSprite.anchor.y = 0.5;
     this._interactionHintSprite.x = Graphics.width / 2;
     this._interactionHintSprite.y = Graphics.height - 120;
     this.addChild(this._interactionHintSprite);
-    InteractionManager.inst.reset();
+    GameInteractionManager.inst.reset();
 }
 
 class Sprite_InteractionHint extends Sprite_KeyHint {
@@ -228,5 +243,7 @@ class Sprite_InteractionHint extends Sprite_KeyHint {
         } else {
             this.opacity -= 25;
         }
+        this.x = $gamePlayer.screenX() - this.width / 2;
+        this.y = $gamePlayer.screenY() - this.height - 80;
     }
 }

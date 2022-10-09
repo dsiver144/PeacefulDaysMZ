@@ -235,34 +235,34 @@ class FarmObject extends SaveableObject {
         return Sprite_FarmObject;
     }
     /**
-     * Interact Position For `InteractionManager`
+     * Interact Position For `GameInteractionManager`
      * @returns {Vector2}
      */
     interactionRange() {
         return new Rectangle(this.position.x, this.position.y, 1, 1);
     }
     /**
-     * Start Interact For `InteractionManager`
+     * Start Interact For `GameInteractionManager`
      * @returns {boolean}
      */
     startInteract() {
         return this.interact(this, true);
     }
     /**
-     * Interact Object Name For `InteractionManager`
+     * Interact Object Name For `GameInteractionManager`
      * @returns {string}
      */
     interactObjectName() {
         return this.type;
     }
     /**
-     * onEnterInteractRange For `InteractionManager`
+     * onEnterInteractRange For `GameInteractionManager`
      */
     onEnterInteractRange() {
         console.log("Enter interact range", this.interactObjectName(), this);
     }
     /**
-     * onLeaveInteractRange For `InteractionManager`
+     * onLeaveInteractRange For `GameInteractionManager`
      */
     onLeaveInteractRange() {
         console.log("Leave interact range", this.interactObjectName());
