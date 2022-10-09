@@ -17,6 +17,7 @@ ConfigManager.clockPosition = 0;
 ConfigManager.keyMapper = {};
 ConfigManager.gamepadMapper = {};
 ConfigManager.dashMode = 2;
+ConfigManager.interactionHintEnabled = 1;
 
 var DSI_Sys1_ConfigManager_ConfigManager_makeData = ConfigManager.makeData;
 ConfigManager.makeData = function () {
@@ -27,6 +28,7 @@ ConfigManager.makeData = function () {
     config['gamepadMapper'] = this.gamepadMapper;
     config['dashMode'] = this.dashMode;
     config['colorMode'] = this.colorMode;
+    config['interactionHintEnabled'] = this.interactionHintEnabled;
     return config;
 };
 
@@ -39,6 +41,7 @@ ConfigManager.applyData = function (config) {
     this.gamepadMapper = this.readData(config, "gamepadMapper", {});
     this.dashMode = this.readData(config, "dashMode", 2);
     this.colorMode = this.readData(config, "colorMode", 1);
+    this.interactionHintEnabled = this.readData(config, "interactionHintEnabled", 1);
     Input.applyKeybindings();
 };
 

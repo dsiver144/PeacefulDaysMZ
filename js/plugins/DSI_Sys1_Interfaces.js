@@ -33,14 +33,14 @@ const GameEvent = {
 const YellowLightColor = [255, 218, 69];
 
 const KeyCodeToNameConverter = {
-    9: 'TAB',
+    9: '@K9',
     13: 'ENT',
     16: 'SHIFT',
     17: 'CTRL',
     18: 'ALT',
     19: 'PSE',
     27: 'ESC',
-    32: 'SPACE',
+    32: '@K32',
     33: 'PGUP',
     34: 'PGDN',
     35: 'END',

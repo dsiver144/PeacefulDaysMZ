@@ -49,10 +49,11 @@ class Sprite_KeyHint extends Sprite {
         this._background = bg;
 
         const style = new PIXI.TextStyle({
-            fill: "#ffd985",
+            fill: "#eeb051",
             fontFamily: "Verdana",
             fontSize: 16,
-            align: "center"
+            fontWeight: "bold",
+            align: "center",
         });
         const keyText = new PIXI.Text("", style);
         this._keyText = keyText;
@@ -95,11 +96,16 @@ class Sprite_KeyHint extends Sprite {
             buttonName = "";
             this._keySprite.visible = true;
         } else {
-            this._keySprite.visible = false;
+            if (buttonName.match(/\@(.+)/i)) {
+                buttonName = '';
+                this._keySprite.visible = true;
+                this._keySprite.bitmap = ImageManager.loadMenu(RegExp.$1, 'keys');
+            } else {
+                this._keySprite.visible = false;
+            }
         }
-
         const actionName = this._textKey ? LocalizeManager.t(this._textKey) : "";
-        if (actionName.length == 0 && isKeyboard) {
+        if (buttonName && actionName.length == 0 && isKeyboard) {
             // Add padding when there is only key name is presented
             buttonName = " " + buttonName + " ";
         }

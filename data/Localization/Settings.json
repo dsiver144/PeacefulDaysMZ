@@ -138,5 +138,12 @@
             "vn": "Cài Đặt Phím",
             "en": "Key Bindings"
         }
+    }, {
+        "key": "Lb_Option_InteractionHint",
+        "lang": {
+            "vn": "Hiển Thị Phím Tương Tác",
+            "en": "Interaction Hints"
+        }
     }
+    
 ]

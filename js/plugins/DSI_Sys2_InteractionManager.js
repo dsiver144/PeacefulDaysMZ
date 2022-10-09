@@ -5,6 +5,7 @@ class GameInteractionManager {
         GameInteractionManager.inst = this;
         /** @type {InteractableObject} */
         this._lastObject = null;
+        this._hintEnabled = true;
     }
     /**
      * Reset
@@ -29,7 +30,7 @@ class GameInteractionManager {
      */
     update() {
         this.updateDelay();
-        this.updateCheck();
+        this.updateHintCheck();
         this.updateControl();
     }
     /**
@@ -46,6 +47,13 @@ class GameInteractionManager {
         return $gamePlayer.canMove() && !this._delayCounter;
     }
     /**
+     * Check if interaction hint enable
+     * @returns {boolean}
+     */
+    isHintEnabled() {
+        return ConfigManager.interactionHintEnabled;
+    }
+    /**
      * Get Nearest Object At A Specific Position
      * @param {Vector2} pos 
      * @returns {InteractableObject}
@@ -58,8 +66,10 @@ class GameInteractionManager {
         let minDist = Number.POSITIVE_INFINITY;
         /** @type {InteractableObject} */
         let targetObject = null;
-        this.allObjects().forEach((object) => {
-            if (!object.interactable()) return;
+        const allObjects = this.allObjects();
+        for (let i = 0; i < allObjects.length; i++) {
+            const object = allObjects[i];
+            if (!object.interactable()) continue;
             const rect = object.interactionRange();
             if (checkPos.x >= rect.x && checkPos.x <= rect.x + rect.width &&
                 checkPos.y >= rect.y && checkPos.y <= rect.y + rect.height) {
@@ -71,16 +81,18 @@ class GameInteractionManager {
                 if (dist < minDist) {
                     minDist = dist;
                     targetObject = object;
+                    break;
                 }
             }
-        })
+        }
         return targetObject;
     }
     /**
      * Update check for nearest object 
      */
-    updateCheck() {
+    updateHintCheck() {
         /** @type {InteractableObject} */
+        if (this.isHintEnabled() == false) return;
         let targetObject = this.getNearestObjectAtPosition($gamePlayer.frontPosition());
         if (targetObject) {
             if (this._lastObject != targetObject) {
@@ -115,7 +127,12 @@ class GameInteractionManager {
                     targetObject.startInteract();
                 }
             } else {
-                this._lastObject?.startInteract();
+                if (this.isHintEnabled()) {
+                    this._lastObject?.startInteract();
+                } else {
+                    let targetObject = this.getNearestObjectAtPosition($gamePlayer.frontPosition());
+                    targetObject?.startInteract();
+                }
             }
         }
     }
