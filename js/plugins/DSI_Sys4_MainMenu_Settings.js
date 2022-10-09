@@ -94,6 +94,13 @@ class Window_Settings extends Window_Command {
             property: "clockMode",
             displayKeys: ['Lb_Option_ClockMode_12', 'Lb_Option_ClockMode_24'],
         });
+        this.addOption('Lb_Option_InteractionHint', {
+            type: "selection",
+            object: ConfigManager,
+            property: "interactionHintEnabled",
+            displayKeys: ['Lb_Off', 'Lb_On'],
+        });
+        
     }
     /**
      * On Option OK
