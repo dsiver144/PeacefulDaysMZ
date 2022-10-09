@@ -238,11 +238,23 @@ class Sprite_InteractionHint extends Sprite_KeyHint {
      */
     update() {
         super.update();
+        this.updateFade();
+        this.updatePosition();
+    }
+    /**
+     * Update Fade
+     */
+    updateFade() {
         if (this._hasTarget) {
             this.opacity += 25;
         } else {
             this.opacity -= 25;
         }
+    }
+    /**
+     * Update Position
+     */
+    updatePosition() {
         this.x = $gamePlayer.screenX() - this.width / 2;
         this.y = $gamePlayer.screenY() - this.height - 80;
     }
