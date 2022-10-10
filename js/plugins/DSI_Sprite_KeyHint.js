@@ -96,7 +96,7 @@ class Sprite_KeyHint extends Sprite {
             buttonName = "";
             this._keySprite.visible = true;
         } else {
-            if (buttonName.match(/\@(.+)/i)) {
+            if (buttonName && buttonName.match(/\@(.+)/i)) {
                 buttonName = '';
                 this._keySprite.visible = true;
                 this._keySprite.bitmap = ImageManager.loadMenu(RegExp.$1, 'keys');
