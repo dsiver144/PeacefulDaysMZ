@@ -17,6 +17,7 @@ ConfigManager.clockPosition = 0;
 ConfigManager.keyMapper = {};
 ConfigManager.gamepadMapper = {};
 ConfigManager.dashMode = 2;
+ConfigManager.dashToggleDelay = 15;
 ConfigManager.interactionHintEnabled = 1;
 
 var DSI_Sys1_ConfigManager_ConfigManager_makeData = ConfigManager.makeData;

@@ -350,7 +350,7 @@ Game_Player.prototype.isDashButtonPressed = function () {
             }
             if (shift && !this._toggleDelay) {
                 this._dashToggle = !this._dashToggle;
-                this._toggleDelay = 15;
+                this._toggleDelay = ConfigManager.dashToggleDelay;
             }
             return this._dashToggle;
     }
