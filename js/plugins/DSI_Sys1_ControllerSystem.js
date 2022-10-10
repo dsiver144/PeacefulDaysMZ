@@ -432,6 +432,7 @@ Scene_Map.prototype.isMenuCalled = function () {
 var DSI_Sys1_ControllerSystem_TouchInput__onMouseDown = TouchInput._onMouseDown;
 TouchInput._onMouseDown = function (event) {
     Input.setState(256 + event.button, true);
+    Input.setInputMode('keyboard');
     DSI_Sys1_ControllerSystem_TouchInput__onMouseDown.call(this, event);
 };
 
