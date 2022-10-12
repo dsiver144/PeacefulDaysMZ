@@ -26,6 +26,7 @@ var $plugins =
 {"name":"DSI_Sys1_ItemDatabase","status":true,"description":"","parameters":{}},
 {"name":"DSI_Sys1_ControllerSystem","status":true,"description":"(v1.0) Player Controller","parameters":{}},
 {"name":"DSI_Sys1_ConfigManager","status":true,"description":"(v1.0) Config Manager","parameters":{}},
+{"name":"DSI_Sys2_Notification","status":true,"description":"(v1.0) Config Manager","parameters":{}},
 {"name":"DSI_Sys2_RangeManager","status":true,"description":"(v1.0) Peaceful Days Range Manager","parameters":{}},
 {"name":"DSI_Sys2_TimeSystem","status":true,"description":"(v1.0) Time System","parameters":{"testParam:number":"144"}},
 {"name":"DSI_Sys2_ItemContainer","status":true,"description":"(v1.0) Peaceful Days Inventory System","parameters":{}},

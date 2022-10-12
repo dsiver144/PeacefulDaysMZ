@@ -2002,7 +2002,7 @@ Sprite.prototype.hide = function() {
 /**
  * Releases the "hidden" state of the sprite.
  */
-Sprite.prototype.show = function() {
+Sprite.prototype.showNotif = function() {
     this._hidden = false;
     this.updateVisibility();
 };

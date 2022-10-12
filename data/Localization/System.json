@@ -182,6 +182,13 @@
         }
     },
     {
+        "key": "Lb_InventoryFull",
+        "lang": {
+            "vn": "Túi đồ của bạn đã đầy!",
+            "en": "Your Backpack is full!"
+        }
+    },
+    {
         "key": "Lb_Settings",
         "lang": {
             "vn": "Cài Đặt",

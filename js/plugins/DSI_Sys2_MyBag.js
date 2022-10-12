@@ -31,6 +31,13 @@ class MyBag extends ItemContainer {
     /**
      * @inheritdoc
      */
+    onItemContainerFull() {
+        AudioController.playBuzzer();
+        Notify.inst.showInventoryFull();
+    }
+    /**
+     * @inheritdoc
+     */
     saveProperties() {
         const data = super.saveProperties();
         return data.concat([

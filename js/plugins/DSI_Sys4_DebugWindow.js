@@ -41,6 +41,10 @@ class Window_MyDebug extends Window_Command {
             SceneManager.push(Scene_Chest);
             SceneManager.prepareNextScene(window['chest'], MyBag.inst);
         });
+        this.addOption('Test Notify', 'notify', () => {
+            Notify.inst.show('SunflowerSeeds', 2);
+            this.activate();
+        })
         this.addOption('Wallhack', 'wallHack', this.onWallHack.bind(this));
         this.addOption('Always Water', 'water', this.onWaterHack.bind(this));
         this.addOption('Ignore Crop Season', 'seasonHack', this.onSeasonHack.bind(this));

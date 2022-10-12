@@ -204,6 +204,12 @@ class ItemContainer extends SaveableObject {
         eventName && EventManager.emit(eventName, slotId);
     }
     /**
+     * On Item Container Full
+     */
+    onItemContainerFull() {
+        
+    }
+    /**
      * Add Item
      * @param {number} id 
      * @param {number} number 
@@ -228,6 +234,7 @@ class ItemContainer extends SaveableObject {
             return 0;
         } else {
             console.log(`> Container: Can't not add ${id} (${number})`);
+            this.onItemContainerFull();
         }
         return number;
     }
