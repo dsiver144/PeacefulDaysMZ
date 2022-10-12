@@ -15,6 +15,10 @@
  * @desc A Test Param
  * 
  */
+const NotificationConfig = {
+    spacing: 40,
+    limitY: 180
+}
 
 class Notify {
     /** @type {Notify} */
@@ -24,6 +28,14 @@ class Notify {
      */
     constructor() {
         Notify.inst = this;
+        /** @type {Sprite_Notification[]} */
+        this._notifications = [];
+    }
+    /**
+     * Get notifications
+     */
+    get notifications() {
+        return this._notifications;
     }
     /**
      * Show Notification
@@ -31,14 +43,29 @@ class Notify {
      * @param {number} iconIndex 
      */
     show(textKey, iconIndex = -1) {
-        if (!SceneManager._scene) return;
-        if (this._lastNofication) {
-            this._lastNofication.hideNotif();
-        }
-        const notify = new Sprite_SlideNotification();
-        notify.showNotif(textKey, iconIndex);
-        SceneManager._scene.addChild(notify);
-        this._lastNofication = notify;
+        this.pushUpOtherNotifications();
+        const notification = new Sprite_SlideNotification();
+        notification.showNotif(textKey, iconIndex);
+        ScreenOverlay.addChild(notification);
+        this._notifications.push(notification);
+    }
+    /**
+     * Remove notification
+     * @param {Sprite_Notification} sprite 
+     */
+    removeNotification(sprite) {
+        this._notifications.splice(
+            this._notifications.indexOf(sprite),
+            1
+        );
+    }
+    /**
+     * Push up all notifications
+     */
+    pushUpOtherNotifications() {
+        this._notifications.forEach(notif => {
+            notif.pushUp();
+        });
     }
     /**
      * Show Inventory Full Notification
@@ -63,11 +90,22 @@ class Sprite_Notification extends Sprite {
      * Show Notification
      * @param {string} textKey 
      * @param {number} iconIndex 
+     * @param {number} slotId 
      */
-    showNotif(textKey, iconIndex = -1) {
+    showNotif(textKey, iconIndex = -1, slotId) {
         this._phase = 'show';
-        this.#updateContent(textKey, iconIndex);
+        this._slotId = slotId;
+        this.updateContent(textKey, iconIndex);
         this.startShow();
+    }
+    /**
+     * Push Up
+     */
+    pushUp() {
+        this._targetY = this.y - NotificationConfig.spacing;
+        if (this.y <= NotificationConfig.limitY) {
+            this.visible = false;
+        }
     }
     /**
      * Set Hide Timer Duration
@@ -105,7 +143,8 @@ class Sprite_Notification extends Sprite {
         const style = new PIXI.TextStyle({
             fill: "#fff7d1",
             fontFamily: "Verdana",
-            fontSize: 20,
+            fontSize: 14,
+            fontWeight: "bold",
             lineJoin: "round",
             stroke: "#6f4949",
             strokeThickness: 5,
@@ -134,23 +173,25 @@ class Sprite_Notification extends Sprite {
      * Update Content
      * @param {string} textKey 
      * @param {number} iconIndex 
+     * @param {number} slotId 
      */
-    #updateContent(textKey, iconIndex = -1) {
+    updateContent(textKey, iconIndex = -1) {
         this._icon.setIcon(iconIndex);
         this._content.text = LocalizeManager.t(textKey);
-        const padding = 8;
+        const padding = 0;
         const spacing = 4;
         const iconSize = iconIndex >= 0 ? 32 + spacing : 0;
         const totalWidth = iconSize + this._content.width + padding + 25;
         this._background.width = totalWidth;
-        const yOffset = 10;
+        const yOffset = 2;
         this._icon.x = padding / 2;
         this._content.x = this._icon.x + iconSize;
         this._icon.y = yOffset;
-        this._content.y = yOffset;
+        this._content.y = yOffset + 4;
     }
     /**
      * On Start Show Notification
+     * @param {number} slotId
      */
     startShow() {
 
@@ -159,6 +200,7 @@ class Sprite_Notification extends Sprite {
      * Hide Notification
      */
     hideNotif() {
+        Notify.inst.removeNotification(this);
         this._phase = 'ended';
         this.endShow();
     }
@@ -183,6 +225,12 @@ class Sprite_Notification extends Sprite {
         return false;
     }
     /**
+     * @inheritdoc
+     */
+    destroy() {
+        super.destroy();
+    }
+    /**
      * Update hide timer
      */
     #updateHideTimer() {
@@ -195,11 +243,19 @@ class Sprite_Notification extends Sprite {
         }
     }
     /**
+     * Update Push Up
+     */
+    #updatePushUp() {
+        if (this._targetY == null) return;
+        this.y += (this._targetY - this.y) * 0.5;
+    }
+    /**
      * @inheritdoc
      */
     update() {
         super.update();
         this.#updateHideTimer();
+        this.#updatePushUp();
     }
 }
 
@@ -208,7 +264,7 @@ class Sprite_SlideNotification extends Sprite_Notification {
      * @inheritdoc
      */
     notifyBGConfig() {
-        return ['img/menus/notify/NotifyBG.png', 0, 0, 25, 0];
+        return ['img/menus/notify/NotifyBG.png', 0, 0, 15, 0];
     }
     /**
      * @inheritdoc
@@ -218,7 +274,7 @@ class Sprite_SlideNotification extends Sprite_Notification {
         this.x = -300;
         this.opacity = 0;
         this.startTween({ x: 0, opacity: 255 }, 15).ease(Easing.easeInOutExpo);
-        this.setHideTimer(60);
+        this.setHideTimer(120);
     }
     /**
      * @inheritdoc

@@ -42,7 +42,8 @@ class Window_MyDebug extends Window_Command {
             SceneManager.prepareNextScene(window['chest'], MyBag.inst);
         });
         this.addOption('Test Notify', 'notify', () => {
-            Notify.inst.show('SunflowerSeeds', 2);
+            const id = Object.keys(ItemDB.items()).randomizeItem();
+            Notify.inst.show(id, 2);
             this.activate();
         })
         this.addOption('Wallhack', 'wallHack', this.onWallHack.bind(this));
