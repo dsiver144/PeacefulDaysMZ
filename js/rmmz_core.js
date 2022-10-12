@@ -1039,7 +1039,7 @@ Graphics._createPixiApp = function() {
 };
 
 Graphics._setupPixi = function() {
-    PIXI.utils.skipHello();
+    PIXI.utils.sayHello();
     PIXI.settings.GC_MAX_IDLE = 600;
 };
 
@@ -4572,13 +4572,13 @@ ColorFilter.prototype._fragmentSrc = function() {
         "  float r = rgb.r;" +
         "  float g = rgb.g;" +
         "  float b = rgb.b;" +
-        "  if (sample.r == 1.0 && sample.g ==0.8549019607843137 && sample.b == 0.2705882352941176) {" +
-        "    r = sample.r * brightness / 255.0;" + 
-        "    g = sample.g * brightness / 255.0;" + 
-        "    b = sample.b * brightness / 255.0;" + 
-        "    gl_FragColor = vec4(r, g, b, a);" +
-        "    return;" +
-        "  }" +
+        // "  if (sample.r == 1.0 && sample.g ==0.8549019607843137 && sample.b == 0.2705882352941176) {" +
+        // "    r = sample.r * brightness / 255.0;" + 
+        // "    g = sample.g * brightness / 255.0;" + 
+        // "    b = sample.b * brightness / 255.0;" + 
+        // "    gl_FragColor = vec4(r, g, b, a);" +
+        // "    return;" +
+        // "  }" +
         "  float r2 = colorTone.r / 255.0;" +
         "  float g2 = colorTone.g / 255.0;" +
         "  float b2 = colorTone.b / 255.0;" +

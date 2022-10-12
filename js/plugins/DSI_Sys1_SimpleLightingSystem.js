@@ -256,6 +256,9 @@ class Sprite_Light extends Sprite {
         this.blendMode = PIXI.BLEND_MODES.SCREEN;
         this._offset = new Vector2(0, 0);
         this._imageFile = "white";
+        this._bloom = new PIXI.filters.BlurFilter();
+        this.filters = [this._bloom];
+        this._timingOffset = Math.random() * 100;
     }
     /**
      * Init light
@@ -338,13 +341,13 @@ class Sprite_Light extends Sprite {
      * Update custom effect
      */
     updateEffects() {
-        
+        this.updatePulse();
     }
     /**
      * Update opacity pulse
      */
     updatePulse() {
-        this.opacity = 100 + Math.abs(Math.sin(Graphics.frameCount / 100) * (255 - 100));
+        this.opacity = 200 + Math.abs(Math.sin(Graphics.frameCount / 50 + this._timingOffset) * (255 - 200));
     }
 }
 
