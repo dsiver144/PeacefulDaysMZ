@@ -60,6 +60,23 @@ class Sprite_Notification extends Sprite {
         this.#create();
     }
     /**
+     * Show Notification
+     * @param {string} textKey 
+     * @param {number} iconIndex 
+     */
+    showNotif(textKey, iconIndex = -1) {
+        this._phase = 'show';
+        this.#updateContent(textKey, iconIndex);
+        this.startShow();
+    }
+    /**
+     * Set Hide Timer Duration
+     * @param {number} duration 
+     */
+    setHideTimer(duration) {
+        this._endTimerCounter = duration;
+    }
+    /**
      * Init Members
      */
     #initMembers() {
@@ -114,21 +131,11 @@ class Sprite_Notification extends Sprite {
         this.#createIcon();
     }
     /**
-     * Show Notification
-     * @param {string} textKey 
-     * @param {number} iconIndex 
-     */
-    showNotif(textKey, iconIndex = -1) {
-        this._phase = 'show';
-        this.updateContent(textKey, iconIndex);
-        this.startShow();
-    }
-    /**
      * Update Content
      * @param {string} textKey 
      * @param {number} iconIndex 
      */
-    updateContent(textKey, iconIndex = -1) {
+    #updateContent(textKey, iconIndex = -1) {
         this._icon.setIcon(iconIndex);
         this._content.text = LocalizeManager.t(textKey);
         const padding = 8;
@@ -146,7 +153,7 @@ class Sprite_Notification extends Sprite {
      * On Start Show Notification
      */
     startShow() {
-        
+
     }
     /**
      * Hide Notification
@@ -176,16 +183,9 @@ class Sprite_Notification extends Sprite {
         return false;
     }
     /**
-     * Set Hide Timer Duration
-     * @param {number} duration 
-     */
-    setHideTimer(duration) {
-        this._endTimerCounter = duration;
-    }
-    /**
      * Update hide timer
      */
-    updateHideTimer() {
+    #updateHideTimer() {
         if (!this.timerEnabled()) return;
         if (this._phase === 'ended') return;
         if (this._endTimerCounter < 0) return;
@@ -199,7 +199,7 @@ class Sprite_Notification extends Sprite {
      */
     update() {
         super.update();
-        this.updateHideTimer();
+        this.#updateHideTimer();
     }
 }
 
@@ -217,7 +217,7 @@ class Sprite_SlideNotification extends Sprite_Notification {
         this.y = 350;
         this.x = -300;
         this.opacity = 0;
-        this.startTween({x: 0, opacity: 255}, 15).ease(Easing.easeInOutExpo);
+        this.startTween({ x: 0, opacity: 255 }, 15).ease(Easing.easeInOutExpo);
         this.setHideTimer(60);
     }
     /**
