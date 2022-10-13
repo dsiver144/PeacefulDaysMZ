@@ -42,6 +42,11 @@ class Window_MyDebug extends Window_Command {
             SceneManager.push(Scene_Chest);
             SceneManager.prepareNextScene(window['chest'], MyBag.inst);
         });
+        this.addOption('Test Message', 'message', () => {
+            const message = LocalizeManager.inst.getItemText('WoodenFence').description;
+            DialogueManager.inst.display(message);
+            this.onCancelCommand();
+        })
         this.addOption('Test Notify', 'notify', () => {
             const id = Object.keys(ItemDB.items()).randomizeItem();
             Notify.inst.showItem(id, Math.randomInt(100));
@@ -153,6 +158,7 @@ class Window_MyDebug extends Window_Command {
      * On Custom Command
      */
     onCustomCommand() {
+        
         MyBag.inst._unlockedRows = 2;
         MyBag.inst.addItem("SunflowerSeeds", 1);
         MyBag.inst.addItem("Sunflower", 10);

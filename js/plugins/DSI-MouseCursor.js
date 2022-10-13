@@ -38,8 +38,10 @@ class Sprite_Mouse extends Sprite {
      */
     constructor() {
         super();
-        this.bitmap = ImageManager.loadSystem(MouseParams.cursorImage || "Cursor");
+        this.bitmap = ImageManager.loadSystem(MouseParams.cursorImage || "MouseCursor");
         this.fadeCount = 0;
+        this.opacity = 0;
+        this.updatePosition();
         this.createHoverText();
     }
     /**
