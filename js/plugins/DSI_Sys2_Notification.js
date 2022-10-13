@@ -23,6 +23,9 @@ const NotificationConfig = {
 class Notify {
     /** @type {Notify} */
     static inst = null;
+    static init() {
+        new Notify();
+    }
     /**
      * This class handle all stuff related to notification for Peaceful Days
      */
@@ -41,7 +44,8 @@ class Notify {
      * Show Inventory Full Notification
      */
     showInventoryFull() {
-        this.show('Lb_InventoryFull', 1);
+        const content = LocalizeManager.t('Lb_InventoryFull');
+        this.show(content, 1);
     }
     /**
      * Show Item
@@ -86,7 +90,7 @@ class Notify {
     }
 }
 
-new Notify();
+Notify.init();
 
 class Sprite_Notification extends Sprite {
     /**

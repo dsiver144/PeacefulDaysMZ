@@ -45,6 +45,7 @@ class Sprite_KeyHint extends Sprite {
      */
     create() {
         const bg = new PIXI.NineSlicePlane(PIXI.Texture.from(this.hintBGPath()), 6, 7, 6, 7);
+        bg.alpha = 0.85;
         this.addChild(bg);
         this._background = bg;
 
