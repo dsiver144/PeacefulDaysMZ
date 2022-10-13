@@ -54,6 +54,17 @@ class LocalizeManager {
         return entry ? entry.lang[language] : `[${key}]`;
     }
     /**
+     * Check missing entries
+     */
+    checkMissingEntries() {
+        Object.entries(ItemDB.items()).forEach(([key, value]) => {
+            const entry = this._texts.get(key);
+            if (!entry) {
+                console.log(key);
+            }
+        })
+    }
+    /**
      * Get Item Text
      * @param {string} key 
      * @returns {{name: string, description: string}}

@@ -38,6 +38,23 @@ class Notify {
         return this._notifications;
     }
     /**
+     * Show Inventory Full Notification
+     */
+    showInventoryFull() {
+        this.show('Lb_InventoryFull', 1);
+    }
+    /**
+     * Show Item
+     * @param {string} itemId 
+     * @param {number} amount 
+     */
+    showItem(itemId, amount) {
+        const {localizeKey, iconIndex} = ItemDB.get(itemId);
+        const sign = amount < 0 ? " -" : " +";
+        const content = LocalizeManager.t(localizeKey) + sign + amount;
+        this.show(content, iconIndex);
+    }
+    /**
      * Show Notification
      * @param {string} textKey 
      * @param {number} iconIndex 
@@ -67,12 +84,6 @@ class Notify {
             notif.pushUp();
         });
     }
-    /**
-     * Show Inventory Full Notification
-     */
-    showInventoryFull() {
-        this.show('Lb_InventoryFull', 1);
-    }
 }
 
 new Notify();
@@ -88,14 +99,14 @@ class Sprite_Notification extends Sprite {
     }
     /**
      * Show Notification
-     * @param {string} textKey 
+     * @param {string} text 
      * @param {number} iconIndex 
      * @param {number} slotId 
      */
-    showNotif(textKey, iconIndex = -1, slotId) {
+    showNotif(text, iconIndex = -1, slotId) {
         this._phase = 'show';
         this._slotId = slotId;
-        this.updateContent(textKey, iconIndex);
+        this.updateContent(text, iconIndex);
         this.startShow();
     }
     /**
@@ -171,18 +182,19 @@ class Sprite_Notification extends Sprite {
     }
     /**
      * Update Content
-     * @param {string} textKey 
+     * @param {string} text 
      * @param {number} iconIndex 
      * @param {number} slotId 
      */
-    updateContent(textKey, iconIndex = -1) {
+    updateContent(text, iconIndex = -1) {
         this._icon.setIcon(iconIndex);
-        this._content.text = LocalizeManager.t(textKey);
+        this._content.text = text;
         const padding = 0;
         const spacing = 4;
         const iconSize = iconIndex >= 0 ? 32 + spacing : 0;
         const totalWidth = iconSize + this._content.width + padding + 25;
         this._background.width = totalWidth;
+        this._background.height = 32;
         const yOffset = 2;
         this._icon.x = padding / 2;
         this._content.x = this._icon.x + iconSize;

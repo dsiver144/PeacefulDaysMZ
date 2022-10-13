@@ -1155,7 +1155,7 @@
 		}
 	},
 	{
-		"key": "CooperOre",
+		"key": "CopperOre",
 		"lang": {
 			"vn": "Quặng Đồng",
 			"en": "Cooper Ore"
@@ -1518,6 +1518,17 @@
 		}
 	},
 	{
+		"key": "ProteinBar",
+		"lang": {
+			"vn": "Thanh Protein",
+			"en": "Protein Bar"
+		},
+		"description": {
+			"vn": "Chứa nhiều chất dinh dưỡng. Ăn để hồi năng lượng.",
+			"en": ""
+		}
+	},
+	{
 		"key": "WoodenFence",
 		"lang": {
 			"vn": "Hàng Rào Gỗ",
@@ -1599,6 +1610,17 @@
 		"lang": {
 			"vn": "Dây Dẫn",
 			"en": "Wire"
+		},
+		"description": {
+			"vn": "Một bộ phận được dùng trong chế tạo máy móc.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Belt",
+		"lang": {
+			"vn": "Dây Đai",
+			"en": "Belt"
 		},
 		"description": {
 			"vn": "Một bộ phận được dùng trong chế tạo máy móc.",
@@ -1738,6 +1760,17 @@
 		}
 	},
 	{
+		"key": "Sand",
+		"lang": {
+			"vn": "Cát",
+			"en": "Sand"
+		},
+		"description": {
+			"vn": "Được tìm thấy ở các bãi biển. Dùng làm nguyên liệu để chế tạo.",
+			"en": ""
+		}
+	},
+	{
 		"key": "Clay",
 		"lang": {
 			"vn": "Đất Sét",
@@ -1863,6 +1896,17 @@
 		"lang": {
 			"vn": "Trứng Vịt",
 			"en": "Duck Egg"
+		},
+		"description": {
+			"vn": "Có thể dùng để chế biến thức ăn.",
+			"en": ""
+		}
+	},
+	{
+		"key": "StorkEgg",
+		"lang": {
+			"vn": "Trứng Cò",
+			"en": "Stork Egg"
 		},
 		"description": {
 			"vn": "Có thể dùng để chế biến thức ăn.",
@@ -2614,6 +2658,17 @@
 		},
 		"description": {
 			"vn": "Một loại nấm hiếm và đắc đỏ. Mọc ở những vùng núi cao và nhiều độ ẩm.",
+			"en": ""
+		}
+	},
+	{
+		"key": "Shimeji",
+		"lang": {
+			"vn": "Nấm Shimeji",
+			"en": "Shimeji"
+		},
+		"description": {
+			"vn": "Chứa nhiều dinh dưỡng. Chúng phải được nấu lên khi ăn không thì sẽ có vị chát.",
 			"en": ""
 		}
 	},

@@ -35,6 +35,7 @@ class Window_MyDebug extends Window_Command {
      */
     makeCommandList() {
         // if (!this._options) return;
+        this.addOption('Custom', 'custom', this.onCustomCommand.bind(this));
         this.addOption('Save', 'save', this.onSaveCommand.bind(this));
         this.addOption('Chest', 'chest', () => {
             window['chest'] ||= new ItemContainer(1);
@@ -43,7 +44,7 @@ class Window_MyDebug extends Window_Command {
         });
         this.addOption('Test Notify', 'notify', () => {
             const id = Object.keys(ItemDB.items()).randomizeItem();
-            Notify.inst.show(id, 2);
+            Notify.inst.showItem(id, Math.randomInt(100));
             this.activate();
         })
         this.addOption('Wallhack', 'wallHack', this.onWallHack.bind(this));
@@ -52,7 +53,6 @@ class Window_MyDebug extends Window_Command {
         this.addOption('Spawn Farm Objects', 'spawnFarmObject', this.onSpawnFarmObjects.bind(this));
         this.addOption('New Day', 'newDay', this.onNewDay.bind(this));
         this.addOption('Set Ambient', 'setAmbient', this.onSetAmbientLight.bind(this));
-        this.addOption('Custom', 'custom', this.onCustomCommand.bind(this));
         this.addOption('Exit', 'cancel', this.onCancelCommand.bind(this));
     }
     /**
