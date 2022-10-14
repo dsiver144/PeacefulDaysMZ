@@ -44,7 +44,6 @@ class DialogueManager {
 }
 
 DialogueManager.init();
-
 class Sprite_DialogueBox extends Sprite {
     /**
      * This class handle dialogue box display for Peaceful Days.
@@ -145,7 +144,6 @@ class Sprite_DialogueBox extends Sprite {
         const lastText = this._content.text;
         this._content.text += word;
         if (this._content.height > lastHeight) {
-            console.log("Overflow at " + word);
             this._content.text = lastText;
             this._content.text += "\n" + word;
             this._targetWord = "\n" + word + " ";
@@ -183,6 +181,6 @@ class Sprite_DialogueBox extends Sprite {
         super.update();
         this.updateDisplay();
         this.updateDisplayCharacter();
-        console.log(this.isBusy());
     }
 }
+
