@@ -44,7 +44,7 @@ class Window_MyDebug extends Window_Command {
         });
         this.addOption('Test Message', 'message', () => {
             const id = Object.keys(ItemDB.items()).randomizeItem();
-            const message = LocalizeManager.inst.getItemText(id).description;
+            const message = LocalizeManager.inst.getItemText('WoodenFence').description;
             DialogueManager.inst.display(message);
             this.onCancelCommand();
         })

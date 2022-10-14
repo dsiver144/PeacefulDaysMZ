@@ -1,53 +1,15 @@
-
 //=======================================================================
-// * Plugin Name  : DSI_Sys1_DialogueSystem.js
-// * Last Updated : 10/13/2022
+// * Plugin Name  : DSI_Sys2_Sprite_DialogueBox.js
+// * Last Updated : 10/14/2022
 //========================================================================
 /*:
  * @author dsiver144
- * @plugindesc (v1.0) Dialogue System For Peaceful Days
+ * @plugindesc (v1.0) Sprite Dialogue Box
  * @help 
  * Empty Help
  * 
  */
-const DialogConfig = {
-    defaultSize: [770, 145],
-    characterDelayDuration: 1,
-    defaultY: 350
-}
-
-class DialogueManager {
-    /** @type {DialogueManager} */
-    static inst = null;
-    static init() {
-        this.inst = new DialogueManager();
-    }
-    /**
-     * This class handle dialogue system for Peaceful Days.
-     */
-    constructor() {
-
-    }
-
-    get messageBox() {
-        if (!this._messageBox) {
-            this._messageBox = new Sprite_DialogueBox2();
-            ScreenOverlay.addChild(this._messageBox);
-        }
-        return this._messageBox;
-
-    }
-
-    display(content) {
-        this.messageBox.display(content);
-    }
-}
-
-DialogueManager.init();
-
-
-
-class Sprite_DialogueBox extends Sprite {
+class Sprite_DialogueBox2 extends Sprite {
     /**
      * This class handle dialogue box display for Peaceful Days.
      */
@@ -60,7 +22,8 @@ class Sprite_DialogueBox extends Sprite {
      */
     create() {
         this.#createBackground();
-        this.#createText();
+        this.#createContent();
+        this.reset();
     }
     /**
      * Create background
@@ -85,37 +48,12 @@ class Sprite_DialogueBox extends Sprite {
         this.height = this._background.height;
         this.x = (Graphics.width - this.width) / 2;
         this.y = DialogConfig.defaultY;
-    }
-    /**
-     * Create Content Text
-     */
-    #createText() {
-        const style = new PIXI.TextStyle({
-            fill: "#fed690",
-            fontFamily: "Verdana",
-            fontSize: 18,
-            fontWeight: "bold",
-            lineJoin: "round",
-            stroke: "#6f4949",
-            strokeThickness: 4,
-            wordWrap: true,
-            wordWrapWidth: this._background.width - 18 * 2
-        });
-        const text = new PIXI.Text("", style);
-        text.x = 18;
-        text.y = 18;
-        this._content = text;
-        this.addChild(text);
-    }
-    /**
-     * Display Message
-     * @param {string} content 
-     */
-    display(content) {
-        this.reset();
-        this._displayWords = content.split(' ');
-        this._content.text = '';
-        this._displayDelay = 0;
+
+        this._textOffsetX = 16;
+        this._textOffsetY = 16;
+        this._maxTextWidth = this.width - this._textOffsetX;
+        this._maxTextHeight = this.height - this._textOffsetY;
+        this._lineHeight = 48;
     }
     /**
      * Reset
@@ -125,6 +63,100 @@ class Sprite_DialogueBox extends Sprite {
         this._targetWord = null;
         this._displayCharacters = null;
         this._displayWords = null;
+        /** @type {PIXI.Text[]} */
+        this._texts = [];
+        this._currentDisplayX = this._textOffsetX;
+        this._currentDisplayY = this._textOffsetY;
+        /** @type {Map<number,MessageTextEffect>} */
+        this._specialEffects = new Map();
+    }
+    /**
+     * Create Content Text
+     */
+    #createText(wordWrap = false) {
+        const style = new PIXI.TextStyle({
+            fill: "#fed690",
+            fontFamily: "Verdana",
+            fontSize: 18,
+            fontWeight: "bold",
+            lineJoin: "round",
+            stroke: "#6f4949",
+            strokeThickness: 4,
+        });
+        if (wordWrap) {
+            style.wordWrap = true;
+            style.wordWrapWidth = this._maxTextWidth;
+        }
+        const text = new PIXI.Text("", style);
+        this.addChild(text);
+        return text;
+    }
+    /**
+     * Create Content
+     */
+    #createContent() {
+        this._content = this.#createText(true);
+        this._content.x = this._textOffsetX;
+        this._content.y = this._textOffsetY;
+    }
+    /**
+     * Display Message
+     * @param {string} content 
+     */
+    display(content) {
+        this.reset();
+        this.calculateSpecialEffect(content);
+        // this._content.text = '';
+        // this._displayDelay = 0;
+    }
+    /**
+     * Calculate Special Effect
+     * @param {string} content
+     */
+    calculateSpecialEffect(content) {
+        content = this.scanForSpecialCodes(content);
+        const spliter = ' ';
+        this._displayWords = content.split(spliter);
+        let newContent = '';
+        for (const word of this._displayWords) {
+            const lastHeight = this._content.height;
+            const lastText = this._content.text;
+            this._content.text += word;
+            if (this._content.height > lastHeight) {
+                this._content.text = lastText;
+                const newWord = "\n" + word + " ";
+                this._content.text += newWord;
+                newContent += newWord;
+                this._content.updateTransform();
+            } else {
+                const newWord = word + " ";
+                this._content.text += newWord;
+                newContent += newWord;
+                this._content.updateTransform();
+            }
+        }
+        this._content.text = '';
+        console.log(newContent);
+        // this._displayWords = null;
+    }
+    /**
+     * Scan For Sepcial Codes
+     * @param {string} content 
+     */
+    scanForSpecialCodes(content) {
+        let newContent = content;
+        console.log(content);
+        newContent = content.replace(/<(\w+):(\d+)>(.+?)<\/\1>/gi, (match, type, params, text) => {
+            const index = content.indexOf(match);
+            // let effect = new MessageTextEffect();
+            // switch (type) {
+            // case 'c':
+            //     break;
+            // }
+            console.log(index, match, type, params, text);
+            return text;
+        })
+        return newContent;
     }
     /**
      * Check if the message box is busy
@@ -186,3 +218,14 @@ class Sprite_DialogueBox extends Sprite {
     }
 }
 
+class MessageTextEffect {
+    /**
+     * Message Text Special Effect
+     * @param {string} name 
+     * @param {any[]} params 
+     */
+    constructor(name, params) {
+        this.name = name;
+        this.params = params;
+    }
+}

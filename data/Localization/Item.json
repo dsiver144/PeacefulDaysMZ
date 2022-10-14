@@ -1535,7 +1535,7 @@
 			"en": "Wooden Fence"
 		},
 		"description": {
-			"vn": "Có thể dùng để trang trí và giới hạn vật nuôi trong một khu vực để chúng không đi lung tung.",
+			"vn": "Có thể dùng để trang trí và <c:15>giới hạn</c> vật nuôi trong một <c:10>khu vực</c> để chúng không đi lung tung.",
 			"en": ""
 		}
 	},
