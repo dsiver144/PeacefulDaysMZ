@@ -59,6 +59,8 @@ class Sprite_DialogueBox2 extends Sprite {
      * Reset
      */
     reset() {
+        this._content.text = '';
+        this._displayCharacterIndex = 0;
         this._displayDelay = 0;
         this._targetWord = null;
         this._displayCharacters = null;
@@ -72,6 +74,8 @@ class Sprite_DialogueBox2 extends Sprite {
     }
     /**
      * Create Content Text
+     * @param {boolean} wordWrap
+     * @returns {PIXI.Text}
      */
     #createText(wordWrap = false) {
         const style = new PIXI.TextStyle({
@@ -98,6 +102,21 @@ class Sprite_DialogueBox2 extends Sprite {
         this._content = this.#createText(true);
         this._content.x = this._textOffsetX;
         this._content.y = this._textOffsetY;
+
+        this._fakeContent = this.#createText(true);
+        this._spaceWidth = this.calcTextWidth(" ");
+        
+    }
+    /**
+     * Calculate Text Width
+     * @param {string} str 
+     * @returns {number}
+     */
+    calcTextWidth(str) {
+        this._fakeContent.text = str;
+        const width = this._fakeContent.width;
+        this._fakeContent.text = "";
+        return width;
     }
     /**
      * Display Message
@@ -127,17 +146,17 @@ class Sprite_DialogueBox2 extends Sprite {
                 const newWord = "\n" + word + " ";
                 this._content.text += newWord;
                 newContent += newWord;
-                this._content.updateTransform();
             } else {
+                this._content.text = lastText;
                 const newWord = word + " ";
                 this._content.text += newWord;
                 newContent += newWord;
-                this._content.updateTransform();
             }
+            this._content.updateTransform();
         }
         this._content.text = '';
         console.log(newContent);
-        // this._displayWords = null;
+        this._displayCharacters = newContent.split("");
     }
     /**
      * Scan For Sepcial Codes
@@ -146,16 +165,33 @@ class Sprite_DialogueBox2 extends Sprite {
     scanForSpecialCodes(content) {
         let newContent = content;
         console.log(content);
+        let counter = -1;
+        const specialData = [];
         newContent = content.replace(/<(\w+):(\d+)>(.+?)<\/\1>/gi, (match, type, params, text) => {
             const index = content.indexOf(match);
-            // let effect = new MessageTextEffect();
-            // switch (type) {
-            // case 'c':
-            //     break;
-            // }
-            console.log(index, match, type, params, text);
-            return text;
-        })
+            const specialWidth = this.calcTextWidth(text);
+            const totalSpaces = Math.floor(specialWidth / this._spaceWidth);
+            const spaces = "".padEnd(totalSpaces, " ");
+            specialData.push({
+                spaces,
+                type,
+                text
+            })
+            return '\e';
+        });
+        counter = 0;
+        for (var i = 0; i < newContent.length; i++) {
+            if (newContent[i] == '\e') {
+                specialData[counter].index = i;
+                counter += 1;
+            }
+        }
+        counter = 0;
+        newContent = newContent.replace(/\e/gi, () => {
+            counter += 1;
+            return specialData[counter - 1].spaces;
+        });
+        console.log(specialData);
         return newContent;
     }
     /**
@@ -164,32 +200,6 @@ class Sprite_DialogueBox2 extends Sprite {
      */
     isBusy() {
         return !!this._displayCharacters && !!this._displayWords;
-    }
-    /**
-     * Update display
-     */
-    updateDisplay() {
-        if (this._targetWord) return;
-        if (!this._displayWords) return;
-        if (this._displayWords.length == 0) return;
-
-        const word = this._displayWords.shift();
-        const lastHeight = this._content.height;
-        const lastText = this._content.text;
-        this._content.text += word;
-        if (this._content.height > lastHeight) {
-            this._content.text = lastText;
-            this._content.text += "\n" + word;
-            this._targetWord = "\n" + word + " ";
-            this._displayCharacters = this._targetWord.split("");
-        } else {
-            this._targetWord = word + " ";
-            this._displayCharacters = this._targetWord.split("");
-        }
-        this._content.text = lastText;
-        if (this._displayWords.length == 0) {
-            this._displayWords = null;
-        }
     }
     /**
      * Update display character 
@@ -202,18 +212,20 @@ class Sprite_DialogueBox2 extends Sprite {
             return;
         }
         const word = this._displayCharacters.shift();
+        // console.log(word, this._displayCharacterIndex);
         this._content.text += word;
         if (this._displayCharacters.length == 0) {
             this._targetWord = null;
         }
         this._displayDelay = DialogConfig.characterDelayDuration;
+        this._displayCharacterIndex += 1;
     }
     /**
      * Update per frame
      */
     update() {
         super.update();
-        this.updateDisplay();
+        // this.updateDisplay();
         this.updateDisplayCharacter();
     }
 }
