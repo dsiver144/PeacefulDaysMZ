@@ -139,10 +139,7 @@ class Sprite_DialogueBox extends Sprite {
         if (this._targetWord) return;
         if (!this._displayWords) return;
         if (this._displayWords.length == 0) return;
-        if (this._displayDelay > 0) {
-            this._displayDelay -= 1;
-            return;
-        }
+
         const word = this._displayWords.shift();
         const lastHeight = this._content.height;
         const lastText = this._content.text;
@@ -168,6 +165,10 @@ class Sprite_DialogueBox extends Sprite {
     updateDisplayCharacter() {
         if (!this._displayCharacters) return;
         if (this._displayCharacters.length == 0) return;
+        if (this._displayDelay > 0) {
+            this._displayDelay -= 1;
+            return;
+        }
         const word = this._displayCharacters.shift();
         this._content.text += word;
         if (this._displayCharacters.length == 0) {

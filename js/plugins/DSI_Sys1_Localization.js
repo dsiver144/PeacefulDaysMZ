@@ -71,14 +71,18 @@ class LocalizeManager {
      */
     getItemText(key, language = null) {
         language = language || this._language;
+        /** @type {ItemLocalizeEntry} */
         const entry = this._texts.get(key);
-        return entry ? {
-            name: entry.lang[language],
-            description: entry.description[language] || `[${key}'s Description]`
-        } : {
-            name: `[${key}]`,
-            description: `[${key}'s Description]`
+        let name = key;
+        let description = `[${key}'s Description]`;
+        if (entry) {
+            name = entry.lang[language];
+            description = entry.description[language];
+            description = description.replace(/\@\[(\w+)\]/gi, (_, param) => {
+                return this.getItemText(param).name;
+            });
         }
+        return {name, description};
     }
     /**
      * Init variables

@@ -43,7 +43,8 @@ class Window_MyDebug extends Window_Command {
             SceneManager.prepareNextScene(window['chest'], MyBag.inst);
         });
         this.addOption('Test Message', 'message', () => {
-            const message = LocalizeManager.inst.getItemText('WoodenFence').description;
+            const id = Object.keys(ItemDB.items()).randomizeItem();
+            const message = LocalizeManager.inst.getItemText(id).description;
             DialogueManager.inst.display(message);
             this.onCancelCommand();
         })
