@@ -69,8 +69,8 @@ class Sprite_DialogueBox2 extends Sprite {
         this._texts = [];
         this._currentDisplayX = this._textOffsetX;
         this._currentDisplayY = this._textOffsetY;
-        /** @type {Map<number,MessageTextEffect>} */
-        this._specialEffects = new Map();
+        /** @type {MessageTextEffect[]} */
+        this._specialEffects = [];
     }
     /**
      * Create Content Text
@@ -86,6 +86,8 @@ class Sprite_DialogueBox2 extends Sprite {
             lineJoin: "round",
             stroke: "#6f4949",
             strokeThickness: 4,
+            trim: false,
+            align: "left",
         });
         if (wordWrap) {
             style.wordWrap = true;
@@ -103,9 +105,7 @@ class Sprite_DialogueBox2 extends Sprite {
         this._content.x = this._textOffsetX;
         this._content.y = this._textOffsetY;
 
-        this._fakeContent = this.#createText(true);
         this._spaceWidth = this.calcTextWidth(" ");
-        
     }
     /**
      * Calculate Text Width
@@ -113,9 +113,11 @@ class Sprite_DialogueBox2 extends Sprite {
      * @returns {number}
      */
     calcTextWidth(str) {
-        this._fakeContent.text = str;
-        const width = this._fakeContent.width;
-        this._fakeContent.text = "";
+        const lastText = this._content.text;
+        this._content.text = str;
+        this._content.calculateBounds();
+        const width = this._content.width;
+        this._content.text = lastText;
         return width;
     }
     /**
@@ -166,32 +168,31 @@ class Sprite_DialogueBox2 extends Sprite {
         let newContent = content;
         console.log(content);
         let counter = -1;
+        /** @type {MessageTextEffect[]} */
         const specialData = [];
         newContent = content.replace(/<(\w+):(\d+)>(.+?)<\/\1>/gi, (match, type, params, text) => {
             const index = content.indexOf(match);
             const specialWidth = this.calcTextWidth(text);
             const totalSpaces = Math.floor(specialWidth / this._spaceWidth);
-            const spaces = "".padEnd(totalSpaces, " ");
-            specialData.push({
-                spaces,
-                type,
-                text
-            })
+            specialData.push(new MessageTextEffect(type, params, text, totalSpaces));
             return '\e';
         });
         counter = 0;
         for (var i = 0; i < newContent.length; i++) {
             if (newContent[i] == '\e') {
-                specialData[counter].index = i;
+                const lastSpaces = specialData[counter - 1] ? specialData[counter - 1].spaces : 0;
+                specialData[counter].index = i + lastSpaces;
                 counter += 1;
             }
         }
         counter = 0;
         newContent = newContent.replace(/\e/gi, () => {
             counter += 1;
-            return specialData[counter - 1].spaces;
+            const spaces = "".padEnd(specialData[counter - 1].spaces, " ");
+            return spaces;
         });
         console.log(specialData);
+        this._specialEffects = specialData;
         return newContent;
     }
     /**
@@ -211,12 +212,26 @@ class Sprite_DialogueBox2 extends Sprite {
             this._displayDelay -= 1;
             return;
         }
-        const word = this._displayCharacters.shift();
-        // console.log(word, this._displayCharacterIndex);
-        this._content.text += word;
-        if (this._displayCharacters.length == 0) {
-            this._targetWord = null;
+        const character = this._displayCharacters.shift();
+        const effect = this._specialEffects.find(effect => effect.index == this._displayCharacterIndex);
+        if (effect) {
+            const specialText = this.#createText(false);
+            specialText.text = effect.text;
+            specialText.x = this._currentDisplayX;
+            specialText.y = this._currentDisplayY;
         }
+        // console.log(word, this._displayCharacterIndex);
+        const lastHeight = this._content.height;
+        this._content.text += character;
+        // if (this._content.height > lastHeight) {
+        //     this._currentDisplayX = this._textOffsetX;
+        //     this._currentDisplayY += this._lineHeight;
+        // }
+        // console.log(this._content.text);
+        console.log(this._content.text);
+        const width = this.calcTextWidth(character);
+        this._currentDisplayX += width;
+
         this._displayDelay = DialogConfig.characterDelayDuration;
         this._displayCharacterIndex += 1;
     }
@@ -236,8 +251,11 @@ class MessageTextEffect {
      * @param {string} name 
      * @param {any[]} params 
      */
-    constructor(name, params) {
+    constructor(name, params, text, spaces) {
         this.name = name;
         this.params = params;
+        this.text = text;
+        this.index = -1;
+        this.spaces = spaces;
     }
 }
