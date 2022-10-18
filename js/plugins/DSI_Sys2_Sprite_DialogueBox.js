@@ -77,35 +77,32 @@ class Sprite_DialogueBox2 extends Sprite {
      * @param {boolean} wordWrap
      * @returns {PIXI.Text}
      */
-    #createText(wordWrap = false) {
-        const style = new PIXI.TextStyle({
-            fill: "#fed690",
-            fontFamily: "Verdana",
-            fontSize: 18,
-            fontWeight: "bold",
-            lineJoin: "round",
-            stroke: "#6f4949",
-            strokeThickness: 4,
-            trim: false,
-            align: "left",
-        });
-        if (wordWrap) {
-            style.wordWrap = true;
-            style.wordWrapWidth = this._maxTextWidth;
-        }
-        const text = new PIXI.Text("", style);
-        this.addChild(text);
+    #createText() {
+        const contentSprite = new Sprite();
+        const bitmap = new Bitmap(this._maxTextWidth, this._maxTextHeight);
+        contentSprite.bitmap = bitmap;
+        this.addChild(contentSprite);
+        contentSprite.x = this._textOffsetX;
+        contentSprite.y = this._textOffsetY;
         return text;
     }
     /**
      * Create Content
      */
     #createContent() {
-        this._content = this.#createText(true);
-        this._content.x = this._textOffsetX;
-        this._content.y = this._textOffsetY;
-
-        this._spaceWidth = this.calcTextWidth(" ");
+        const contentSprite = new Sprite();
+        const bitmap = new Bitmap(this._maxTextWidth, this._maxTextHeight);
+        contentSprite.bitmap = bitmap;
+        this.addChild(contentSprite);
+        contentSprite.x = 0; //this._textOffsetX;
+        contentSprite.y = 0; //this._textOffsetY;
+        bitmap.fontSize = 20;
+        bitmap.textColor = "#fed690";
+        bitmap.fontFace = "Verdana";
+        bitmap.fontBold = true;
+        bitmap.outlineWidth = 5;
+        bitmap.outlineColor = "#6f4949";
+        this._content = bitmap;
     }
     /**
      * Calculate Text Width
@@ -113,12 +110,7 @@ class Sprite_DialogueBox2 extends Sprite {
      * @returns {number}
      */
     calcTextWidth(str) {
-        const lastText = this._content.text;
-        this._content.text = str;
-        this._content.calculateBounds();
-        const width = this._content.width;
-        this._content.text = lastText;
-        return width;
+        return this._content.measureTextWidth(str);
     }
     /**
      * Display Message
@@ -139,24 +131,16 @@ class Sprite_DialogueBox2 extends Sprite {
         const spliter = ' ';
         this._displayWords = content.split(spliter);
         let newContent = '';
+        let currentHeight = 20;
+        let currentWidth = 0;
         for (const word of this._displayWords) {
-            const lastHeight = this._content.height;
-            const lastText = this._content.text;
-            this._content.text += word;
-            if (this._content.height > lastHeight) {
-                this._content.text = lastText;
-                const newWord = "\n" + word + " ";
-                this._content.text += newWord;
-                newContent += newWord;
-            } else {
-                this._content.text = lastText;
-                const newWord = word + " ";
-                this._content.text += newWord;
-                newContent += newWord;
+            currentWidth += this.calcTextWidth(word + " ");
+            if (currentWidth >= this._maxTextWidth) {
+                console.log("BREAK AT ", word);
+                currentWidth = 0;
             }
-            this._content.updateTransform();
         }
-        this._content.text = '';
+        newContent = content;
         console.log(newContent);
         this._displayCharacters = newContent.split("");
     }
@@ -166,33 +150,33 @@ class Sprite_DialogueBox2 extends Sprite {
      */
     scanForSpecialCodes(content) {
         let newContent = content;
-        console.log(content);
-        let counter = -1;
-        /** @type {MessageTextEffect[]} */
-        const specialData = [];
-        newContent = content.replace(/<(\w+):(\d+)>(.+?)<\/\1>/gi, (match, type, params, text) => {
-            const index = content.indexOf(match);
-            const specialWidth = this.calcTextWidth(text);
-            const totalSpaces = Math.floor(specialWidth / this._spaceWidth);
-            specialData.push(new MessageTextEffect(type, params, text, totalSpaces));
-            return '\e';
-        });
-        counter = 0;
-        for (var i = 0; i < newContent.length; i++) {
-            if (newContent[i] == '\e') {
-                const lastSpaces = specialData[counter - 1] ? specialData[counter - 1].spaces : 0;
-                specialData[counter].index = i + lastSpaces;
-                counter += 1;
-            }
-        }
-        counter = 0;
-        newContent = newContent.replace(/\e/gi, () => {
-            counter += 1;
-            const spaces = "".padEnd(specialData[counter - 1].spaces, " ");
-            return spaces;
-        });
-        console.log(specialData);
-        this._specialEffects = specialData;
+        // console.log(content);
+        // let counter = -1;
+        // /** @type {MessageTextEffect[]} */
+        // const specialData = [];
+        // newContent = content.replace(/<(\w+):(\d+)>(.+?)<\/\1>/gi, (match, type, params, text) => {
+        //     const index = content.indexOf(match);
+        //     const specialWidth = this.calcTextWidth(text);
+        //     const totalSpaces = Math.floor(specialWidth / this._spaceWidth);
+        //     specialData.push(new MessageTextEffect(type, params, text, totalSpaces));
+        //     return '\e';
+        // });
+        // counter = 0;
+        // for (var i = 0; i < newContent.length; i++) {
+        //     if (newContent[i] == '\e') {
+        //         const lastSpaces = specialData[counter - 1] ? specialData[counter - 1].spaces : 0;
+        //         specialData[counter].index = i + lastSpaces;
+        //         counter += 1;
+        //     }
+        // }
+        // counter = 0;
+        // newContent = newContent.replace(/\e/gi, () => {
+        //     counter += 1;
+        //     const spaces = "".padEnd(specialData[counter - 1].spaces, " ");
+        //     return spaces;
+        // });
+        // console.log(specialData);
+        // this._specialEffects = specialData;
         return newContent;
     }
     /**
@@ -213,22 +197,25 @@ class Sprite_DialogueBox2 extends Sprite {
             return;
         }
         const character = this._displayCharacters.shift();
-        const effect = this._specialEffects.find(effect => effect.index == this._displayCharacterIndex);
-        if (effect) {
-            const specialText = this.#createText(false);
-            specialText.text = effect.text;
-            specialText.x = this._currentDisplayX;
-            specialText.y = this._currentDisplayY;
-        }
-        // console.log(word, this._displayCharacterIndex);
-        const lastHeight = this._content.height;
-        this._content.text += character;
-        // if (this._content.height > lastHeight) {
-        //     this._currentDisplayX = this._textOffsetX;
-        //     this._currentDisplayY += this._lineHeight;
+        // const effect = this._specialEffects.find(effect => effect.index == this._displayCharacterIndex);
+        // if (effect) {
+        //     const specialText = this.#createText(false);
+        //     specialText.text = effect.text;
+        //     specialText.x = this._currentDisplayX;
+        //     specialText.y = this._currentDisplayY;
         // }
+        // // console.log(word, this._displayCharacterIndex);
+        // const lastHeight = this._content.height;
+        // this._content.text += character;
+        // // if (this._content.height > lastHeight) {
+        // //     this._currentDisplayX = this._textOffsetX;
+        // //     this._currentDisplayY += this._lineHeight;
+        // // }
+        // // console.log(this._content.text);
         // console.log(this._content.text);
-        console.log(this._content.text);
+        const dx = this._currentDisplayX;
+        const dy = this._currentDisplayY;
+        this._content.drawText(character, dx, dy, 20, 20);
         const width = this.calcTextWidth(character);
         this._currentDisplayX += width;
 
