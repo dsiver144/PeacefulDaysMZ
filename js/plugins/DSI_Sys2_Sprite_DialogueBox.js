@@ -53,7 +53,7 @@ class Sprite_DialogueBox2 extends Sprite {
         this._textOffsetY = 16;
         this._maxTextWidth = this.width - this._textOffsetX;
         this._maxTextHeight = this.height - this._textOffsetY;
-        this._lineHeight = 48;
+        this._lineHeight = 30;
     }
     /**
      * Reset
@@ -130,17 +130,21 @@ class Sprite_DialogueBox2 extends Sprite {
         content = this.scanForSpecialCodes(content);
         const spliter = ' ';
         this._displayWords = content.split(spliter);
+
         let newContent = '';
         let currentHeight = 20;
         let currentWidth = 0;
         for (const word of this._displayWords) {
-            currentWidth += this.calcTextWidth(word + " ");
+            const part = word + spliter;
+            currentWidth += this.calcTextWidth(part);
             if (currentWidth >= this._maxTextWidth) {
                 console.log("BREAK AT ", word);
                 currentWidth = 0;
+                newContent += "\n" + part;
+            } else {
+                newContent += part;
             }
         }
-        newContent = content;
         console.log(newContent);
         this._displayCharacters = newContent.split("");
     }
@@ -152,14 +156,14 @@ class Sprite_DialogueBox2 extends Sprite {
         let newContent = content;
         // console.log(content);
         // let counter = -1;
-        // /** @type {MessageTextEffect[]} */
+        /** @type {MessageTextEffect[]} */
         // const specialData = [];
         // newContent = content.replace(/<(\w+):(\d+)>(.+?)<\/\1>/gi, (match, type, params, text) => {
         //     const index = content.indexOf(match);
         //     const specialWidth = this.calcTextWidth(text);
         //     const totalSpaces = Math.floor(specialWidth / this._spaceWidth);
         //     specialData.push(new MessageTextEffect(type, params, text, totalSpaces));
-        //     return '\e';
+        //     return '';
         // });
         // counter = 0;
         // for (var i = 0; i < newContent.length; i++) {
@@ -213,6 +217,10 @@ class Sprite_DialogueBox2 extends Sprite {
         // // }
         // // console.log(this._content.text);
         // console.log(this._content.text);
+        if (character == '\n') {
+            this._currentDisplayX = this._textOffsetX;  
+            this._currentDisplayY += this._lineHeight; 
+        }
         const dx = this._currentDisplayX;
         const dy = this._currentDisplayY;
         this._content.drawText(character, dx, dy, 20, 20);
