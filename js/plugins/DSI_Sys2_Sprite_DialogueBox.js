@@ -51,7 +51,7 @@ class Sprite_DialogueBox extends Sprite {
 
         this._textOffsetX = 16;
         this._textOffsetY = 16;
-        this._maxTextWidth = this.width - this._textOffsetX - 15;
+        this._maxTextWidth = this.width - this._textOffsetX;
         this._maxTextHeight = this.height - this._textOffsetY;
         this._lineHeight = 30;
     }
@@ -61,26 +61,12 @@ class Sprite_DialogueBox extends Sprite {
     reset() {
         this._displayCharacterIndex = 0;
         this._displayDelay = 0;
-        this._currentDisplayX = this._textOffsetX;
-        this._currentDisplayY = this._textOffsetY;
+        this._currentDisplayX = this._content.offsetX;
+        this._currentDisplayY = this._content.offsetY;
         /** @type {MessageDisplayEntry[]} */
         this._displayEntries = null;
         this._content.clear();
         this._pause = false;
-    }
-    /**
-     * Create Content Text
-     * @param {boolean} wordWrap
-     * @returns {PIXI.Text}
-     */
-    #createText() {
-        const contentSprite = new Sprite();
-        const bitmap = new Bitmap(this._maxTextWidth, this._maxTextHeight);
-        contentSprite.bitmap = bitmap;
-        this.addChild(contentSprite);
-        contentSprite.x = this._textOffsetX;
-        contentSprite.y = this._textOffsetY;
-        return text;
     }
     /**
      * Create Content
@@ -90,8 +76,8 @@ class Sprite_DialogueBox extends Sprite {
         const bitmap = new Bitmap(this._maxTextWidth, this._maxTextHeight);
         contentSprite.bitmap = bitmap;
         this.addChild(contentSprite);
-        contentSprite.x = 0; //this._textOffsetX;
-        contentSprite.y = 0; //this._textOffsetY;
+        contentSprite.x = this._textOffsetX; 
+        contentSprite.y = this._textOffsetY; 
         bitmap.fontSize = 19;
         bitmap.textColor = "#fed690";
         bitmap.defaultTextColor = bitmap.textColor;
@@ -99,6 +85,8 @@ class Sprite_DialogueBox extends Sprite {
         bitmap.fontBold = true;
         bitmap.outlineWidth = 5;
         bitmap.outlineColor = "#6f4949";
+        bitmap.offsetX = 4;
+        bitmap.offsetY = 4;
         this._content = bitmap;
     }
     /**
@@ -138,7 +126,7 @@ class Sprite_DialogueBox extends Sprite {
             const word = params[0];
             const part = word;
             currentWidth += this.calcTextWidth(part);
-            if (currentWidth >= this._maxTextWidth) {
+            if (currentWidth >= this._maxTextWidth - this._content.offsetX) {
                 for (var j = i; j >= 0; j--) {
                     const entry2 = displayEntries[j];
                     const {type, params} = entry2;
@@ -210,7 +198,7 @@ class Sprite_DialogueBox extends Sprite {
             case 'character':
                 const character = entry.params[0];
                 if (character == '\n') {
-                    this._currentDisplayX = this._textOffsetX;  
+                    this._currentDisplayX = this._content.offsetX;  
                     this._currentDisplayY += this._lineHeight; 
                 }
                 const dx = this._currentDisplayX;
@@ -231,8 +219,8 @@ class Sprite_DialogueBox extends Sprite {
                 this._content.textColor = color;
                 break;
             case 'page':
-                this._currentDisplayX = this._textOffsetX;
-                this._currentDisplayY = this._textOffsetY;
+                this._currentDisplayX = this._content.offsetX;
+                this._currentDisplayY = this._content.offsetY;
                 this.pause();
                 break;
             default:
