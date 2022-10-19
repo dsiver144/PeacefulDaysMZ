@@ -31,7 +31,7 @@ class DialogueManager {
 
     get messageBox() {
         if (!this._messageBox) {
-            this._messageBox = new Sprite_DialogueBox2();
+            this._messageBox = new Sprite_DialogueBox();
             ScreenOverlay.addChild(this._messageBox);
         }
         return this._messageBox;

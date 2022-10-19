@@ -9,7 +9,7 @@
  * Empty Help
  * 
  */
-class Sprite_DialogueBox2 extends Sprite {
+class Sprite_DialogueBox extends Sprite {
     /**
      * This class handle dialogue box display for Peaceful Days.
      */
@@ -51,7 +51,7 @@ class Sprite_DialogueBox2 extends Sprite {
 
         this._textOffsetX = 16;
         this._textOffsetY = 16;
-        this._maxTextWidth = this.width - this._textOffsetX;
+        this._maxTextWidth = this.width - this._textOffsetX - 15;
         this._maxTextHeight = this.height - this._textOffsetY;
         this._lineHeight = 30;
     }
@@ -59,18 +59,14 @@ class Sprite_DialogueBox2 extends Sprite {
      * Reset
      */
     reset() {
-        this._content.text = '';
         this._displayCharacterIndex = 0;
         this._displayDelay = 0;
-        this._targetWord = null;
-        this._displayCharacters = null;
-        this._displayWords = null;
-        /** @type {PIXI.Text[]} */
-        this._texts = [];
         this._currentDisplayX = this._textOffsetX;
         this._currentDisplayY = this._textOffsetY;
-        /** @type {MessageTextEffect[]} */
-        this._specialEffects = [];
+        /** @type {MessageDisplayEntry[]} */
+        this._displayEntries = null;
+        this._content.clear();
+        this._pause = false;
     }
     /**
      * Create Content Text
@@ -96,8 +92,9 @@ class Sprite_DialogueBox2 extends Sprite {
         this.addChild(contentSprite);
         contentSprite.x = 0; //this._textOffsetX;
         contentSprite.y = 0; //this._textOffsetY;
-        bitmap.fontSize = 20;
+        bitmap.fontSize = 19;
         bitmap.textColor = "#fed690";
+        bitmap.defaultTextColor = bitmap.textColor;
         bitmap.fontFace = "Verdana";
         bitmap.fontBold = true;
         bitmap.outlineWidth = 5;
@@ -119,69 +116,76 @@ class Sprite_DialogueBox2 extends Sprite {
     display(content) {
         this.reset();
         this.calculateSpecialEffect(content);
-        // this._content.text = '';
-        // this._displayDelay = 0;
+        this.visible = true;
     }
     /**
      * Calculate Special Effect
      * @param {string} content
      */
     calculateSpecialEffect(content) {
-        content = this.scanForSpecialCodes(content);
+        const displayEntries = this.convertToDisplayEntries(content);
         const spliter = ' ';
-        this._displayWords = content.split(spliter);
 
-        let newContent = '';
-        let currentHeight = 20;
         let currentWidth = 0;
-        for (const word of this._displayWords) {
-            const part = word + spliter;
+        for (let i = 0; i < displayEntries.length; i++) {
+            const entry = displayEntries[i];
+            const {type, params} = entry;
+            if (type === 'page') {
+                currentWidth = 0;
+                continue;
+            }
+            if (type !== 'character') continue;
+            const word = params[0];
+            const part = word;
             currentWidth += this.calcTextWidth(part);
             if (currentWidth >= this._maxTextWidth) {
-                console.log("BREAK AT ", word);
+                for (var j = i; j >= 0; j--) {
+                    const entry2 = displayEntries[j];
+                    const {type, params} = entry2;
+                    if (type === 'character' && params[0] == ' ') {
+                        entry2.params[0] = '\n'
+                        break;
+                    }
+                }
                 currentWidth = 0;
-                newContent += "\n" + part;
-            } else {
-                newContent += part;
             }
         }
-        console.log(newContent);
-        this._displayCharacters = newContent.split("");
+        this._displayEntries = displayEntries;
     }
     /**
-     * Scan For Sepcial Codes
+     * Convert text to display entries
      * @param {string} content 
+     * @returns {MessageDisplayEntry[]}
      */
-    scanForSpecialCodes(content) {
-        let newContent = content;
-        // console.log(content);
-        // let counter = -1;
-        /** @type {MessageTextEffect[]} */
-        // const specialData = [];
-        // newContent = content.replace(/<(\w+):(\d+)>(.+?)<\/\1>/gi, (match, type, params, text) => {
-        //     const index = content.indexOf(match);
-        //     const specialWidth = this.calcTextWidth(text);
-        //     const totalSpaces = Math.floor(specialWidth / this._spaceWidth);
-        //     specialData.push(new MessageTextEffect(type, params, text, totalSpaces));
-        //     return '';
-        // });
-        // counter = 0;
-        // for (var i = 0; i < newContent.length; i++) {
-        //     if (newContent[i] == '\e') {
-        //         const lastSpaces = specialData[counter - 1] ? specialData[counter - 1].spaces : 0;
-        //         specialData[counter].index = i + lastSpaces;
-        //         counter += 1;
-        //     }
-        // }
-        // counter = 0;
-        // newContent = newContent.replace(/\e/gi, () => {
-        //     counter += 1;
-        //     const spaces = "".padEnd(specialData[counter - 1].spaces, " ");
-        //     return spaces;
-        // });
-        // console.log(specialData);
-        // this._specialEffects = specialData;
-        return newContent;
+    convertToDisplayEntries(content) {
+        let result = [];
+        for (var i = 0; i < content.length; i++) {
+            if (content[i] === '<') {
+                let specialCode = content[i];
+                for (var j = i + 1; j < content.length; j++) {
+                    specialCode += content[j];
+                    if (content[j] === '>') {
+                        break;
+                    }
+                }
+                if (specialCode.match(/<(.+?)>/i)) {
+                    const [type, params] = RegExp.$1.split(':');
+                    switch(type) {
+                    case 'c':
+                        let newParams = params.split(",");
+                        result.push({type: 'color', params: newParams});
+                        break;
+                    case 'page':
+                        result.push({type: 'page', params: []});
+                        break;
+                    }
+                    i = j;
+                }
+            } else {
+                result.push({type: 'character', params: [content[i]]});
+            }
+        }
+        return result;
     }
     /**
      * Check if the message box is busy
@@ -194,41 +198,76 @@ class Sprite_DialogueBox2 extends Sprite {
      * Update display character 
      */
     updateDisplayCharacter() {
-        if (!this._displayCharacters) return;
-        if (this._displayCharacters.length == 0) return;
+        if (this._pause) return;
+        if (!this._displayEntries) return;
+        if (this._displayEntries.length == 0) return;
         if (this._displayDelay > 0) {
             this._displayDelay -= 1;
             return;
         }
-        const character = this._displayCharacters.shift();
-        // const effect = this._specialEffects.find(effect => effect.index == this._displayCharacterIndex);
-        // if (effect) {
-        //     const specialText = this.#createText(false);
-        //     specialText.text = effect.text;
-        //     specialText.x = this._currentDisplayX;
-        //     specialText.y = this._currentDisplayY;
-        // }
-        // // console.log(word, this._displayCharacterIndex);
-        // const lastHeight = this._content.height;
-        // this._content.text += character;
-        // // if (this._content.height > lastHeight) {
-        // //     this._currentDisplayX = this._textOffsetX;
-        // //     this._currentDisplayY += this._lineHeight;
-        // // }
-        // // console.log(this._content.text);
-        // console.log(this._content.text);
-        if (character == '\n') {
-            this._currentDisplayX = this._textOffsetX;  
-            this._currentDisplayY += this._lineHeight; 
+        const entry = this._displayEntries.shift();
+        switch (entry.type) {
+            case 'character':
+                const character = entry.params[0];
+                if (character == '\n') {
+                    this._currentDisplayX = this._textOffsetX;  
+                    this._currentDisplayY += this._lineHeight; 
+                }
+                const dx = this._currentDisplayX;
+                const dy = this._currentDisplayY;
+                this._content.drawText(character, dx, dy, 20, 20);
+                const width = this.calcTextWidth(character);
+                this._currentDisplayX += width;
+                this._displayDelay = DialogConfig.characterDelayDuration;
+                break;
+            case 'color':
+                const number = +entry.params[0];
+                let color = null;
+                if (number == 0) {
+                    color = this._content.defaultTextColor;
+                } else {
+                    color = ColorManager.textColor(number);
+                }
+                this._content.textColor = color;
+                break;
+            case 'page':
+                this._currentDisplayX = this._textOffsetX;
+                this._currentDisplayY = this._textOffsetY;
+                this.pause();
+                break;
+            default:
+                console.log("===");
+                break;
         }
-        const dx = this._currentDisplayX;
-        const dy = this._currentDisplayY;
-        this._content.drawText(character, dx, dy, 20, 20);
-        const width = this.calcTextWidth(character);
-        this._currentDisplayX += width;
-
-        this._displayDelay = DialogConfig.characterDelayDuration;
         this._displayCharacterIndex += 1;
+    }
+    /**
+     * Update control
+     */
+    updateControl() {
+        if (Input.isTriggeredCheck()) {
+            if (this._pause) {
+                this.resume();
+                AudioController.playPage();
+            } else {
+                if (this._displayEntries.length == 0) {
+                    this.visible = false;
+                }
+            }
+        }
+    }
+    /**
+     * Pause
+     */
+    pause() {
+        this._pause = true;
+    }
+    /**
+     * Resume
+     */
+    resume() {
+        this._pause = false;
+        this._content.clear();
     }
     /**
      * Update per frame
@@ -237,20 +276,20 @@ class Sprite_DialogueBox2 extends Sprite {
         super.update();
         // this.updateDisplay();
         this.updateDisplayCharacter();
+        this.updateControl();
     }
 }
 
-class MessageTextEffect {
+class MessageDisplayEntry {
     /**
-     * Message Text Special Effect
-     * @param {string} name 
+     * Message Display Entry
+     * @param {string} type 
      * @param {any[]} params 
      */
-    constructor(name, params, text, spaces) {
-        this.name = name;
+    constructor(type, params) {
+        /** @type {string} */
+        this.type = type;
+        /** @type {any[]} */
         this.params = params;
-        this.text = text;
-        this.index = -1;
-        this.spaces = spaces;
     }
 }
