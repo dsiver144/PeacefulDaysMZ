@@ -104,7 +104,7 @@ class Sprite_DialogueBox extends Sprite {
     display(content) {
         this.reset();
         this.calculateSpecialEffect(content);
-        this.visible = true;
+        this.showDialogue();
     }
     /**
      * Calculate Special Effect
@@ -180,7 +180,7 @@ class Sprite_DialogueBox extends Sprite {
      * @returns {boolean}
      */
     isBusy() {
-        return !!this._displayCharacters && !!this._displayWords;
+        return !!this._displayEntries && this._displayEntries.length > 0;
     }
     /**
      * Update display character 
@@ -236,10 +236,9 @@ class Sprite_DialogueBox extends Sprite {
         if (Input.isTriggeredCheck()) {
             if (this._pause) {
                 this.resume();
-                AudioController.playPage();
             } else {
-                if (this._displayEntries.length == 0) {
-                    this.visible = false;
+                if (!this.isBusy()) {
+                    this.hideDialogue();
                 }
             }
         }
@@ -256,6 +255,24 @@ class Sprite_DialogueBox extends Sprite {
     resume() {
         this._pause = false;
         this._content.clear();
+        AudioController.playPage();
+    }
+    /**
+     * Show Dialogue
+     */
+    showDialogue() {
+        this.alpha = 0;
+        const targetY = DialogConfig.defaultY;
+        this.y = Graphics.height;
+        this.startTween({alpha: 1.0, y: targetY}, 10).ease(Easing.easeInOutCubic);
+    }
+    /**
+     * Hide Dialogue
+     */
+    hideDialogue() {
+        AudioController.playPage();
+        const targetY = Graphics.height;
+        this.startTween({alpha: 0.0, y: targetY}, 10).ease(Easing.easeInOutCubic);
     }
     /**
      * Update per frame
