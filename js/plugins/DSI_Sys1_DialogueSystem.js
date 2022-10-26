@@ -47,6 +47,15 @@ class DialogueManager {
         this.messageBox.display(content);
     }
     /**
+     * Show Choices
+     * @param {string[]} choices 
+     * @param {(n: number) => void} choiceCallback 
+     */
+    showChoices(choices, choiceCallback) {
+        this._choices = choices;
+        this._choiceCallback = choiceCallback;
+    }
+    /**
      * Check if dialogue system is busy
      * @returns {boolean}
      */
@@ -67,16 +76,19 @@ Game_Interpreter.prototype.command102 = function(params) {
 
 Game_Interpreter.prototype.setupChoices = function(params) {
     const choices = params[0].clone();
-    const cancelType = params[1] < choices.length ? params[1] : -2;
-    const defaultType = params.length > 2 ? params[2] : 0;
-    const positionType = params.length > 3 ? params[3] : 2;
-    const background = params.length > 4 ? params[4] : 0;
-    $gameMessage.setChoices(choices, defaultType, cancelType);
-    $gameMessage.setChoiceBackground(background);
-    $gameMessage.setChoicePositionType(positionType);
-    $gameMessage.setChoiceCallback(n => {
+    DialogueManager.inst.showChoices(choices, (n) => {
         this._branch[this._indent] = n;
-    });
+    })
+    // const cancelType = params[1] < choices.length ? params[1] : -2;
+    // const defaultType = params.length > 2 ? params[2] : 0;
+    // const positionType = params.length > 3 ? params[3] : 2;
+    // const background = params.length > 4 ? params[4] : 0;
+    // $gameMessage.setChoices(choices, defaultType, cancelType);
+    // $gameMessage.setChoiceBackground(background);
+    // $gameMessage.setChoicePositionType(positionType);
+    // $gameMessage.setChoiceCallback(n => {
+    //     this._branch[this._indent] = n;
+    // });
 }
 
 Game_Message.prototype.isBusy = function() {
