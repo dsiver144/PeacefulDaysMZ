@@ -56,11 +56,33 @@ class DialogueManager {
         this._choiceCallback = choiceCallback;
     }
     /**
+     * Select choice
+     * @param {number} index 
+     */
+    selectChoice(index) {
+        if (!this.hasChoice()) return;
+        this._choiceCallback(index);
+    }
+    /**
+     * Clear Choices
+     */
+    clearChoice() {
+        this._choices = null;
+        this._choiceCallback = null;
+    }
+    /**
+     * Has Choice?
+     * @returns {boolean}
+     */
+    hasChoice() {
+        return !!this._choices;
+    }
+    /**
      * Check if dialogue system is busy
      * @returns {boolean}
      */
     isBusy() {
-        return this.messageBox.isBusy();
+        return this.messageBox.isBusy() || this.hasChoice();
     }
 }
 
