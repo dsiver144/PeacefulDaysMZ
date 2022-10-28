@@ -64,6 +64,8 @@ class Sprite_ChoiceBox extends Sprite {
     initMembers() {
         this._cursorIndex = 0;
     }
+
+    get cursorIndex() { return this._cursorIndex }
     /**
      * Create display components
      */
@@ -99,13 +101,16 @@ class Sprite_ChoiceBox extends Sprite {
         if (Input.isTriggered(MenuKeyAction.MoveUp)) {
             this.moveCursor(-1); 
         }
+        if (Input.isTriggered(MenuKeyAction.Confirm)) {
+            this.confirm();
+        }
     }
     /**
      * Move cursor
      * @param {number} direction 
      */
     moveCursor(direction) {
-        const index = this._cursorIndex + direction;
+        const index = this.cursorIndex + direction;
         const maxIndex = this._choices.length - 1;
         if (index > maxIndex) {
             index = 0;
@@ -122,6 +127,13 @@ class Sprite_ChoiceBox extends Sprite {
     select(index) {
         this._cursorIndex = index;
         AudioController.playCursor();
+    }
+    /**
+     * Confirm
+     */
+    confirm() {
+        DialogueManager.inst.selectChoice(this.cursorIndex);
+        AudioController.playOk();
     }
     /**
      * Update
