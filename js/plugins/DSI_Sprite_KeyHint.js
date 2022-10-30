@@ -93,7 +93,7 @@ class Sprite_KeyHint extends Sprite {
         let buttonName = data;
         if (isGamepad) {
             const button = currentMappedKey;
-            this._keySprite.bitmap = ImageManager.loadMenu('Gamepad_' + button, 'keys');
+            this._keySprite.bitmap = button != undefined ? ImageManager.loadMenu('Gamepad_' + button, 'keys') : null;
             buttonName = "";
             this._keySprite.visible = true;
         } else {
@@ -101,6 +101,7 @@ class Sprite_KeyHint extends Sprite {
                 buttonName = '';
                 this._keySprite.visible = true;
                 this._keySprite.bitmap = ImageManager.loadMenu(RegExp.$1, 'keys');
+                this._keySprite.bitmap.smooth = false;
             } else {
                 this._keySprite.visible = false;
             }
@@ -116,7 +117,7 @@ class Sprite_KeyHint extends Sprite {
         const keyWidth = buttonName ? this._keyText.width : 20; 
         const actionWidth = actionName ? this._actionText.width : 0;
 
-        this._background.width = keyWidth + actionWidth + 8;
+        this._background.width = keyWidth + actionWidth + 10;
         this._background.height = 27;
 
         this._keyText.x = 4;

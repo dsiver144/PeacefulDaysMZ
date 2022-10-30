@@ -234,6 +234,16 @@ class Sprite_InteractionHint extends Sprite_KeyHint {
      */
     setTarget(textKey, keyAction = FieldKeyAction.Check) {
         this._hasTarget = true;
+        if (Input.useMouse) {
+            switch (keyAction) {
+                case FieldKeyAction.Check:
+                    keyAction = FieldKeyAction.CheckEx;
+                    break;
+                case FieldKeyAction.UseTool:
+                    keyAction = FieldKeyAction.UseToolEx;
+                    break;
+            }
+        }
         this._keyAction = keyAction;
         this._textKey = textKey;
         this.refresh();

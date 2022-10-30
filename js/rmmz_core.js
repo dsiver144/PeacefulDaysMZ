@@ -5967,6 +5967,13 @@ Input._updateGamepadState = function(gamepad) {
  * @param {Gamepad} gamepad 
  */
 Input.setInputMode = function(mode, gamepad) {
+    if (mode == 'mouse') {
+        mode = 'keyboard';
+        this.useMouse = true;
+    }
+    if (gamepad) {
+        this.useMouse = false;
+    }
     if (this.inputMode == mode) return;
     this.inputMode = mode;
     this.activeGamepad = gamepad;
