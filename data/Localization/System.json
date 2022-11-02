@@ -261,7 +261,7 @@
     {
         "key": "Lbl_EmptySlotDesc",
         "lang": {
-            "vn": "Không có vật phẩm nào ở đây. <v:10>",
+            "vn": "Không có vật phẩm nào ở đây.",
             "en": "There is nothing here."
         }
     },
