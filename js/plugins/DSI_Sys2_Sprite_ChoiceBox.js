@@ -64,7 +64,9 @@ class Sprite_ChoiceBox extends Sprite {
     initMembers() {
         this._cursorIndex = 0;
     }
-
+    /**
+     * Get cursor index
+     */
     get cursorIndex() { return this._cursorIndex }
     /**
      * Create display components
@@ -79,17 +81,18 @@ class Sprite_ChoiceBox extends Sprite {
 
     }
     /**
-     * Set Choices
+     * Show Choices
      * @param {string[]} choices 
      */
-    setChoices(choices) {
+    showChoices(choices) {
         this._choices = choices;
+        this.displayChoices();
     }
     /**
      * Display Choices
      */
     displayChoices() {
-
+        
     }
     /**
      * Update control
@@ -127,6 +130,7 @@ class Sprite_ChoiceBox extends Sprite {
     select(index) {
         this._cursorIndex = index;
         AudioController.playCursor();
+        console.log("Select choice: " + index);
     }
     /**
      * Confirm
@@ -134,6 +138,7 @@ class Sprite_ChoiceBox extends Sprite {
     confirm() {
         DialogueManager.inst.selectChoice(this.cursorIndex);
         AudioController.playOk();
+        console.log("Confirm :" + this.cursorIndex);
     }
     /**
      * Update

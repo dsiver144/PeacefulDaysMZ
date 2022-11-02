@@ -40,6 +40,16 @@ class DialogueManager {
         return this._messageBox;
     }
     /**
+     * Get Choice Box Sprite
+     */
+    get choiceBox() {
+        if (!this._choiceBox) {
+            this._choiceBox = new Sprite_ChoiceBox();
+            ScreenOverlay.addChild(this._choiceBox);
+        }
+        return this._choiceBox;
+    }
+    /**
      * Display Content
      * @param {string} content 
      */
@@ -54,6 +64,7 @@ class DialogueManager {
     showChoices(choices, choiceCallback) {
         this._choices = choices;
         this._choiceCallback = choiceCallback;
+        this.choiceBox.showChoices(choices);
     }
     /**
      * Select choice
@@ -62,11 +73,12 @@ class DialogueManager {
     selectChoice(index) {
         if (!this.hasChoice()) return;
         this._choiceCallback(index);
+        this.clearChoices();
     }
     /**
      * Clear Choices
      */
-    clearChoice() {
+    clearChoices() {
         this._choices = null;
         this._choiceCallback = null;
     }
@@ -100,17 +112,7 @@ Game_Interpreter.prototype.setupChoices = function(params) {
     const choices = params[0].clone();
     DialogueManager.inst.showChoices(choices, (n) => {
         this._branch[this._indent] = n;
-    })
-    // const cancelType = params[1] < choices.length ? params[1] : -2;
-    // const defaultType = params.length > 2 ? params[2] : 0;
-    // const positionType = params.length > 3 ? params[3] : 2;
-    // const background = params.length > 4 ? params[4] : 0;
-    // $gameMessage.setChoices(choices, defaultType, cancelType);
-    // $gameMessage.setChoiceBackground(background);
-    // $gameMessage.setChoicePositionType(positionType);
-    // $gameMessage.setChoiceCallback(n => {
-    //     this._branch[this._indent] = n;
-    // });
+    });
 }
 
 Game_Message.prototype.isBusy = function() {
