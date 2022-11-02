@@ -26,7 +26,7 @@ var DSI = DSI || {};
     Bitmap = class Bitmap_Pixelated extends Bitmap {
         initialize(width, height) {
             super.initialize(width, height);
-            this.smooth = Utils.isNwjs();
+            this.smooth = false; //Utils.isNwjs();
             this.fontFace = 'Verdana';
         }
     }

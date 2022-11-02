@@ -122,9 +122,9 @@ const KeyCodeToNameConverter = {
     191: '/',
     220: '\\',
     222: '\'',
-    256: 'M0',
-    257: 'M1',
-    258: 'M2',
+    256: '@M0',
+    257: '@M1',
+    258: '@M2',
 }
 
 const ButtonConverter = {
