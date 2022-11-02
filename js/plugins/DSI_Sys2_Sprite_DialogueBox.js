@@ -168,7 +168,10 @@ class Sprite_DialogueBox extends Sprite {
                         break;
                     case 'v':
                         const varId = Number(params);
-                        result.push({type: 'character', params: [$gameVariables.value(varId).toString()]});
+                        const characters = $gameVariables.value(varId).toString();
+                        characters.split('').forEach((c) => {
+                            result.push({type: 'character', params: [c]});
+                        });
                         break;
                     }
                     i = j;
