@@ -35,6 +35,7 @@ class DialogueManager {
     get messageBox() {
         if (!this._messageBox) {
             this._messageBox = new Sprite_DialogueBox();
+            this._messageBox.hideDialogue(true);
             ScreenOverlay.addChild(this._messageBox);
         }
         return this._messageBox;
@@ -62,6 +63,7 @@ class DialogueManager {
      * @param {(n: number) => void} choiceCallback 
      */
     showChoices(choices, choiceCallback) {
+        console.log("Show choices", {choices});
         this._choices = choices;
         this._choiceCallback = choiceCallback;
         this.choiceBox.showChoices(choices);
@@ -94,9 +96,57 @@ class DialogueManager {
      * @returns {boolean}
      */
     isBusy() {
-        return this.messageBox.isBusy() || this.hasChoice();
+        return this.isMessageBoxBusy() || this.isChoiceBoxBusy();
+    }
+    /**
+     * Check if message box is busy
+     * @returns {boolean}
+     */
+    isMessageBoxBusy() {
+        return this.messageBox.isBusy();
+    }
+    /**
+     * Check if choice box is busy
+     * @returns {boolean}
+     */
+    isChoiceBoxBusy() {
+        return this.hasChoice();
     }
 }
+
+Game_Interpreter.prototype.command101 = function(params) {
+    if ($gameMessage.isBusy()) {
+        return false;
+    }
+    // $gameMessage.setFaceImage(params[0], params[1]);
+    // $gameMessage.setBackground(params[2]);
+    // $gameMessage.setPositionType(params[3]);
+    // $gameMessage.setSpeakerName(params[4]);
+    let text = '';
+    while (this.nextEventCode() === 401) {
+        // Text data
+        this._index++;
+        text += LocalizeManager.t(this.currentCommand().parameters[0]) + "\n";
+    }
+    DialogueManager.inst.display(text);
+    // switch (this.nextEventCode()) {
+    //     case 102: // Show Choices
+    //         this._index++;
+    //         this.setupChoices(this.currentCommand().parameters);
+    //         break;
+    //     case 103: // Input Number
+    //         this._index++;
+    //         this.setupNumInput(this.currentCommand().parameters);
+    //         break;
+    //     case 104: // Select Item
+    //         this._index++;
+    //         this.setupItemChoice(this.currentCommand().parameters);
+    //         break;
+    // }
+    this.setWaitMode("message");
+    return true;
+};
+
 
 // Show Choices
 Game_Interpreter.prototype.command102 = function(params) {

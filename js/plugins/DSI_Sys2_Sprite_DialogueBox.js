@@ -269,7 +269,12 @@ class Sprite_DialogueBox extends Sprite {
     /**
      * Hide Dialogue
      */
-    hideDialogue() {
+    hideDialogue(instant = false) {
+        if (instant) {
+            this.y = Graphics.height;
+            this.alpha = 0.0;
+            return;
+        }
         AudioController.playPage();
         const targetY = Graphics.height;
         this.startTween({alpha: 0.0, y: targetY}, 10).ease(Easing.easeInOutCubic);

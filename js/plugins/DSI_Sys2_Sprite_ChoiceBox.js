@@ -62,6 +62,7 @@ class Sprite_ChoiceBox extends Sprite {
      * Init Members
      */
     initMembers() {
+        this._choices = [];
         this._cursorIndex = 0;
     }
     /**
@@ -85,6 +86,7 @@ class Sprite_ChoiceBox extends Sprite {
      * @param {string[]} choices 
      */
     showChoices(choices) {
+        this.initMembers();
         this._choices = choices;
         this.displayChoices();
     }
@@ -98,6 +100,7 @@ class Sprite_ChoiceBox extends Sprite {
      * Update control
      */
     updateControl() {
+        if (DialogueManager.inst.isMessageBoxBusy()) return;
         if (Input.isTriggered(MenuKeyAction.MoveDown)) {
             this.moveCursor(1);
         }
@@ -113,7 +116,7 @@ class Sprite_ChoiceBox extends Sprite {
      * @param {number} direction 
      */
     moveCursor(direction) {
-        const index = this.cursorIndex + direction;
+        let index = this.cursorIndex + direction;
         const maxIndex = this._choices.length - 1;
         if (index > maxIndex) {
             index = 0;
