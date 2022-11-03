@@ -64,6 +64,7 @@ class Sprite_ChoiceBox extends Sprite {
     initMembers() {
         this._choices = [];
         this._cursorIndex = 0;
+        this._choiceSprites = [];
     }
     /**
      * Get cursor index
@@ -94,12 +95,40 @@ class Sprite_ChoiceBox extends Sprite {
      * Display Choices
      */
     displayChoices() {
-        
+        /** @type {Sprite[]} */
+        const style = new PIXI.TextStyle({
+            fill: "#fff7d1",
+            fontFamily: "Verdana",
+            fontSize: 23,
+            lineJoin: "round",
+            stroke: "#6f4949",
+            strokeThickness: 5,
+        });
+        this._choices.forEach((text, index) => {
+            const sprite = new Sprite();
+            const choiceText = new PIXI.Text(text, style);
+            sprite.addChild(choiceText);
+            sprite.width = choiceText.width;
+            sprite.height = choiceText.height;
+            sprite.y = index * sprite.height;
+            this.addChild(sprite);
+            this._choiceSprites.push(sprite);
+        });
+    }
+    /**
+     * Hide choices
+     */
+    hideChoices(instant = false) {
+        this._choiceSprites.forEach(sprite => {
+            this.removeChild(sprite);
+        })
+        this._choiceSprites.splice(0);
     }
     /**
      * Update control
      */
     updateControl() {
+        if (!DialogueManager.inst.hasChoice()) return;
         if (DialogueManager.inst.isMessageBoxBusy()) return;
         if (Input.isTriggered(MenuKeyAction.MoveDown)) {
             this.moveCursor(1);
@@ -109,6 +138,14 @@ class Sprite_ChoiceBox extends Sprite {
         }
         if (Input.isTriggered(MenuKeyAction.Confirm)) {
             this.confirm();
+        }
+        for (var i = 0; i < this._choiceSprites.length; i++) {
+            const sprite = this._choiceSprites[i];
+            if (i == this.cursorIndex) {
+                sprite.opacity += 25;
+            } else {
+                sprite.opacity = 100;
+            }
         }
     }
     /**
@@ -142,6 +179,7 @@ class Sprite_ChoiceBox extends Sprite {
         DialogueManager.inst.selectChoice(this.cursorIndex);
         AudioController.playOk();
         console.log("Confirm :" + this.cursorIndex);
+        this.hideChoices();
     }
     /**
      * Update

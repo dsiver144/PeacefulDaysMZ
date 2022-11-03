@@ -166,13 +166,13 @@ class Sprite_DialogueBox extends Sprite {
                     case 'page':
                         result.push({type: 'page', params: []});
                         break;
-                    case 'v':
-                        const varId = Number(params);
-                        const characters = $gameVariables.value(varId).toString();
-                        characters.split('').forEach((c) => {
-                            result.push({type: 'character', params: [c]});
-                        });
-                        break;
+                    // case 'v':
+                    //     const varId = Number(params);
+                    //     const characters = $gameVariables.value(varId).toString();
+                    //     characters.split('').forEach((c) => {
+                    //         result.push({type: 'character', params: [c]});
+                    //     });
+                    //     break;
                     }
                     i = j;
                 }
@@ -205,7 +205,7 @@ class Sprite_DialogueBox extends Sprite {
             case 'character':
                 const character = entry.params[0];
                 if (character == '\n') {
-                    this._currentDisplayX = this._content.offsetX;  
+                    this._currentDisplayX = 0; //this._content.offsetX;  
                     this._currentDisplayY += this._lineHeight; 
                 }
                 const dx = this._currentDisplayX;

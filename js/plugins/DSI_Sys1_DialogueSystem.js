@@ -46,6 +46,7 @@ class DialogueManager {
     get choiceBox() {
         if (!this._choiceBox) {
             this._choiceBox = new Sprite_ChoiceBox();
+            this._choiceBox.hideChoices(true);
             ScreenOverlay.addChild(this._choiceBox);
         }
         return this._choiceBox;
@@ -55,7 +56,24 @@ class DialogueManager {
      * @param {string} content 
      */
     display(content) {
-        this.messageBox.display(content);
+        this.messageBox.display(this.processContent(content));
+    }
+    /**
+     * Process content
+     * @param {string} content 
+     */
+    processContent(content) {
+        console.log({content});
+        // Replace text key with correct localize data
+        content = content.replace(/{(.+?)}/gi, (_, textKey) => {
+            return LocalizeManager.t(textKey);
+        });
+        // Replace variable tag <v: varId> with value.
+        content = content.replace(/<v:\s*(\d+)>/gi, (_, varID) => {
+            return $gameVariables.value(+varID);
+        });
+        console.log(content);
+        return content;
     }
     /**
      * Show Choices
@@ -63,7 +81,7 @@ class DialogueManager {
      * @param {(n: number) => void} choiceCallback 
      */
     showChoices(choices, choiceCallback) {
-        console.log("Show choices", {choices});
+        console.log("Show choices", { choices });
         this._choices = choices;
         this._choiceCallback = choiceCallback;
         this.choiceBox.showChoices(choices);
@@ -114,7 +132,7 @@ class DialogueManager {
     }
 }
 
-Game_Interpreter.prototype.command101 = function(params) {
+Game_Interpreter.prototype.command101 = function (params) {
     if ($gameMessage.isBusy()) {
         return false;
     }
@@ -126,7 +144,7 @@ Game_Interpreter.prototype.command101 = function(params) {
     while (this.nextEventCode() === 401) {
         // Text data
         this._index++;
-        text += LocalizeManager.t(this.currentCommand().parameters[0]) + "\n";
+        text += this.currentCommand().parameters[0] + "\n";
     }
     DialogueManager.inst.display(text);
     // switch (this.nextEventCode()) {
@@ -149,7 +167,7 @@ Game_Interpreter.prototype.command101 = function(params) {
 
 
 // Show Choices
-Game_Interpreter.prototype.command102 = function(params) {
+Game_Interpreter.prototype.command102 = function (params) {
     if ($gameMessage.isBusy()) {
         return false;
     }
@@ -158,14 +176,14 @@ Game_Interpreter.prototype.command102 = function(params) {
     return true;
 }
 
-Game_Interpreter.prototype.setupChoices = function(params) {
+Game_Interpreter.prototype.setupChoices = function (params) {
     const choices = params[0].clone();
     DialogueManager.inst.showChoices(choices, (n) => {
         this._branch[this._indent] = n;
     });
 }
 
-Game_Message.prototype.isBusy = function() {
+Game_Message.prototype.isBusy = function () {
     return DialogueManager.inst.isBusy();
 }
 
