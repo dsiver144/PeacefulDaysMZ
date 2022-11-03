@@ -63,7 +63,6 @@ class DialogueManager {
      * @param {string} content 
      */
     processContent(content) {
-        console.log({content});
         // Replace text key with correct localize data
         content = content.replace(/{(.+?)}/gi, (_, textKey) => {
             return LocalizeManager.t(textKey);
@@ -72,7 +71,6 @@ class DialogueManager {
         content = content.replace(/<v:\s*(\d+)>/gi, (_, varID) => {
             return $gameVariables.value(+varID);
         });
-        console.log(content);
         return content;
     }
     /**
@@ -82,6 +80,10 @@ class DialogueManager {
      */
     showChoices(choices, choiceCallback) {
         console.log("Show choices", { choices });
+        // Process choice content before showing
+        for (var i = 0; i < choices; i++) {
+            choices[i] = this.processContent(choices[i]);
+        }
         this._choices = choices;
         this._choiceCallback = choiceCallback;
         this.choiceBox.showChoices(choices);
