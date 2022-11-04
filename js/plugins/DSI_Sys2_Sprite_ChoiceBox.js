@@ -105,12 +105,19 @@ class Sprite_ChoiceBox extends Sprite {
             strokeThickness: 5,
         });
         this._choices.forEach((text, index) => {
-            const sprite = new Sprite();
+            const sprite = new Sprite_Clickable();
             const choiceText = new PIXI.Text(text, style);
             sprite.addChild(choiceText);
             sprite.width = choiceText.width;
             sprite.height = choiceText.height;
             sprite.y = index * sprite.height;
+            sprite.onClick = () => {
+                if (this.cursorIndex != index) {
+                    this.select(index);
+                } else {
+                    this.confirm();
+                }
+            }
             this.addChild(sprite);
             this._choiceSprites.push(sprite);
         });
