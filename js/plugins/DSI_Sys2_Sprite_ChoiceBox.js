@@ -64,6 +64,7 @@ class Sprite_ChoiceBox extends Sprite {
     initMembers() {
         this._choices = [];
         this._cursorIndex = 0;
+        /** @type {Sprite_Clickable[]} */
         this._choiceSprites = [];
     }
     /**
@@ -104,13 +105,14 @@ class Sprite_ChoiceBox extends Sprite {
             stroke: "#6f4949",
             strokeThickness: 5,
         });
+        let maxWidth = 500;
         this._choices.forEach((text, index) => {
             const sprite = new Sprite_Clickable();
             const choiceText = new PIXI.Text(text, style);
             sprite.addChild(choiceText);
             sprite.width = choiceText.width;
             sprite.height = choiceText.height;
-            sprite.y = index * sprite.height;
+            maxWidth = Math.max(maxWidth, sprite.width);
             sprite.onClick = () => {
                 if (this.cursorIndex != index) {
                     this.select(index);
@@ -118,9 +120,33 @@ class Sprite_ChoiceBox extends Sprite {
                     this.confirm();
                 }
             }
-            this.addChild(sprite);
             this._choiceSprites.push(sprite);
         });
+        const spacing = 10;
+        const totalHeight = this._choiceSprites.length * (this._choiceSprites[0].height + spacing) - spacing;
+        const yStart = DialogConfig.defaultY - totalHeight - spacing;
+        const widthOffset = 95;
+        this._choiceSprites.forEach((sprite, index) => {
+            const [img, left, top, right, bottom] = this.choiceBGConfig();
+            const bg = new PIXI.NineSlicePlane(PIXI.Texture.from(img), left, top, right, bottom);
+            sprite.addChildAt(bg, 0);
+            bg.width = maxWidth;
+            bg.height = 35;
+            bg.x = -left;
+            bg.y = 0;
+            sprite.x = Graphics.width - bg.width + right - widthOffset;
+            sprite.y = yStart + index * (sprite.height + spacing);
+            sprite.opacity = 0;
+            sprite.startTween({opacity: 255}, 15);
+            this.addChild(sprite);
+        });
+    }
+    /**
+     * Notify Background Config
+     * @returns any[]
+     */
+    choiceBGConfig() {
+        return ['img/menus/Dialogue/ChoiceBG.png', 20, 0, 24, 0];
     }
     /**
      * Hide choices
@@ -141,7 +167,7 @@ class Sprite_ChoiceBox extends Sprite {
             this.moveCursor(1);
         }
         if (Input.isTriggered(MenuKeyAction.MoveUp)) {
-            this.moveCursor(-1); 
+            this.moveCursor(-1);
         }
         if (Input.isTriggered(MenuKeyAction.Confirm)) {
             this.confirm();

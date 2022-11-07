@@ -80,7 +80,7 @@ class DialogueManager {
      */
     showChoices(choices, choiceCallback) {
         console.log("Show choices", { choices });
-        // Process choice content before showing
+        // Process choice content before show
         for (var i = 0; i < choices; i++) {
             choices[i] = this.processContent(choices[i]);
         }
