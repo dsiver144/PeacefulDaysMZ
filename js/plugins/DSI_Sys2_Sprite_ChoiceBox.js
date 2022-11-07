@@ -64,8 +64,6 @@ class Sprite_ChoiceBox extends Sprite {
     initMembers() {
         this._choices = [];
         this._cursorIndex = 0;
-        /** @type {Sprite_Clickable[]} */
-        this._choiceSprites = [];
     }
     /**
      * Get cursor index
@@ -75,13 +73,52 @@ class Sprite_ChoiceBox extends Sprite {
      * Create display components
      */
     create() {
-        this.#createBackground();
+        this.#createChoiceSprites();
     }
     /**
      * Create background
      */
-    #createBackground() {
-
+    #createChoiceSprites() {
+        /** @type {Sprite_Clickable[]} */
+        this._choiceSprites = [];
+        const maxChoices = 4;
+        /** @type {Sprite[]} */
+        const style = new PIXI.TextStyle({
+            fill: "#fff7d1",
+            fontFamily: "Verdana",
+            fontSize: 23,
+            lineJoin: "round",
+            stroke: "#6f4949",
+            strokeThickness: 5,
+        });
+        // Create choice sprites
+        for (let index = 0; index < maxChoices; index++) {
+            const sprite = new Sprite_Clickable();
+            const choiceText = new PIXI.Text('Test', style);
+            sprite.addChild(choiceText);
+            sprite.height = choiceText.height;
+            sprite.choiceText = choiceText;
+            sprite.onClick = () => {
+                if (this.cursorIndex != index) {
+                    this.select(index);
+                } else {
+                    this.confirm();
+                }
+            }
+            this._choiceSprites.push(sprite);
+        }
+        // Create choice backgrounds
+        this._choiceSprites.forEach((sprite, index) => {
+            const [img, left, top, right, bottom] = this.choiceBGConfig();
+            const bg = new PIXI.NineSlicePlane(PIXI.Texture.from(img), left, top, right, bottom);
+            sprite.addChildAt(bg, 0);
+            bg.height = 35;
+            bg.x = -left;
+            bg.y = 0;
+            this.addChild(sprite);
+            sprite.visible = false;
+            sprite.background = bg;
+        });
     }
     /**
      * Show Choices
@@ -96,50 +133,32 @@ class Sprite_ChoiceBox extends Sprite {
      * Display Choices
      */
     displayChoices() {
-        /** @type {Sprite[]} */
-        const style = new PIXI.TextStyle({
-            fill: "#fff7d1",
-            fontFamily: "Verdana",
-            fontSize: 23,
-            lineJoin: "round",
-            stroke: "#6f4949",
-            strokeThickness: 5,
-        });
-        let maxWidth = 500;
-        this._choices.forEach((text, index) => {
-            const sprite = new Sprite_Clickable();
-            const choiceText = new PIXI.Text(text, style);
-            sprite.addChild(choiceText);
-            sprite.width = choiceText.width;
-            sprite.height = choiceText.height;
-            maxWidth = Math.max(maxWidth, sprite.width);
-            sprite.onClick = () => {
-                if (this.cursorIndex != index) {
-                    this.select(index);
-                } else {
-                    this.confirm();
-                }
-            }
-            this._choiceSprites.push(sprite);
-        });
+        // Setup display params
         const spacing = 10;
-        const totalHeight = this._choiceSprites.length * (this._choiceSprites[0].height + spacing) - spacing;
+        const totalHeight = this._choices.length * (this._choiceSprites[0].height + spacing) - spacing;
         const yStart = DialogConfig.defaultY - totalHeight - spacing;
         const widthOffset = 95;
-        this._choiceSprites.forEach((sprite, index) => {
-            const [img, left, top, right, bottom] = this.choiceBGConfig();
-            const bg = new PIXI.NineSlicePlane(PIXI.Texture.from(img), left, top, right, bottom);
-            sprite.addChildAt(bg, 0);
-            bg.width = maxWidth;
-            bg.height = 35;
-            bg.x = -left;
-            bg.y = 0;
-            sprite.x = Graphics.width - bg.width + right - widthOffset;
+        let maxWidth = 500;
+        // Calculate max width
+        for (var index = 0; index < this._choices.length; index++) {
+            const sprite = this._choiceSprites[index];
+            sprite.choiceText.text = this._choices[index];
+            maxWidth = Math.max(maxWidth, sprite.choiceText.width);
+        }
+        // Set correct display position on screen.
+        for (var index = 0; index < this._choices.length; index++) {
+            const sprite = this._choiceSprites[index];
+            sprite.visible = true;
+            sprite.width = maxWidth;
+            sprite.background.width = maxWidth;
+
+            sprite.x = Graphics.width - sprite.background.width - widthOffset;
             sprite.y = yStart + index * (sprite.height + spacing);
             sprite.opacity = 0;
-            sprite.startTween({opacity: 255}, 15);
-            this.addChild(sprite);
-        });
+            const orginalX = sprite.x;
+            sprite.x += 100;
+            sprite.startTween({ opacity: 255, x: orginalX }, 15).delay(index * 5).ease(Easing.easeOutExpo);
+        }
     }
     /**
      * Notify Background Config
@@ -153,9 +172,8 @@ class Sprite_ChoiceBox extends Sprite {
      */
     hideChoices(instant = false) {
         this._choiceSprites.forEach(sprite => {
-            this.removeChild(sprite);
-        })
-        this._choiceSprites.splice(0);
+            sprite.visible = false;
+        });
     }
     /**
      * Update control

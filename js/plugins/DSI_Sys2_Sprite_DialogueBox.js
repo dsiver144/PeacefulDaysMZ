@@ -240,6 +240,8 @@ class Sprite_DialogueBox extends Sprite {
      * Update control
      */
     updateControl() {
+        // If there is a dialogue choice box visible, then disable message box input.
+        if (DialogueManager.inst.isChoiceBoxBusy()) return;
         if (Input.isTriggeredCheck()) {
             if (this._pause) {
                 this.resume();

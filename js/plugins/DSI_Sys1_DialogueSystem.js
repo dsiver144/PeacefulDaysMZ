@@ -96,6 +96,7 @@ class DialogueManager {
         if (!this.hasChoice()) return;
         this._choiceCallback(index);
         this.clearChoices();
+        this.messageBox.hideDialogue();
     }
     /**
      * Clear Choices
