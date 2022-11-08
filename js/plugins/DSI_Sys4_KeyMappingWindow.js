@@ -102,10 +102,11 @@ class Window_KeyMapping extends Window_Command {
         const textKey = this.currentExt().textKey;
         Input.disableSystem();
         this.listenForKeyPress((pressedKey) => {
-            let isValid = Input.assignKey(textKey, pressedKey, inputMode);
+            let isValid = undefined;
             if (inputMode != this._inputMode) {
                 isValid = false;
             }
+            isValid = isValid == undefined ? Input.assignKey(textKey, pressedKey, inputMode) : isValid;
             if (isValid) {
                 Input.applyKeybindings();
                 AudioController.playOk();

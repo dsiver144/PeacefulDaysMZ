@@ -81,12 +81,12 @@ class Sprite_ChoiceBox extends Sprite {
     #createChoiceSprites() {
         /** @type {Sprite_Clickable[]} */
         this._choiceSprites = [];
-        const maxChoices = 4;
+        const maxChoices = 6;
         /** @type {Sprite[]} */
         const style = new PIXI.TextStyle({
             fill: "#fff7d1",
             fontFamily: "Verdana",
-            fontSize: 23,
+            fontSize: 18,//23,
             lineJoin: "round",
             stroke: "#6f4949",
             strokeThickness: 5,
@@ -95,9 +95,13 @@ class Sprite_ChoiceBox extends Sprite {
         for (let index = 0; index < maxChoices; index++) {
             const sprite = new Sprite_Clickable();
             const choiceText = new PIXI.Text('Test', style);
+            const keyHint = new Sprite_KeyHint(MenuKeyAction.Confirm);
+            keyHint.visible = false;
             sprite.addChild(choiceText);
+            sprite.addChild(keyHint);
             sprite.height = choiceText.height;
             sprite.choiceText = choiceText;
+            sprite.keyHint = keyHint;
             sprite.onClick = () => {
                 if (this.cursorIndex != index) {
                     this.select(index);
@@ -114,7 +118,7 @@ class Sprite_ChoiceBox extends Sprite {
             sprite.addChildAt(bg, 0);
             bg.height = 35;
             bg.x = -left;
-            bg.y = 0;
+            bg.y = -2;
             this.addChild(sprite);
             sprite.visible = false;
             sprite.background = bg;
@@ -134,16 +138,16 @@ class Sprite_ChoiceBox extends Sprite {
      */
     displayChoices() {
         // Setup display params
-        const spacing = 10;
+        const spacing = 12;
         const totalHeight = this._choices.length * (this._choiceSprites[0].height + spacing) - spacing;
         const yStart = DialogConfig.defaultY - totalHeight - spacing;
-        const widthOffset = 95;
-        let maxWidth = 500;
+        const widthOffset = 75;
+        let maxWidth = 300;
         // Calculate max width
         for (var index = 0; index < this._choices.length; index++) {
             const sprite = this._choiceSprites[index];
             sprite.choiceText.text = this._choices[index];
-            maxWidth = Math.max(maxWidth, sprite.choiceText.width);
+            maxWidth = Math.max(maxWidth, sprite.choiceText.width + 80);
         }
         // Set correct display position on screen.
         for (var index = 0; index < this._choices.length; index++) {
@@ -154,6 +158,10 @@ class Sprite_ChoiceBox extends Sprite {
 
             sprite.x = Graphics.width - sprite.background.width - widthOffset;
             sprite.y = yStart + index * (sprite.height + spacing);
+            
+            sprite.keyHint.x = sprite.width - sprite.keyHint.width - 40;
+            sprite.keyHint.y = 2;
+
             sprite.opacity = 0;
             const orginalX = sprite.x;
             sprite.x += 100;
@@ -183,9 +191,11 @@ class Sprite_ChoiceBox extends Sprite {
         if (DialogueManager.inst.isMessageBoxBusy()) return;
         if (Input.isTriggered(MenuKeyAction.MoveDown)) {
             this.moveCursor(1);
+            // return;
         }
         if (Input.isTriggered(MenuKeyAction.MoveUp)) {
             this.moveCursor(-1);
+            // return;
         }
         if (Input.isTriggered(MenuKeyAction.Confirm)) {
             this.confirm();
@@ -194,8 +204,10 @@ class Sprite_ChoiceBox extends Sprite {
             const sprite = this._choiceSprites[i];
             if (i == this.cursorIndex) {
                 sprite.opacity += 25;
+                sprite.keyHint.visible = true;
             } else {
                 sprite.opacity = 100;
+                sprite.keyHint.visible = false;
             }
         }
     }
@@ -204,7 +216,7 @@ class Sprite_ChoiceBox extends Sprite {
      * @param {number} direction 
      */
     moveCursor(direction) {
-        let index = this.cursorIndex + direction;
+        let index = this._cursorIndex + direction;
         const maxIndex = this._choices.length - 1;
         if (index > maxIndex) {
             index = 0;
@@ -213,6 +225,7 @@ class Sprite_ChoiceBox extends Sprite {
             index = maxIndex;
         }
         this.select(index);
+        Input.update();
     }
     /**
      * Select
@@ -221,7 +234,6 @@ class Sprite_ChoiceBox extends Sprite {
     select(index) {
         this._cursorIndex = index;
         AudioController.playCursor();
-        console.log("Select choice: " + index);
     }
     /**
      * Confirm
