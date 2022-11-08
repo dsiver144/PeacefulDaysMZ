@@ -145,3 +145,19 @@ NetCore.send = function(data) {
 NetCore.listen = function(action, callback) {
     NetCore.inst.listen(action, callback);
 }
+
+class NetObject {
+    /**
+     * Handle net object
+     */
+    constructor() {
+        this.peerId = null;
+    }
+    /**
+     * Set Peer ID
+     * @param {string} id 
+     */
+    setPeerId(id) {
+        this.peerId = id;
+    }
+}
