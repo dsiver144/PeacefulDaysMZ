@@ -53,10 +53,10 @@ Game_Player.prototype.moveByInput = function() {
                 this._movePressing = false;
                 this.checkEventTriggerTouchFront(direction);
             }
-            // Handle network
-            // if (NetCore.isReady()) {
-            //     NetCore.send({action: 'characterMove', params: {_realX: this._realX, _realY: this._realY, _direction: this._direction, _pattern: this._pattern}});
-            // }
+            //Handle network
+            if (NetCore.isReady()) {
+                NetCore.send({action: 'characterMove', params: {_x: this._x, _y: this._y, _direction: this._direction, _pattern: this._pattern, _mapId: $gameMap.mapId()}});
+            }
             return;
         } else if ($gameTemp.isDestinationValid()) {
             this._x = Math.round(this._x);

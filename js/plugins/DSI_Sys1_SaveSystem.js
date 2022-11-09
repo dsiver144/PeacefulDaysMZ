@@ -81,6 +81,23 @@ class SaveableObject {
     }
 }
 
+function SaveUtils() {
+
+}
+
+/**
+ * Parse Saveable Object
+ * @param {string} savedObject 
+ * @returns {SaveableObject}
+ */
+SaveUtils.parseObject = function(savedObject) {
+    const newObject = eval(`new ${savedObject.type}()`);
+    newObject.loadSaveData(savedObject);
+    return newObject;
+}
+
+
+
 //========================================================================
 // CREATE SAVEABLE OBJECTS
 //========================================================================

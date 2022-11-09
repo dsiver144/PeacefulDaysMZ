@@ -15,6 +15,11 @@ class Game_RemotePlayer extends Game_Character {
         super.initMembers();
     }
 
+    setTargetPosition(x, y) {
+        this._x = x;
+        this._y = y;
+    }
+
 }
 
 class NetCoreImpl {
@@ -42,19 +47,9 @@ class NetCoreImpl {
                 console.log('Got updateObject message', data, content);
                 const { objects } = params;
                 objects.forEach(object => {
-                    const newObject = eval(`new ${object.type}()`);
-                    newObject.loadSaveData(object);
+                    const newObject = SaveUtils.parseObject(object);
                     this.currentFarmland().replaceObject(newObject);
                 })
-            });
-            NetCore.listen('hostUseTool', (data) => {
-                const { peerId, content } = data;
-                const { action, params } = content;
-                console.log('Got host use tool data', data, content);
-                const { object } = params;
-                const newObject = eval(`new ${object.type}()`);
-                newObject.loadSaveData(object);
-                this.currentFarmland().replaceObject(newObject);
             });
         }
         // Handle for both host & remote
@@ -74,7 +69,7 @@ class NetCoreImpl {
             }
             /** @type {Game_RemotePlayer} */
             let remotePlayer = this._remoteCharacters[peerId];
-            remotePlayer.setPosition(params._realX, params._realY);
+            remotePlayer.setTargetPosition(params._realX, params._realY);
             remotePlayer._direction = params._direction;
             remotePlayer._pattern = params._pattern;
             MyUtils.getMapSprite('remotePlayer' + peerId).update();

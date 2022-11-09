@@ -151,13 +151,19 @@ class NetObject {
      * Handle net object
      */
     constructor() {
-        this.peerId = null;
+        this._peerId = null;
     }
     /**
      * Set Peer ID
      * @param {string} id 
      */
     setPeerId(id) {
-        this.peerId = id;
+        this._peerId = id;
+    }
+    /**
+     * Get Peer ID
+     */
+    get peerId() {
+        return this._peerId;
     }
 }
