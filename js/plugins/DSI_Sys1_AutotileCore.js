@@ -18,6 +18,38 @@ RpgMakerTileIdSpecial.split(",").forEach((str) => {
     BitmaskToTileIDTable[mask] = tileId;
 });
 
+var Autotile47TileTable =
+[
+	"empty", "empty", "empty", "empty", "A3", "B3", "C3", "D3", "A1", "B3", "C3", "D3", "A3", "B1", "C3", "D3", "A1", "B1", "C3", "D3", "A3", "B3", "C3", "D1", "A1", "B3", "C3", "D1", "A3", "B1", "C3", "D1", "A1", "B1", "C3", "D1", "A3", "B3", "C1", "D3", "A1", "B3", "C1", "D3", "A3", "B1", "C1", "D3", "A1", "B1", "C1", "D3", "A3", "B3", "C1", "D1", "A1", "B3", "C1", "D1", "A3", "B1", "C1", "D1", "A1", "B1", "C1", "D1", "A5", "B3", "C5", "D3", "A5", "B1", "C5", "D3", "A5", "B3", "C5", "D1", "A5", "B1", "C5", "D1", "A4", "B4", "C3", "D3", "A4", "B4", "C3", "D1", "A4", "B4", "C1", "D3", "A4", "B4", "C1", "D1", "A3", "B5", "C3", "D5", "A3", "B5", "C1", "D5", "A1", "B5", "C3", "D5", "A1", "B5", "C1", "D5", "A3", "B3", "C4", "D4", "A1", "B3", "C4", "D4", "A3", "B1", "C4", "D4", "A1", "B1", "C4", "D4", "A5", "B5", "C5", "D5", "A4", "B4", "C4", "D4", "A2", "B4", "C5", "D3", "A2", "B4", "C5", "D1", "A4", "B2", "C3", "D5", "A4", "B2", "C1", "D5", "A3", "B5", "C4", "D2", "A1", "B5", "C4", "D2", "A5", "B3", "C2", "D4", "A5", "B1", "C2", "D4", "A2", "B2", "C5", "D5", "A2", "B4", "C2", "D4", "A5", "B5", "C2", "D2", "A4", "B2", "C4", "D2", "A2", "B2", "C2", "D2"
+]
+
+const TileSize = 32;
+const SubTileSize = TileSize / 2;
+
+var SubTileTable = 
+{
+	"A1" : 2,
+	"B1" : 3,
+	"C1" : 6,
+	"D1" : 7,
+	"A2" : 8,
+	"B4" : 9,
+	"A4" : 10,
+	"B2" : 11,
+	"C5" : 12,
+	"D3" : 13,
+	"C3" : 14,
+	"D5" : 15,
+	"A5" : 16,
+	"B3" : 17,
+	"A3" : 18,
+	"B5" : 19,
+	"C2" : 20,
+	"D4" : 21,
+	"C4" : 22,
+	"D2" : 23
+}
+
 function AutotileUtils() {
     return new Error("Cant init static class");
 }
@@ -143,3 +175,33 @@ AutotileUtils.makeSegmentTile = function (source, bitmap, autoTileId) {
     //     bitmap.blt(source, sx, sy, tileWidth / 2, tileHeight / 2, dx, dy);
     // }
 };
+
+AutotileUtils.getSubtileRect = function(tileID) {
+    const value = SubTileTable[tileID];
+    return new Rectangle((value % 4) * SubTileSize, Math.floor(value / 4) * SubTileSize, SubTileSize, SubTileSize);
+}
+
+AutotileUtils.drawTile = function(sourceBitmap, targetBitmap, tileNumber, tilesetWidth) {
+    const subTileOffsets = [{x: 0, y: 0}, {x: SubTileSize, y: 0}, {x: 0, y: SubTileSize}, {x: SubTileSize, y: SubTileSize}];
+    let tilePosX = (tileNumber % tilesetWidth) * TileSize;
+    let tilePosY = Math.floor(tileNumber / tilesetWidth) * TileSize;
+    for (let i = 1; i <= 4; i++) {
+        const subRect = this.getSubtileRect(Autotile47TileTable[1 + (tileNumber * 4) + (i - 1)]);
+        const x = tilePosX + subTileOffsets[i].x;
+        const y = tilePosY + subTileOffsets[i].y;
+        targetBitmap.blt(sourceBitmap, subRect.x, subRect.y, subRect.width, subRect.height, x, y);
+    }
+}
+/**
+ * Convert RPG Maker autotile format to 48-tiles format
+ * @param {Bitmap} sourceBitmap 
+ * @returns {Bitmap}
+ */
+AutotileUtils.convertRMTo48Tiles = function(sourceBitmap) {
+    const tilesetWidth = 8;
+    const targetBitmap = new Bitmap(TileSize * tilesetWidth, 48 / tilesetWidth * TileSize);
+    for (let i = 1; i <= 47; i++) {
+        this.drawTile(sourceBitmap, targetBitmap, i, tilesetWidth);
+    }
+    return targetBitmap;
+}
