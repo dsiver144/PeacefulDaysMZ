@@ -10,11 +10,17 @@
  * Empty Help
  */
 class Game_RemotePlayer extends Game_Character {
-
+    /**
+     * Init Members
+     */
     initMembers() {
         super.initMembers();
     }
-
+    /**
+     * Set Target Position
+     * @param {number} x 
+     * @param {number} y 
+     */
     setTargetPosition(x, y) {
         this._x = x;
         this._y = y;
@@ -27,7 +33,7 @@ class NetCoreImpl {
      * Register Net Core Listeners.
      * @returns {void}
      */
-     registerNetCoreListeners() {
+    registerNetCoreListeners() {
         if (!NetCore.isReady()) return;
         this._remoteCharacters = {};
         if (NetCore.isHost()) {
