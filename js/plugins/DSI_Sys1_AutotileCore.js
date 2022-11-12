@@ -131,6 +131,24 @@ AutotileUtils.calcAutoTileIndex = function (bitmask) {
     const refinedBitmask = topLeft * (2 ** 0) + top * (2 ** 1) + topRight * (2 ** 2) + left * (2 ** 3) + right * (2 ** 4) + bottomLeft * (2 ** 5) + bottom * (2 ** 6) + bottomRight * (2 ** 7);
     return BitmaskToTileIDTable[refinedBitmask];
 }
+
+AutotileUtils.calcWallAutoTileIndex = function(bitmask) {
+    // ========================
+    // BR B BL R L TR T TL
+    // 7  6 5  4 3 2  1 0
+    // ========================
+    const top = (bitmask & (2 ** 1)) > 0
+    const left = (bitmask & (2 ** 3)) > 0
+    const right = (bitmask & (2 ** 4)) > 0
+    const bottom = (bitmask & (2 ** 6)) > 0
+    const topLeft = (top && left && bitmask & (2 ** 0)) > 0
+    const topRight = (top && right && bitmask & (2 ** 2)) > 0
+    const bottomLeft = (bottom && left && bitmask & (2 ** 5)) > 0
+    const bottomRight = (bottom && right && bitmask & (2 ** 7)) > 0
+    const wallTopLeft = (topLeft && bottomLeft) > 0
+    const wallTopRight = (topRight && bottomRight) > 0
+    
+}
 /**
  * Calculate autotile index using 8 direction check
  * @param {(pos: Vector2) => boolean} callback 
