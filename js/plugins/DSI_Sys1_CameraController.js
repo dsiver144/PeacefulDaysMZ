@@ -22,6 +22,7 @@ class CameraController extends SaveableObject {
         this._targetType = null;
         this._lastScrollX = null;
         this._lastScrollY = null;
+        this._zoomRatio = 1.0;
     }
     /**
      * @inheritdoc
@@ -31,6 +32,7 @@ class CameraController extends SaveableObject {
             ['_targetType', ''],
             ['_lastScrollX', ''],
             ['_lastScrollY', ''],
+            ['_zoomRatio', ''],
         ]
     }
     /**
@@ -38,7 +40,7 @@ class CameraController extends SaveableObject {
      */
     getSaveData() {
         this._targetType = this._target.constructor.name;
-       return super.getSaveData(); 
+        return super.getSaveData();
     }
     Auto
     /**
@@ -48,10 +50,39 @@ class CameraController extends SaveableObject {
         super.loadSaveData(data);
         /** @type {string} */
         const targeType = data._targetType;
-        switch(targeType) {
+        switch (targeType) {
             case 'Game_Player':
                 this.setTarget($gamePlayer, this._speed);
                 break;
+        }
+    }
+    /**
+     * Set Zoom
+     * @param {number} zoomRatio 
+     */
+    setZoom(zoomRatio, duration = 0) {
+        if (duration == 0) {
+            this._zoomRatio = zoomRatio;
+            return;
+        }
+        this._targetZoomRatio = zoomRatio;
+        this._zoomDuration = duration;
+    }
+    /**
+     * Get Zoom Ratio
+     */
+    get zoomRatio() {
+        return this._zoomRatio;
+    }
+    /**
+     * Update zoom
+     */
+    updateZoom() {
+        if (this._zoomDuration > 0) {
+            const d = this._zoomDuration;
+            const t = this._targetZoomRatio;
+            this._zoomRatio = (this._zoomRatio * (d - 1) + t) / d;
+            this._zoomDuration--;
         }
     }
     /**
@@ -65,7 +96,7 @@ class CameraController extends SaveableObject {
         try {
             this._lastScrollX = this._target.scrolledX();
             this._lastScrollY = this._target.scrolledY();
-        } catch(err) {
+        } catch (err) {
             console.warn(err);
             this._lastScrollX = 0;
             this._lastScrollY = 0;
@@ -82,6 +113,7 @@ class CameraController extends SaveableObject {
      */
     update() {
         this.updateScroll();
+        this.updateZoom();
     }
     /**
      * Update scroll
@@ -132,7 +164,7 @@ class CameraController extends SaveableObject {
 }
 
 Game_Player.prototype.updateScroll = function (lastScrolledX, lastScrolledY) {
-    
+
 };
 
 var DSI_Sys1_CameraController_Game_System_createSaveableObjects = Game_System.prototype.createSaveableObjects;
@@ -150,3 +182,20 @@ Game_Player.prototype.initMembers = function () {
     DSI_Sys1_CameraController_Game_Player_initMembers.call(this);
     CameraController.inst?.setTarget(this);
 }
+
+var DSI_Sys1_CameraController_Spriteset_Map_update = Spriteset_Map.prototype.update;
+Spriteset_Map.prototype.update = function () {
+    DSI_Sys1_CameraController_Spriteset_Map_update.call(this);
+    this.scale.x = CameraController.inst.zoomRatio || 1.0;
+    this.scale.y = CameraController.inst.zoomRatio || 1.0;
+}
+
+// Game_Map.prototype.screenTileX = function() {
+//     const zoomRatio = CameraController.inst.zoomRatio || 1.0;
+//     return Math.round((Graphics.width / this.tileWidth()) * 16) / 16 / zoomRatio;
+// };
+
+// Game_Map.prototype.screenTileY = function() {
+//     const zoomRatio = CameraController.inst.zoomRatio || 1.0;
+//     return Math.round((Graphics.height / this.tileHeight()) * 16) / 16 / zoomRatio;
+// };
