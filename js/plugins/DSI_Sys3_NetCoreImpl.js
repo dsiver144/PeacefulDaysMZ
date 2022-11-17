@@ -75,7 +75,7 @@ class NetCoreImpl {
             }
             /** @type {Game_RemotePlayer} */
             let remotePlayer = this._remoteCharacters[peerId];
-            remotePlayer.setTargetPosition(params._realX, params._realY);
+            remotePlayer.setTargetPosition(params._x, params._y);
             remotePlayer._direction = params._direction;
             remotePlayer._pattern = params._pattern;
             MyUtils.getMapSprite('remotePlayer' + peerId).update();
