@@ -41,12 +41,7 @@ class Sprite_DialogueBox extends Sprite {
      * Create speaker sprite
      */
     #createSpeakerSprite() {
-        const speakerSprite = new Sprite();
-        speakerSprite.opacity = 0;
-        speakerSprite.y = -0;
-        speakerSprite.scale.x = 2.0;
-        speakerSprite.scale.y = 2.0;
-        speakerSprite.anchor.y = 1.0;
+        const speakerSprite = new Sprite_DialogueSpeaker();
         this.addChild(speakerSprite);
         this._speakerSprite = speakerSprite;
     }
@@ -288,10 +283,7 @@ class Sprite_DialogueBox extends Sprite {
         const targetY = DialogConfig.defaultY;
         this.y = Graphics.height;
         this.startTween({alpha: 1.0, y: targetY}, 10).ease(Easing.easeInOutCubic);
-        if (DialogueManager.inst.activeSpeaker.isAvailable()) {
-            this._speakerSprite.bitmap = ImageManager.loadNPC(DialogueManager.inst.activeSpeaker.npcKey, DialogueManager.inst.activeSpeaker.emotion);
-            this._speakerSprite.startTween({opacity: 255}, 10).ease(Easing.easeInOutCubic);
-        }
+        this._speakerSprite.setSpeaker(DialogueManager.inst.activeSpeaker);
     }
     /**
      * Hide Dialogue

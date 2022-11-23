@@ -162,6 +162,13 @@ class DialogueSpeaker {
         return !!this.npcKey;
     }
     /**
+     * Has Blink Animation
+     * @returns {boolean}
+     */
+    hasBlinkAnimation() {
+        return this._emotion == 'Normal';
+    }
+    /**
      * Get NPC Key
      */
     get npcKey() {

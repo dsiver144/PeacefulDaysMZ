@@ -57,6 +57,7 @@ var $plugins =
 {"name":"DSI_Sys3_FurnitureDB","status":true,"description":"(v1.0) Furniture Database","parameters":{}},
 {"name":"DSI_Sys3_Furniture","status":true,"description":"(v1.0) Furniture","parameters":{}},
 {"name":"DSI_Sys3_Farmland","status":true,"description":"","parameters":{}},
+{"name":"DSI_Sys3_Sprite_DialogueSpeaker","status":true,"description":"(v1.0) A custom plugin by dsiver144","parameters":{"testParam:number":"144"}},
 {"name":"DSI_Sys4_Sprite_FarmObject","status":true,"description":"(v1.0) Sprite Farm Object","parameters":{}},
 {"name":"DSI_Sys4_Sprite_FarmTile","status":true,"description":"(v1.0) Sprite Farm Tile","parameters":{}},
 {"name":"DSI_Sys4_Sprite_FarmObstacle","status":true,"description":"(v1.0) Sprite Farm Obstacle","parameters":{}},
