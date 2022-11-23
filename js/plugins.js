@@ -41,6 +41,7 @@ var $plugins =
 {"name":"DSI_Sys2_ForagingSystem","status":true,"description":"","parameters":{}},
 {"name":"DSI_Sys2_MiningSystem","status":true,"description":"","parameters":{}},
 {"name":"DSI_Sys2_InteractionManager","status":true,"description":"","parameters":{}},
+{"name":"DSI_Sys2_NPC","status":true,"description":"(v1.0) NPC Core","parameters":{}},
 {"name":"DSI_Sys2_Sprite_DialogueBox","status":true,"description":"(v1.0) Handle scene map for Peaceful Days.","parameters":{}},
 {"name":"DSI_Sys2_Sprite_ChoiceBox","status":true,"description":"(v1.0) Handle scene map for Peaceful Days.","parameters":{}},
 {"name":"DSI_Sys2_SceneMap","status":true,"description":"(v1.0) Handle scene map for Peaceful Days.","parameters":{}},

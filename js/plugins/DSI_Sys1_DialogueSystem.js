@@ -26,7 +26,16 @@ class DialogueManager {
      * This class handle dialogue system for Peaceful Days.
      */
     constructor() {
-
+    }
+    /**
+     * Get Dialogue Speaker
+     * @returns {DialogueSpeaker}
+     */
+     get activeSpeaker() {
+        if (!this._activeSpeaker) {
+            this._activeSpeaker = new DialogueSpeaker();
+        }
+        return this._activeSpeaker;
     }
     /**
      * Get Dialogue Sprite
@@ -54,8 +63,10 @@ class DialogueManager {
     /**
      * Display Content
      * @param {string} content 
+     * @param {string} speakerData 
      */
-    display(content) {
+    display(content, speakerData = '') {
+        this.activeSpeaker.setData(speakerData);
         this.messageBox.display(this.processContent(content));
     }
     /**
@@ -135,6 +146,42 @@ class DialogueManager {
     }
 }
 
+class DialogueSpeaker {
+    /**
+     * Dialoge Speaker
+     */
+    constructor() {
+        this._npcKey = '';
+        this._emotion = '';
+    }
+    /**
+     * Check if dialogue speaker is available
+     * @returns {boolean}
+     */
+    isAvailable() {
+        return !!this.npcKey;
+    }
+    /**
+     * Get NPC Key
+     */
+    get npcKey() {
+        return this._npcKey;
+    }
+    /**
+     * Get NPC emotion
+     */
+    get emotion() {
+        return this._emotion;
+    }
+    /**
+     * Set Data
+     * @param {string} speakerData should be follow this format NPCKEY_EMOTION (ex: Azalea_Happy)
+     */
+    setData(speakerData) {
+        [this._npcKey, this._emotion] = speakerData.split("_");
+    }
+}
+
 Game_Interpreter.prototype.command101 = function (params) {
     if ($gameMessage.isBusy()) {
         return false;
@@ -149,7 +196,7 @@ Game_Interpreter.prototype.command101 = function (params) {
         this._index++;
         text += this.currentCommand().parameters[0] + "\n";
     }
-    DialogueManager.inst.display(text);
+    DialogueManager.inst.display(text, params[4]);
     // switch (this.nextEventCode()) {
     //     case 102: // Show Choices
     //         this._index++;
