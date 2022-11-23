@@ -4,48 +4,9 @@
 //========================================================================
 /*:
  * @author dsiver144
- * @plugindesc (v1.0) A custom plugin by dsiver144
+ * @plugindesc (v1.0) Sprite Dialogue Speaker
  * @help 
  * Empty Help
- * 
- * @param testParam:number
- * @text Test Param
- * @type number
- * @default 144
- * @desc A Test Param
- * 
- */
-/*~struct~PositionObject:
- * @param x:num
- * @text x
- * @desc X position
- * 
- * @param y:num
- * @text y
- * @desc Y Position
- *
- */
-/*~struct~SoundEffect:
- * @param name:str
- * @text name
- * @type file
- * @dir audio/se/
- * @desc Choose the name of SE you want to use.
- *
- * @param volume:num
- * @text volume
- * @default 70
- * @desc Choose the volume value of the se
- * 
- * @param pitch:num
- * @text pitch
- * @default 100
- * @desc Choose the pitch value of the se
- * 
- * @param pan:num
- * @text pan
- * @default 0
- * @desc Choose the pan value of the se
  * 
  */
 class Sprite_DialogueSpeaker extends Sprite {

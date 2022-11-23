@@ -13,7 +13,8 @@
 const DialogConfig = {
     defaultSize: [770, 145],
     characterDelayDuration: 1,
-    defaultY: 350
+    defaultY: 350,
+    waitForInputPos: [735, 109]
 }
 
 class DialogueManager {
@@ -204,11 +205,12 @@ Game_Interpreter.prototype.command101 = function (params) {
         text += this.currentCommand().parameters[0] + "\n";
     }
     DialogueManager.inst.display(text, params[4]);
-    // switch (this.nextEventCode()) {
-    //     case 102: // Show Choices
-    //         this._index++;
-    //         this.setupChoices(this.currentCommand().parameters);
-    //         break;
+    switch (this.nextEventCode()) {
+        case 102: // Show Choices
+            this._index++;
+            this.setupChoices(this.currentCommand().parameters);
+            break;
+    }
     //     case 103: // Input Number
     //         this._index++;
     //         this.setupNumInput(this.currentCommand().parameters);

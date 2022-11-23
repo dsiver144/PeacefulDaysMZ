@@ -131,7 +131,12 @@ class Sprite_ChoiceBox extends Sprite {
     showChoices(choices) {
         this.initMembers();
         this._choices = choices;
-        this.displayChoices();
+        // If dialogue box is currently displaying then wait for it to finish to display choices
+        if (DialogueManager.inst.messageBox.isFinishDisplayDialogue()) {
+            this.displayChoices();
+        } else {
+            this._waitForDialogueToFinish = true;
+        }
     }
     /**
      * Display Choices
@@ -169,6 +174,15 @@ class Sprite_ChoiceBox extends Sprite {
         }
     }
     /**
+     * Update display choices
+     */
+    updateDisplayChoices() {
+        if (!this._waitForDialogueToFinish) return;
+        if (!DialogueManager.inst.messageBox.isFinishDisplayDialogue()) return;
+        this.displayChoices();
+        this._waitForDialogueToFinish = false;
+    }
+    /**
      * Notify Background Config
      * @returns any[]
      */
@@ -188,7 +202,7 @@ class Sprite_ChoiceBox extends Sprite {
      */
     updateControl() {
         if (!DialogueManager.inst.hasChoice()) return;
-        if (DialogueManager.inst.isMessageBoxBusy()) return;
+        if (!DialogueManager.inst.messageBox.isFinishDisplayDialogue()) return;
         if (Input.isTriggered(MenuKeyAction.MoveDown)) {
             this.moveCursor(1);
         }
@@ -241,12 +255,14 @@ class Sprite_ChoiceBox extends Sprite {
         AudioController.playOk();
         console.log("Confirm :" + this.cursorIndex);
         this.hideChoices();
+        Input.update();
     }
     /**
      * Update
      */
     update() {
         super.update();
+        this.updateDisplayChoices();
         this.updateControl();
     }
 }

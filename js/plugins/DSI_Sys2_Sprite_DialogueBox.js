@@ -21,9 +21,10 @@ class Sprite_DialogueBox extends Sprite {
      * Create display components
      */
     create() {
-        this.#createBackground();
         this.#createSpeakerSprite();
+        this.#createBackground();
         this.#createContent();
+        this.#createWaitForInputIcon();
         this.reset();
     }
     /**
@@ -97,6 +98,16 @@ class Sprite_DialogueBox extends Sprite {
         bitmap.offsetX = 4;
         bitmap.offsetY = 4;
         this._content = bitmap;
+    }
+    /**
+     * Create wait for input icon
+     */
+    #createWaitForInputIcon() {
+        const icon = new Sprite_Icon(18);
+        this.addChild(icon);
+        icon.x = DialogConfig.waitForInputPos[0];
+        icon.y = DialogConfig.waitForInputPos[1];
+        this._waitForInputIcon = icon;
     }
     /**
      * Calculate Text Width
@@ -196,7 +207,21 @@ class Sprite_DialogueBox extends Sprite {
      * @returns {boolean}
      */
     isBusy() {
-        return !!this._displayEntries && this._displayEntries.length > 0;
+        return this._isShowed;
+    }
+    /**
+     * Check if messagebox is finished display dialoge
+     * @returns {boolean}
+     */
+    isFinishDisplayDialogue() {
+        return !this._displayEntries || (this._displayEntries && this._displayEntries.length == 0);
+    }
+    /**
+     * Check if this dialog has waiting for input icon
+     * @returns {boolean}
+     */
+    hasWaitingForInputIcon() {
+        return this.isFinishDisplayDialogue() || this._pause;
     }
     /**
      * Update display character 
@@ -252,14 +277,22 @@ class Sprite_DialogueBox extends Sprite {
         // If there is a dialogue choice box visible, then disable message box input.
         if (DialogueManager.inst.isChoiceBoxBusy()) return;
         if (Input.isTriggeredCheck()) {
+            Input.update();
             if (this._pause) {
                 this.resume();
             } else {
-                if (!this.isBusy()) {
+                if (this.isFinishDisplayDialogue()) {
                     this.hideDialogue();
                 }
             }
         }
+    }
+    /**
+     * Update wait for input icon
+     */
+    updateWaitForInputIcon() {
+        this._waitForInputIcon.y = DialogConfig.waitForInputPos[1] + Math.sin(Graphics.frameCount / 5) * 3;
+        this._waitForInputIcon.visible = this.hasWaitingForInputIcon();
     }
     /**
      * Pause
@@ -284,6 +317,7 @@ class Sprite_DialogueBox extends Sprite {
         this.y = Graphics.height;
         this.startTween({alpha: 1.0, y: targetY}, 10).ease(Easing.easeInOutCubic);
         this._speakerSprite.setSpeaker(DialogueManager.inst.activeSpeaker);
+        this._isShowed = true;
     }
     /**
      * Hide Dialogue
@@ -297,6 +331,7 @@ class Sprite_DialogueBox extends Sprite {
         AudioController.playPage();
         const targetY = Graphics.height;
         this.startTween({alpha: 0.0, y: targetY}, 10).ease(Easing.easeInOutCubic);
+        this._isShowed = false;
     }
     /**
      * Update per frame
@@ -306,6 +341,7 @@ class Sprite_DialogueBox extends Sprite {
         // this.updateDisplay();
         this.updateDisplayCharacter();
         this.updateControl();
+        this.updateWaitForInputIcon();
     }
 }
 
