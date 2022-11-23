@@ -191,11 +191,9 @@ class Sprite_ChoiceBox extends Sprite {
         if (DialogueManager.inst.isMessageBoxBusy()) return;
         if (Input.isTriggered(MenuKeyAction.MoveDown)) {
             this.moveCursor(1);
-            // return;
         }
         if (Input.isTriggered(MenuKeyAction.MoveUp)) {
             this.moveCursor(-1);
-            // return;
         }
         if (Input.isTriggered(MenuKeyAction.Confirm)) {
             this.confirm();
@@ -206,7 +204,7 @@ class Sprite_ChoiceBox extends Sprite {
                 sprite.opacity += 25;
                 sprite.keyHint.visible = true;
             } else {
-                sprite.opacity = 100;
+                sprite.opacity = 140;
                 sprite.keyHint.visible = false;
             }
         }
