@@ -3,8 +3,8 @@ class Fermenter extends FarmMachine {
     /**
      * @inheritdoc
      */
-    imageFile() {
-        return super.imageFile() + "Fermenter";
+    machineFilename() {
+        return "Fermenter";
     }
     /**
      * @inheritdoc

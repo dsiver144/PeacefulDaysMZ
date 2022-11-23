@@ -38,10 +38,17 @@ class FarmMachine extends Building {
         return this._task[0];
     }
     /**
+     * Machine filename
+     * @returns {string} image filename of the machine
+     */
+    machineFilename() {
+        return "";
+    }
+    /**
      * @inheritdoc
      */
     imageFile() {
-        return 'machines/';
+        return 'machines/' + this.machineFilename();
     }
     /**
      * @inheritdoc

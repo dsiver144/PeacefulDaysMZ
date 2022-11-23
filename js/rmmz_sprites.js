@@ -1,5 +1,5 @@
 //=============================================================================
-// rmmz_sprites.js v1.5.0
+// rmmz_sprites.js v1.6.0
 //=============================================================================
 
 //-----------------------------------------------------------------------------
@@ -3429,7 +3429,7 @@ Spriteset_Map.prototype.loadTileset = function() {
 Spriteset_Map.prototype.createCharacters = function() {
     this._characterSprites = [];
     for (const event of $gameMap.events()) {
-        this._characterSprites.push(new Sprite_EventCharacter(event));
+        this._characterSprites.push(new Sprite_Character(event));
     }
     for (const vehicle of $gameMap.vehicles()) {
         this._characterSprites.push(new Sprite_Character(vehicle));

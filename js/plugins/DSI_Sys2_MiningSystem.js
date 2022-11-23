@@ -22,11 +22,11 @@ class MineManager extends SaveableObject {
         this._minedItems[itemID] += value;
     }
     /**
-     * Get total of a specific item that has been mined
+     * Get Mine Item Number
      * @param {string} itemID 
-     * @returns {number}
+     * @returns {number} number of item has been mined
      */
-    getTotalMinedItem(itemID) {
+    getMinedItemNumber(itemID) {
         return this._minedItems[itemID] || 0;
     }
     /**
