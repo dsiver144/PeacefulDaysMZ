@@ -32,11 +32,22 @@ class Sprite_DialogueSpeaker extends Sprite {
         if (dialogueSpeaker.isAvailable()) {
             this._eyeClosed = true;
             this.bitmap = ImageManager.loadNPC(dialogueSpeaker.npcKey, dialogueSpeaker.emotion);
-            this.startTween({opacity: 255}, 10).ease(Easing.easeInOutCubic);
+            this.x = -50;
+            this.alpha = 0.0;
+            this.startTween({x: 0, alpha: 1.0}, 20).delay(10).ease(Easing.easeInOutCubic);
         } else {
             this.bitmap = null;
             this._dialogueSpeaker = null;
         }
+    }
+    /**
+     * Refresh
+     */
+    refresh() {
+        if (!this._dialogueSpeaker) return;
+        if (!this._dialogueSpeaker.isAvailable()) return;
+        this._eyeClosed = true;
+        this.bitmap = ImageManager.loadNPC(this._dialogueSpeaker.npcKey, this._dialogueSpeaker.emotion);
     }
     /**
      * Update blink animation

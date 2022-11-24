@@ -178,10 +178,14 @@ class Sprite_DialogueBox extends Sprite {
                 }
                 if (specialCode.match(/<(.+?)>/i)) {
                     const [type, params] = RegExp.$1.split(':');
+                    let newParams = null;
                     switch(type) {
                     case 'c':
-                        let newParams = params.split(",");
+                        newParams = params.split(",");
                         result.push({type: 'color', params: newParams});
+                        break;
+                    case 'f':
+                        result.push({type: 'face', params: params.trim()});
                         break;
                     case 'page':
                         result.push({type: 'page', params: []});
@@ -259,6 +263,11 @@ class Sprite_DialogueBox extends Sprite {
                 }
                 this._content.textColor = color;
                 break;
+            case 'face':
+                const emotion = entry.params;
+                DialogueManager.inst.activeSpeaker.setEmotion(emotion); 
+                this._speakerSprite.refresh();
+                break;
             case 'page':
                 this._currentDisplayX = this._content.offsetX;
                 this._currentDisplayY = this._content.offsetY;
@@ -313,9 +322,8 @@ class Sprite_DialogueBox extends Sprite {
      */
     showDialogue() {
         this.alpha = 0;
-        const targetY = DialogConfig.defaultY;
-        this.y = Graphics.height;
-        this.startTween({alpha: 1.0, y: targetY}, 10).ease(Easing.easeInOutCubic);
+        // const targetY = DialogConfig.defaultY;
+        this.startTween({alpha: 1.0}, 30).ease(Easing.easeInOutCubic);
         this._speakerSprite.setSpeaker(DialogueManager.inst.activeSpeaker);
         this._isShowed = true;
     }
@@ -324,13 +332,11 @@ class Sprite_DialogueBox extends Sprite {
      */
     hideDialogue(instant = false) {
         if (instant) {
-            this.y = Graphics.height;
             this.alpha = 0.0;
             return;
         }
         AudioController.playPage();
-        const targetY = Graphics.height;
-        this.startTween({alpha: 0.0, y: targetY}, 10).ease(Easing.easeInOutCubic);
+        this.startTween({alpha: 0.0}, 30).ease(Easing.easeInOutCubic);
         this._isShowed = false;
     }
     /**

@@ -143,7 +143,7 @@ class DialogueManager {
      * @returns {boolean}
      */
     isChoiceBoxBusy() {
-        return this.hasChoice();
+        return this.hasChoice() && this.choiceBox.isVisibled();
     }
 }
 
@@ -180,6 +180,13 @@ class DialogueSpeaker {
      */
     get emotion() {
         return this._emotion;
+    }
+    /**
+     * Set Emotion
+     * @param {string} emotion 
+     */
+    setEmotion(emotion) {
+        this._emotion = emotion;
     }
     /**
      * Set Data

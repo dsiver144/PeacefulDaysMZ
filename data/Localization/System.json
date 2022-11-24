@@ -77,6 +77,13 @@
         }
     },
     {
+        "key": "Lb_Change",
+        "lang": {
+            "vn": "Thay Đổi",
+            "en": "Change"
+        }
+    },
+    {
         "key": "Lb_Interact",
         "lang": {
             "vn": "Tương Tác",

@@ -172,6 +172,7 @@ class Sprite_ChoiceBox extends Sprite {
             sprite.x += 100;
             sprite.startTween({ opacity: 255, x: orginalX }, 15).delay(index * 5).ease(Easing.easeOutExpo);
         }
+        this._isVisibled = true;
     }
     /**
      * Update display choices
@@ -196,12 +197,21 @@ class Sprite_ChoiceBox extends Sprite {
         this._choiceSprites.forEach(sprite => {
             sprite.visible = false;
         });
+        this._isVisibled = false;
+    }
+    /**
+     * Is Visibled
+     * @returns {boolean}
+     */
+    isVisibled() {
+        return this._isVisibled;
     }
     /**
      * Update control
      */
     updateControl() {
         if (!DialogueManager.inst.hasChoice()) return;
+        if (!this.isVisibled()) return;
         if (!DialogueManager.inst.messageBox.isFinishDisplayDialogue()) return;
         if (Input.isTriggered(MenuKeyAction.MoveDown)) {
             this.moveCursor(1);
