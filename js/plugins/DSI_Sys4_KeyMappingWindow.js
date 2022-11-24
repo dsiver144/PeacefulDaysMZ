@@ -56,6 +56,7 @@ class Window_KeyMapping extends Window_Command {
     showHints() {
         const keys = [
             [KeyBindMenuKeyAction.RestoreDefault, KeyBindMenuKeyAction.RestoreDefault],
+            [MenuKeyAction.Confirm, "Lb_Change"],
             [MenuKeyAction.Cancel, "Lb_Back"],
         ]
         ScreenOverlay.showButtonHints(...keys);
